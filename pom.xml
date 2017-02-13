@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.openecomp.sdnc</groupId>
+        <artifactId>root</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <groupId>org.openecomp.appc.deployment</groupId>
+    <artifactId>appc-docker-project</artifactId>
+    <name>APPC Docker Project</name>
+    <description>The APP-C component contains SDNC Docker Image, and installs APPC/SDNC components on top.</description>
+
+    <!-- ================================================================================== -->
+    <!-- Define plugin repositories -->
+    <!-- ================================================================================== -->
+    <pluginRepositories>
+        <!-- Black Duck plugin dependencies -->
+        <pluginRepository>
+            <id>JCenter</id>
+            <name>JCenter Repository</name>
+            <url>http://jcenter.bintray.com</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>Restlet</id>
+            <name>Restlet Repository</name>
+            <url>http://maven.restlet.com</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <build>
+        <plugins>
+            <!-- blackduck maven plugin -->
+            <plugin>
+                <groupId>com.blackducksoftware.integration</groupId>
+                <artifactId>hub-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <inherited>false</inherited>
+                <configuration>
+                    <hubProjectName>${project.name}</hubProjectName>
+                    <outputDirectory>${project.basedir}</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-bdio-file</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>createHubOutput</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- license plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.10</version>
+                <configuration>
+                    <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+                    <processStartTag>============LICENSE_START=======================================================</processStartTag>
+                    <processEndTag>============LICENSE_END=========================================================</processEndTag>
+                    <sectionDelimiter>================================================================================</sectionDelimiter>
+                    <licenseName>apache_v2</licenseName>
+                    <inceptionYear>2017</inceptionYear>
+                    <organizationName>OpenECOMP</organizationName>
+                    <projectName>openECOMP : APP-C</projectName>
+                    <canUpdateCopyright>true</canUpdateCopyright>
+                    <canUpdateDescription>true</canUpdateDescription>
+                    <canUpdateLicense>true</canUpdateLicense>
+                    <emptyLineAfterHeader>true</emptyLineAfterHeader>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>first</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <modules>
+        <module>platform-logic</module>
+        <module>installation</module>
+    </modules>
+    <organization>
+        <name>OpenECOMP</name>
+    </organization>
+    <version>1.0.0</version>
+</project>
