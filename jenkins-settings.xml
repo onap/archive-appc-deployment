@@ -12,13 +12,15 @@
   xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
   <profiles>
+	<!-- NOTE: The ecomp.nexus.url and port will need to be replaced or defined 
+		as properties in your build enviornment. -->
     <profile>
       <id>openecomp-release</id>
       <repositories>
         <repository>
           <id>openecomp-release</id>
           <name>openecomp-release</name>
-          <url>https://ecomp-nexus:8443/repository/maven-releases/</url>
+          <url>https://${ecomp.nexus.url}:${ecomp.nexus.port}/repository/maven-releases/</url>
           <releases>
             <enabled>true</enabled>
             <updatePolicy>never</updatePolicy>
@@ -32,7 +34,7 @@
         <pluginRepository>
           <id>openecomp-release</id>
           <name>openecomp-release</name>
-          <url>https://ecomp-nexus:8443/repository/maven-releases/</url>
+          <url>https://${ecomp.nexus.url}:${ecomp.nexus.port}/repository/maven-releases/</url>
           <releases>
             <enabled>true</enabled>
             <updatePolicy>never</updatePolicy>
@@ -50,7 +52,7 @@
         <repository>
           <id>openecomp-snapshot</id>
           <name>openecomp-snapshot</name>
-          <url>https://ecomp-nexus:8443/repository/maven-snapshots/</url>
+          <url>https://${ecomp.nexus.url}:${ecomp.nexus.port}/repository/maven-snapshots/</url>
           <releases>
             <enabled>false</enabled>
           </releases>
@@ -63,7 +65,7 @@
         <pluginRepository>
           <id>openecomp-snapshot</id>
           <name>openecomp-snapshot</name>
-          <url>https://ecomp-nexus:8443/repository/maven-snapshots/</url>
+          <url>https://${ecomp.nexus.url}:${ecomp.nexus.port}/repository/maven-snapshots/</url>
           <releases>
             <enabled>false</enabled>
           </releases>
