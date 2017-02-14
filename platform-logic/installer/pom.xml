@@ -103,7 +103,7 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.openecomp.sdnc</groupId>
+			<groupId>org.openecomp.sdnc.core</groupId>
 			<artifactId>sli-common</artifactId>
 			<version>${sdnctl.sli.version}</version>
 		</dependency>
