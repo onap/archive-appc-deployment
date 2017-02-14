@@ -1,4 +1,4 @@
-<service-logic xmlns='http://www.att.com/sdnctl/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.att.com/sdnctl/svclogic ./svclogic.xsd' module='APPC' version='2.0.0'><method rpc='topology-operation-all' mode='sync'>
+<service-logic xmlns='http://www.openecomp.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.openecomp.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.0'><method rpc='topology-operation-all' mode='sync'>
 <!--What method should we try to call. Closely maps to __action__Server()--><switch test='`$org.openecomp.appc.action`'>
 <outcome value='restart'>
 <execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='restartServer'>
