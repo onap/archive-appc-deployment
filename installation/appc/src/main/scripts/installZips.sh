@@ -37,7 +37,7 @@ fi
 
 cwd=$(pwd)
 
-mavenOpts=${2:-"-s $cwd/../../jenkins-settings.xml"}
+mavenOpts=${2:-"-s $cwd/../../appc-deployment-settings"}
 cd /tmp
 
 echo "Installing APP-C version ${APPC_VERSION}"
