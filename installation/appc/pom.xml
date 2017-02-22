@@ -49,7 +49,7 @@
 				<executions>
 					<execution>
 						<id>generate-images</id>
-						<phase>generate-sources</phase>
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>build</goal>
 						</goals>
