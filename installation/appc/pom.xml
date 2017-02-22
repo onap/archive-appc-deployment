@@ -25,46 +25,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.16.5</version>
-				<inherited>false</inherited>
-				<configuration>
-					<images>
-						<image>
-							<name>${image.name}</name>
-							<build>
-								<cleanup>try</cleanup>
-								<dockerFileDir>${basedir}/target/docker-stage</dockerFileDir>
-								<dockerFile>${basedir}/target/docker-stage/Dockerfile</dockerFile>
-								<tags>
-								    <tag>${project.version}</tag>
-									<!-- <tag>release2</tag> -->
-								</tags>
-							</build>
-						</image>
-					</images>
-				</configuration>
-				<executions>
-					<execution>
-						<id>generate-images</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
 
-					<execution>
-						<id>push-images</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>build</goal>
-							<goal>push</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			
 			<!-- This is to add any extra scripts, sql dump files, properties files APPC may need even after inheriting from the sdnc base image -->
 			<plugin>
@@ -220,6 +181,209 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>docker</id>
+				<build>
+					<plugins>
+						<plugin>
+							<groupId>io.fabric8</groupId>
+							<artifactId>docker-maven-plugin</artifactId>
+							<version>0.16.5</version>
+							<inherited>false</inherited>
+							<configuration>
+								<images>
+									<image>
+										<name>${image.name}</name>
+										<build>
+											<cleanup>try</cleanup>
+											<dockerFileDir>${basedir}/target/docker-stage</dockerFileDir>
+											<dockerFile>${basedir}/target/docker-stage/Dockerfile</dockerFile>
+											<tags>
+											    <tag>${project.version}</tag>
+												<!-- <tag>release2</tag> -->
+											</tags>
+										</build>
+									</image>
+								</images>
+							</configuration>
+							<executions>
+								<execution>
+									<id>generate-images</id>
+									<phase>generate-sources</phase>
+									<goals>
+										<goal>build</goal>
+									</goals>
+								</execution>
+
+								<execution>
+									<id>push-images</id>
+									<phase>deploy</phase>
+									<goals>
+										<goal>build</goal>
+										<goal>push</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+			
+						<!-- This is to add any extra scripts, sql dump files, properties files APPC may need even after inheriting from the sdnc base image -->
+						<plugin>
+							<artifactId>maven-resources-plugin</artifactId>
+							<version>2.6</version>
+							<executions>
+								<execution>
+									<id>copy-dockerfile</id>
+									<goals>
+										<goal>copy-resources</goal>
+									</goals><!-- here the phase you need -->
+									<phase>validate</phase>
+									<configuration>
+										<outputDirectory>${basedir}/target/docker-stage</outputDirectory>
+										<resources>
+											<resource>
+												<directory>src/main/docker</directory>
+												<includes>
+													<include>Dockerfile</include>
+												</includes>
+												<filtering>true</filtering>
+											</resource>
+										</resources>
+									</configuration>
+								</execution>
+
+								<execution>
+									<id>copy-scripts</id>
+									<goals>
+										<goal>copy-resources</goal>
+									</goals><!-- here the phase you need -->
+									<phase>validate</phase>
+									<configuration>
+										<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/appc/bin</outputDirectory>
+										<resources>
+											<resource>
+												<directory>src/main/scripts</directory>
+												<includes>
+													<include>*.sh</include>
+												</includes>
+												<filtering>false</filtering>
+											</resource>
+										</resources>
+									</configuration>
+								</execution>
+					
+								<!-- Two commented execution tags below in case / when appc needs to add .dump mysql files or keystore files -->
+								<!--<execution>
+									<id>copy-data</id>
+									<goals>
+										<goal>copy-resources</goal>
+									</goals>
+									<phase>validate</phase>
+									<configuration>
+										<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/sdnc/data</outputDirectory>
+										<resources>
+											<resource>
+												<directory>src/main/resources</directory>
+												<includes>
+													<include>*.dump</include>
+												</includes>
+												<filtering>false</filtering>
+											</resource>
+										</resources>
+									</configuration>
+								</execution>
+								<execution>
+									<id>copy-keystores</id>
+									<goals>
+										<goal>copy-resources</goal>
+									</goals>
+									<phase>validate</phase>
+									<configuration>
+										<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/sdnc/data/stores</outputDirectory>
+										<resources>
+											<resource>
+												<directory>../src/main/stores</directory>
+												<includes>
+													<include>*.jks</include>
+												</includes>
+												<filtering>false</filtering>
+											</resource>
+										</resources>
+									</configuration>
+								</execution>-->
+					
+								<execution>
+									<id>copy-properties</id>
+									<goals>
+										<goal>copy-resources</goal>
+									</goals>
+									<phase>validate</phase>
+									<configuration>
+										<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/appc/data/properties</outputDirectory>
+										<resources>
+											<resource>
+												<directory>../src/main/appc-properties</directory>
+												<includes>
+													<include>*.properties</include>
+												</includes>
+												<filtering>false</filtering>
+											</resource>
+										</resources>
+									</configuration>
+								</execution>
+							</executions>
+						</plugin>
+						<plugin>
+							<artifactId>exec-maven-plugin</artifactId>
+							<groupId>org.codehaus.mojo</groupId>
+							<executions>
+								<execution>
+									<id>Get features</id>
+									<phase>generate-sources</phase>
+									<goals>
+										<goal>exec</goal>
+									</goals>
+									<configuration>
+										<executable>/bin/bash</executable>
+										<environmentVariables>
+											<APPC_VERSION>${appc.version}</APPC_VERSION>
+											<APPC_OAM_VERSION>${project.version}</APPC_OAM_VERSION>
+											<SDNC_OAM_VERSION>${project.version}</SDNC_OAM_VERSION>
+										</environmentVariables>
+										<arguments>
+											<argument>${basedir}/src/main/scripts/installZips.sh</argument>
+											<argument>${basedir}/target/docker-stage/opt/openecomp/appc</argument>
+										</arguments>
+									</configuration>
+								</execution>
+
+								<execution>
+									<id>change shell permissions</id>
+									<phase>process-sources</phase>
+									<goals>
+										<goal>exec</goal>
+									</goals>
+									<configuration>
+										<executable>/usr/bin/find</executable>
+										<arguments>
+											<argument>${basedir}/target/docker-stage/opt/openecomp/appc</argument>
+											<argument>-name</argument>
+											<argument>*.sh</argument>
+											<argument>-exec</argument>
+											<argument>chmod</argument>
+											<argument>+x</argument>
+											<argument>{}</argument>
+											<argument>;</argument>
+										</arguments>
+									</configuration>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</build>
+			</profile>
+		</profiles>
 	
 	<organization>
 		<name>openECOMP</name>
