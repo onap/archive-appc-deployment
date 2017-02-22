@@ -25,46 +25,44 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.16.5</version>
-				<inherited>false</inherited>
-				<configuration>
-					<images>
-						<image>
-							<name>${image.name}</name>
-							<build>
-								<cleanup>try</cleanup>
-								<dockerFileDir>${basedir}/target/docker-stage</dockerFileDir>
-								<dockerFile>${basedir}/target/docker-stage/Dockerfile</dockerFile>
-								<tags>
-								    <tag>${project.version}</tag>
-									<!-- <tag>release2</tag> -->
-								</tags>
-							</build>
-						</image>
-					</images>
-				</configuration>
-				<executions>
-					<execution>
-						<id>generate-images</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
+			<profiles>
+				<profile>
+					<id>docker</id>
+						<plugin>
+							<groupId>io.fabric8</groupId>
+							<artifactId>docker-maven-plugin</artifactId>
+							<version>0.16.5</version>
+							<inherited>false</inherited>
+							<configuration>
+								<images>
+									<image>
+										<name>${image.name}</name>
+										<build>
+											<cleanup>try</cleanup>
+											<dockerFileDir>${basedir}/target/docker-stage</dockerFileDir>
+											<dockerFile>${basedir}/target/docker-stage/Dockerfile</dockerFile>
+											<tags>
+											    <tag>${project.version}</tag>
+												<!-- <tag>release2</tag> -->
+											</tags>
+										</build>
+									</image>
+								</images>
+							</configuration>
+							<executions>
 
-					<execution>
-						<id>push-images</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>build</goal>
-							<goal>push</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+								<execution>
+									<id>push-images</id>
+									<phase>deploy</phase>
+									<goals>
+										<goal>build</goal>
+										<goal>push</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+				</profile>
+			</profiles>
 			
 			<!-- This is to add any extra scripts, sql dump files, properties files APPC may need even after inheriting from the sdnc base image -->
 			<plugin>
