@@ -22,6 +22,9 @@ ${ODL_HOME}/bin/client -u karaf feature:install odl-netconf-connector-all
 ${ODL_HOME}/bin/client -u karaf feature:install odl-restconf-noauth
 ${ODL_HOME}/bin/client -u karaf feature:install odl-netconf-topology
 
+# When the karaf netconf feature gets installed, need to replace default password with OpenECOMP APP-C ODL Password
+sed -i 's/admin<\/password>/Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U<\/password>/' ${ODL_HOME}/etc/opendaylight/karaf/99-netconf-connector.xml
+
 echo "Installing APP-C Features"
 echo ""
 
