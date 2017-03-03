@@ -9,7 +9,6 @@ sdnc_targetDir=${1:-${SDNC_HOME}}
 featureDir=${targetDir}/features
 
 APPC_FEATURES=" \
- appc-iaas-adapter \
  appc-provider \
  appc-event-listener \
  appc-dispatcher \

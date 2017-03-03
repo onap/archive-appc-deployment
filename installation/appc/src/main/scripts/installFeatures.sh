@@ -5,7 +5,6 @@ APPC_HOME=${APPC_HOME:-/opt/openecomp/appc}
 APPC_FEATURE_DIR=${APPC_FEATURE_DIR:-${APPC_HOME}/features}
 
 APPC_FEATURES=" \
- appc-iaas-adapter \
  appc-provider \
  appc-event-listener \
  appc-dispatcher \
