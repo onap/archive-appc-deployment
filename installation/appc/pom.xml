@@ -18,8 +18,12 @@
 	<description>Creates APPC Docker container on top of the SDNC Base Docker Image</description>
 
 	<properties>
-		<image.name>ecomp/appc-image</image.name>
+		<image.name>openecomp/appc-image</image.name>
 		<appc.version>${project.version}</appc.version>
+                <!--This version will be over-ridden by jenkins 
+                    injecting the version.properties variable file during docker build-->
+		<appc.docker.staging.version>0.0.1</appc.docker.staging.version>
+		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
 	</properties>
 
 
@@ -200,7 +204,7 @@
 										<dockerFileDir>${basedir}/target/docker-stage</dockerFileDir>
 										<dockerFile>${basedir}/target/docker-stage/Dockerfile</dockerFile>
 										<tags>
-											<tag>${project.version}</tag>
+											<tag>${appc.docker.staging.version}-STAGING-${maven.build.timestamp}</tag>
 											<tag>latest</tag> 
 										</tags>
 									</build>
