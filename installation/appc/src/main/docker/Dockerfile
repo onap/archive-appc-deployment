@@ -4,8 +4,8 @@ MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
 # copy openecomp
 COPY opt /opt
+
 RUN ln -s /opt/openecomp/appc /opt/appc
-RUN chmod +x /opt/openecomp/appc/bin/*
 
 # ENTRYPOINT exec /opt/opendaylight/current/bin/karaf
 EXPOSE 8181

@@ -210,7 +210,7 @@
 						<executions>
 							<execution>
 								<id>generate-images</id>
-								<phase>generate-sources</phase>
+								<phase>package</phase>
 								<goals>
 									<goal>build</goal>
 								</goals>
