@@ -1,0 +1,56 @@
+#####standard .git ignore entries#####
+
+## IDE Specific Files ##
+org.eclipse.core.resources.prefs
+.classpath
+.project
+.settings
+.idea
+.externalToolBuilders
+maven-eclipse.xml
+workspace
+
+# Used to not upload Blackduck Scans
+**/*.jsonld
+**/blackDuckHubProjectName.txt
+**/blackDuckHubProjectVersionName.txt
+
+## Compilation Files ##
+*.class
+**/target
+target
+target-ide
+MANIFEST.MF
+
+## Misc Ignores (OS specific etc) ##
+bin/
+dist
+*~
+*.ipr
+*.iml
+*.iws
+classes
+out/
+.DS_STORE
+.metadata
+
+## antlr4 generated files ##
+ExprGrammarBaseListener.java
+ExprGrammarLexer.java
+ExprGrammarListener.java
+ExprGrammarParser.java
+ExprGrammar.tokens
+ExprGrammarLexer.tokens
+
+# BlackDuck generated file
+sdnc-oam_bdio.jsonld
+
+#Chef local mode cache
+local-mode-cache
+
+# Generated local docker image
+**/docker-files/opt
+**/src/main/resources/opt
+
+#dgbuilder releases
+**/dgbuilder/releases
