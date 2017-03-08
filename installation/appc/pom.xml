@@ -22,7 +22,7 @@
 		<appc.version>${project.version}</appc.version>
                 <!--This version will be over-ridden by jenkins 
                     injecting the version.properties variable file during docker build-->
-		<appc.docker.staging.version>0.0.1</appc.docker.staging.version>
+		<appc.docker.staging.version>1.0.0</appc.docker.staging.version>
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
 	</properties>
 
