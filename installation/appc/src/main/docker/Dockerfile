@@ -1,5 +1,5 @@
 # Base ubuntu with added packages needed for open ecomp
-FROM ecomp/sdnc-image:1.0.0-SNAPSHOT
+FROM openecomp/sdnc-image:latest
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
 # copy openecomp
