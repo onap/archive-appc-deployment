@@ -206,7 +206,7 @@
 										<dockerFile>${basedir}/target/docker-stage/Dockerfile</dockerFile>
 										<tags>
 											<!-- <tag>${appc.docker.staging.version}-STAGING-${maven.build.timestamp}</tag> -->
-											<tag>${appc.docker.staging.version}-STAGING-latest</tag>
+											<tag>${release_name}.${sprint_number}-STAGING-latest</tag>
 										</tags>
 									</build>
 								</image>
