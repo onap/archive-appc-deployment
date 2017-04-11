@@ -148,7 +148,7 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<executable>/bin/bash</executable>
+							<executable>bash</executable>
 							<environmentVariables>
 								<APPC_VERSION>${appc.version}</APPC_VERSION>
 								<APPC_OAM_VERSION>${project.version}</APPC_OAM_VERSION>
@@ -168,7 +168,7 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<executable>/usr/bin/find</executable>
+							<executable>find</executable>
 							<arguments>
 								<argument>${basedir}/target/docker-stage/opt/openecomp/appc</argument>
 								<argument>-name</argument>
@@ -324,7 +324,7 @@
 									<goal>exec</goal>
 								</goals>
 								<configuration>
-									<executable>/bin/bash</executable>
+									<executable>bash</executable>
 									<environmentVariables>
 										<APPC_VERSION>${appc.version}</APPC_VERSION>
 										<APPC_OAM_VERSION>${project.version}</APPC_OAM_VERSION>
