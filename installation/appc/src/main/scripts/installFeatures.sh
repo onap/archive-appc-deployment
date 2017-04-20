@@ -4,6 +4,20 @@ ODL_HOME=${ODL_HOME:-/opt/opendaylight/current}
 APPC_HOME=${APPC_HOME:-/opt/openecomp/appc}
 APPC_FEATURE_DIR=${APPC_FEATURE_DIR:-${APPC_HOME}/features}
 
+function featureInstall {
+COUNT=0
+while [ $COUNT -lt 10 ]; do
+  ${ODL_HOME}/bin/client -u karaf feature:install $1 2> /tmp/installErr
+  cat /tmp/installErr
+  if grep -q 'Failed to get the session' /tmp/installErr; then
+    sleep 10
+  else
+    let COUNT=10
+  fi
+  let COUNT=COUNT+1
+done
+}
+
 APPC_FEATURES=" \
  appc-provider \
  appc-event-listener \
@@ -18,9 +32,9 @@ APPC_FEATURES=" \
  appc-asdc-listener"
  
 echo "Enabling core APP-C features"
-${ODL_HOME}/bin/client -u karaf feature:install odl-netconf-connector-all
-${ODL_HOME}/bin/client -u karaf feature:install odl-restconf-noauth
-${ODL_HOME}/bin/client -u karaf feature:install odl-netconf-topology
+featureInstall odl-netconf-connector-all
+featureInstall odl-restconf-noauth
+featureInstall odl-netconf-topology
 
 # When the karaf netconf feature gets installed, need to replace default password with OpenECOMP APP-C ODL Password
 sed -i 's/admin<\/password>/Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U<\/password>/' ${ODL_HOME}/etc/opendaylight/karaf/99-netconf-connector.xml
