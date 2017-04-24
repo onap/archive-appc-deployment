@@ -42,14 +42,14 @@ services:
   
   
   dgbuilder:
-    image: "openecomp/dgbuilder-sdnc-image:latest"
+    image: "openecomp/dgbuilder-sdnc-image:1.1-SNAPSHOT-latest"
     depends_on:
       - db
     container_name:  sdnc_dgbuilder_container
     entrypoint:
        - "/bin/bash"
        - "-c"
-       - "cd /opt/openecomp/sdnc/dgbuilder/ && ./start sdnc1.0 && wait"
+       - "cd /opt/openecomp/sdnc/dgbuilder/ && ./start.sh sdnc1.0 && wait"
     ports:
       - "3000:3100"
     links:
