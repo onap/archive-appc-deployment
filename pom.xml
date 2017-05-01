@@ -12,6 +12,14 @@
     <name>APPC Docker Project</name>
     <description>The APP-C component contains SDNC Docker Image, and installs APPC/SDNC components on top.</description>
 
+    <properties>
+        <!-- NEXUS URLS -->
+        <openecomp.nexus.host>nexus.onap.org</openecomp.nexus.host>
+        <openecomp.nexus.url>https://${openecomp.nexus.host}/content</openecomp.nexus.url>
+        <openecomp.nexus.snapshot-url>${openecomp.nexus.url}/repositories/snapshots/</openecomp.nexus.snapshot-url>
+        <openecomp.nexus.release-url>${openecomp.nexus.url}/repositories/releases/</openecomp.nexus.release-url>
+    </properties>
+
     <!-- ================================================================================== -->
     <!-- Define plugin repositories -->
     <!-- ================================================================================== -->
@@ -44,7 +52,7 @@
                     <version>1.6.7</version>
                     <extensions>true</extensions>
                     <configuration>
-                        <nexusUrl>https://nexus.openecomp.org</nexusUrl>
+                        <nexusUrl>https://${openecomp.nexus.host}</nexusUrl>
                         <stagingProfileId>176c31dfe190a</stagingProfileId>
                         <serverId>ecomp-staging</serverId>
                     </configuration>

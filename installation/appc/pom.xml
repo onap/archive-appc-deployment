@@ -192,6 +192,40 @@
 			<build>
 				<plugins>
 					<plugin>
+						<groupId>org.codehaus.groovy.maven</groupId>
+						<artifactId>gmaven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<properties>
+										<ver>${project.version}</ver>
+										<timestamp>${maven.build.timestamp}</timestamp>
+									</properties>
+									<source>
+										println project.properties['ver'];
+										def versionArray;
+										if ( project.properties['ver'] != null ) {
+										versionArray = project.properties['ver'].split('\\.');
+										}
+										if ( project.properties['ver'].endsWith("-SNAPSHOT") ) {
+										project.properties['dockertag1']=project.properties['ver'] + "-latest";
+										project.properties['dockertag2']="latest";
+										} else {
+										project.properties['dockertag1']=versionArray[0] + '.' + versionArray[1] + "-STAGING-latest";
+										project.properties['dockertag2']=project.properties['ver'] + "-STAGING-" + project.properties['timestamp'];
+										}
+										println 'docker tag 1: ' + project.properties['dockertag1'];
+										println 'docker tag 2: ' + project.properties['dockertag2'];
+									</source>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
 						<groupId>io.fabric8</groupId>
 						<artifactId>docker-maven-plugin</artifactId>
 						<version>0.16.5</version>
@@ -205,8 +239,7 @@
 										<dockerFileDir>${basedir}/target/docker-stage</dockerFileDir>
 										<dockerFile>${basedir}/target/docker-stage/Dockerfile</dockerFile>
 										<tags>
-											<!-- <tag>${appc.docker.staging.version}-STAGING-${maven.build.timestamp}</tag> -->
-											<tag>${release_name}.${sprint_number}-STAGING-latest</tag>
+											<tag>${dockertag1}</tag>
 										</tags>
 									</build>
 								</image>
