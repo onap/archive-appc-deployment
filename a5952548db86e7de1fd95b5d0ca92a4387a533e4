@@ -1,0 +1,7 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+2: Patrick Brady <pb071s@att.com>
+Submitted-by: Patrick Brady <pb071s@att.com>
+Submitted-at: Mon, 01 May 2017 19:32:59 +0000
+Reviewed-on: http://gerrit.onap.org/r/3783
+Project: appc/deployment
+Branch: refs/heads/release-1.0.0
