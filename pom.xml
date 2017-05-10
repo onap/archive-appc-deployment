@@ -21,6 +21,22 @@
     </properties>
 
     <!-- ================================================================================== -->
+    <!-- Distribution Management Sites -->
+    <!-- ================================================================================== -->
+    <distributionManagement>
+        <repository>
+            <id>ecomp-releases</id>
+            <name>openecomp-repository-releases</name>
+            <url>${openecomp.nexus.release-url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>ecomp-snapshots</id>
+            <name>openecomp-repository-snapshots</name>
+            <url>${openecomp.nexus.snapshot-url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <!-- ================================================================================== -->
     <!-- Define plugin repositories -->
     <!-- ================================================================================== -->
     <pluginRepositories>
