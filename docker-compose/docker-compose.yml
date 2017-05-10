@@ -1,5 +1,11 @@
 version: '2'
 
+networks:
+  default:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: ${MTU}
+
 services:
   db:
     image: mysql/mysql-server:5.6
