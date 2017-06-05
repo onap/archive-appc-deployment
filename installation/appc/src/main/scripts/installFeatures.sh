@@ -39,15 +39,15 @@ done
 }
 
 APPC_FEATURES=" \
+ appc-metric \
  appc-provider \
+ appc-dmaap-adapter \
  appc-event-listener \
- appc-dispatcher \
  appc-chef-adapter \
  appc-netconf-adapter \
  appc-rest-adapter \
- appc-dmaap-adapter \
+ appc-dispatcher \
  appc-dg-util \
- appc-metric \
  appc-dg-shared \
  appc-asdc-listener"
  
