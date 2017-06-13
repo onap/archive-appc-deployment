@@ -46,7 +46,8 @@ APPC_FEATURES=" \
  appc-dg-util \
  appc-metric \
  appc-dg-shared \
- appc-asdc-listener"
+ appc-asdc-listener \
+ appc-iaas-adapter"
 
 APPC_VERSION=${APPC_VERSION:-0.0.1}
 APPC_OAM_VERSION=${APPC_OAM_VERSION:-0.1.1}
