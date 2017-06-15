@@ -50,7 +50,8 @@ APPC_FEATURES=" \
  appc-dg-util \
  appc-dg-shared \
  appc-asdc-listener \
- appc-iaas-adapter"
+ appc-iaas-adapter \
+ appc-ansible-adapter"
 
 echo "Enabling core APP-C features"
 featureInstall odl-netconf-connector-all
