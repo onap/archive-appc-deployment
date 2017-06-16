@@ -2,9 +2,9 @@
 
 ###
 # ============LICENSE_START=======================================================
-# openECOMP : APP-C
+# APPC
 # ================================================================================
-# Copyright (C) 2017 OpenECOMP
+# Copyright (C) 2017 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ============LICENSE_END=========================================================
+# ECOMP is a trademark and service mark of AT&T Intellectual Property.
 ###
 
 SDNC_CONFIG_DIR=${SDNC_CONFIG_DIR:-/opt/sdnc/data/properties}
