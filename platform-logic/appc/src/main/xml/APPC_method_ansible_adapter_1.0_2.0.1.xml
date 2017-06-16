@@ -1,0 +1,55 @@
+<service-logic xmlns='http://www.openecomp.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.openecomp.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.1'><method rpc='ansible-adapter-1.0' mode='sync'>
+<execute plugin='org.openecomp.appc.adapter.ansible.AnsibleAdapter' method='reqExec' >
+<parameter name='AgentUrl' value='`$AgentUrl`'/>
+  <parameter name='User' value='`$User`'/>
+                        <parameter name='Password' value='`$Password`'/>
+                        <parameter name='LocalParameters' value='`$LocalParameters`'/>
+                        <parameter name='EnvParameters' value='`$EnvParameters`'/>
+                        <parameter name='FileParameters' value='`$FileParameters`'/>
+                        <parameter name='NodeList' value='`$NodeList`'/>
+                        <parameter name='Timeout' value='`$Timeout`'/>
+                        <parameter name='Version' value='`$Version`'/>
+                        <parameter name='PlaybookName' value='`$PlaybookName`'/>
+                        <parameter name='Action' value='`$Action`'/>
+<outcome value='failure'>
+<return status='failure'>
+<parameter name='output.status.code' value='200' />
+<parameter name='output.status.message' value='`$org.openecomp.appc.adapter.ansible.message`' />
+</return></outcome>
+<outcome value='Other'>
+<switch test="`$org.openecomp.appc.adapter.ansible.result.code`">
+<outcome value='500'>
+<return status='failure'>
+<parameter name='output.status.code' value='200' />
+<parameter name='output.status.message' value='`$org.openecomp.appc.adapter.ansible.message`' />
+<parameter name='output.status.results' value='`$org.openecomp.appc.adapter.ansible.results`' />
+</return></outcome>
+<outcome value='100'>
+<execute plugin='org.openecomp.appc.adapter.ansible.AnsibleAdapter' method='reqExecResult' >
+   <parameter name='message' value='`$org.openecomp.appc.adapter.ansible.message`'/>
+   <parameter name='code' value='`$org.openecomp.appc.adapter.ansible.result.code`'/>
+   <parameter name='AgentUrl' value='`$AgentUrl`'/>
+   <parameter name='User' value='`$User`'/>
+   <parameter name='Password' value='`$Password`'/>
+   <parameter name='Id' value='`$org.openecomp.appc.adapter.ansible.Id`'/>
+<outcome value='failure'>
+<return status='failure'>
+<parameter name='output.status.code' value='200' />
+<parameter name='output.status.message' value='`$org.openecomp.appc.adapter.ansible.message`' />
+<parameter name='output.status.results' value='`$org.openecomp.appc.adapter.ansible.results`' />
+</return>
+</outcome>
+<outcome value='success'>
+<set>
+<parameter name='output.status.code' value='`$org.openecomp.appc.adapter.ansible.result.code`' />
+<parameter name='output.status.message' value='`$org.openecomp.appc.adapter.ansible.message`' />
+<parameter name='output.status.results' value='`$org.openecomp.appc.adapter.ansible.results`' />
+</set>
+</outcome>
+</execute>
+</outcome>
+</switch>
+</outcome>
+</execute>
+</method>
+</service-logic>
