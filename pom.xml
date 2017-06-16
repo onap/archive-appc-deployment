@@ -98,8 +98,8 @@
                     <sectionDelimiter>================================================================================</sectionDelimiter>
                     <licenseName>apache_v2</licenseName>
                     <inceptionYear>2017</inceptionYear>
-                    <organizationName>OpenECOMP</organizationName>
-                    <projectName>openECOMP : APP-C</projectName>
+                    <organizationName>AT&amp;T Intellectual Property. All rights reserved.</organizationName>
+                    <projectName>APPC</projectName>
                     <canUpdateCopyright>true</canUpdateCopyright>
                     <canUpdateDescription>true</canUpdateDescription>
                     <canUpdateLicense>true</canUpdateLicense>
