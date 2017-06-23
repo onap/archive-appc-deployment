@@ -21,11 +21,11 @@
 
         <!-- Setting absolute sdnc versions because the ranges defined in the sdnc root pom cause problems.
              These values override those in the parent pom (org.openecomp.sdnc.core.root). -->
-        <sdnc.core.version>1.1.2</sdnc.core.version>
-        <sdnc.adaptors.version>1.1.2</sdnc.adaptors.version>
-        <sdnc.northbound.version>1.1.2</sdnc.northbound.version>
-        <sdnc.oam.version>1.1.2</sdnc.oam.version>
-        <sdnc.plugins.version>1.1.2</sdnc.plugins.version>
+        <sdnc.core.version>1.1.2-SNAPSHOT</sdnc.core.version>
+        <sdnc.adaptors.version>1.1.2-SNAPSHOT</sdnc.adaptors.version>
+        <sdnc.northbound.version>1.1.2-SNAPSHOT</sdnc.northbound.version>
+        <sdnc.oam.version>1.1.2-SNAPSHOT</sdnc.oam.version>
+        <sdnc.plugins.version>1.1.2-SNAPSHOT</sdnc.plugins.version>
         <sdnctl.sli.version>${sdnc.core.version}</sdnctl.sli.version>
         <sdnctl.aai.service.version>${sdnc.adaptors.version}</sdnctl.aai.service.version>
         <sdnctl.dblib.version>${sdnc.core.version}</sdnctl.dblib.version>
