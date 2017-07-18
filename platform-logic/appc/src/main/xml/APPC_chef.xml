@@ -1,0 +1,150 @@
+<service-logic xmlns='http://www.openecomp.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.openecomp.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='3.0.0'><method rpc='chef' mode='sync'>
+<block>
+<set>
+<parameter name='chef-server-address' value='`$chef-server-address`' />
+<parameter name='chef-username' value='`$chef-username`' />
+<parameter name='chef-organization' value='`$chef-organization`'/>
+</set><block>
+<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='VnfcEnvironment' >
+<parameter name='organizations' value='`$chef-organization`'/> 
+<parameter name='serverAddress' value='`$chef-server-address`'/> 
+<parameter name='username' value='`$chef-username`'/> 
+<parameter name='Environment' value='`$Environment`'/></execute><switch test='`$chefServerResult.code`'><outcome value='200'>
+<block>
+<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='VnfcNodeobjects' >
+<parameter name='organizations' value='`$chef-organization`'/> 
+<parameter name='serverAddress' value='`$chef-server-address`'/> 
+<parameter name='username' value='`$chef-username`'/> 
+<parameter name='NodeList' value='`$NodeList`'/>
+<parameter name='Node' value='`$Node`'/></execute><switch test='`$chefServerResult.code`'><outcome value='200'>
+<switch test='`$PushJobFlag`'>
+<outcome value='true'>
+<block>
+<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='VnfcPushJob'>
+	<parameter name='organizations' value='`$chef-organization`'/> 
+	<parameter name='serverAddress' value='`$chef-server-address`'/> 
+	<parameter name='username' value='`$chef-username`'/> 
+	<parameter name='NodeList' value='`$NodeList`'/>
+	<parameter name='CallbackCapable' value='`$CallbackCapable`'/>
+	<parameter name='RequestId' value='`$RequestId`'/>
+	<parameter name='CallbackUrl' value='`$CallbackUrl`'/></execute><switch test='`$chefServerResult.code`'>
+<outcome value='Other'>
+<return status='failure'>
+<parameter name='output.status.code' value='200' />
+<parameter name='output.status.message' value='`$chefServerResult.message`' />
+</return></outcome><outcome value='201'>
+<switch test='`$CallbackCapable`'>
+<outcome value='true'>
+<return status='success'>
+<parameter name='output.status.code' value='400' />
+<parameter name='output.status.message' value='chef success, waiting for callback' /></return></outcome><outcome value='Other'>
+<block>
+<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='checkPushJob' >
+	<parameter name='organizations' value='`$chef-organization`'/> 
+	<parameter name='serverAddress' value='`$chef-server-address`'/> 
+	<parameter name='username' value='`$chef-username`'/> 
+	<parameter name='jobid' value='`$jobID`'/>
+	<parameter name='retryTimes' value='`$retryTimes`'/>
+	<parameter name='retryInterval' value='`$retryInterval`'/></execute><switch test='`$chefServerResult.code`'>
+<outcome value='Other'>
+<return status='failure'>
+<parameter name='output.status.code' value='200' />
+<parameter name='output.status.message' value='`$chefServerResult.message`' /></return></outcome><outcome value='200'>
+<switch test='`$GetOutputFlag`'>
+<outcome value='Other'>
+<return status='success'>
+<parameter name='output.status.code' value='400' />
+<parameter name='output.status.message' value='`$chefServerResult.message`' /></return></outcome><outcome value='true'>
+<block>
+<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='fetchResults' >
+	<parameter name='organizations' value='`$chef-organization`'/> 
+	<parameter name='serverAddress' value='`$chef-server-address`'/> 
+	<parameter name='username' value='`$chef-username`'/> 
+	<parameter name='NodeList' value='`$NodeList`'/></execute><switch test='`$chefServerResult.code`'>
+<outcome value='200'>
+<return status='success'>
+<parameter name='output.status.code' value='400' />
+<parameter name='output.status.message' value='finish' />
+<parameter name='output.status.results' value='`$chefServerResult.message`' /></return></outcome><outcome value='Other'>
+<return status='failure'>
+<parameter name='output.status.code' value='200' />
+<parameter name='output.status.message' value='`$chefServerResult.message`' />
+</return></outcome></switch></block></outcome></switch></outcome></switch></block></outcome></switch></outcome></switch></block></outcome><outcome value='Other'>
+<return status='success'>
+<parameter name='output.status.code' value='400' />
+<parameter name='output.status.message' value='chef success, do not need push job ' /></return></outcome></switch></outcome><outcome value='Other'>
+<return status='failure'>
+<parameter name='output.status.code' value='200' />
+<parameter name='output.status.message' value='`$chefServerResult.message`' />
+</return></outcome></switch></block></outcome><outcome value='201'>
+<block>
+<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='VnfcNodeobjects' >
+<parameter name='organizations' value='`$chef-organization`'/> 
+<parameter name='serverAddress' value='`$chef-server-address`'/> 
+<parameter name='username' value='`$chef-username`'/> 
+<parameter name='NodeList' value='`$NodeList`'/>
+<parameter name='Node' value='`$Node`'/></execute><switch test='`$chefServerResult.code`'><outcome value='200'>
+<switch test='`$PushJobFlag`'>
+<outcome value='true'>
+<block>
+<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='VnfcPushJob'>
+	<parameter name='organizations' value='`$chef-organization`'/> 
+	<parameter name='serverAddress' value='`$chef-server-address`'/> 
+	<parameter name='username' value='`$chef-username`'/> 
+	<parameter name='NodeList' value='`$NodeList`'/>
+	<parameter name='CallbackCapable' value='`$CallbackCapable`'/>
+	<parameter name='RequestId' value='`$RequestId`'/>
+	<parameter name='CallbackUrl' value='`$CallbackUrl`'/></execute><switch test='`$chefServerResult.code`'>
+<outcome value='Other'>
+<return status='failure'>
+<parameter name='output.status.code' value='200' />
+<parameter name='output.status.message' value='`$chefServerResult.message`' />
+</return></outcome><outcome value='201'>
+<switch test='`$CallbackCapable`'>
+<outcome value='true'>
+<return status='success'>
+<parameter name='output.status.code' value='400' />
+<parameter name='output.status.message' value='chef success, waiting for callback' /></return></outcome><outcome value='Other'>
+<block>
+<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='checkPushJob' >
+	<parameter name='organizations' value='`$chef-organization`'/> 
+	<parameter name='serverAddress' value='`$chef-server-address`'/> 
+	<parameter name='username' value='`$chef-username`'/> 
+	<parameter name='jobid' value='`$jobID`'/>
+	<parameter name='retryTimes' value='`$retryTimes`'/>
+	<parameter name='retryInterval' value='`$retryInterval`'/></execute><switch test='`$chefServerResult.code`'>
+<outcome value='Other'>
+<return status='failure'>
+<parameter name='output.status.code' value='200' />
+<parameter name='output.status.message' value='`$chefServerResult.message`' /></return></outcome><outcome value='200'>
+<switch test='`$GetOutputFlag`'>
+<outcome value='Other'>
+<return status='success'>
+<parameter name='output.status.code' value='400' />
+<parameter name='output.status.message' value='`$chefServerResult.message`' /></return></outcome><outcome value='true'>
+<block>
+<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='fetchResults' >
+	<parameter name='organizations' value='`$chef-organization`'/> 
+	<parameter name='serverAddress' value='`$chef-server-address`'/> 
+	<parameter name='username' value='`$chef-username`'/> 
+	<parameter name='NodeList' value='`$NodeList`'/></execute><switch test='`$chefServerResult.code`'>
+<outcome value='200'>
+<return status='success'>
+<parameter name='output.status.code' value='400' />
+<parameter name='output.status.message' value='finish' />
+<parameter name='output.status.results' value='`$chefServerResult.message`' /></return></outcome><outcome value='Other'>
+<return status='failure'>
+<parameter name='output.status.code' value='200' />
+<parameter name='output.status.message' value='`$chefServerResult.message`' />
+</return></outcome></switch></block></outcome></switch></outcome></switch></block></outcome></switch></outcome></switch></block></outcome><outcome value='Other'>
+<return status='success'>
+<parameter name='output.status.code' value='400' />
+<parameter name='output.status.message' value='chef success, do not need push job ' /></return></outcome></switch></outcome><outcome value='Other'>
+<return status='failure'>
+<parameter name='output.status.code' value='200' />
+<parameter name='output.status.message' value='`$chefServerResult.message`' />
+</return></outcome></switch></block></outcome><outcome value='Other'>
+<return status='failure'>
+<parameter name='output.status.code' value='200' />
+<parameter name='output.status.message' value='`$chefServerResult.message`' />
+</return></outcome></switch></block></block></method></service-logic>
