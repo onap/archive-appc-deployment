@@ -1,0 +1,614 @@
+[{
+	"id": "335dc414.286014",
+	"type": "set",
+	"name": "chef server set",
+	"xml": "<set>\n<parameter name='chef-server-address' value='`$chef-server-address`' />\n<parameter name='chef-username' value='`$chef-username`' />\n<parameter name='chef-organization' value='`$chef-organization`'/>\n",
+	"comments": "",
+	"x": 404,
+	"y": 238.45454788208008,
+	"z": "49009b52.507ca4",
+	"wires": []
+}, {
+	"id": "33bda605.955de2",
+	"type": "block",
+	"name": "block",
+	"xml": "<block>\n",
+	"atomic": "false",
+	"comments": "",
+	"outputs": 1,
+	"x": 218.54547882080078,
+	"y": 485,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["e8329217.2dc7c", "a40c3e36.fe8338"]
+	]
+}, {
+	"id": "e8329217.2dc7c",
+	"type": "execute",
+	"name": "Environment",
+	"xml": "<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='VnfcEnvironment' >\n<parameter name='organizations' value='`$chef-organization`'/> \n<parameter name='serverAddress' value='`$chef-server-address`'/> \n<parameter name='username' value='`$chef-username`'/> \n<parameter name='Environment' value='`$Environment`'/>",
+	"comments": "",
+	"outputs": 1,
+	"x": 409.9091262817383,
+	"y": 410.2727355957031,
+	"z": "49009b52.507ca4",
+	"wires": [
+		[]
+	]
+}, {
+	"id": "b142240c.8ddff8",
+	"type": "block",
+	"name": "block",
+	"xml": "<block>\n",
+	"atomic": "false",
+	"comments": "",
+	"outputs": 1,
+	"x": 816.9091110229492,
+	"y": 408.7272605895996,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["bc8d5070.3d88b8", "10a16c52.ad032c"]
+	]
+}, {
+	"id": "bc8d5070.3d88b8",
+	"type": "execute",
+	"name": "VnfcNodeobjects",
+	"xml": "<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='VnfcNodeobjects' >\n<parameter name='organizations' value='`$chef-organization`'/> \n<parameter name='serverAddress' value='`$chef-server-address`'/> \n<parameter name='username' value='`$chef-username`'/> \n<parameter name='NodeList' value='`$NodeList`'/>\n<parameter name='Node' value='`$Node`'/>",
+	"comments": "",
+	"outputs": 1,
+	"x": 1050.0908889770508,
+	"y": 367.00000381469727,
+	"z": "49009b52.507ca4",
+	"wires": [
+		[]
+	]
+}, {
+	"id": "10a16c52.ad032c",
+	"type": "switchNode",
+	"name": "switch",
+	"xml": "<switch test='`$chefServerResult.code`'>",
+	"comments": "",
+	"outputs": 1,
+	"x": 1063.0908889770508,
+	"y": 471.00000381469727,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["f32d707f.bec0f", "1b80d2ba.806e35"]
+	]
+}, {
+	"id": "1b80d2ba.806e35",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='200'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 1251.0908889770508,
+	"y": 454,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["4c00f500.6c661c"]
+	]
+}, {
+	"id": "f32d707f.bec0f",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='Other'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 1161.0908889770508,
+	"y": 587.0000038146973,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["2a7cac08.317dec"]
+	]
+}, {
+	"id": "43690b27.0ac9cc",
+	"type": "block",
+	"name": "block",
+	"xml": "<block>\n",
+	"atomic": "false",
+	"comments": "",
+	"outputs": 1,
+	"x": 1681.1819534301758,
+	"y": 199.09091186523438,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["f306ea50.b4f3e", "e4f71a52.e2d5e"]
+	]
+}, {
+	"id": "9082bb4a.80248",
+	"type": "execute",
+	"name": "checkPushJob",
+	"xml": "<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='checkPushJob' >\n\t<parameter name='organizations' value='`$chef-organization`'/> \n\t<parameter name='serverAddress' value='`$chef-server-address`'/> \n\t<parameter name='username' value='`$chef-username`'/> \n\t<parameter name='jobid' value='`$jobID`'/>\n\t<parameter name='retryTimes' value='`$retryTimes`'/>\n\t<parameter name='retryInterval' value='`$retryInterval`'/>",
+	"comments": "",
+	"outputs": 1,
+	"x": 2343.4543991088867,
+	"y": 729.9999265670776,
+	"z": "49009b52.507ca4",
+	"wires": [
+		[]
+	]
+}, {
+	"id": "da225e9c.f12d08",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='201'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 1878.0908279418945,
+	"y": 581.181770324707,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["53c3c4d6.42f5dc"]
+	]
+}, {
+	"id": "6ea6e2ea.488efc",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='Other'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 1881.181739807129,
+	"y": 426.9090461730957,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["6b2adbf9.afd184"]
+	]
+}, {
+	"id": "e4f71a52.e2d5e",
+	"type": "switchNode",
+	"name": "switch",
+	"xml": "<switch test='`$chefServerResult.code`'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 1720.3636283874512,
+	"y": 486.54542541503906,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["da225e9c.f12d08", "6ea6e2ea.488efc"]
+	]
+}, {
+	"id": "f306ea50.b4f3e",
+	"type": "execute",
+	"name": "pushJob",
+	"xml": "<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='VnfcPushJob'>\n\t<parameter name='organizations' value='`$chef-organization`'/> \n\t<parameter name='serverAddress' value='`$chef-server-address`'/> \n\t<parameter name='username' value='`$chef-username`'/> \n\t<parameter name='NodeList' value='`$NodeList`'/>\n\t<parameter name='CallbackCapable' value='`$CallbackCapable`'/>\n\t<parameter name='RequestId' value='`$RequestId`'/>\n\t<parameter name='CallbackUrl' value='`$CallbackUrl`'/>",
+	"comments": "",
+	"outputs": 1,
+	"x": 1862.2727737426758,
+	"y": 181.6363525390625,
+	"z": "49009b52.507ca4",
+	"wires": [
+		[]
+	]
+}, {
+	"id": "3276a7e.dac35d8",
+	"type": "other",
+	"name": "other",
+	"xml": "<outcome value='Other'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 562.5454788208008,
+	"y": 589,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["7ded29ca.1fb8a8"]
+	]
+}, {
+	"id": "e66f2cd9.a34a6",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='200'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 577.5454788208008,
+	"y": 440,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["b142240c.8ddff8"]
+	]
+}, {
+	"id": "a40c3e36.fe8338",
+	"type": "switchNode",
+	"name": "switch",
+	"xml": "<switch test='`$chefServerResult.code`'>",
+	"comments": "",
+	"outputs": 1,
+	"x": 380.36365509033203,
+	"y": 634.5454711914062,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["3276a7e.dac35d8", "e66f2cd9.a34a6", "5861ba34.9baf74"]
+	]
+}, {
+	"id": "2a7cac08.317dec",
+	"type": "returnFailure",
+	"name": "return failure",
+	"xml": "<return status='failure'>\n<parameter name='output.status.code' value='200' />\n<parameter name='output.status.message' value='`$chefServerResult.message`' />\n",
+	"comments": "",
+	"x": 1335.0908889770508,
+	"y": 593.0000038146973,
+	"z": "49009b52.507ca4",
+	"wires": []
+}, {
+	"id": "7ded29ca.1fb8a8",
+	"type": "returnFailure",
+	"name": "return failure",
+	"xml": "<return status='failure'>\n<parameter name='output.status.code' value='200' />\n<parameter name='output.status.message' value='`$chefServerResult.message`' />\n",
+	"comments": "",
+	"x": 786.5454788208008,
+	"y": 598,
+	"z": "49009b52.507ca4",
+	"wires": []
+}, {
+	"id": "5861ba34.9baf74",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='201'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 578.4545364379883,
+	"y": 509.272705078125,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["b142240c.8ddff8"]
+	]
+}, {
+	"id": "c573c0a2.f1b6a",
+	"type": "block",
+	"name": "block",
+	"xml": "<block>\n",
+	"atomic": "false",
+	"comments": "",
+	"outputs": 1,
+	"x": 93.54547882080078,
+	"y": 338,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["335dc414.286014", "33bda605.955de2"]
+	]
+}, {
+	"id": "6b2adbf9.afd184",
+	"type": "returnFailure",
+	"name": "return failure",
+	"xml": "<return status='failure'>\n<parameter name='output.status.code' value='200' />\n<parameter name='output.status.message' value='`$chefServerResult.message`' />\n",
+	"comments": "",
+	"x": 2083.545478820801,
+	"y": 426,
+	"z": "49009b52.507ca4",
+	"wires": []
+}, {
+	"id": "53c3c4d6.42f5dc",
+	"type": "switchNode",
+	"name": "switch",
+	"xml": "<switch test='`$CallbackCapable`'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 1953.5454788208008,
+	"y": 688,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["bddb192.207ca68", "e972395c.32322"]
+	]
+}, {
+	"id": "e972395c.32322",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='Other'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 2114.545478820801,
+	"y": 741,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["f0f202b3.e8ceb8"]
+	]
+}, {
+	"id": "bddb192.207ca68",
+	"type": "outcomeTrue",
+	"name": "outcome",
+	"xml": "<outcome value='true'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 2117.636390686035,
+	"y": 586.7272758483887,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["51e8206a.a3d048"]
+	]
+}, {
+	"id": "51e8206a.a3d048",
+	"type": "returnSuccess",
+	"name": "return success",
+	"xml": "<return status='success'>\n<parameter name='output.status.code' value='400' />\n<parameter name='output.status.message' value='chef success, waiting for callback' />",
+	"comments": "",
+	"x": 2300.545478820801,
+	"y": 588,
+	"z": "49009b52.507ca4",
+	"wires": []
+}, {
+	"id": "ff3d4c52.b0f988",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='200'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 2451.545478820801,
+	"y": 985,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["389afae5.2abcfe"]
+	]
+}, {
+	"id": "7430e7ad.b98db8",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='Other'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 2454.636390686035,
+	"y": 830.7272758483887,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["a7b69f75.49a23"]
+	]
+}, {
+	"id": "438453a1.a7dc6c",
+	"type": "switchNode",
+	"name": "switch",
+	"xml": "<switch test='`$chefServerResult.code`'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 2293.8182792663574,
+	"y": 890.363655090332,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["ff3d4c52.b0f988", "7430e7ad.b98db8"]
+	]
+}, {
+	"id": "a7b69f75.49a23",
+	"type": "returnFailure",
+	"name": "return failure",
+	"xml": "<return status='failure'>\n<parameter name='output.status.code' value='200' />\n<parameter name='output.status.message' value='`$chefServerResult.message`' />",
+	"comments": "",
+	"x": 2673.909004211426,
+	"y": 782,
+	"z": "49009b52.507ca4",
+	"wires": []
+}, {
+	"id": "719f95d6.241efc",
+	"type": "execute",
+	"name": "fetchResults",
+	"xml": "<execute plugin='org.openecomp.appc.adapter.chef.ChefAdapter' method='fetchResults' >\n\t<parameter name='organizations' value='`$chef-organization`'/> \n\t<parameter name='serverAddress' value='`$chef-server-address`'/> \n\t<parameter name='username' value='`$chef-username`'/> \n\t<parameter name='NodeList' value='`$NodeList`'/>",
+	"comments": "",
+	"outputs": 1,
+	"x": 2978.727119445801,
+	"y": 1222.181884765625,
+	"z": "49009b52.507ca4",
+	"wires": [
+		[]
+	]
+}, {
+	"id": "f0f202b3.e8ceb8",
+	"type": "block",
+	"name": "block",
+	"xml": "<block>\n",
+	"atomic": "false",
+	"comments": "",
+	"outputs": 1,
+	"x": 2117.5454788208003,
+	"y": 843.9999999999998,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["9082bb4a.80248", "438453a1.a7dc6c"]
+	]
+}, {
+	"id": "9636fbc0.374dc",
+	"type": "switchNode",
+	"name": "switch",
+	"xml": "<switch test='`$chefServerResult.code`'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 2965.5454788208012,
+	"y": 1366.0000000000002,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["23dc29f4.7deafe", "da18f68d.d8c4f"]
+	]
+}, {
+	"id": "da18f68d.d8c4f",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='Other'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 3238.6363945007324,
+	"y": 1483.000029563904,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["9102124d.6d7118"]
+	]
+}, {
+	"id": "23dc29f4.7deafe",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='200'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 3239.727363586426,
+	"y": 1330.7272949218752,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["b38ba59b.7c553"]
+	]
+}, {
+	"id": "b38ba59b.7c553",
+	"type": "returnSuccess",
+	"name": "return success",
+	"xml": "<return status='success'>\n<parameter name='output.status.code' value='400' />\n<parameter name='output.status.message' value='finish' />\n<parameter name='output.status.results' value='`$chefServerResult.message`' />",
+	"comments": "",
+	"x": 3467.909248352051,
+	"y": 1331.4545898437502,
+	"z": "49009b52.507ca4",
+	"wires": []
+}, {
+	"id": "9102124d.6d7118",
+	"type": "returnFailure",
+	"name": "return failure",
+	"xml": "<return status='failure'>\n<parameter name='output.status.code' value='200' />\n<parameter name='output.status.message' value='`$chefServerResult.message`' />\n",
+	"comments": "",
+	"x": 3473.727363586426,
+	"y": 1491.7271728515625,
+	"z": "49009b52.507ca4",
+	"wires": []
+}, {
+	"id": "310e4a28.127d5e",
+	"type": "block",
+	"name": "block",
+	"xml": "<block>\n",
+	"atomic": "false",
+	"comments": "",
+	"outputs": 1,
+	"x": 2815.545478820801,
+	"y": 1286,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["719f95d6.241efc", "9636fbc0.374dc"]
+	]
+}, {
+	"id": "389afae5.2abcfe",
+	"type": "switchNode",
+	"name": "switch",
+	"xml": "<switch test='`$GetOutputFlag`'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 2619.545478820801,
+	"y": 1064,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["cc456542.7b98f", "71db97e2.8ed32"]
+	]
+}, {
+	"id": "71db97e2.8ed32",
+	"type": "outcomeTrue",
+	"name": "outcome",
+	"xml": "<outcome value='true'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 2818.6363945007324,
+	"y": 1121.0000295639038,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["310e4a28.127d5e"]
+	]
+}, {
+	"id": "cc456542.7b98f",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='Other'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 2821.727306365967,
+	"y": 966.7273054122925,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["47f523ab.f340ac"]
+	]
+}, {
+	"id": "47f523ab.f340ac",
+	"type": "returnSuccess",
+	"name": "return success",
+	"xml": "<return status='success'>\n<parameter name='output.status.code' value='400' />\n<parameter name='output.status.message' value='`$chefServerResult.message`' />",
+	"comments": "",
+	"x": 3005.909248352051,
+	"y": 969.4545288085938,
+	"z": "49009b52.507ca4",
+	"wires": []
+}, {
+	"id": "5bb7e566.448e74",
+	"type": "dgstart",
+	"name": "DGSTART",
+	"outputs": 1,
+	"x": 148.54547882080078,
+	"y": 81,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["21f2ae37.a3c3aa"]
+	]
+}, {
+	"id": "2a37ea50.e2ef2e",
+	"type": "method",
+	"name": "chef",
+	"xml": "<method rpc='chef' mode='sync'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 126.54547882080078,
+	"y": 242,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["c573c0a2.f1b6a"]
+	]
+}, {
+	"id": "4c00f500.6c661c",
+	"type": "switchNode",
+	"name": "switch",
+	"xml": "<switch test='`$PushJobFlag`'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 1356.5454788208008,
+	"y": 291,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["c0401b40.2f6d1", "8bba0e5b.35d44"]
+	]
+}, {
+	"id": "8bba0e5b.35d44",
+	"type": "other",
+	"name": "outcome",
+	"xml": "<outcome value='Other'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 1476.5454788208008,
+	"y": 348,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["815c41bc.e5c128"]
+	]
+}, {
+	"id": "c0401b40.2f6d1",
+	"type": "outcomeTrue",
+	"name": "outcome",
+	"xml": "<outcome value='true'>\n",
+	"comments": "",
+	"outputs": 1,
+	"x": 1479.6363906860352,
+	"y": 193.72727584838867,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["43690b27.0ac9cc"]
+	]
+}, {
+	"id": "815c41bc.e5c128",
+	"type": "returnSuccess",
+	"name": "return success",
+	"xml": "<return status='success'>\n<parameter name='output.status.code' value='400' />\n<parameter name='output.status.message' value='chef success, do not need push job ' />",
+	"comments": "",
+	"x": 1518.5454788208008,
+	"y": 468,
+	"z": "49009b52.507ca4",
+	"wires": []
+}, {
+	"id": "21f2ae37.a3c3aa",
+	"type": "service-logic",
+	"name": "APPC 3.0.0",
+	"module": "APPC",
+	"version": "3.0.0",
+	"comments": "",
+	"xml": "<service-logic xmlns='http://www.openecomp.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.openecomp.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='3.0.0'>",
+	"outputs": 1,
+	"x": 147,
+	"y": 163,
+	"z": "49009b52.507ca4",
+	"wires": [
+		["2a37ea50.e2ef2e"]
+	]
+}]
