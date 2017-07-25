@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.openecomp.sdnc.core</groupId>
         <artifactId>root</artifactId>
-        <version>1.1.2</version>
+        <version>1.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
@@ -21,11 +21,11 @@
 
         <!-- Setting absolute sdnc versions because the ranges defined in the sdnc root pom cause problems.
              These values override those in the parent pom (org.openecomp.sdnc.core.root). -->
-        <sdnc.core.version>1.1.2-SNAPSHOT</sdnc.core.version>
-        <sdnc.adaptors.version>1.1.2-SNAPSHOT</sdnc.adaptors.version>
-        <sdnc.northbound.version>1.1.2-SNAPSHOT</sdnc.northbound.version>
-        <sdnc.oam.version>1.1.2-SNAPSHOT</sdnc.oam.version>
-        <sdnc.plugins.version>1.1.2-SNAPSHOT</sdnc.plugins.version>
+        <sdnc.core.version>1.1.0-SNAPSHOT</sdnc.core.version>
+        <sdnc.adaptors.version>1.1.0-SNAPSHOT</sdnc.adaptors.version>
+        <sdnc.northbound.version>1.1.0-SNAPSHOT</sdnc.northbound.version>
+        <sdnc.oam.version>1.1.0-SNAPSHOT</sdnc.oam.version>
+        <sdnc.plugins.version>1.1.0-SNAPSHOT</sdnc.plugins.version>
         <sdnctl.sli.version>${sdnc.core.version}</sdnctl.sli.version>
         <sdnctl.aai.service.version>${sdnc.adaptors.version}</sdnctl.aai.service.version>
         <sdnctl.dblib.version>${sdnc.core.version}</sdnctl.dblib.version>
