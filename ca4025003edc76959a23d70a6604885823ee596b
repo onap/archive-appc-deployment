@@ -1,0 +1,9 @@
+Code-Review+1: Patrick Brady <pb071s@att.com>
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Milton Kwock <mk2818@att.com>
+Code-Review+2: Skip Wonnell <kw5258@att.com>
+Submitted-by: Skip Wonnell <kw5258@att.com>
+Submitted-at: Tue, 01 Aug 2017 18:28:58 +0000
+Reviewed-on: http://gerrit.onap.org/r/6503
+Project: appc/deployment
+Branch: refs/heads/master
