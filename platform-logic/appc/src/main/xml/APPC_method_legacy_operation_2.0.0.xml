@@ -1,0 +1,47 @@
+<!-- ============LICENSE_START======================================================= 
+	APPC ================================================================================ 
+	Copyright (C) 2017 AT&T Intellectual Property. All rights reserved. ================================================================================ 
+	Licensed under the Apache License, Version 2.0 (the "License"); you may not 
+	use this file except in compliance with the License. You may obtain a copy 
+	of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. ============LICENSE_END========================================================= 
+	ECOMP is a trademark and service mark of AT&T Intellectual Property. -->
+
+<service-logic module='Appc-API' version='2.0.0.0'>
+	<method rpc='legacy_operation' mode='sync'>
+		<block atomic='`true' `>
+			<outcome value='1'>
+				<execute plugin='`org.openecomp.appc.dg.common.LegacyUtil' `
+					method='`prepareRequest' `></execute>
+			</outcome>
+			<outcome value='2'>
+				<call mode='`sync' ` rpc='`topology-operation-all' ` module='`APPC' `
+					version='`2.0.0' `>
+					<outcome value='failure'>
+						<execute plugin='`org.openecomp.appc.dg.common.LegacyUtil' `
+							method='`convertNegativeResponse' `>
+							<outcome value='success'>
+								<return status='`failure' `>
+									<parameter name='org.openecomp.appc.dg.error' value='`$error-message`' />
+									<parameter name='SvcLogic.status.code' value='`$error-code`' />
+									<parameter name='dg.status.message.param.errorMsg'
+										value='`$error-message`' />
+								</return>
+							</outcome>
+						</execute>
+					</outcome>
+					<outcome value='success'>
+						<execute plugin='`org.openecomp.appc.dg.common.LegacyUtil' `
+							method='`convertPositiveResponse' `></execute>
+					</outcome>
+				</call>
+			</outcome>
+			<outcome value='3'>
+				<return status='`success' `></return>
+			</outcome>
+		</block>
+	</method>
+</service-logic>

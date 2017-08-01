@@ -1,97 +1,100 @@
-<!--
-  ============LICENSE_START=======================================================
-  APPC
-  ================================================================================
-  Copyright (C) 2017 AT&T Intellectual Property. All rights reserved.
-  ================================================================================
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-  
-       http://www.apache.org/licenses/LICENSE-2.0
-  
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-  ============LICENSE_END=========================================================
-  ECOMP is a trademark and service mark of AT&T Intellectual Property.
--->
+<!-- ============LICENSE_START======================================================= 
+	APPC ================================================================================ 
+	Copyright (C) 2017 AT&T Intellectual Property. All rights reserved. ================================================================================ 
+	Licensed under the Apache License, Version 2.0 (the "License"); you may not 
+	use this file except in compliance with the License. You may obtain a copy 
+	of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. ============LICENSE_END========================================================= 
+	ECOMP is a trademark and service mark of AT&T Intellectual Property. -->
 
-<service-logic xmlns='http://www.openecomp.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.openecomp.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.0'><method rpc='topology-operation-all' mode='sync'>
-<!--What method should we try to call. Closely maps to __action__Server()--><switch test='`$org.openecomp.appc.action`'>
-<outcome value='restart'>
-<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='restartServer'>
-<parameter name="org.openecomp.appc.provider.name" value="OpenStack" />
-<parameter name="org.openecomp.appc.instance.url" value="`$org.openecomp.appc.vmid`" />
-<parameter name="org.openecomp.appc.identity.url" value="`$org.openecomp.appc.identity.url`" /><outcome value='success'>
-<return status='success'>
-</return></outcome><outcome value='failure'>
-<return status='failure'>
-<!--
-<parameter name='error-code' value='500' />
-<parameter name='error-message' value='failed' />
---></return></outcome></execute></outcome><outcome value='rebuild'>
-<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='rebuildServer'>
-<parameter name="org.openecomp.appc.provider.name" value="OpenStack" />
-<parameter name="org.openecomp.appc.instance.url" value="`$org.openecomp.appc.vmid`" />
-<parameter name="org.openecomp.appc.identity.url" value="`$org.openecomp.appc.identity.url`" /><outcome value='success'>
-<return status='success'>
-</return></outcome><outcome value='Other'>
-<return status='failure'>
-<!--
-<parameter name='error-code' value='500' />
-<parameter name='error-message' value='failed' />
---></return></outcome></execute></outcome><outcome value='migrate'>
-<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='migrateServer'>
-<parameter name="org.openecomp.appc.provider.name" value="OpenStack" />
-<parameter name="org.openecomp.appc.instance.url" value="`$org.openecomp.appc.vmid`" />
-<parameter name="org.openecomp.appc.identity.url" value="`$org.openecomp.appc.identity.url`" /><outcome value='success'>
-<return status='success'>
-</return></outcome><outcome value='Other'>
-<return status='failure'>
-<!--
-<parameter name='error-code' value='500' />
-<parameter name='error-message' value='failed' />
---></return></outcome></execute></outcome><outcome value='snapshot'>
-<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='createSnapshot'>
-<parameter name="org.openecomp.appc.provider.name" value="OpenStack" />
-<parameter name="org.openecomp.appc.instance.url" value="`$org.openecomp.appc.vmid`" />
-<parameter name="org.openecomp.appc.identity.url" value="`$org.openecomp.appc.identity.url`" /><outcome value='success'>
-<return status='success'>
-</return></outcome><outcome value='Other'>
-<return status='failure'>
-<!--
-<parameter name='error-code' value='500' />
-<parameter name='error-message' value='failed' />
---></return></outcome></execute></outcome><outcome value='evacuate'>
-<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='evacuateServer'>
-<parameter name="org.openecomp.appc.provider.name" value="OpenStack" />
-<parameter name="org.openecomp.appc.instance.url" value="`$org.openecomp.appc.vmid`" />
-<parameter name="org.openecomp.appc.identity.url" value="`$org.openecomp.appc.identity.url`" /><outcome value='success'>
-<return status='failure'>
-<parameter name='error-code' value='500' />
-<parameter name='error-message' value='This action is not yet implemented' />
-</return></outcome><outcome value='Other'>
-<return status='failure'>
-<parameter name='error-code' value='500' />
-<parameter name='error-message' value='This action is not yet implemented' />
-</return></outcome></execute></outcome><!--Unknown action provided. Fail--><outcome value='Other'>
-<return status='failure'>
-<parameter name='error-code' value='404' />
-<parameter name='error-message' value='Unknown action specified' />
-</return></outcome><outcome value='modifyConfig'>
-<block>
-<execute plugin='org.openecomp.appc.adapter.rest.RestAdapter' method='commonDelete' >
-<parameter name='org.openecomp.appc.instance.URI' value='`$org.openecomp.appc.configURL`'/>
-<parameter name='org.openecomp.appc.instance.haveHeader' value='false'/>
-</execute><execute plugin='org.openecomp.appc.adapter.rest.RestAdapter' method='commonPut' >
-<parameter name='org.openecomp.appc.instance.URI' value='`$org.openecomp.appc.configURL`'/>
-<parameter name='org.openecomp.appc.instance.requestBody' value='`$org.openecomp.appc.configJson`'/>
-<parameter name='org.openecomp.appc.instance.headers' value='{"Content-type":"application/json"}'/>
-<parameter name='org.openecomp.appc.instance.haveHeader' value='true'/><outcome value='success'>
-<return status='success'>
-</return></outcome><outcome value='Other'>
-<return status='success'>
-</return></outcome></execute></block></outcome></switch></method></service-logic>
+<service-logic module='APPC' version='2.0.0'>
+	<method rpc='topology-operation-all' mode='sync'>
+		<switch test='`$org.openecomp.appc.action' `>
+			<outcome value='rebuild'>
+				<execute plugin='`org.openecomp.appc.adapter.iaas.ProviderAdapter' `
+					method='`rebuildServer' `>
+					<parameter name='org.openecomp.appc.instance.url' value='`$org.openecomp.appc.vmid`' />
+					<parameter name='org.openecomp.appc.identity.url' value='`$org.openecomp.appc.identity.url`' />
+					<parameter name='org.openecomp.appc.provider.name' value='`OpenStack`' />
+					<outcome value='success'>
+						<return status='`success' `></return>
+					</outcome>
+					<outcome value='Other'>
+						<return status='`failure' `></return>
+					</outcome>
+				</execute>
+			</outcome>
+			<outcome value='restart'>
+				<execute plugin='`org.openecomp.appc.adapter.iaas.ProviderAdapter' `
+					method='`restartServer' `>
+					<parameter name='org.openecomp.appc.instance.url' value='`$org.openecomp.appc.vmid`' />
+					<parameter name='org.openecomp.appc.identity.url' value='`$org.openecomp.appc.identity.url`' />
+					<parameter name='org.openecomp.appc.provider.name' value='`OpenStack`' />
+					<outcome value='success'>
+						<return status='`success' `></return>
+					</outcome>
+					<outcome value='failure'>
+						<return status='`failure' `></return>
+					</outcome>
+				</execute>
+			</outcome>
+			<outcome value='evacuate'>
+				<execute plugin='`org.openecomp.appc.adapter.iaas.ProviderAdapter' `
+					method='`evacuateServer' `>
+					<parameter name='org.openecomp.appc.instance.url' value='`$org.openecomp.appc.vmid`' />
+					<parameter name='org.openecomp.appc.identity.url' value='`$org.openecomp.appc.identity.url`' />
+					<parameter name='org.openecomp.appc.provider.name' value='`OpenStack`' />
+					<outcome value='success'>
+						<return status='`failure' `>
+							<parameter name='error-message' value='`This action is not yet implemented`' />
+							<parameter name='error-code' value='`500`' />
+						</return>
+					</outcome>
+					<outcome value='Other'>
+						<return status='`failure' `>
+							<parameter name='error-message' value='`This action is not yet implemented`' />
+							<parameter name='error-code' value='`500`' />
+						</return>
+					</outcome>
+				</execute>
+			</outcome>
+			<outcome value='snapshot'>
+				<execute plugin='`org.openecomp.appc.adapter.iaas.ProviderAdapter' `
+					method='`createSnapshot' `>
+					<parameter name='org.openecomp.appc.instance.url' value='`$org.openecomp.appc.vmid`' />
+					<parameter name='org.openecomp.appc.identity.url' value='`$org.openecomp.appc.identity.url`' />
+					<parameter name='org.openecomp.appc.provider.name' value='`OpenStack`' />
+					<outcome value='success'>
+						<return status='`success' `></return>
+					</outcome>
+					<outcome value='Other'>
+						<return status='`failure' `></return>
+					</outcome>
+				</execute>
+			</outcome>
+			<outcome value='migrate'>
+				<execute plugin='`org.openecomp.appc.adapter.iaas.ProviderAdapter' `
+					method='`migrateServer' `>
+					<parameter name='org.openecomp.appc.instance.url' value='`$org.openecomp.appc.vmid`' />
+					<parameter name='org.openecomp.appc.identity.url' value='`$org.openecomp.appc.identity.url`' />
+					<parameter name='org.openecomp.appc.provider.name' value='`OpenStack`' />
+					<outcome value='success'>
+						<return status='`success' `></return>
+					</outcome>
+					<outcome value='Other'>
+						<return status='`failure' `></return>
+					</outcome>
+				</execute>
+			</outcome>
+			<outcome value='Other'>
+				<return status='`failure' `>
+					<parameter name='error-message' value='`Unknown action specified`' />
+					<parameter name='error-code' value='`404`' />
+				</return>
+			</outcome>
+		</switch>
+	</method>
+</service-logic>
