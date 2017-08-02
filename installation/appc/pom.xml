@@ -378,7 +378,7 @@
 									<goal>exec</goal>
 								</goals>
 								<configuration>
-									<executable>/usr/bin/find</executable>
+									<executable>find</executable>
 									<arguments>
 										<argument>${basedir}/target/docker-stage/opt/openecomp/appc</argument>
 										<argument>-name</argument>
