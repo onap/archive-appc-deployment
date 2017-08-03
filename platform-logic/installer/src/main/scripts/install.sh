@@ -52,5 +52,5 @@ MYSQL_DB=${MYSQL_DB:-sdnctl}
 MYSQL_HOST=${MYSQL_HOST:-dbhost}
 
 mysql --user=${MYSQL_USER} --password=${MYSQL_PWD} --host=${MYSQL_HOST} ${MYSQL_DB} <<-END
-SOURCE VNF_DG_MAPPING.sql
+SOURCE /opt/openecomp/appc/svclogic/config/VNF_DG_MAPPING.sql
 END
