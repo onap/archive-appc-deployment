@@ -1,0 +1,7 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+2: Skip Wonnell <kw5258@att.com>
+Submitted-by: Skip Wonnell <kw5258@att.com>
+Submitted-at: Thu, 03 Aug 2017 00:38:43 +0000
+Reviewed-on: http://gerrit.onap.org/r/6559
+Project: appc/deployment
+Branch: refs/heads/master
