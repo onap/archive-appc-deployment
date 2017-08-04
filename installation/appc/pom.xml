@@ -75,7 +75,7 @@
 						</configuration>
 					</execution>
 					
-					<!-- Two commented execution tags below in case / when appc needs to add .dump mysql files or keystore files -->
+					<!-- Commented tags in case / when appc needs to add .dump mysql files or keystore files -->
 					<!--<execution>
 						<id>copy-data</id>
 						<goals>
@@ -94,7 +94,8 @@
 								</resource>
 							</resources>
 						</configuration>
-					</execution>
+					</execution>-->
+					
 					<execution>
 						<id>copy-keystores</id>
 						<goals>
@@ -102,18 +103,19 @@
 						</goals>
 						<phase>validate</phase>
 						<configuration>
-							<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/sdnc/data/stores</outputDirectory>
+							<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/appc/data/stores</outputDirectory>
 							<resources>
 								<resource>
 									<directory>../src/main/stores</directory>
 									<includes>
 										<include>*.jks</include>
+										<include>*.p12</include>
 									</includes>
 									<filtering>false</filtering>
 								</resource>
 							</resources>
 						</configuration>
-					</execution>-->
+					</execution>
 					
 					<execution>
 						<id>copy-properties</id>
@@ -125,7 +127,7 @@
 							<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/appc/data/properties</outputDirectory>
 							<resources>
 								<resource>
-									<directory>../src/main/appc-properties</directory>
+									<directory>../src/main/properties</directory>
 									<includes>
 										<include>*.properties</include>
 									</includes>
@@ -314,16 +316,46 @@
 
 							<!-- Two commented execution tags below in case / when appc needs 
 								to add .dump mysql files or keystore files -->
-							<!--<execution> <id>copy-data</id> <goals> <goal>copy-resources</goal> 
-								</goals> <phase>validate</phase> <configuration> <outputDirectory>${basedir}/target/docker-stage/opt/openecomp/sdnc/data</outputDirectory> 
-								<resources> <resource> <directory>src/main/resources</directory> <includes> 
-								<include>*.dump</include> </includes> <filtering>false</filtering> </resource> 
-								</resources> </configuration> </execution> <execution> <id>copy-keystores</id> 
-								<goals> <goal>copy-resources</goal> </goals> <phase>validate</phase> <configuration> 
-								<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/sdnc/data/stores</outputDirectory> 
-								<resources> <resource> <directory>../src/main/stores</directory> <includes> 
-								<include>*.jks</include> </includes> <filtering>false</filtering> </resource> 
-								</resources> </configuration> </execution> -->
+							<!-- <execution>
+								<id>copy-data</id>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<phase>validate</phase>
+								<configuration>
+									<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/sdnc/data</outputDirectory>
+									<resources>
+										<resource>
+											<directory>src/main/resources</directory>
+											<includes>
+												<include>*.dump</include>
+											</includes>
+											<filtering>false</filtering>
+										</resource>
+									</resources>
+								</configuration>
+							</execution> -->
+							
+							<execution>
+								<id>copy-keystores</id>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<phase>validate</phase>
+								<configuration>
+									<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/appc/data/stores</outputDirectory>
+									<resources>
+										<resource>
+											<directory>../src/main/stores</directory>
+											<includes>
+												<include>*.jks</include>
+												<include>*.p12</include>
+											</includes>
+											<filtering>false</filtering>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
 
 							<execution>
 								<id>copy-properties</id>
@@ -335,7 +367,7 @@
 									<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/appc/data/properties</outputDirectory>
 									<resources>
 										<resource>
-											<directory>../src/main/appc-properties</directory>
+											<directory>../src/main/properties</directory>
 											<includes>
 												<include>*.properties</include>
 											</includes>
@@ -378,7 +410,7 @@
 									<goal>exec</goal>
 								</goals>
 								<configuration>
-									<executable>/usr/bin/find</executable>
+									<executable>find</executable>
 									<arguments>
 										<argument>${basedir}/target/docker-stage/opt/openecomp/appc</argument>
 										<argument>-name</argument>

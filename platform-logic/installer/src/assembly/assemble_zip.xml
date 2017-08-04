@@ -40,6 +40,7 @@
 				<include>**/*.xml</include>
 				<include>**/graph.versions</include>
 			</includes>
+			<lineEnding>unix</lineEnding>
 		</fileSet>
 
 		<fileSet>
