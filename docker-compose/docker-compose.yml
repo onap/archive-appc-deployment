@@ -15,12 +15,12 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
       - MYSQL_ROOT_HOST=%
-    logging:       
-      driver:   "json-file"
+    logging:
+      driver: "json-file"
       options:  
         max-size: "30m"
         max-file: "5"
-  
+
       
   appc:
     image: "openecomp/appc-image:latest"
@@ -41,17 +41,17 @@ services:
       - APPC_CONFIG_DIR=/opt/openecomp/appc/data/properties
       - DMAAP_TOPIC_ENV=SUCCESS
     logging:
-      driver:   "json-file"
+      driver: "json-file"
       options:
         max-size: "30m"
         max-file: "5"
-  
-  
+
+
   dgbuilder:
     image: "openecomp/dgbuilder-sdnc-image:latest"
     depends_on:
       - db
-    container_name:  sdnc_dgbuilder_container
+    container_name: sdnc_dgbuilder_container
     entrypoint:
        - "/bin/bash"
        - "-c"
@@ -67,8 +67,8 @@ services:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
       - SDNC_CONFIG_DIR=/opt/openecomp/sdnc/data/properties
       - APPC_CONFIG_DIR=/opt/openecomp/appc/data/properties
-    logging:       
-      driver:   "json-file"
-      options:  
+    logging:
+      driver: "json-file"
+      options:
         max-size: "30m"
         max-file: "5"
