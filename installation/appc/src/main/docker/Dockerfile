@@ -2,6 +2,9 @@
 FROM openecomp/sdnc-image:1.1.2-SNAPSHOT
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
+# Set the Env. Variable in the container to add the APPC CONFIG DIR (the SDNC_CONFIG_DIR is inherited from SDNC Image)
+ENV APPC_CONFIG_DIR /opt/openecomp/appc/data/properties
+
 # copy openecomp
 COPY opt /opt
 

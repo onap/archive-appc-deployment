@@ -4,7 +4,7 @@ networks:
   default:
     driver: bridge
     driver_opts:
-      com.docker.network.driver.mtu: ${MTU}
+      com.docker.network.driver.mtu: 1500
 
 services:
   db:
@@ -23,7 +23,7 @@ services:
   
       
   appc:
-    image: "openecomp/appc-image:latest"
+    image: "localhost:8082/openecomp/appc-image:1.1.0-SNAPSHOT-latest"
     depends_on :
       - db
     container_name: appc_controller_container
@@ -48,7 +48,7 @@ services:
   
   
   dgbuilder:
-    image: "openecomp/dgbuilder-sdnc-image:latest"
+    image: "nexus3.onap.org:10001/openecomp/dgbuilder-sdnc-image:1.1-STAGING-latest"
     depends_on:
       - db
     container_name:  sdnc_dgbuilder_container
