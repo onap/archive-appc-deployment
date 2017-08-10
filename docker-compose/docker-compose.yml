@@ -72,3 +72,4 @@ services:
       options:  
         max-size: "30m"
         max-file: "5"
+
