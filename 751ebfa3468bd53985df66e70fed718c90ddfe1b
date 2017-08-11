@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a1a2d67_a8d5b544",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-08-11T00:05:18Z",
+      "side": 1,
+      "message": "Tends to be bad practice to run as root :p, but at least your git config should have your name. Probably can\u0027t accept this as is.",
+      "range": {
+        "startLine": 2,
+        "startChar": 12,
+        "endLine": 2,
+        "endChar": 33
+      },
+      "revId": "751ebfa3468bd53985df66e70fed718c90ddfe1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1a2d67_88caf99f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-08-11T00:05:18Z",
+      "side": 1,
+      "message": "Good commit message (except for author name)!\n\nIt\u0027s super helpful to have a properly formatted git commit message.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 17
+      },
+      "revId": "751ebfa3468bd53985df66e70fed718c90ddfe1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1a2d67_68cf9db1",
+        "filename": "docker-compose/docker-compose.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-08-11T00:05:18Z",
+      "side": 1,
+      "message": "Please remove extraneous spaces.",
+      "range": {
+        "startLine": 70,
+        "startChar": 12,
+        "endLine": 70,
+        "endChar": 19
+      },
+      "revId": "751ebfa3468bd53985df66e70fed718c90ddfe1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1a2d67_a83c9594",
+        "filename": "installation/appc/src/main/docker/Dockerfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-08-11T00:05:18Z",
+      "side": 1,
+      "message": "seems like this should eventually change to ccsdk/opendaylight-image - but probably too soon for that change.",
+      "range": {
+        "startLine": 2,
+        "startChar": 5,
+        "endLine": 2,
+        "endChar": 40
+      },
+      "revId": "751ebfa3468bd53985df66e70fed718c90ddfe1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1a2d67_c837d1af",
+        "filename": "installation/appc/src/main/docker/Dockerfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-08-11T00:05:18Z",
+      "side": 1,
+      "message": "Seems like this should be removed.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 53
+      },
+      "revId": "751ebfa3468bd53985df66e70fed718c90ddfe1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a1a2d67_48c4e191",
+        "filename": "platform-logic/appc/src/main/xml/APPC_chef.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-08-11T00:05:18Z",
+      "side": 1,
+      "message": "Please remove extraneous spaces.",
+      "range": {
+        "startLine": 29,
+        "startChar": 62,
+        "endLine": 29,
+        "endChar": 63
+      },
+      "revId": "751ebfa3468bd53985df66e70fed718c90ddfe1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
