@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_2fd1c9cd",
+        "filename": "installation/appc/src/main/scripts/installFeatures.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-08-14T18:34:25Z",
+      "side": 1,
+      "message": "Seems like extraneous line addition.",
+      "revId": "2639b52658ce6f5ce7703955f4a701bcae46f208",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
