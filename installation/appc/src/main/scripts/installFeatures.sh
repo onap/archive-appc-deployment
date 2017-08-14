@@ -42,17 +42,21 @@ done
 APPC_FEATURES=" \
  appc-metric \
  appc-provider \
+ appc-command-executor \
  appc-dmaap-adapter \
  appc-event-listener \
  appc-chef-adapter \
  appc-netconf-adapter \
  appc-rest-adapter \
+ appc-lifecycle-management \
  appc-dispatcher \
  appc-dg-util \
  appc-dg-shared \
  appc-asdc-listener \
+ appc-oam \
  appc-iaas-adapter \
  appc-ansible-adapter"
+
 
 echo "Enabling core APP-C features"
 featureInstall odl-netconf-connector-all
