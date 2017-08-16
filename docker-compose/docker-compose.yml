@@ -21,7 +21,9 @@ services:
         max-size: "30m"
         max-file: "5"
 
-      
+# Tweaking SDNC_CONFIG_DIR temporarily from ../sdnc/.. to ../appc/.. since it may be needed in this script
+#    to map to SDN-C AAI Service Bundle's AAI Activator class inside the gerrit sdnc/adaptors repo, so that
+#    the AAI Service bundle loads APP-C's aaiclient.properties instead of SDN-C's aaiclient.properties.
   appc:
     image: "openecomp/appc-image:latest"
     depends_on :
@@ -37,7 +39,7 @@ services:
       - db:sdnctldb02
     environment:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
-      - SDNC_CONFIG_DIR=/opt/openecomp/sdnc/data/properties
+      - SDNC_CONFIG_DIR=/opt/openecomp/appc/data/properties
       - APPC_CONFIG_DIR=/opt/openecomp/appc/data/properties
       - DMAAP_TOPIC_ENV=SUCCESS
     logging:
@@ -66,9 +68,9 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
       - SDNC_CONFIG_DIR=/opt/openecomp/sdnc/data/properties
-      - APPC_CONFIG_DIR=/opt/openecomp/appc/data/properties
     logging:
       driver: "json-file"
       options:
         max-size: "30m"
         max-file: "5"
+
