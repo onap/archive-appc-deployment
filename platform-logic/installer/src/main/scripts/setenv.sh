@@ -21,15 +21,18 @@
 # ECOMP is a trademark and service mark of AT&T Intellectual Property.
 ###
 
-SDNC_CONFIG_DIR=${SDNC_CONFIG_DIR:-/opt/sdnc/data/properties}
+# Tweaking SDNC_CONFIG_DIR temporarily from ../sdnc/.. to ../appc/.. since it may be needed in this script
+#    to map to SDN-C AAI Service Bundle's AAI Activator class inside the gerrit sdnc/adaptors repo, so that
+#    the AAI Service bundle loads APP-C's aaiclient.properties instead of SDN-C's aaiclient.properties.
+SDNC_CONFIG_DIR=${SDNC_CONFIG_DIR:-/opt/appc/data/properties}
 APPC_CONFIG_DIR=${APPC_CONFIG_DIR:-/opt/appc/data/properties}
 
-AAIURI=$(grep org.openecomp.sdnc.sli.aai.uri ${APPC_CONFIG_DIR}/aaiclient.properties | grep -v '#' | cut -d'=' -f2)
+AAIURI=$(grep org.openecomp.sdnc.sli.aai.uri ${SDNC_CONFIG_DIR}/aaiclient.properties | grep -v '#' | cut -d'=' -f2)
 
-MYSQL_USER=$(grep org.openecomp.sdnc.sli.jdbc.user ${APPC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2)
-MYSQL_PWD=$(grep org.openecomp.sdnc.sli.jdbc.password ${APPC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2)
-MYSQL_DB=$(grep org.openecomp.sdnc.sli.jdbc.database ${APPCC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2)
-MYSQL_SERVER=$(grep org.openecomp.sdnc.sli.jdbc.hosts ${APPC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2 | cut -d',' -f1)
+MYSQL_USER=$(grep org.openecomp.sdnc.sli.jdbc.user ${SDNC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2)
+MYSQL_PWD=$(grep org.openecomp.sdnc.sli.jdbc.password ${SDNC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2)
+MYSQL_DB=$(grep org.openecomp.sdnc.sli.jdbc.database ${SDNC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2)
+MYSQL_SERVER=$(grep org.openecomp.sdnc.sli.jdbc.hosts ${SDNC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2 | cut -d',' -f1)
 
 ODLUSER=$(grep controllerUser ${SDNC_CONFIG_DIR}/backup.properties | grep -v '#' | cut -d'=' -f2)
 ODLPWD=$(grep controllerPass ${SDNC_CONFIG_DIR}/backup.properties | grep -v '#' | cut -d'=' -f2)
