@@ -41,7 +41,6 @@ done
 
 APPC_FEATURES=" \
  appc-metric \
- appc-provider \
  appc-command-executor \
  appc-dmaap-adapter \
  appc-event-listener \
@@ -50,6 +49,7 @@ APPC_FEATURES=" \
  appc-rest-adapter \
  appc-lifecycle-management \
  appc-dispatcher \
+ appc-provider \
  appc-dg-util \
  appc-dg-shared \
  appc-asdc-listener \
