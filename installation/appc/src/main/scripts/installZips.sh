@@ -52,7 +52,8 @@ APPC_FEATURES=" \
  appc-dg-shared \
  appc-iaas-adapter \
  appc-ansible-adapter \
- appc-oam"
+ appc-oam \
+ appc-sequence-generator"
 
 APPC_VERSION=${APPC_VERSION:-0.0.1}
 APPC_OAM_VERSION=${APPC_OAM_VERSION:-0.1.1}
