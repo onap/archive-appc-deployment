@@ -21,7 +21,10 @@
 # ECOMP is a trademark and service mark of AT&T Intellectual Property.
 ###
 
-# Install SDN-C & APP-C platform components if not already installed and start container
+#
+# This script takes care of installing the SDN-C & APP-C platform components 
+#  if not already installed, and starts the APP-C Docker Container
+#
 
 ODL_HOME=${ODL_HOME:-/opt/opendaylight/current}
 ODL_ADMIN_PASSWORD=${ODL_ADMIN_PASSWORD:-Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U}
@@ -43,11 +46,17 @@ if [ -z "$DMAAP_TOPIC_ENV" ]
 		echo "DMAAP_TOPIC_ENV shell variable exists and it's $DMAAP_TOPIC_ENV"
 fi
 
-
 echo "Adding a value to property appc.asdc.env in appc.properties for appc-asdc-listener feature"
 echo "" >> $APPC_HOME/data/properties/appc.properties
 echo "appc.asdc.env=$DMAAP_TOPIC_ENV" >> $APPC_HOME/data/properties/appc.properties
 echo "" >> $APPC_HOME/data/properties/appc.properties
+
+
+
+#
+# Add the DB hostnames in /etc/hosts (IP address is the MySQL DB IP)
+#
+RUN echo "172.19.0.2      dbhost sdnctldb01 sdnctldb02" >> /etc/hosts
 
 
 
@@ -66,6 +75,8 @@ if [ ! -f ${SDNC_HOME}/.installed ]
 then
 	echo "Installing SDN-C database"
 	${SDNC_HOME}/bin/installSdncDb.sh
+	echo "Installing APP-C database"
+	${APPC_HOME}/bin/installAppcDb.sh
 	echo "Starting OpenDaylight"
 	${ODL_HOME}/bin/start
 	echo "Waiting ${SLEEP_TIME} seconds for OpenDaylight to initialize"

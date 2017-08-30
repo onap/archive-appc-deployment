@@ -75,15 +75,14 @@
 						</configuration>
 					</execution>
 					
-					<!-- Commented tags in case / when appc needs to add .dump mysql files or keystore files -->
-					<!--<execution>
+					<execution>
 						<id>copy-data</id>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
 						<phase>validate</phase>
 						<configuration>
-							<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/sdnc/data</outputDirectory>
+							<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/appc/data</outputDirectory>
 							<resources>
 								<resource>
 									<directory>src/main/resources</directory>
@@ -94,7 +93,7 @@
 								</resource>
 							</resources>
 						</configuration>
-					</execution>-->
+					</execution>
 					
 					<execution>
 						<id>copy-keystores</id>
@@ -314,16 +313,14 @@
 								</configuration>
 							</execution>
 
-							<!-- Two commented execution tags below in case / when appc needs 
-								to add .dump mysql files or keystore files -->
-							<!-- <execution>
+							<execution>
 								<id>copy-data</id>
 								<goals>
 									<goal>copy-resources</goal>
 								</goals>
 								<phase>validate</phase>
 								<configuration>
-									<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/sdnc/data</outputDirectory>
+									<outputDirectory>${basedir}/target/docker-stage/opt/openecomp/appc/data</outputDirectory>
 									<resources>
 										<resource>
 											<directory>src/main/resources</directory>
@@ -334,7 +331,7 @@
 										</resource>
 									</resources>
 								</configuration>
-							</execution> -->
+							</execution>
 							
 							<execution>
 								<id>copy-keystores</id>

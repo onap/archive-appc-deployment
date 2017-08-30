@@ -1,0 +1,27 @@
+--
+-- Table structure for table `transactions` for appcctl db
+--
+
+DROP TABLE IF EXISTS `transactions`;
+CREATE TABLE `transactions` (
+    `TIMESTAMP`
+    varchar(32) NOT NULL,
+    `REQUEST_ID`
+    varchar(256) DEFAULT NULL,
+    `START_TIME`
+    varchar(32) DEFAULT NULL,
+    `END_TIME`
+    varchar(32) DEFAULT NULL,
+    `TARGET_ID`
+    varchar(256) DEFAULT NULL,
+    `TARGET_TYPE`
+    varchar(256) DEFAULT NULL,
+    `SUB_COMPONENT`
+    varchar(256) DEFAULT NULL,
+    `OPERATION`
+    varchar(256) DEFAULT NULL,
+    `RESULT_CODE`
+    varchar(256) DEFAULT NULL,
+    `DESCRIPTION`
+    text
+) ENGINE = InnoDB DEFAULT CHARSET = latin1;

@@ -1,4 +1,4 @@
-# Base ubuntu with added packages needed for open ecomp
+# Base ubuntu with added packages needed for ONAP
 FROM openecomp/sdnc-image:1.1.2-SNAPSHOT-STAGING-170625-122013
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
@@ -9,5 +9,5 @@ ENV APPC_CONFIG_DIR /opt/openecomp/appc/data/properties
 COPY opt /opt
 RUN ln -s /opt/openecomp/appc /opt/appc
 
-#Expose port 8181 for ODL REST calls
+# Expose port 8181 for ODL REST calls
 EXPOSE 8181
