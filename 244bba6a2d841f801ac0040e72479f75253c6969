@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_c1eace0e",
+        "filename": "installation/appc/src/main/scripts/installZips.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-09-07T19:56:40Z",
+      "side": 1,
+      "message": "I\u0027m assuming some point this will be CCSDK_HOME but if I remember correctly this is not changed in CCSDK yet.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 8
+      },
+      "revId": "244bba6a2d841f801ac0040e72479f75253c6969",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
