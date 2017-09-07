@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Patrick Brady <pb071s@att.com>
+Code-Review+2: Marcus Williams <marcus.williams@intel.com>
+Submitted-by: Marcus Williams <marcus.williams@intel.com>
+Submitted-at: Thu, 07 Sep 2017 19:56:42 +0000
+Reviewed-on: http://gerrit.onap.org/r/10899
+Project: appc/deployment
+Branch: refs/heads/master
