@@ -1,5 +1,5 @@
 # Base ubuntu with added packages needed for ONAP
-FROM openecomp/sdnc-image:1.1.2-SNAPSHOT-STAGING-170625-122013
+FROM onap/ccsdk-odlsli-image:latest
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
 # Set the Env. Variable in the container to add the APPC CONFIG DIR (the SDNC_CONFIG_DIR is inherited from SDNC Image)

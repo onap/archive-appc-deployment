@@ -29,7 +29,7 @@ then
 fi
 
 APPC_HOME=${APPC_HOME:-/opt/openecomp/appc}
-SDNC_HOME=${SDNC_HOME:-/opt/openecomp/sdnc}
+SDNC_HOME=${SDNC_HOME:-/opt/onap/sdnc}
 
 targetDir=${1:-${APPC_HOME}}
 sdnc_targetDir=${1:-${SDNC_HOME}}
