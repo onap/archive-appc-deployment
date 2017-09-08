@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <groupId>org.openecomp.appc.deployment</groupId>
     <artifactId>appc-docker-project</artifactId>
-    <name>APPC Docker Project</name>
+    <name>appc-deployment</name>
     <description>The APP-C component contains SDNC Docker Image, and installs APPC/SDNC components on top.</description>
 
     <properties>
