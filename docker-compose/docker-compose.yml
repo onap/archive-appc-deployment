@@ -50,7 +50,7 @@ services:
 
 
   dgbuilder:
-    image: "openecomp/dgbuilder-sdnc-image:latest"
+    image: "onap/ccsdk-dgbuilder-image:latest"
     depends_on:
       - db
     container_name: sdnc_dgbuilder_container
