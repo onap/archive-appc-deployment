@@ -52,7 +52,7 @@ APPC_FEATURES=" \
  appc-provider \
  appc-dg-util \
  appc-dg-shared \
- appc-asdc-listener \
+ appc-sdc-listener \
  appc-oam \
  appc-iaas-adapter \
  appc-ansible-adapter \

@@ -37,7 +37,7 @@ sdnc_targetDir=${1:-${SDNC_HOME}}
 featureDir=${targetDir}/features
 
 APPC_FEATURES=" \
- appc-asdc-listener \
+ appc-sdc-listener \
  appc-lifecycle-management \
  appc-command-executor \
  appc-provider \
