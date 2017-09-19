@@ -1,0 +1,663 @@
+CREATE DATABASE  IF NOT EXISTS `sdnctl` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `sdnctl`;
+
+SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
+SET @@SESSION.SQL_LOG_BIN= 0;
+
+--
+-- GTID state at the beginning of the backup 
+--
+
+SET @@GLOBAL.GTID_PURGED='9760232c-da6f-11e5-9de8-0050569a170f:1-11640';
+
+--
+-- Table structure for table `ACTION_LEVEL_REFERENCE`
+--
+
+DROP TABLE IF EXISTS `ACTION_LEVEL_REFERENCE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ACTION_LEVEL_REFERENCE` (
+  `ACTION_LEVEL_REFERENCE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ACTION_IDENTIFIER` varchar(50) NOT NULL,
+  `ACTION_LEVEL` varchar(50) NOT NULL,
+  UNIQUE KEY `ACTION_LEVEL_REFERENCE_ID` (`ACTION_LEVEL_REFERENCE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ASDC_ARTIFACTS`
+--
+
+DROP TABLE IF EXISTS `ASDC_ARTIFACTS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ASDC_ARTIFACTS` (
+  `ASDC_ARTIFACTS_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SERVICE_UUID` varchar(50) DEFAULT NULL,
+  `DISTRIBUTION_ID` varchar(50) DEFAULT NULL,
+  `SERVICE_NAME` varchar(255) DEFAULT NULL,
+  `SERVICE_DESCRIPTION` varchar(255) DEFAULT NULL,
+  `RESOURCE_UUID` varchar(255) DEFAULT NULL,
+  `RESOURCE_INSTANCE_NAME` varchar(255) DEFAULT NULL,
+  `RESOURCE_NAME` varchar(255) DEFAULT NULL,
+  `RESOURCE_VERSION` varchar(50) DEFAULT NULL,
+  `RESOURCE_TYPE` varchar(50) DEFAULT NULL,
+  `ARTIFACT_UUID` varchar(50) DEFAULT NULL,
+  `ARTIFACT_TYPE` varchar(50) DEFAULT NULL,
+  `ARTIFACT_VERSION` varchar(25) DEFAULT NULL,
+  `ARTIFACT_DESCRIPTION` varchar(255) DEFAULT NULL,
+  `INTERNAL_VERSION` int(11) DEFAULT NULL,
+  `CREATION_DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ARTIFACT_NAME` varchar(255) DEFAULT NULL,
+  `ARTIFACT_CONTENT` longtext,
+  PRIMARY KEY (`ASDC_ARTIFACTS_ID`),
+  UNIQUE KEY `ASDC_ARTIFACTS_ID` (`ASDC_ARTIFACTS_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1412 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ASDC_REFERENCE`
+--
+
+DROP TABLE IF EXISTS `ASDC_REFERENCE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ASDC_REFERENCE` (
+  `ASDC_REFERENCE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `VNF_TYPE` varchar(50) DEFAULT NULL,
+  `VNFC_TYPE` varchar(50) DEFAULT NULL,
+  `FILE_CATEGORY` varchar(50) DEFAULT NULL,
+  `ACTION` varchar(50) DEFAULT NULL,
+  `ARTIFACT_TYPE` varchar(50) DEFAULT NULL,
+  `ARTIFACT_NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ASDC_REFERENCE_ID`),
+  UNIQUE KEY `ASDC_REFERENCE_ID` (`ASDC_REFERENCE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `CONFIGFILES`
+--
+
+DROP TABLE IF EXISTS `CONFIGFILES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `CONFIGFILES` (
+  `CONFIG_FILE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `EXTERNAL_VERSION` varchar(50) DEFAULT NULL,
+  `DATA_SOURCE` varchar(25) DEFAULT NULL,
+  `CREATION_DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `SERVICE_INSTANCE_ID` varchar(50) DEFAULT NULL,
+  `VNF_TYPE` varchar(50) DEFAULT NULL,
+  `VNFC_TYPE` varchar(50) DEFAULT NULL,
+  `FILE_CATEGORY` varchar(50) DEFAULT NULL,
+  `FILE_NAME` varchar(255) DEFAULT NULL,
+  `FILE_CONTENT` longtext,
+  `ACTION` varchar(50) DEFAULT NULL,
+  `VNF_ID` varchar(50) DEFAULT NULL,
+  `VM_NAME` varchar(50) DEFAULT NULL,
+  `VNF_NAME` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`CONFIG_FILE_ID`),
+  UNIQUE KEY `CONFIG_FILE_ID` (`CONFIG_FILE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=688 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `CONFIGURE_ACTION_DG`
+--
+
+DROP TABLE IF EXISTS `CONFIGURE_ACTION_DG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `CONFIGURE_ACTION_DG` (
+  `CONFIGURE_ACTION_DG_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `VNF_TYPE` varchar(50) DEFAULT NULL,
+  `ACTION` varchar(50) DEFAULT NULL,
+  `GENERATE_CONFIG_DG` varchar(50) DEFAULT NULL,
+  `DOWNLOAD_CONFIG_DG` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`CONFIGURE_ACTION_DG_ID`),
+  UNIQUE KEY ` CONFIGURE_ACTION_DG_ID` (`CONFIGURE_ACTION_DG_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `CONFIG_FILE_REFERENCE`
+--
+
+DROP TABLE IF EXISTS `CONFIG_FILE_REFERENCE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `CONFIG_FILE_REFERENCE` (
+  `CONFIG_FILE_REFERENCE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SITE_LOCATION` varchar(50) DEFAULT NULL,
+  `VNF_TYPE` varchar(50) DEFAULT NULL,
+  `IMPORT_TYPE` varchar(50) DEFAULT NULL,
+  `FILE_TYPE` varchar(50) DEFAULT NULL,
+  `SOURCE_SERVER_NAME` varchar(255) DEFAULT NULL,
+  `SOURCE_FILE_PATH` varchar(255) DEFAULT NULL,
+  `TARGET_FILE_PATH` varchar(255) DEFAULT NULL,
+  `NAME` varchar(50) DEFAULT NULL,
+  `FILE_NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`CONFIG_FILE_REFERENCE_ID`),
+  UNIQUE KEY `CONFIG_FILE_REFERENCE_ID` (`CONFIG_FILE_REFERENCE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `CONFIG_TRANSACTION_LOG`
+--
+
+DROP TABLE IF EXISTS `CONFIG_TRANSACTION_LOG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `CONFIG_TRANSACTION_LOG` (
+  `CONFIG_TRANSACTION_LOG_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `REQUEST_ID` varchar(50) DEFAULT NULL,
+  `MESSAGE_TYPE` varchar(50) DEFAULT NULL,
+  `CREATION_DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `MESSAGE` longtext,
+  PRIMARY KEY (`CONFIG_TRANSACTION_LOG_ID`),
+  UNIQUE KEY ` CONFIG_TRANSACTION_LOG_ID` (`CONFIG_TRANSACTION_LOG_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1074 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `DEVICE_AUTHENTICATION`
+--
+
+DROP TABLE IF EXISTS `DEVICE_AUTHENTICATION`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DEVICE_AUTHENTICATION` (
+  `DEVICE_AUTHENTICATION_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `VNF_TYPE` varchar(50) DEFAULT NULL,
+  `USER_NAME` varchar(50) DEFAULT NULL,
+  `PASSWORD` varchar(100) DEFAULT NULL,
+  `PORT_NUMBER` int(11) DEFAULT NULL,
+  PRIMARY KEY (`DEVICE_AUTHENTICATION_ID`),
+  UNIQUE KEY `DEVICE_AUTHENTICATION_ID` (`DEVICE_AUTHENTICATION_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Temporary view structure for view `DEVICE_CONFIGURATION`
+--
+
+DROP TABLE IF EXISTS `DEVICE_CONFIGURATION`;
+/*!50001 DROP VIEW IF EXISTS `DEVICE_CONFIGURATION`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `DEVICE_CONFIGURATION` AS SELECT 
+ 1 AS `UPLOAD_CONFIG_ID`,
+ 1 AS `REQUEST_ID`,
+ 1 AS `ORIGINATOR_ID`,
+ 1 AS `SERVICE_DESCRIPTION`,
+ 1 AS `ACTION`,
+ 1 AS `UPLOAD_DATE`,
+ 1 AS `VNF_ID`,
+ 1 AS `VNF_NAME`,
+ 1 AS `VM_NAME`,
+ 1 AS `VNF_TYPE`,
+ 1 AS `VNFC_TYPE`,
+ 1 AS `HOST_IP_ADDRESS`,
+ 1 AS `CONFIG_INDICATOR`,
+ 1 AS `PENDING_DELETE`,
+ 1 AS `CONTENT`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `DEVICE_INTERFACE_LOG`
+--
+
+DROP TABLE IF EXISTS `DEVICE_INTERFACE_LOG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DEVICE_INTERFACE_LOG` (
+  `DEVICE_INTERFACE_LOG_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SERVICE_INSTANCE_ID` varchar(50) DEFAULT NULL,
+  `REQUEST_ID` varchar(50) DEFAULT NULL,
+  `CREATION_DATE` datetime NOT NULL,
+  `LOG` longtext,
+  PRIMARY KEY (`DEVICE_INTERFACE_LOG_ID`),
+  UNIQUE KEY `DEVICE_INTERFACE_LOG_ID` (`DEVICE_INTERFACE_LOG_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `DEVICE_INTERFACE_PROTOCOL`
+--
+
+DROP TABLE IF EXISTS `DEVICE_INTERFACE_PROTOCOL`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DEVICE_INTERFACE_PROTOCOL` (
+  `DEVICE_INTERFACE_PROTOCOL_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `VNF_TYPE` varchar(50) DEFAULT NULL,
+  `PROTOCOL` varchar(50) DEFAULT NULL,
+  `MODULE` varchar(50) DEFAULT NULL,
+  `DG_RPC` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`DEVICE_INTERFACE_PROTOCOL_ID`),
+  UNIQUE KEY `DEVICE_INTERFACE_PROTOCOL_ID` (`DEVICE_INTERFACE_PROTOCOL_ID`),
+  UNIQUE KEY `VNF_TYPE` (`VNF_TYPE`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `DOWNLOAD_CONFIG_TEMPLATE`
+--
+
+DROP TABLE IF EXISTS `DOWNLOAD_CONFIG_TEMPLATE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DOWNLOAD_CONFIG_TEMPLATE` (
+  `DOWNLOAD_CONFIG_TEMPLATE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `VNF_TYPE` varchar(50) NOT NULL,
+  `PROTOCOL` varchar(50) NOT NULL,
+  `TEMPLATE` longtext,
+  PRIMARY KEY (`DOWNLOAD_CONFIG_TEMPLATE_ID`),
+  UNIQUE KEY `DOWNLOAD_CONFIG_TEMPLATE_ID` (`DOWNLOAD_CONFIG_TEMPLATE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `DOWNLOAD_DG_REFERENCE`
+--
+
+DROP TABLE IF EXISTS `DOWNLOAD_DG_REFERENCE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DOWNLOAD_DG_REFERENCE` (
+  `DOWNLOAD_DG_REFERENCE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `PROTOCOL` varchar(50) NOT NULL,
+  `DOWNLOAD_CONFIG_DG` varchar(50) NOT NULL,
+  PRIMARY KEY (`DOWNLOAD_DG_REFERENCE_ID`),
+  UNIQUE KEY ` DOWNLOAD_DG_REFERENCE_ID` (`DOWNLOAD_DG_REFERENCE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `DT_ACTION_STATUS`
+--
+
+DROP TABLE IF EXISTS `DT_ACTION_STATUS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DT_ACTION_STATUS` (
+  `DT_ACTION_STATUS_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ACTION` varchar(50) NOT NULL,
+  `VNF_TYPE` varchar(50) DEFAULT NULL,
+  `VNFC_TYPE` varchar(50) DEFAULT NULL,
+  `USER` varchar(50) NOT NULL,
+  `TECHNOLOGY` varchar(50) DEFAULT NULL,
+  `UPDATED_DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `STATUS` varchar(50) NOT NULL,
+  PRIMARY KEY (`DT_ACTION_STATUS_ID`),
+  UNIQUE KEY `DT_ACTION_STATUS_ID` (`DT_ACTION_STATUS_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `DT_ARTIFACT_REFERENCE`
+--
+
+DROP TABLE IF EXISTS `DT_ARTIFACT_REFERENCE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DT_ARTIFACT_REFERENCE` (
+  `DT_ARTIFACT_REFERENCE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `PROTOCOL` varchar(50) DEFAULT NULL,
+  `ACTION` varchar(50) DEFAULT NULL,
+  `ARTIFACT_TYPE` varchar(50) NOT NULL,
+  `ARTIFACT_PRIORITY` int(11) NOT NULL,
+  PRIMARY KEY (`DT_ARTIFACT_REFERENCE_ID`),
+  UNIQUE KEY `DT_ARTIFACT_REFERENCE_ID` (`DT_ARTIFACT_REFERENCE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `DT_ARTIFACT_TRACKING`
+--
+
+DROP TABLE IF EXISTS `DT_ARTIFACT_TRACKING`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DT_ARTIFACT_TRACKING` (
+  `DT_ARTIFACT_TRACKING_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ASDC_ARTIFACTS_ID` int(11) DEFAULT NULL,
+  `ASDC_REFERENCE_ID` int(11) DEFAULT NULL,
+  `USER` varchar(50) NOT NULL,
+  `TECHNOLOGY` varchar(50) DEFAULT NULL,
+  `CREATION_DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ARTIFACT_STATUS` varchar(50) NOT NULL,
+  `IN_CART` varchar(50) DEFAULT NULL,
+  `PROTOCOL` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`DT_ARTIFACT_TRACKING_ID`),
+  UNIQUE KEY `DT_ARTIFACT_TRACKING_ID` (`DT_ARTIFACT_TRACKING_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `DT_GUI_REFERENCE`
+--
+
+DROP TABLE IF EXISTS `DT_GUI_REFERENCE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DT_GUI_REFERENCE` (
+  `DT_GUI_REFERENCE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `GUI_NAME` varchar(50) NOT NULL,
+  `FIELD_NAME` varchar(50) NOT NULL,
+  `VALUE` varchar(50) NOT NULL,
+  `USER` varchar(50) NOT NULL,
+  `UPDATED_DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `PROTOCOL` varchar(50) DEFAULT NULL,
+  `ACTION` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`DT_GUI_REFERENCE_ID`),
+  UNIQUE KEY `DT_GUI_REFERENCE_ID` (`DT_GUI_REFERENCE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `DT_STATUS_RELATIONSHIP`
+--
+
+DROP TABLE IF EXISTS `DT_STATUS_RELATIONSHIP`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `DT_STATUS_RELATIONSHIP` (
+  `DT_STATUS_RELATIONSHIP_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `DT_ARTIFACT_TRACKING_ID` int(11) NOT NULL,
+  `DT_ACTION_STATUS_ID` int(11) NOT NULL,
+  PRIMARY KEY (`DT_STATUS_RELATIONSHIP_ID`),
+  UNIQUE KEY `DT_STATUS_RELATIONSHIP_ID` (`DT_STATUS_RELATIONSHIP_ID`),
+  KEY `IE_DT_STATUS_RELATIONSHIP` (`DT_ARTIFACT_TRACKING_ID`),
+  KEY `IE2_DT_STATUS_RELATIONSHIP` (`DT_ACTION_STATUS_ID`),
+  CONSTRAINT `DT_STATUS_RELATIONSHIP_IBFK_1` FOREIGN KEY (`DT_ARTIFACT_TRACKING_ID`) REFERENCES `DT_ARTIFACT_TRACKING` (`DT_ARTIFACT_TRACKING_ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `DT_STATUS_RELATIONSHIP_IBFK_2` FOREIGN KEY (`DT_ACTION_STATUS_ID`) REFERENCES `DT_ACTION_STATUS` (`DT_ACTION_STATUS_ID`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `GET_CONFIG_TEMPLATE`
+--
+
+DROP TABLE IF EXISTS `GET_CONFIG_TEMPLATE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `GET_CONFIG_TEMPLATE` (
+  `GET_CONFIG_TEMPLATE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `VNF_TYPE` varchar(50) NOT NULL,
+  `DEVICE_INTERFACE_PROTOCOL_ID` int(11) NOT NULL,
+  `XML_PROCESSING` varchar(1) DEFAULT NULL,
+  `XML_PROTOCOL` varchar(30) DEFAULT NULL,
+  `TEMPLATE` longtext,
+  PRIMARY KEY (`GET_CONFIG_TEMPLATE_ID`),
+  UNIQUE KEY `GET_CONFIG_TEMPLATE_ID` (`GET_CONFIG_TEMPLATE_ID`),
+  KEY `get_config_template_ibfk_1` (`DEVICE_INTERFACE_PROTOCOL_ID`),
+  CONSTRAINT `get_config_template_ibfk_1` FOREIGN KEY (`DEVICE_INTERFACE_PROTOCOL_ID`) REFERENCES `DEVICE_INTERFACE_PROTOCOL` (`DEVICE_INTERFACE_PROTOCOL_ID`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `MULTISTEP_FLOW_REFERENCE`
+--
+
+DROP TABLE IF EXISTS `MULTISTEP_FLOW_REFERENCE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MULTISTEP_FLOW_REFERENCE` (
+  `MULTISTEP_FLOW_REFERENCE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ACTION` varchar(50) NOT NULL,
+  `ACTION_LEVEL` varchar(50) DEFAULT NULL,
+  `VNF_TYPE` varchar(50) DEFAULT NULL,
+  `SEQUENCE_TYPE` varchar(50) DEFAULT NULL,
+  `CATEGORY` varchar(50) DEFAULT NULL,
+  `GENERATION_NODE` varchar(50) DEFAULT NULL,
+  `EXECUTION_NODE` varchar(50) DEFAULT NULL,
+  `CREATOR` varchar(50) DEFAULT NULL,
+  `UPDATED_DATE` datetime DEFAULT NULL,
+  UNIQUE KEY ` MULTISTEP_FLOW_REFERENCE_ID` (`MULTISTEP_FLOW_REFERENCE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `NODE_TYPES`
+--
+
+DROP TABLE IF EXISTS `NODE_TYPES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `NODE_TYPES` (
+  `nodetype` varchar(80) NOT NULL,
+  PRIMARY KEY (`nodetype`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `PREPARE_FILE_RELATIONSHIP`
+--
+
+DROP TABLE IF EXISTS `PREPARE_FILE_RELATIONSHIP`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `PREPARE_FILE_RELATIONSHIP` (
+  `PREPARE_FILE_RELATIONSHIP_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SERVICE_INSTANCE_ID` varchar(50) DEFAULT NULL,
+  `REQUEST_ID` varchar(255) DEFAULT NULL,
+  `CONFIG_FILE_ID` int(11) DEFAULT NULL,
+  `ASDC_ARTIFACTS_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`PREPARE_FILE_RELATIONSHIP_ID`),
+  UNIQUE KEY `PREPARE_FILE_RELATIONSHIP_ID` (`PREPARE_FILE_RELATIONSHIP_ID`),
+  KEY `ie_prepare_file_relationship` (`CONFIG_FILE_ID`),
+  KEY `ie2_prepare_file_relationship` (`ASDC_ARTIFACTS_ID`),
+  CONSTRAINT `prepare_file_relationship_ibfk_2` FOREIGN KEY (`ASDC_ARTIFACTS_ID`) REFERENCES `ASDC_ARTIFACTS` (`ASDC_ARTIFACTS_ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `prepare_file_replationship_ibfk_1` FOREIGN KEY (`CONFIG_FILE_ID`) REFERENCES `CONFIGFILES` (`CONFIG_FILE_ID`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=558 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `PROCESS_FLOW_REFERENCE`
+--
+
+DROP TABLE IF EXISTS `PROCESS_FLOW_REFERENCE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `PROCESS_FLOW_REFERENCE` (
+  `PROCESS_FLOW_REFERENCE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ACTION` varchar(50) NOT NULL,
+  `ACTION_LEVEL` varchar(50) DEFAULT NULL,
+  `PROTOCOL` varchar(50) DEFAULT NULL,
+  `EXECUTION_TYPE` varchar(100) NOT NULL,
+  `EXECUTION_MODULE` varchar(100) NOT NULL,
+  `EXECUTION_RPC` varchar(100) NOT NULL,
+  `UPDATED_DATE` datetime DEFAULT NULL,
+  `GET_RUNNING_CONFIG` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`PROCESS_FLOW_REFERENCE_ID`),
+  UNIQUE KEY `PROCESS_FLOW_REFERENCE_ID` (`PROCESS_FLOW_REFERENCE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `PROTOCOL_REFERENCE`
+--
+
+DROP TABLE IF EXISTS `PROTOCOL_REFERENCE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `PROTOCOL_REFERENCE` (
+  `PROTOCOL_REFERENCE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ACTION` varchar(50) NOT NULL,
+  `VNF_TYPE` varchar(50) DEFAULT NULL,
+  `PROTOCOL` varchar(50) DEFAULT NULL,
+  `UPDATED_DATE` datetime DEFAULT NULL,
+  `TEMPLATE` varchar(45) DEFAULT NULL,
+  `ACTION_LEVEL` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`PROTOCOL_REFERENCE_ID`),
+  UNIQUE KEY ` PROTOCOL_REFERENCE_ID` (`PROTOCOL_REFERENCE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `REQUEST_ARTIFACTS`
+--
+
+DROP TABLE IF EXISTS `REQUEST_ARTIFACTS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `REQUEST_ARTIFACTS` (
+  `REQUEST_ARTIFACTS_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `REQUEST_ID` varchar(50) NOT NULL,
+  `ACTION` varchar(50) NOT NULL,
+  `ACTION_LEVEL` varchar(50) DEFAULT NULL,
+  `VNF_TYPE` varchar(50) DEFAULT NULL,
+  `CATEGORY` varchar(50) NOT NULL,
+  `ARTIFACT_CONTENT` longtext,
+  `UPDATED_DATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`REQUEST_ARTIFACTS_ID`),
+  UNIQUE KEY `REQUEST_ARTIFACTS_ID` (`REQUEST_ARTIFACTS_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `SVC_LOGIC`
+--
+
+DROP TABLE IF EXISTS `SVC_LOGIC`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `SVC_LOGIC` (
+  `module` varchar(80) NOT NULL,
+  `rpc` varchar(80) NOT NULL,
+  `version` varchar(40) NOT NULL,
+  `mode` varchar(5) NOT NULL,
+  `active` varchar(1) NOT NULL,
+  `graph` longblob,
+  PRIMARY KEY (`module`,`rpc`,`version`,`mode`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `UPLOAD_CONFIG`
+--
+
+DROP TABLE IF EXISTS `UPLOAD_CONFIG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `UPLOAD_CONFIG` (
+  `UPLOAD_CONFIG_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `REQUEST_ID` varchar(50) DEFAULT NULL,
+  `ORIGINATOR_ID` varchar(50) DEFAULT NULL,
+  `SERVICE_DESCRIPTION` varchar(100) DEFAULT NULL,
+  `ACTION` varchar(50) DEFAULT NULL,
+  `UPLOAD_DATE` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `VNF_ID` varchar(50) DEFAULT NULL,
+  `VNF_NAME` varchar(50) DEFAULT NULL,
+  `VM_NAME` varchar(50) DEFAULT NULL,
+  `VNF_TYPE` varchar(50) DEFAULT NULL,
+  `VNFC_TYPE` varchar(50) DEFAULT NULL,
+  `HOST_IP_ADDRESS` varchar(50) DEFAULT NULL,
+  `CONFIG_INDICATOR` varchar(25) DEFAULT NULL,
+  `PENDING_DELETE` varchar(1) DEFAULT NULL,
+  `CONTENT` longtext,
+  PRIMARY KEY (`UPLOAD_CONFIG_ID`),
+  UNIQUE KEY `UPLOAD_CONFIG_ID` (`UPLOAD_CONFIG_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=224 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `VNFC_DG_MAPPING`
+--
+
+DROP TABLE IF EXISTS `VNFC_DG_MAPPING`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `VNFC_DG_MAPPING` (
+  `ACTION` varchar(50) DEFAULT NULL,
+  `API_VERSION` varchar(10) DEFAULT NULL,
+  `VNF_TYPE` varchar(50) DEFAULT NULL,
+  `VNFC_TYPE` varchar(50) DEFAULT NULL,
+  `DG_NAME` varchar(50) NOT NULL,
+  `DG_VERSION` varchar(50) DEFAULT NULL,
+  `DG_MODULE` varchar(50) NOT NULL,
+  UNIQUE KEY `INPUT_CONSTRAINT` (`ACTION`,`API_VERSION`,`VNF_TYPE`,`VNFC_TYPE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `VNFC_REFERENCE`
+--
+
+DROP TABLE IF EXISTS `VNFC_REFERENCE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `VNFC_REFERENCE` (
+  `VNFC_REFERENCE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ACTION` varchar(50) NOT NULL,
+  `VNF_TYPE` varchar(50) NOT NULL,
+  `VM_INSTANCE` int(11) NOT NULL,
+  `VNFC_INSTANCE` int(11) NOT NULL,
+  `VNFC_TYPE` varchar(50) NOT NULL,
+  `VNFC_FUNCTION_CODE` varchar(50) NOT NULL,
+  `IPADDRESS_V4_OAM_VIP` varchar(50) DEFAULT NULL,
+  `GROUP_NOTATION_TYPE` varchar(50) DEFAULT NULL,
+  `GROUP_NOTATION_VALUE` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`VNFC_REFERENCE_ID`),
+  UNIQUE KEY ` VNFC_REFERENCE_ID` (`VNFC_REFERENCE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `VNF_DG_MAPPING`
+--
+
+DROP TABLE IF EXISTS `VNF_DG_MAPPING`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `VNF_DG_MAPPING` (
+  `action` varchar(50) NOT NULL,
+  `api_version` varchar(50) DEFAULT NULL,
+  `vnf_type` varchar(50) DEFAULT NULL,
+  `vnf_version` varchar(50) DEFAULT NULL,
+  `dg_name` varchar(50) NOT NULL,
+  `dg_version` varchar(50) DEFAULT NULL,
+  `dg_module` varchar(50) NOT NULL,
+  UNIQUE KEY `INPUT_CONSTRAINT` (`action`,`api_version`,`vnf_type`,`vnf_version`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `VNF_LOCK_MANAGEMENT`
+--
+
+DROP TABLE IF EXISTS `VNF_LOCK_MANAGEMENT`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `VNF_LOCK_MANAGEMENT` (
+  `RESOURCE_ID` varchar(50) NOT NULL,
+  `OWNER_ID` varchar(50) DEFAULT NULL,
+  `UPDATED` bigint(20) unsigned NOT NULL,
+  `TIMEOUT` int(10) unsigned NOT NULL,
+  `VER` int(10) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`RESOURCE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `VNF_STATE_MANAGEMENT`
+--
+
+DROP TABLE IF EXISTS `VNF_STATE_MANAGEMENT`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `VNF_STATE_MANAGEMENT` (
+  `VNF_ID` varchar(50) NOT NULL,
+  `STATE` varchar(50) NOT NULL,
+  `OWNER_ID` varchar(255) DEFAULT NULL,
+  `UPDATED` bigint(20) unsigned NOT NULL,
+  `VER` int(10) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`VNF_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
