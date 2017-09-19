@@ -18,7 +18,7 @@
 # ============LICENSE_END=========================================================
 ###
 
-SDNC_HOME=${SDNC_HOME:-/opt/openecomp/sdnc}
+SDNC_HOME=${SDNC_HOME:-/opt/onap/sdnc}
 APPC_HOME=${APPC_HOME:-/opt/openecomp/appc}
 MYSQL_PASSWD=${MYSQL_PASSWD:-openECOMP1.0}
 

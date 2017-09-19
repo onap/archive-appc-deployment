@@ -57,7 +57,7 @@ services:
     entrypoint:
        - "/bin/bash"
        - "-c"
-       - "cd /opt/openecomp/sdnc/dgbuilder/ && ./start.sh sdnc1.0 && wait"
+       - "cd /opt/onap/sdnc/dgbuilder/ && ./start.sh sdnc1.0 && wait"
     ports:
       - "3000:3100"
     links:
@@ -67,7 +67,7 @@ services:
       - appc:sdnhost
     environment:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
-      - SDNC_CONFIG_DIR=/opt/openecomp/sdnc/data/properties
+      - SDNC_CONFIG_DIR=/opt/onap/sdnc/data/properties
     logging:
       driver: "json-file"
       options:
