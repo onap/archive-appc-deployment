@@ -1,0 +1,9 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Hector Anapan-Lavalle <ha076r@att.com>
+Code-Review+1: Patrick Brady <pb071s@att.com>
+Code-Review+2: Skip Wonnell <skip@att.com>
+Submitted-by: Skip Wonnell <skip@att.com>
+Submitted-at: Wed, 20 Sep 2017 17:01:21 +0000
+Reviewed-on: http://gerrit.onap.org/r/13293
+Project: appc/deployment
+Branch: refs/heads/master
