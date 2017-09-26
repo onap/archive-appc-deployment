@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_8af59f58",
+        "filename": "installation/appc/src/main/resources/sdncInstallFeatures.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-09-26T21:16:00Z",
+      "side": 1,
+      "message": "As far as I can tell these aren\u0027t used? Are they deprecated relic?\n\nSeem to only be used in installZips.sh which is not present for sdnc here.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 60
+      },
+      "revId": "6855cad614b24c3ae3c274963625d5cbfe469d6d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_aabe2363",
+        "filename": "pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-09-26T21:16:00Z",
+      "side": 1,
+      "message": "Looks like to fix this I need to update some ccsdk distribution pom to make this work. I need to update ccsdk odlsli installZips.sh also.",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "6855cad614b24c3ae3c274963625d5cbfe469d6d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
