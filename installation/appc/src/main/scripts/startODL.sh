@@ -81,6 +81,9 @@ then
 	${ODL_HOME}/bin/start
 	echo "Waiting ${SLEEP_TIME} seconds for OpenDaylight to initialize"
 	sleep ${SLEEP_TIME}
+	echo "Inserting modified installFeatures.sh for sdnc"
+	rm ${SDNC_HOME}/bin/installFeatures.sh
+	cp ${APPC_HOME}/data/sdncInstallFeatures.sh ${SDNC_HOME}/bin/installFeatures.sh
 	echo "Installing SDN-C platform features"
 	${SDNC_HOME}/bin/installFeatures.sh
 	if [ -x ${SDNC_HOME}/svclogic/bin/install.sh ]
