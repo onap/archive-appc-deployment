@@ -44,7 +44,7 @@ CREATE TABLE `VNF_DG_MAPPING` (
 
 LOCK TABLES `VNF_DG_MAPPING` WRITE;
 /*!40000 ALTER TABLE `VNF_DG_MAPPING` DISABLE KEYS */;
-INSERT INTO `VNF_DG_MAPPING` VALUES ('Restart','2.01','','','legacy_operation','2.0.0','APPC'), ('Restart','2.00','','','Restart_VNF','2.0.1','APPC');
+INSERT INTO `VNF_DG_MAPPING` VALUES ('Restart','2.01','','','Generic_Restart','3.0.0','APPC'), ('Restart','2.00','','','Generic_Restart','3.0.0','APPC');
 
 /*!40000 ALTER TABLE `VNF_DG_MAPPING` ENABLE KEYS */;
 UNLOCK TABLES;

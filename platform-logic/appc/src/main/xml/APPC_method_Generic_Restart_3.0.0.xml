@@ -1,0 +1,142 @@
+<!--
+  ============LICENSE_START=======================================================
+  APPC
+  ================================================================================
+  Copyright (C) 2017 AT&T Intellectual Property. All rights reserved.
+  ================================================================================
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  ============LICENSE_END=========================================================
+  ECOMP is a trademark and service mark of AT&T Intellectual Property.
+-->
+<service-logic xmlns='http://www.openecomp.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.openecomp.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='3.0.0'><method rpc='Generic_Restart' mode='sync'>
+<execute plugin='org.openecomp.appc.dg.common.JsonDgUtil' method='flatAndAddToContext' >
+<parameter name="payload" value="`$input.payload`" /><outcome value='failure'>
+<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="apiVer" value="1.01"/>
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="Failure in flattening payload Json" /><outcome value='success'>
+</outcome></execute><return status='failure'>
+<parameter name="output.status.message" value="Failure in flattening payload Json" /></return></block></outcome><outcome value='not-found'>
+<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="apiVer" value="1.01"/>
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="Failure in loading Json flattening plugin" /><outcome value='success'>
+</outcome></execute><return status='failure'>
+<parameter name="output.status.message" value="Failure in loading Json flattening plugin" /></return></block></outcome><outcome value='success'>
+<switch test='$input.action-identifiers.vnf-id'>
+<outcome value=''><return status="failure">
+    <parameter name="error-message" value="input.action-identifiers.vnf-id is null" />
+</return></outcome><block>
+<set>
+<parameter name='namedQueryData.instance-filters.instance-filter[0].generic-vnf.vnf-id' value='`$input.action-identifiers.vnf-id`' />
+<parameter name='namedQueryData.instance-filters.instance-filter_length' value='`1`' /></set><get-resource plugin="org.openecomp.sdnc.sli.aai.AAIService" resource="named-query" key="named-query-uuid = '037eb932-edac-48f5-9782-c19c0aa5a031' AND prefix='namedQueryData' " local-only="false" pfx="vnfInfo" >
+<outcome value='failure'>
+<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="apiVer" value="1.01"/>
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="Exception in running AAI Named Query" />
+
+<outcome value='success'>
+</outcome></execute><return status='failure'>
+</return></block></outcome><outcome value='success'>
+<switch test='`$vnfInfo`'>
+<outcome value=''><block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="Failure in retrieving VNF Hierachy" /><outcome value='success'>
+</outcome></execute><return status='failure'>
+<parameter name="output.status.message" value="Failure in retrieving VNF Hierachy" /></return></block></outcome><switch test='`$vnfInfo.inventory-response-item[0].generic-vnf.vnf-id == $input.action-identifiers.vnf-id`'>
+<outcome value='false'>
+<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="apiVer" value="1.01"/>
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="Failure matching vnf-id to VNF Hierachy" /><outcome value='success'>
+</outcome></execute><return status='failure'>
+<parameter name="output.status.message" value="Failure in loading Json flattening plugin" /></return></block></outcome><block atomic='true'>
+<for index='vserverIndex' start='0' end='vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-length' >
+<switch test='vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-item[$vserverIndex].vserver.vserver-selflink'>
+<outcome value=''><block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="Failure in retrieving vserver-selflink from VNF Hierachy" /><outcome value='success'>
+</outcome></execute><return status='failure'>
+<parameter name="output.status.message" value="Failure in retrieving vserver-selflink from VNF Hierachy" /></return></block></outcome><switch test='vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-item[$vserverIndex].inventory-response-items.inventory-response-item[0].inventory-response-items.inventory-response-item[0].cloud-region.identity-url'>
+<outcome value=''><block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="Failure in retrieving identity-url from VNF Hierachy" /><outcome value='success'>
+</outcome></execute><return status='failure'>
+<parameter name="output.status.message" value="Failure in retrieving identity-url from VNF Hierachy" /></return></block></outcome><switch test='$vm-id'>
+<switch test='vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-item[$vserverIndex].vserver.vserver-selflink == $vm-id'>
+<outcome value='true'>
+<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='restartServer'>
+<parameter name="org.openecomp.appc.provider.name" value="OpenStack"/>
+<parameter name="org.openecomp.appc.instance.url" value="`$vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-item[$vserverIndex].vserver.vserver-selflink`" />
+<parameter name="org.openecomp.appc.identity.url" value="`$vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-item[$vserverIndex].inventory-response-items.inventory-response-item[0].inventory-response-items.inventory-response-item[0].cloud-region.identity-url`" />
+
+<outcome value='failure'>
+<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="apiVer" value="1.01"/>
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="`'Failure in restart for:' + $VNF.VM[$i].URL`" /><outcome value='success'>
+</outcome></execute><return status='failure'>
+</return></block></outcome><outcome value='success'>
+<switch test='`$RESTART_STATUS`'>
+<outcome value='ERROR'>
+<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="apiVer" value="1.01"/>
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="`'Stop : Error occoured while restarting the server:' + $VNF.VM[$i].URL`" /><outcome value='success'>
+</outcome></execute><return status='failure'>
+</return></block></outcome><outcome value='CONTEXT_NOT_FOUND'>
+<block atomic='true'><return status='failure'>
+</return><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="apiVer" value="1.01"/>
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="`'Stop : Context not found:' + $VNF.VM[$i].URL`" /><outcome value='success'>
+</outcome></execute></block></outcome><outcome value='SUCCESS'>
+<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='reportSuccess' >
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="`'Restart event executed successfully for ' + $VNF.VM[$i].URL`" />
+<outcome value='failure'>
+</outcome><outcome value='success'>
+</outcome></execute></outcome></switch></outcome></execute></outcome></switch><outcome value=''><execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='restartServer'>
+<parameter name="org.openecomp.appc.provider.name" value="OpenStack"/>
+<parameter name="org.openecomp.appc.instance.url" value="`$vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-item[$vserverIndex].vserver.vserver-selflink`" />
+<parameter name="org.openecomp.appc.identity.url" value="`$vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-item[$vserverIndex].inventory-response-items.inventory-response-item[0].inventory-response-items.inventory-response-item[0].cloud-region.identity-url`" />
+
+<outcome value='failure'>
+<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="apiVer" value="1.01"/>
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="`'Failure in restart for:' + $VNF.VM[$i].URL`" /><outcome value='success'>
+</outcome></execute><return status='failure'>
+</return></block></outcome><outcome value='success'>
+<switch test='`$RESTART_STATUS`'>
+<outcome value='ERROR'>
+<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="apiVer" value="1.01"/>
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="`'Stop : Error occoured while restarting the server:' + $VNF.VM[$i].URL`" /><outcome value='success'>
+</outcome></execute><return status='failure'>
+</return></block></outcome><outcome value='CONTEXT_NOT_FOUND'>
+<block atomic='true'><return status='failure'>
+</return><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<parameter name="apiVer" value="1.01"/>
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="`'Stop : Context not found:' + $VNF.VM[$i].URL`" /><outcome value='success'>
+</outcome></execute></block></outcome><outcome value='SUCCESS'>
+<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='reportSuccess' >
+<parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
+<parameter name="output.status.message" value="`'Restart event executed successfully for ' + $VNF.VM[$i].URL`" />
+<outcome value='failure'>
+</outcome><outcome value='success'>
+</outcome></execute></outcome></switch></outcome></execute></outcome></switch></switch></switch></for><return status='success'>
+</return></block></switch></switch></outcome></get-resource></block></switch></outcome></execute></method></service-logic>
