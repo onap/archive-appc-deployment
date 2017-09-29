@@ -29,4 +29,4 @@ do
     CLASSPATH=$CLASSPATH:${jar}
 done
 
-java -cp ${CLASSPATH}:${MYSQL_JDBC_DRIVER} org.openecomp.sdnc.sli.SvcLogicParser $*
+java -cp ${CLASSPATH}:${MYSQL_JDBC_DRIVER} org.onap.ccsdk.sli.core.sli.SvcLogicParser $*

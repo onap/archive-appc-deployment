@@ -19,7 +19,7 @@
   ECOMP is a trademark and service mark of AT&T Intellectual Property.
 -->
 
-<service-logic xmlns='http://www.openecomp.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.openecomp.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.1'><method rpc='Generic_Restart' mode='sync'>
+<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.1'><method rpc='Generic_Restart' mode='sync'>
 <execute plugin='org.openecomp.appc.dg.common.JsonDgUtil' method='flatAndAddToContext' >
 <parameter name="payload" value="`$input.payload`" /><outcome value='success'>
 <execute plugin='org.openecomp.appc.dg.util.ExecuteNodeAction' method='getVnfHierarchy'>
