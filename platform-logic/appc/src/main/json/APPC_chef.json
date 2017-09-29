@@ -603,7 +603,7 @@
 	"module": "APPC",
 	"version": "3.0.0",
 	"comments": "",
-	"xml": "<service-logic xmlns='http://www.openecomp.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.openecomp.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='3.0.0'>",
+	"xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='3.0.0'>",
 	"outputs": 1,
 	"x": 147,
 	"y": 163,

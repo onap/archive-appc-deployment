@@ -18,7 +18,7 @@
   ============LICENSE_END=========================================================
   -->
 
-<service-logic xmlns='http://www.openecomp.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.openecomp.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='3.0.0'><method rpc='chef' mode='sync'>
+<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='3.0.0'><method rpc='chef' mode='sync'>
 <block>
 <set>
 <parameter name='chef-server-address' value='`$chef-server-address`' />
