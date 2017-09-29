@@ -105,9 +105,9 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.openecomp.sdnc.core</groupId>
+			<groupId>org.onap.ccsdk.sli.core</groupId>
 			<artifactId>sli-common</artifactId>
-			<version>1.1.2-SNAPSHOT</version>
+			<version>${ccsdk.sli.core.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.antlr</groupId>

@@ -27,12 +27,12 @@
 SDNC_CONFIG_DIR=${SDNC_CONFIG_DIR:-/opt/appc/data/properties}
 APPC_CONFIG_DIR=${APPC_CONFIG_DIR:-/opt/appc/data/properties}
 
-AAIURI=$(grep org.openecomp.sdnc.sli.aai.uri ${SDNC_CONFIG_DIR}/aaiclient.properties | grep -v '#' | cut -d'=' -f2)
+AAIURI=$(grep org.onap.ccsdk.sli.aai.uri ${SDNC_CONFIG_DIR}/aaiclient.properties | grep -v '#' | cut -d'=' -f2)
 
-MYSQL_USER=$(grep org.openecomp.sdnc.sli.jdbc.user ${SDNC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2)
-MYSQL_PWD=$(grep org.openecomp.sdnc.sli.jdbc.password ${SDNC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2)
-MYSQL_DB=$(grep org.openecomp.sdnc.sli.jdbc.database ${SDNC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2)
-MYSQL_SERVER=$(grep org.openecomp.sdnc.sli.jdbc.hosts ${SDNC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2 | cut -d',' -f1)
+MYSQL_USER=$(grep org.onap.ccsdk.sli.jdbc.user ${SDNC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2)
+MYSQL_PWD=$(grep org.onap.ccsdk.sli.jdbc.password ${SDNC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2)
+MYSQL_DB=$(grep org.onap.ccsdk.sli.jdbc.database ${SDNC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2)
+MYSQL_SERVER=$(grep org.onap.ccsdk.sli.jdbc.hosts ${SDNC_CONFIG_DIR}/dblib.properties | grep -v '#' | cut -d'=' -f2 | cut -d',' -f1)
 
 ODLUSER=$(grep controllerUser ${SDNC_CONFIG_DIR}/backup.properties | grep -v '#' | cut -d'=' -f2)
 ODLPWD=$(grep controllerPass ${SDNC_CONFIG_DIR}/backup.properties | grep -v '#' | cut -d'=' -f2)
