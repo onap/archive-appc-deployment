@@ -7,3 +7,4 @@ APPC Deployment Documentation Repository
 
    APPC Deployment Guidelines/APPC Deployment Guidelines
    Testing an ONAP Component Locally/Testing an ONAP Component Locally
+   Chef Adapter/Chef Adapter
