@@ -1,0 +1,493 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>APPC Ansible Adapter Documentation</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">APPC Ansible Adapter Documentation</h1>
+</div>
+<p>This wiki provides documentation regarding the design, capabilities and usage of the Ansible Extension for APP-C. <a href="https://www.ansible.com/">Ansible</a> is a an open-source VNF management framework that allows provide an almost cli like set of tools in a structured form. It is agentless in that the target VNF need not have any additional software other than:</p>
+<ol style="list-style-type: lower-alpha">
+<li>SSH server</li>
+<li>Python &gt;= 2.7</li>
+<li>Any necessary software that is specific to the VNF to run its functions.</li>
+</ol>
+<p>Any action (e.g configure, restart, health check etc) can be executed on the VNF by constructing a <strong>playbook (or set of playbooks)</strong> that is executed by an Ansible agent on the VNF via SSH.</p>
+<p>The Ansible Extension for APP-C allows management of VNFs that support Ansible through the following three additions :</p>
+<blockquote>
+<ul>
+<li><strong>An APP-C/Ansible Server interface:</strong> Ansible libraries are written in python and hence cannot be executed natively from within the APP-C Karaf container. Instead, the design calls for an <strong>Ansible Server</strong> that can execute the Ansible playbooks and exposes a <strong>REST</strong> interface that is compliant with requirements of APP-C. These requirements are documented as the Server API Interface that any compliant Ansible Server must support. Exact implementation of the Ansible Server is left open and does not affect APP-C operations as long as the server follows the interface. For purposes of evaluation, a reference web server that implements this APP-C/Ansible Server interface has been developed and the code is available from the App-C ONAP repository under <em>appc-adapters/appc-ansible-adapter/appc-ansible-example-server</em>.</li>
+<li><strong>An APP-C Ansible adapter:</strong> The ansible adapter is an OSGI bundle in the APP-C Karaf container that interacts with the Ansible Server . It is essentially a set of REST calls that performs two actions, submit request for a playbook to be executed, and if required get the results of the playbook after execution (if in synchronous mode).</li>
+<li><strong>Ansible Directed Graph (DG):</strong> The Ansible Directed graph is generic DG that can be used to invoke any playbook via Ansible (and hence any APP-C action, since in Ansible, VNF actions map to playbooks) corresponding to an LCM action.</li>
+</ul>
+</blockquote>
+<p>The architecture design for supporting Ansible is outlined in the diagram below :</p>
+<p><img src="images/image0.png" alt="image0" /></p>
+<p>The workflow envisioned when Application Controller receives an event is as follows :</p>
+<ol style="list-style-type: decimal">
+<li>Application Controller receives event from the Event Bus for an LCM action.</li>
+<li>The appropriate LCM API invokes the Dispatcher which performs the relevant lookups for A&amp;AI and Workflow (DG information).</li>
+<li>The dispatcher calls the DG relevant to the LCM action (for the VNF).</li>
+<li>The DG conducts any processing of data (e.g retrieving additional information, filling templates etc) , prepares the necessary DG context variables outlined in Table 1 and then invokes the Ansible DG.</li>
+<li>Ansible DG leverages the Ansible Adapter to interact with the Ansible Server.</li>
+<li>Ansible Server invokes the appropriate playbook which in turn interacts with the VNF and then returns the playbook results.</li>
+<li>Ansible Server returns results.</li>
+<li>Ansible DG provides these results back to calling DG.</li>
+</ol>
+<p>A ladder diagram of the work flow is pasted below :</p>
+<p><img src="images/image1.png" alt="image1" /></p>
+<p>Details of each of these three (DG, Adapter and Ansible Server) are listed below :</p>
+<p>1. <strong>Ansible Directed Graph (DG):</strong> The Ansible Directed graph is the most common way an App-C developer is expected to leverage Ansible functionality. The Ansible DG is a general purpose graph that can be used to invoke and retrieve results from any playbook on an ONAP-compliant Ansible Server. The Ansible Graph,when called, expects a certain set of inputs to be provided as input and when upon completion provides results from the execution of the Ansible playbook. The Ansible DG can be invoked using the following (current) naming:</p>
+<table style="width:50%;">
+<colgroup>
+<col width="18%" />
+<col width="31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Field</th>
+<th align="left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">module</td>
+<td align="left">APPC</td>
+</tr>
+<tr class="even">
+<td align="left">rpc</td>
+<td align="left">ansible-adapter-1.0</td>
+</tr>
+<tr class="odd">
+<td align="left">version</td>
+<td align="left">2.0.1</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>The inputs that the Ansible DG expects in DG context memory are listed below:</p>
+<p>Table 1: Input Parameters to the Ansible Directed Graph</p>
+</blockquote>
+<table>
+<colgroup>
+<col width="9%" />
+<col width="36%" />
+<col width="13%" />
+<col width="41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variable Name</th>
+<th align="left">Description</th>
+<th align="left">Type</th>
+<th align="left">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">User</td>
+<td align="left">Username to logon to Ansible Server</td>
+<td align="left"><blockquote>
+<p>Mandatory</p>
+</blockquote></td>
+<td align="left">Should be provided by APPC.</td>
+</tr>
+<tr class="even">
+<td align="left">Password</td>
+<td align="left">Password to logon to Ansible Server</td>
+<td align="left"><blockquote>
+<p>Mandatory</p>
+</blockquote></td>
+<td align="left">Should be provided by APPC.</td>
+</tr>
+<tr class="odd">
+<td align="left">AgentUrl</td>
+<td align="left">The complete URL of the Ansible Server to post the request for execution and retrieve results (if in synchronous mode)</td>
+<td align="left"><blockquote>
+<p>Mandatory</p>
+</blockquote></td>
+<td align="left">Should be provided by APPC.</td>
+</tr>
+<tr class="even">
+<td align="left">PlaybookName</td>
+<td align="left">Name/identifier of playbook to run</td>
+<td align="left"><blockquote>
+<p>Mandatory</p>
+</blockquote></td>
+<td align="left">To be provided in the template.</td>
+</tr>
+<tr class="odd">
+<td align="left">Action</td>
+<td align="left">The type of VNF action being requested</td>
+<td align="left"><blockquote>
+<p>Optional</p>
+</blockquote></td>
+<td align="left">Provided either by APPC or Template.</td>
+</tr>
+<tr class="even">
+<td align="left"><dl>
+<dt>EnvParameters</dt>
+<dd><p>passed</p>
+</dd>
+</dl></td>
+<td align="left"><blockquote>
+<p>A JSON dictionary (stringified) listing the parameters to be</p>
+</blockquote>
+to the Ansible playbook | | Values</td>
+<td align="left"><blockquote>
+<p>Optional</p>
+</blockquote>
+to be filled in by App-C</td>
+<td align="left">Structure of the EnvParameters dictionary to be supplied in template. based on values from payload in run-time</td>
+</tr>
+<tr class="odd">
+<td align="left">FileParameters</td>
+<td align="left">A JSON dictionary (stringified) listing file names and files to be created for Ansible playbook |</td>
+<td align="left"><blockquote>
+<dl>
+<dt>Optional</dt>
+<dd><p>Values to b</p>
+</dd>
+</dl>
+</blockquote></td>
+<td align="left"><blockquote>
+<p>Structure of the FileParameters dictionary to be supplied in template.</p>
+</blockquote>
+e filled in by App-C based on values from payload in run-time</td>
+</tr>
+<tr class="even">
+<td align="left">Timeout</td>
+<td align="left">Time Ansible Server should wait before terminating playbook</td>
+<td align="left"><blockquote>
+<p>Optional</p>
+</blockquote></td>
+<td align="left">To be provided in the template.</td>
+</tr>
+<tr class="odd">
+<td align="left">NodeList</td>
+<td align="left">List of FQDNs/IP Addresses of VNF that the Ansible playbook should be executed on.</td>
+<td align="left"><blockquote>
+<p>Optional (if not supplied, will run on server)</p>
+</blockquote></td>
+<td align="left">To be provided to App-C during Runtime.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>The 'template' referred in the above table must be a JSON file as documented in the VNF vendor requirements and must contain the key-value pairs listed above (that are expected to be in the template). An LCM API</p>
+</blockquote>
+<p>Directed graph should fill in necessary parameters in the template, and then put the key-value pairs from the template as listed above in DG context memory before calling the Ansible DG.</p>
+<blockquote>
+<p>Upon completion the Ansible DG sets the following variables in DG context memory</p>
+<p>Table 2: Output Variables set by Ansible DG Variable</p>
+</blockquote>
+<table>
+<colgroup>
+<col width="24%" />
+<col width="75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Type</th>
+<th align="left">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p>output.status.code</p>
+<blockquote>
+<p>The ansible<br />
+run on mult<br />
+one of the</p>
+</blockquote></td>
+<td align="left"><blockquote>
+<p>Result of the request: 400 if SUCCESS , 200 if FAILURE.</p>
+<p>playbook may have multiple sub-tasks, playbooks etc and may</p>
+</blockquote>
+iple VMs of a host. The request is considered to fail if even tasks is incomplete.</td>
+</tr>
+<tr class="even">
+<td align="left"><dl>
+<dt>output.status.message</dt>
+<dd><p>TERMINATED.</p>
+</dd>
+</dl></td>
+<td align="left">If playbook finished, set to FINISH, if playbook terminated, set to If abnormal error, reported in message</td>
+</tr>
+<tr class="odd">
+<td align="left"><dl>
+<dt>output.status.results</dt>
+<dd><p>Ansible pla<br />
+playbook wa<br />
+of a dictio<br />
+API Documen</p>
+</dd>
+</dl></td>
+<td align="left"><blockquote>
+<p>A JSON dictionary with results corresponding to output provided by the</p>
+</blockquote>
+ybook request. This is optional (may not be present if s terminated). The results, if present, will be in the form nary that follows the format presented in the Ansible Server tation. The document also contains examples of output.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><em>Note : The Ansible Server supports a Callback Url functionality, but it is currently not invoked by App-C Ansible Adapter or Directed Graph. If added, it is easy to change the Adapter and Ansible DG to support this.</em></p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>APP-C Ansible Adapter:</strong> The App-C Ansible Adapter is an OSGI bundle which essentially makes REST calls to the Ansible Server. It exposes three methods that can be invoked by the Service Logic Interpreter (SLI).</li>
+</ol>
+<blockquote>
+<ol style="list-style-type: lower-alpha">
+<li><em>void reqExec(Map&lt;String, String&gt; params, SvcLogicContext ctx) throws SvcLogicException</em>: A method to invoke the test.</li>
+<li><em>void reqExecResult(Map&lt;String, String&gt; params, SvcLogicContext ctx) throws SvcLogicException</em>: A method to request results of a test.</li>
+<li><em>void reqExecLog(Map&lt;String, String&gt; params, SvcLogicContext ctx) throws SvcLogicException</em> : A method to retreive the logs from a request (not used in the Ansible DG currently).</li>
+</ol>
+<blockquote>
+<p>Currently, the Ansible DG uses only the first two (reqExec and reqExecResult) since only these two are needed to request execution of a playbook and retrieval of results. The reqExecLog is for diagnostic purposes.</p>
+<p>In order to communicate with the Ansible Server, it is currently assumed that:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Credentials comprise of a username and password.</li>
+<li>Communication is over https</li>
+</ol>
+<p>The Ansible Adapter has three configurable parameters related to SSL certificate of the Ansible Server, which can be set from the properties file:</p>
+<ol style="list-style-type: lower-alpha">
+<li>org.openecomp.appc.adapter.ansible.clientType. If set to &quot;TRUST_ALL&quot;, will accept all SSL certificates from any Ansible Server. If set to &quot;TRUST_CERT&quot;, will accept SSL from only those Ansible Servers whose certificate is in the trustStore keystore file. These two options can be used for development environment. Default option is to trust only well known server certificates (use in Production).</li>
+<li>org.openecomp.appc.adapter.ansible.trustStore used to point to the keystore file</li>
+<li>org.openecomp.appc.adapter.ansible.trustStorePasswd used to set password for keystore file</li>
+</ol>
+</blockquote>
+</blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Reference Ansible Server Implementation of APPC / Ansible Interface (for testing purposes only)</strong>
+<ol style="list-style-type: lower-alpha">
+<li>Overview</li>
+</ol></li>
+</ol>
+<p><img src="images/image2.png" alt="image2" /></p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Inventory file</li>
+</ol>
+<blockquote>
+<p>The Prototype Ansible Server requires that all credentials and IP Addresses for the VNF being tested either already be present in the Server’s Database or be loaded before any playbooks are invoked. Supported credentials are user-name/password and public-key authentication.</p>
+<p>All VNF credentials stored in a unique file (or in a SQL database depending on the ansible server runtime configuration):</p>
+</blockquote>
+</blockquote>
+<p>[host] localhost ansible_connection=local</p>
+<p>[hostgroup1] hostname11 ansible_connection=ssh ansible_ssh_user=loginid11 ansible_ssh_pass=passwd11 hostname12 ansible_connection=ssh ansible_ssh_user=loginid12 ansible_ssh_private_key_file=kefile12 … [hostgroup2] hostname21 ansible_connection=ssh ansible_ssh_user=loginid21 ansible_ssh_private_key_file=keyfile21 …. [hostgroup3] …</p>
+<blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Playbooks</li>
+</ol>
+<blockquote>
+<p>Playbooks can either be provided as stand alone text files or gzipped tar file (playbooks with roles sub-directories) either stored in a local file or in an SQL database.</p>
+<p>Naming convention: anything_<script type="text/javascript">
+<!--
+h='&#x4d;&#46;&#x6d;&#110;&#46;&#x25;&#x37;&#66;&#x79;&#x6d;&#108;';a='&#64;';n='&#76;&#x43;&#x4d;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+'&#76;&#x43;&#x4d;&#64;&#x4d;&#46;&#x6d;&#110;&#46;&#x7b;&#x79;&#x6d;&#108;'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#76;&#x43;&#x4d;&#64;&#x4d;&#46;&#x6d;&#110;&#46;&#x7b;&#x79;&#x6d;&#108;&#32;&#40;&#76;&#x43;&#x4d;&#32;&#x61;&#116;&#32;&#x4d;&#32;&#100;&#x6f;&#116;&#32;&#x6d;&#110;&#32;&#100;&#x6f;&#116;&#32;&#x25;&#x37;&#66;&#x79;&#x6d;&#108;&#x29;</noscript>,tar.gz} where version number M is a digit and mn are subversion number digits.</p>
+<p>Playbooks should be written such that they can run from the command line: &quot;ansible-playbook -i inventoryfile</p>
+</blockquote>
+</blockquote>
+<p>–extra-vars optionalvariables playbookname&quot; That means the playbook should not contain any VM credentials information, they are expected to be provided through the inventory file passed at run time.</p>
+<blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>Stand-alone playbooks</li>
+</ol>
+</blockquote>
+<p><img src="images/image3.png" alt="image3" /></p>
+<blockquote>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Playbooks in gzipped tarfiles</li>
+</ol>
+</blockquote>
+<p><img src="images/image4.png" alt="image4" /></p>
+<blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Installation</li>
+</ol>
+<blockquote>
+<ol style="list-style-type: lower-alpha">
+<li>Python</li>
+</ol>
+<blockquote>
+<p>sudo apt-get install python2.7 sudo apt-get install python-pip pip install PyMySQL pip install requests</p>
+</blockquote>
+<dl>
+<dt>b. Ansible</dt>
+<dd><p>sudo apt-get install software-properties-common sudo apt-add-repository ppa:ansible/ansible sudo apt-get update sudo apt-get install ansible</p>
+</dd>
+</dl>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>SQL database</li>
+</ol>
+<blockquote>
+<dl>
+<dt>a. Installing MySQL</dt>
+<dd><p>sudo apt-get install mysql-server Set root passwd during installation (i.e. password_4_mysql_user_id) sudo service mysql restart</p>
+</dd>
+</dl>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Setting up mysql</li>
+</ol>
+<blockquote>
+<p>mysql -u [username]-p mysql -uroot -p</p>
+<p>Create user (i.e. id=mysql_user_id psswd=password_4_mysql_user_id)</p>
+<p>CREATE USER <script type="text/javascript">
+<!--
+h='&#x27;&#x25;';a='&#64;';n='&#x27;&#x61;&#112;&#112;&#x63;&#x27;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#x61;&#112;&#112;&#x63;&#x27;&#32;&#x61;&#116;&#32;&#x27;&#x25;</noscript>' IDENTIFIED BY 'password_4_mysql_user_id';</p>
+<p>GRANT ALL PRIVILEGES ON <em>.</em> TO 'mysql_user_<script type="text/javascript">
+<!--
+h='&#x27;&#x25;&#x27;';a='&#64;';n='&#x69;&#100;&#x27;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x69;&#100;&#x27;&#32;&#x61;&#116;&#32;&#x27;&#x25;&#x27;</noscript>;</p>
+<p>SET PASSWORD FOR 'mysql_user_<script type="text/javascript">
+<!--
+h='&#x27;&#x25;&#x27;&#x3d;&#80;&#x41;&#x53;&#x53;&#x57;&#x4f;&#82;&#68;';a='&#64;';n='&#x69;&#100;&#x27;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x69;&#100;&#x27;&#32;&#x61;&#116;&#32;&#x27;&#x25;&#x27;&#x3d;&#80;&#x41;&#x53;&#x53;&#x57;&#x4f;&#82;&#68;</noscript>('password_4_mysql_user_id');</p>
+</blockquote>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Creating schema</li>
+</ol>
+<blockquote>
+<p>CREATE SCHEMA ansible;</p>
+<p>SHOW DATABASES;</p>
+<p>USE ansible;</p>
+<p>CREATE TABLE playbook (name VARCHAR(45) NOT NULL, value BLOB, type VARCHAR(60), version VARCHAR(60), PRIMARY KEY (name));</p>
+<p>SHOW TABLES;</p>
+<p>CREATE TABLE inventory (hostname VARCHAR(45) NOT NULL, hostgroup VARCHAR(45), credentials VARCHAR(500), PRIMARY KEY (hostname));</p>
+<p>SHOW COLUMNS FROM playbook;</p>
+<p>SHOW COLUMNS FROM inventory;</p>
+<p>GRANT ALL PRIVILEGES ON <em>.</em> TO 'mysql_user_<script type="text/javascript">
+<!--
+h='&#x27;&#x25;';a='&#64;';n='&#x69;&#100;&#x27;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x69;&#100;&#x27;&#32;&#x61;&#116;&#32;&#x27;&#x25;</noscript>' IDENTIFIED BY 'password_4_mysql_user_id' WITH GRANT OPTION;</p>
+<p>GRANT ALL PRIVILEGES ON <em>.</em> TO <script type="text/javascript">
+<!--
+h='&#x27;&#x25;';a='&#64;';n='&#x27;&#x61;&#110;&#x73;&#x69;&#98;&#108;&#x65;&#x27;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x27;&#x61;&#110;&#x73;&#x69;&#98;&#108;&#x65;&#x27;&#32;&#x61;&#116;&#32;&#x27;&#x25;</noscript>' IDENTIFIED BY 'ansible_agent' WITH GRANT OPTION;</p>
+<p>FLUSH PRIVILEGES;</p>
+</blockquote>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Loading playbooks and inventory data in SQL database</li>
+</ol>
+<blockquote>
+<p>Place inventory file and playbooks to be loaded in one directory, set LoadAnsibleMySql variables:</p>
+<p>SQL credentials:</p>
+<p>host=&quot;localhost&quot; # your host, usually localhost user=&quot;mysql_user_id&quot; # your username passwd=&quot;password_4_mysql_user_id&quot; # your password db=&quot;ansible&quot; # name of the database</p>
+<p>Path of playbook location:</p>
+<p>playbook_path = &quot;something/something/&quot;</p>
+<p>Full name of inventory file:</p>
+<p>inventory = &quot;something/something/Ansible_inventory&quot;</p>
+<p>These variables are located right after main:</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><img src="images/image5.png" alt="image5" /></p>
+<blockquote>
+<p>Run loader: python LoadAnsibleMySql.py</p>
+</blockquote>
+<blockquote>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Execution</li>
+</ol>
+<blockquote>
+<p>Ansible server is executed through RestServer.py. Its configuration file consists of the following:</p>
+<p># Host definition ip: 0.0.0.0 port: 8000 # Security (controls use of TLS encrypton and RestServer authentication) tls: no auth: no # TLS certificates (must be built on application host) priv: provide_privated_key.pem pub: provide_public_key.pem # RestServer authentication id: provide_RestServer_id psswd: provide_password_4_RestServer_id # Mysql host: localhost user: mysql_user_id passwd: password_4_mysql_user_id db: ansible #Playbooks from_files: yes ansible_path: /home/ubuntu/RestServerOpenSource ansible_inv: Ansible_inventory ansible_temp: PlaybooksTemp timeout_seconds: 60 # Blocking on GetResults getresults_block: yes</p>
+</blockquote>
+</blockquote>
+<p>Execution and testing steps:</p>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li><strong>Start RestServer</strong>: <em>python RestServer.py</em></li>
+</ol>
+<blockquote>
+<p>Note: RSA key fingerprint needs to be loaded manually in server for each VM defined in inventory file that requires ssh authentication. This can be done by testing ssh credentials to each target VM and accepting RSA key fingerprint:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ssh</span> -i key <span class="dt">\|</span>VMaddress<span class="dt">\|</span>
+<span class="kw">RSA</span> key fingerprint is <span class="dt">\|</span>something.<span class="dt">\|</span>
+<span class="kw">Are</span> you sure you want to continue connecting (yes/no)<span class="kw">?</span> yes</code></pre></div>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Try curl commands</strong> (case no secured REST: HTTP &amp; no authentication)</li>
+</ol>
+<blockquote>
+<p>Request to execute playbook:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -H <span class="st">&quot;Content-type: application/json&quot;</span> -X POST -d <span class="st">&#39;{&quot;Id&quot;: &quot;10&quot;, &quot;PlaybookName&quot;: &quot;ansible\_sleep&quot;, &quot;NodeList&quot;: [&quot;host&quot;], &quot;Timeout&quot;: &quot;60&quot;, &quot;EnvParameters&quot;: {&quot;Sleep&quot;: &quot;10&quot;}}&#39;</span>http://0.0.0.0:8000/Dispatch</code></pre></div>
+<p>Response:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="st">&quot;ExpectedDuration&quot;</span>: <span class="st">&quot;60sec&quot;</span>, <span class="st">&quot;StatusMessage&quot;</span>: <span class="st">&quot;PENDING&quot;</span>, <span class="st">&quot;StatusCode&quot;</span>: <span class="kw">100</span>}</code></pre></div>
+<p>Get results (blocked until test finished):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -H <span class="st">&quot;Content-type: application/json&quot;</span> -X GET <span class="st">&quot;http://0.0.0.0:8000/Dispatch/?Id=10&amp;Type=GetResult&quot;</span></code></pre></div>
+<p>Response:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="st">&quot;Results&quot;</span>: {<span class="st">&quot;localhost&quot;</span>: {<span class="st">&quot;GroupName&quot;</span>: <span class="st">&quot;host&quot;</span>, <span class="st">&quot;StatusMessage&quot;</span>: <span class="st">&quot;SUCCESS&quot;</span>, <span class="st">&quot;StatusCode&quot;</span>: <span class="kw">200</span>}}, <span class="st">&quot;PlaybookName&quot;</span>:<span class="st">&quot;ansible\_sleep&quot;</span>, <span class="st">&quot;Version&quot;</span>: <span class="st">&quot;0.00&quot;</span>, <span class="st">&quot;Duration&quot;</span>: <span class="st">&quot;11.261794&quot;</span>, <span class="st">&quot;StatusMessage&quot;</span>: <span class="st">&quot;FINISHED&quot;</span>, <span class="st">&quot;StatusCode&quot;</span>: <span class="kw">200</span>}</code></pre></div>
+<p>Delete playbook execution information</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">curl</span> -H <span class="st">&quot;Content-type: application/json&quot;</span> -X DELETE http://0.0.0.0:8000/Dispatch/?Id=10</code></pre></div>
+<p>Response:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="st">&quot;StatusMessage&quot;</span>: <span class="st">&quot;PLAYBOOK EXECUTION RECORDS DELETED&quot;</span>, <span class="st">&quot;StatusCode&quot;</span>: <span class="kw">200</span>}</code></pre></div>
+</blockquote>
+</blockquote>
+<p>Playbook execution done through system call</p>
+<blockquote>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ansible-playbook</span> --v -extra-vars ‘playbookvars’ -i inventoryfile playbook.yml</code></pre></div>
+<ul>
+<li>Inventory file created at run time, playbook loaded from mysql, both placed in the temporary directory destroyed at end of test (Playbook archive is unpacked in the temporary directory)</li>
+</ul>
+</blockquote>
+<p>All tested playbooks written such that the ansible ‘play recap’ log indicates whether or not the playbook tasks succeeded (multiple tasks in a standalone playbook or playbooks with roles directory structure)</p>
+<p>Sample ansible ‘play recap’:</p>
+<p>|image 6|</p>
+</body>
+</html>
