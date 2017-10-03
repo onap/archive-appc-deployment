@@ -16,6 +16,24 @@
       "revId": "5cf9dc300bdf18ce134f34d19765f41943ef98f8",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_a624000d",
+        "filename": "installation/appc/src/main/scripts/startODL.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2319
+      },
+      "writtenOn": "2017-10-03T15:13:32Z",
+      "side": 0,
+      "message": "actually, dbhost is another docker instance today so it would never be 127.0.0.1.\nAfter this change, I was planning a bigger revamp with ENV variable use in order to connect to the db (so it could be another host or this one more easily)",
+      "parentUuid": "9a437d4f_a6f6408d",
+      "revId": "5cf9dc300bdf18ce134f34d19765f41943ef98f8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
