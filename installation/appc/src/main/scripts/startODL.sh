@@ -51,15 +51,6 @@ echo "" >> $APPC_HOME/data/properties/appc.properties
 echo "appc.asdc.env=$DMAAP_TOPIC_ENV" >> $APPC_HOME/data/properties/appc.properties
 echo "" >> $APPC_HOME/data/properties/appc.properties
 
-
-
-#
-# Add the DB hostnames in /etc/hosts (IP address is the MySQL DB IP)
-#
-RUN echo "172.19.0.2      dbhost sdnctldb01 sdnctldb02" >> /etc/hosts
-
-
-
 #
 # Wait for database to init properly
 #
