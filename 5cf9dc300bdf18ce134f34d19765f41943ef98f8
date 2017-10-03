@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_a6f6408d",
+        "filename": "installation/appc/src/main/scripts/startODL.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1201
+      },
+      "writtenOn": "2017-10-03T14:30:19Z",
+      "side": 0,
+      "message": "dbhost must be defined as 127.0.0.1. See MySQL.",
+      "revId": "5cf9dc300bdf18ce134f34d19765f41943ef98f8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
