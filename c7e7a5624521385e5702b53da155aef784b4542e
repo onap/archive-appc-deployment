@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_4fa8c08c",
+        "filename": "installation/src/main/properties/aaiclient.properties",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 131
+      },
+      "writtenOn": "2017-10-05T21:54:06Z",
+      "side": 1,
+      "message": "I noticed this when syncing these changes with OOM.\n\nIs this a typo or does port 8543 exist in AAI?",
+      "range": {
+        "startLine": 137,
+        "startChar": 94,
+        "endLine": 137,
+        "endChar": 98
+      },
+      "revId": "c7e7a5624521385e5702b53da155aef784b4542e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
