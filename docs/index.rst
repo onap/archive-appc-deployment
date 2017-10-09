@@ -9,3 +9,4 @@ APPC Deployment Documentation Repository
    Testing an ONAP Component Locally/Testing an ONAP Component Locally
    Chef Adapter/Chef Adapter
    Ansible Adapter/Ansible Adapter
+   Platform Logic/Platform Logic
