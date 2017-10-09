@@ -10,3 +10,4 @@ APPC Deployment Documentation Repository
    Chef Adapter/Chef Adapter
    Ansible Adapter/Ansible Adapter
    Platform Logic/Platform Logic
+   APPC Properties/APPC Properties
