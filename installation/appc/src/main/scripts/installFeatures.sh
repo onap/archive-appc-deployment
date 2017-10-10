@@ -64,8 +64,8 @@ wget -P /opt/opendaylight/current/deploy https://www.bouncycastle.org/download/b
 wget -P /opt/opendaylight/current/deploy https://www.bouncycastle.org/download/bcprov-ext-jdk15on-158.jar
 
 echo "Enabling core APP-C features"
+featureInstall odl-restconf-all
 featureInstall odl-netconf-connector-all
-featureInstall odl-restconf-noauth
 featureInstall odl-netconf-topology
 
 echo "Installing APP-C Features"
