@@ -58,13 +58,14 @@ APPC_FEATURES=" \
  appc-ansible-adapter \
  appc-sequence-generator"
 
+# Temp fix to fix bouncycastle issue that is preventing netconf to work correctly
+wget -P /opt/opendaylight/current/deploy https://www.bouncycastle.org/download/bcprov-jdk15on-158.jar
+wget -P /opt/opendaylight/current/deploy https://www.bouncycastle.org/download/bcprov-ext-jdk15on-158.jar
+
 echo "Enabling core APP-C features"
 featureInstall odl-netconf-connector-all
 featureInstall odl-restconf-noauth
 featureInstall odl-netconf-topology
-
-# When the karaf netconf feature gets installed, need to replace default password with OpenECOMP APP-C ODL Password
-sed -i 's/admin<\/password>/Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U<\/password>/' ${ODL_HOME}/etc/opendaylight/karaf/99-netconf-connector.xml
 
 echo "Installing APP-C Features"
 echo ""
