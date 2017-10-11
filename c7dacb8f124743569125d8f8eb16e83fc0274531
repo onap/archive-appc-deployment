@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a2f8d8d_e8928af5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-10-11T22:43:11Z",
+      "side": 1,
+      "message": "Should wrap this and not exceed 72 chars in one line.",
+      "range": {
+        "startLine": 9,
+        "startChar": 72,
+        "endLine": 9,
+        "endChar": 175
+      },
+      "revId": "c7dacb8f124743569125d8f8eb16e83fc0274531",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a2f8d8d_a8bc826d",
+        "filename": "installation/appc/src/main/scripts/installFeatures.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2017-10-11T22:43:11Z",
+      "side": 1,
+      "message": "Are we sure we want \"topologys\" rather than \"topology\" ?  https://github.com/opendaylight/netconf/blob/stable/nitrogen/features/netconf-connector/odl-netconf-topology/pom.xml\n\n\"opendaylight-user@root\u003efeature:list | grep odl-netconf-topology\nodl-netconf-topology                             | 1.2.1-Carbon     |           | odl-controller-1.2.1-Carbon               | OpenDaylight :: Netconf Topology :: Netconf Connec\"",
+      "range": {
+        "startLine": 68,
+        "startChar": 35,
+        "endLine": 68,
+        "endChar": 36
+      },
+      "revId": "c7dacb8f124743569125d8f8eb16e83fc0274531",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
