@@ -40,7 +40,7 @@
 <block atomic='true'>
 <set>
 <parameter name='namedQueryData.instance-filters.instance-filter[0].generic-vnf.vnf-id' value='`$input.action-identifiers.vnf-id`' />
-<parameter name='namedQueryData.instance-filters.instance-filter_length' value='`1`' /></set><get-resource plugin="org.onap.ccsdk.sli.adaptors.aai.AAIService" resource="named-query" key="named-query-uuid = '037eb932-edac-48f5-9782-c19c0aa5a031' AND prefix='namedQueryData' " local-only="false" pfx="vnfInfo" >
+<parameter name='namedQueryData.instance-filters.instance-filter_length' value='`1`' /></set><get-resource plugin="org.onap.ccsdk.sli.adaptors.aai.AAIService" resource="named-query" key="named-query-uuid = '037eb932-edac-48f5-9782-c19c0aa5a031' AND prefix = 'namedQueryData' " local-only="false" pfx="vnfInfo" >
 <outcome value='failure'>
 <block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
