@@ -49,7 +49,7 @@
 
 <outcome value='success'>
 </outcome></execute><return status='failure'>
-</return></block></outcome></get-resource><switch test='`$vnfInfo`'>
+</return></block></outcome></get-resource><switch test='`$vnfInfo.inventory-response-item[0].generic-vnf.vnf-id`'>
 <outcome value=''><block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="Failure in retrieving VNF Hierachy" /><outcome value='success'>
@@ -62,7 +62,7 @@
 <parameter name="output.status.message" value="Failure matching vnf-id to VNF Hierachy" /><outcome value='success'>
 </outcome></execute><return status='failure'>
 <parameter name="output.status.message" value="Failure in loading Json flattening plugin" /></return></block></outcome><outcome value='true'>
-<block atomic='true'><for index='vserverIndex' start='0' end='vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-length' >
+<block atomic='true'><for index='vserverIndex' start='0' end='`$vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-item_length`' >
 <switch test='vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-item[$vserverIndex].vserver.vserver-selflink'>
 <outcome value=''><block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
@@ -75,9 +75,9 @@
 <parameter name="output.status.message" value="Failure in retrieving identity-url from VNF Hierachy" /><outcome value='success'>
 </outcome></execute><return status='failure'>
 <parameter name="output.status.message" value="Failure in retrieving identity-url from VNF Hierachy" /></return></block></outcome><outcome value='Other'>
-<switch test='$vm-id'>
+<switch test='`$vm-id`'>
 <outcome value='Other'>
-<switch test='vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-item[$vserverIndex].vserver.vserver-selflink == $vm-id'>
+<switch test='`$vnfInfo.inventory-response-item[0].inventory-response-items.inventory-response-item[$vserverIndex].vserver.vserver-selflink == $vm-id`'>
 <outcome value='true'>
 <execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='restartServer'>
 <parameter name="org.openecomp.appc.provider.name" value="OpenStack"/>
