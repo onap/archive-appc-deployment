@@ -1,0 +1,559 @@
+[
+    {
+        "id": "88ff0ee4.127f9",
+        "type": "dgstart",
+        "name": "DGSTART",
+        "outputs": 1,
+        "x": 128,
+        "y": 63,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "8d1f9124.e1f4a"
+            ]
+        ]
+    },
+    {
+        "id": "81ccbde2.50341",
+        "type": "execute",
+        "name": "execute",
+        "xml": "<execute plugin='org.openecomp.appc.dg.util.InputParameterValidation' method='validateAttribute' >\n<parameter name=\"VM_ID\" value=\"`$VM_ID`\"/>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 156,
+        "y": 234,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "a26d863e.374678",
+                "de958d31.1f71c"
+            ]
+        ]
+    },
+    {
+        "id": "8d1f9124.e1f4a",
+        "type": "service-logic",
+        "name": "APPC 2.0.0",
+        "module": "APPC",
+        "version": "2.0.0",
+        "comments": "",
+        "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.0'>",
+        "outputs": 1,
+        "x": 245,
+        "y": 127,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "16047e8c.19f4f1"
+            ]
+        ]
+    },
+    {
+        "id": "16047e8c.19f4f1",
+        "type": "method",
+        "name": "HUB_CONFIGURE",
+        "xml": "<method rpc='HUB_Configure' mode='sync'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 450,
+        "y": 128,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "81ccbde2.50341"
+            ]
+        ]
+    },
+    {
+        "id": "19df0391.29a5ac",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 647,
+        "y": 456,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "ddd1e97e.2e7958"
+            ]
+        ]
+    },
+    {
+        "id": "4263d9fe.a44478",
+        "type": "returnSuccess",
+        "name": "return success",
+        "xml": "<return status='success'>",
+        "comments": "",
+        "x": 1277,
+        "y": 316,
+        "z": "3cdef05f.1a867",
+        "wires": []
+    },
+    {
+        "id": "ec2a4716.6f5bd8",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>",
+        "comments": "",
+        "x": 840,
+        "y": 590,
+        "z": "3cdef05f.1a867",
+        "wires": []
+    },
+    {
+        "id": "a8db1260.3b4d2",
+        "type": "execute",
+        "name": "execute",
+        "xml": "<execute plugin='org.openecomp.appc.dg.util.InputParameterValidation' method='validateAttributeCharacter' >\n<parameter name=\"VM_ID\" value=\"`$VM_ID`\"/>\n<parameter name=\"special_characters\" value=\"!@#$%^*()_\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 414,
+        "y": 230,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "9ea2f9c9.97cca8",
+                "de958d31.1f71c"
+            ]
+        ]
+    },
+    {
+        "id": "6505e427.e6f8fc",
+        "type": "switchNode",
+        "name": "switch",
+        "xml": "<switch test='`$validateAttribute`'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 109,
+        "y": 415,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "e36d066.e4c57f8",
+                "8315ab3f.dd8748"
+            ]
+        ]
+    },
+    {
+        "id": "e36d066.e4c57f8",
+        "type": "outcome",
+        "name": "outcome",
+        "xml": "<outcome value='true'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 288,
+        "y": 328,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "a8db1260.3b4d2"
+            ]
+        ]
+    },
+    {
+        "id": "8315ab3f.dd8748",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 265,
+        "y": 462,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "3429ade3.024402"
+            ]
+        ]
+    },
+    {
+        "id": "4011e7a8.8a2f88",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>",
+        "comments": "",
+        "x": 276,
+        "y": 610,
+        "z": "3cdef05f.1a867",
+        "wires": []
+    },
+    {
+        "id": "237facf4.17bde4",
+        "type": "switchNode",
+        "name": "switch",
+        "xml": "<switch test='`$validateAttributeCharacter`'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 487,
+        "y": 399,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "19df0391.29a5ac",
+                "941dc362.20221"
+            ]
+        ]
+    },
+    {
+        "id": "941dc362.20221",
+        "type": "outcome",
+        "name": "outcome",
+        "xml": "<outcome value='true'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 644,
+        "y": 351,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "da96bd6f.7bfa5"
+            ]
+        ]
+    },
+    {
+        "id": "da96bd6f.7bfa5",
+        "type": "execute",
+        "name": "execute",
+        "xml": "<execute plugin='org.openecomp.appc.dg.util.InputParameterValidation' method='validateAttributeLength' >\n<parameter name=\"VM_ID\" value=\"`$VM_ID`\"/>\n<parameter name=\"maximum_length_param\" value=\"50\" />\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 720,
+        "y": 215,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "190e25c4.6c54ca",
+                "de958d31.1f71c"
+            ]
+        ]
+    },
+    {
+        "id": "595c6432.9cb05c",
+        "type": "switchNode",
+        "name": "switch",
+        "xml": "<switch test='`$validateAttributeLength`'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 908,
+        "y": 371,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "ba40e581.4bf1a8",
+                "3de7f8b8.9d6078"
+            ]
+        ]
+    },
+    {
+        "id": "ba40e581.4bf1a8",
+        "type": "outcome",
+        "name": "outcome",
+        "xml": "<outcome value='true'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1082,
+        "y": 314,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "4263d9fe.a44478"
+            ]
+        ]
+    },
+    {
+        "id": "3de7f8b8.9d6078",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1074,
+        "y": 437,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "ba3f8014.78979"
+            ]
+        ]
+    },
+    {
+        "id": "41157b6a.f646a4",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>",
+        "comments": "",
+        "x": 1228,
+        "y": 589,
+        "z": "3cdef05f.1a867",
+        "wires": []
+    },
+    {
+        "id": "a26d863e.374678",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 108,
+        "y": 323,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "6505e427.e6f8fc"
+            ]
+        ]
+    },
+    {
+        "id": "9ea2f9c9.97cca8",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 471,
+        "y": 304,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "237facf4.17bde4"
+            ]
+        ]
+    },
+    {
+        "id": "190e25c4.6c54ca",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 890,
+        "y": 301,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "595c6432.9cb05c"
+            ]
+        ]
+    },
+    {
+        "id": "de958d31.1f71c",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 873,
+        "y": 104,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "222ff717.c68c48"
+            ]
+        ]
+    },
+    {
+        "id": "9ef62278.0eef8",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>",
+        "comments": "",
+        "x": 1152,
+        "y": 232,
+        "z": "3cdef05f.1a867",
+        "wires": []
+    },
+    {
+        "id": "267702aa.29ecfe",
+        "type": "execute",
+        "name": "execute",
+        "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"eventTime\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"apiVer\" value=\"1.02\"/>\n<parameter name=\"eventId\" value=\"123\"/>\n<parameter name=\"reason\" value=\"Other\"/>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1141,
+        "y": 128,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "e0cdb313.3c45d"
+            ]
+        ]
+    },
+    {
+        "id": "51a2c6.d2810d3c",
+        "type": "execute",
+        "name": "execute",
+        "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"eventTime\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"apiVer\" value=\"1.02\"/>\n<parameter name=\"eventId\" value=\"123\"/>\n<parameter name=\"reason\" value=\"Other\"/>",
+        "comments": "",
+        "outputs": 1,
+        "x": 267,
+        "y": 526,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "1761418a.b6d8ee"
+            ]
+        ]
+    },
+    {
+        "id": "828ae706.049e18",
+        "type": "execute",
+        "name": "execute",
+        "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"eventTime\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"apiVer\" value=\"1.02\"/>\n<parameter name=\"eventId\" value=\"123\"/>\n<parameter name=\"reason\" value=\"Other\"/>",
+        "comments": "",
+        "outputs": 1,
+        "x": 821,
+        "y": 480,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "6f253557.19a1dc"
+            ]
+        ]
+    },
+    {
+        "id": "1ab8afcb.3c8a4",
+        "type": "execute",
+        "name": "execute",
+        "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"eventTime\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"apiVer\" value=\"1.02\"/>\n<parameter name=\"eventId\" value=\"123\"/>\n<parameter name=\"reason\" value=\"Other\"/>",
+        "comments": "",
+        "outputs": 1,
+        "x": 1205,
+        "y": 481,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "aef121bc.322bd"
+            ]
+        ]
+    },
+    {
+        "id": "222ff717.c68c48",
+        "type": "block",
+        "name": "block",
+        "xml": "<block atomic='true'>\n",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 955,
+        "y": 170,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "267702aa.29ecfe",
+                "9ef62278.0eef8"
+            ]
+        ]
+    },
+    {
+        "id": "e0cdb313.3c45d",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1289,
+        "y": 66,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3429ade3.024402",
+        "type": "block",
+        "name": "block",
+        "xml": "<block atomic='true'>\n",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 106,
+        "y": 569,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "51a2c6.d2810d3c",
+                "4011e7a8.8a2f88"
+            ]
+        ]
+    },
+    {
+        "id": "ddd1e97e.2e7958",
+        "type": "block",
+        "name": "block",
+        "xml": "<block atomic='true'>\n",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 663,
+        "y": 531,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "828ae706.049e18",
+                "ec2a4716.6f5bd8"
+            ]
+        ]
+    },
+    {
+        "id": "ba3f8014.78979",
+        "type": "block",
+        "name": "block",
+        "xml": "<block atomic='true'>\n",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 1060,
+        "y": 533,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            [
+                "1ab8afcb.3c8a4",
+                "41157b6a.f646a4"
+            ]
+        ]
+    },
+    {
+        "id": "1761418a.b6d8ee",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 411,
+        "y": 526,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f253557.19a1dc",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 965,
+        "y": 480,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aef121bc.322bd",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1340,
+        "y": 539,
+        "z": "3cdef05f.1a867",
+        "wires": [
+            []
+        ]
+    }
+]

@@ -1,0 +1,121 @@
+[
+    {
+        "id": "a3099a78.6e69b8",
+        "type": "dgstart",
+        "name": "DGSTART",
+        "outputs": 1,
+        "x": 106,
+        "y": 85,
+        "z": "961baaa6.a27258",
+        "wires": [
+            [
+                "828db90b.8f9a98"
+            ]
+        ]
+    },
+    {
+        "id": "828db90b.8f9a98",
+        "type": "service-logic",
+        "name": "Appc-API 2.0.0.0",
+        "module": "Appc-API",
+        "version": "2.0.0.0",
+        "comments": "",
+        "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='Appc-API' version='2.0.0.0'>",
+        "outputs": 1,
+        "x": 212,
+        "y": 142,
+        "z": "961baaa6.a27258",
+        "wires": [
+            [
+                "aad933dd.444b9"
+            ]
+        ]
+    },
+    {
+        "id": "aad933dd.444b9",
+        "type": "method",
+        "name": "VNF_Backup",
+        "xml": "<method rpc='VNF_Backup' mode='sync'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 303,
+        "y": 204,
+        "z": "961baaa6.a27258",
+        "wires": [
+            [
+                "a8f4edf0.5d8c2"
+            ]
+        ]
+    },
+    {
+        "id": "a8f4edf0.5d8c2",
+        "type": "execute",
+        "name": "execute: handleUpgradeStub",
+        "xml": "<execute plugin='org.openecomp.appc.dg.util.UpgradeStubNode' method='handleUpgradeStub' >\n<parameter name=\"failureIndicator\" value=\"`$failureIndicator`\" />\n\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 419,
+        "y": 264,
+        "z": "961baaa6.a27258",
+        "wires": [
+            [
+                "133b1b36.ea26a5",
+                "73f403bf.cc84fc"
+            ]
+        ]
+    },
+    {
+        "id": "133b1b36.ea26a5",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 639,
+        "y": 241,
+        "z": "961baaa6.a27258",
+        "wires": [
+            [
+                "57a5901.f38057"
+            ]
+        ]
+    },
+    {
+        "id": "73f403bf.cc84fc",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 637,
+        "y": 288,
+        "z": "961baaa6.a27258",
+        "wires": [
+            [
+                "b63d970d.810598"
+            ]
+        ]
+    },
+    {
+        "id": "57a5901.f38057",
+        "type": "returnSuccess",
+        "name": "return success",
+        "xml": "<return status='success'>\n<parameter name='error-code' value='200' />\n<parameter name='error-message' value=\"For testing only... success in Backup\" />\n",
+        "comments": "",
+        "x": 825,
+        "y": 241,
+        "z": "961baaa6.a27258",
+        "wires": []
+    },
+    {
+        "id": "b63d970d.810598",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>\n<parameter name='error-code' value=\"500\" />\n<parameter name='error-message' value=\"For testing only... failure in Backup\" />\n",
+        "comments": "",
+        "x": 823,
+        "y": 289,
+        "z": "961baaa6.a27258",
+        "wires": []
+    }
+]

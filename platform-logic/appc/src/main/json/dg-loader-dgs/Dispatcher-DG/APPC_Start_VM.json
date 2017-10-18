@@ -1,0 +1,333 @@
+[
+  {
+    "id": "d52f4308.555fb",
+    "type": "dgstart",
+    "name": "DGSTART",
+    "outputs": 1,
+    "x": 96.99993896484375,
+    "y": 54,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "763cad7e.1450b4"
+      ]
+    ]
+  },
+  {
+    "id": "763cad7e.1450b4",
+    "type": "service-logic",
+    "name": "APPC 2.0.0",
+    "module": "APPC",
+    "version": "2.0.0",
+    "comments": "",
+    "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.0'>",
+    "outputs": 1,
+    "x": 141.99993896484375,
+    "y": 137,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "812b1c37.4885c"
+      ]
+    ]
+  },
+  {
+    "id": "812b1c37.4885c",
+    "type": "method",
+    "name": "Start VM",
+    "xml": "<method rpc='Start_VM' mode='sync'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 301.99993896484375,
+    "y": 137,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "c47aa6c9.8c9378"
+      ]
+    ]
+  },
+  {
+    "id": "280842c.c99e1be",
+    "type": "call",
+    "name": "Start Application ",
+    "xml": "<call module='`$ApplicationStart.dg_module`' rpc='`$ApplicationStart.dg_name`' version='`$ApplicationStart.dg_version`' mode='sync'  >\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 766.9999771118164,
+    "y": 336.0000305175781,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "144156f7.572b29",
+        "7eab80e5.2adb3",
+        "70e14c1f.8e34e4"
+      ]
+    ]
+  },
+  {
+    "id": "144156f7.572b29",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 998.9999771118164,
+    "y": 266.9998779296875,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "96fd3f86.877cb"
+      ]
+    ]
+  },
+  {
+    "id": "7eab80e5.2adb3",
+    "type": "failure",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 996.9999771118164,
+    "y": 407.9999694824219,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "deb77571.89feb8"
+      ]
+    ]
+  },
+  {
+    "id": "db549b18.455358",
+    "type": "returnSuccess",
+    "name": "return success",
+    "xml": "<return status='success'>\n",
+    "comments": "",
+    "x": 1378.0005493164062,
+    "y": 262.9998779296875,
+    "z": "1cdd4efa.2a36b1",
+    "wires": []
+  },
+  {
+    "id": "c47aa6c9.8c9378",
+    "type": "execute",
+    "name": "Resolve Application Start DG",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.DgResolverPlugin' method='resolveDg'>\n<parameter name=\"vnfType\" value='`$vnf.type`' />\n<parameter name=\"vnfcType\" value='`$vnfcType`' />\n<parameter name=\"action\" value=\"Start_Application\" />\n<parameter name=\"api-ver\" value=\"2.0.0\" />\n<parameter name=\"prefix\" value=\"ApplicationStart\" />\n<parameter name=\"DGResolutionType\" value=\"VNFC\" />\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 349,
+    "y": 238,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "ba0ce95d.a32d48",
+        "cc32ed95.f1246"
+      ]
+    ]
+  },
+  {
+    "id": "ba0ce95d.a32d48",
+    "type": "failure",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 604,
+    "y": 143,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "c89af7a5.6217e8"
+      ]
+    ]
+  },
+  {
+    "id": "cc32ed95.f1246",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 598.9999771118164,
+    "y": 336.0000305175781,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "280842c.c99e1be"
+      ]
+    ]
+  },
+  {
+    "id": "c89af7a5.6217e8",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 770.0000610351562,
+    "y": 142,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "e4e7b04c.adb7d",
+        "d2671f6c.53d78",
+        "735a4bd9.4bb604"
+      ]
+    ]
+  },
+  {
+    "id": "e4e7b04c.adb7d",
+    "type": "record",
+    "name": "Log message",
+    "xml": "<record plugin=\"org.openecomp.sdnc.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"debug\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"record\" value=\"`$error-message`\"/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 992,
+    "y": 143,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "735a4bd9.4bb604",
+    "type": "set",
+    "name": "Set failure code and message",
+    "xml": "<set>\n<parameter name='error-code' value=\"401\"/>\n<parameter name='error-message' value=\"`'Failed to resolve Application start DG for : ' + $vnfcType`\"/>\n",
+    "comments": "",
+    "x": 1037,
+    "y": 98.88888549804688,
+    "z": "1cdd4efa.2a36b1",
+    "wires": []
+  },
+  {
+    "id": "d2671f6c.53d78",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n",
+    "comments": "",
+    "x": 989.9998779296875,
+    "y": 186.00006103515625,
+    "z": "1cdd4efa.2a36b1",
+    "wires": []
+  },
+  {
+    "id": "70e14c1f.8e34e4",
+    "type": "not-found",
+    "name": "not-found",
+    "xml": "<outcome value='not-found'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 996.5555191040039,
+    "y": 335.8888854980469,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "bbaacbc9.6e42a8"
+      ]
+    ]
+  },
+  {
+    "id": "bbaacbc9.6e42a8",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1172.222267150879,
+    "y": 336.8888854980469,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "2620f33d.ba7aac",
+        "d98a42e2.78acd",
+        "87259f65.26a31"
+      ]
+    ]
+  },
+  {
+    "id": "2620f33d.ba7aac",
+    "type": "set",
+    "name": "Set failure code and message",
+    "xml": "<set>\n<parameter name='error-code' value=\"401\"/>\n<parameter name='error-message' value=\"`'Application Start DG not found for : ' + $vnfcType`\" />\n",
+    "comments": "",
+    "x": 1426.5555419921875,
+    "y": 316.77777099609375,
+    "z": "1cdd4efa.2a36b1",
+    "wires": []
+  },
+  {
+    "id": "d98a42e2.78acd",
+    "type": "record",
+    "name": "Log message",
+    "xml": "<record plugin=\"org.openecomp.sdnc.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"debug\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"record\" value=\"`$error-message`\"/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1381.5554809570312,
+    "y": 362.8888854980469,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "87259f65.26a31",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n",
+    "comments": "",
+    "x": 1379.555519104004,
+    "y": 408.8888854980469,
+    "z": "1cdd4efa.2a36b1",
+    "wires": []
+  },
+  {
+    "id": "deb77571.89feb8",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1155.555549621582,
+    "y": 407.8888854980469,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "d98a42e2.78acd",
+        "87259f65.26a31"
+      ]
+    ]
+  },
+  {
+    "id": "96fd3f86.877cb",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1172.9999389648438,
+    "y": 264,
+    "z": "1cdd4efa.2a36b1",
+    "wires": [
+      [
+        "db549b18.455358",
+        "ba9d1c0b.3d282"
+      ]
+    ]
+  },
+  {
+    "id": "ba9d1c0b.3d282",
+    "type": "set",
+    "name": "Set success code and message",
+    "xml": "<set>\n<parameter name='error-code' value=\"400\"/>\n<parameter name='error-message' value=\"Success\" />\n",
+    "comments": "",
+    "x": 1430.9999389648438,
+    "y": 218,
+    "z": "1cdd4efa.2a36b1",
+    "wires": []
+  }
+]

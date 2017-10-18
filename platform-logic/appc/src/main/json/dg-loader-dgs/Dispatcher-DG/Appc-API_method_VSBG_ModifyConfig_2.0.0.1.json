@@ -1,0 +1,563 @@
+[
+    {
+        "id": "7803fc.b785cc04",
+        "type": "execute",
+        "name": "execute: retrieveDSConfiguration",
+        "xml": "<execute plugin='org.openecomp.appc.dg.netconf.NetconfDBPlugin' method='retrieveDSConfiguration' >\n<parameter name=\"configuration-file-name\" value=\"`$configuration-file-name`\" />\n<parameter name=\"vnf-type\" value=\"`$vnf-type`\" />\n<parameter name=\"vnf-host-ip-address\" value=\"`$vnf-host-ip-address`\" />\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 497,
+        "y": 602.0000457763672,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "e9707cd1.b397e",
+                "b9dd9161.84c4"
+            ]
+        ]
+    },
+    {
+        "id": "e9707cd1.b397e",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 728.666748046875,
+        "y": 660.2222366333008,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "41d228d8.8ed518"
+            ]
+        ]
+    },
+    {
+        "id": "b9dd9161.84c4",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 725.7777709960938,
+        "y": 624.7778091430664,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "e305119d.ed993"
+            ]
+        ]
+    },
+    {
+        "id": "41d228d8.8ed518",
+        "type": "execute",
+        "name": "execute: operationStateValidation",
+        "xml": "<execute plugin='org.openecomp.appc.dg.netconf.NetconfClientPlugin' method='operationStateValidation' >\n<parameter name=\"vnf-host-ip-address\" value=\"`$vnf-host-ip-address`\" />\n<parameter name=\"org.openecomp.appc.vftype\" value=\"`$vnf-type`\" />\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 730.4444580078125,
+        "y": 724.2222061157227,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "a9ebbdb4.61508",
+                "9dc375e3.ffd028"
+            ]
+        ]
+    },
+    {
+        "id": "a9ebbdb4.61508",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 960,
+        "y": 689.444465637207,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "e305119d.ed993"
+            ]
+        ]
+    },
+    {
+        "id": "9dc375e3.ffd028",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 956.33349609375,
+        "y": 736.2222061157227,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "e6a1550.e281ca8"
+            ]
+        ]
+    },
+    {
+        "id": "e6a1550.e281ca8",
+        "type": "execute",
+        "name": "execute: modifyConfiguration",
+        "xml": "<execute plugin='org.openecomp.appc.dg.netconf.NetconfClientPlugin' method='modifyConfiguration' >\n<parameter name=\"connection-details\" value=\"`$connection-details`\" />\n<parameter name=\"file-content\" value=\"`$file-content`\" />\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 823.1112060546875,
+        "y": 818.5554885864258,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "60608be7.4c01b4",
+                "1891f46a.8b267c"
+            ]
+        ]
+    },
+    {
+        "id": "60608be7.4c01b4",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1041,
+        "y": 798.8889236450195,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "e305119d.ed993"
+            ]
+        ]
+    },
+    {
+        "id": "1891f46a.8b267c",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1045.2222900390625,
+        "y": 842.7777786254883,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "2c1a225a.7bc46e"
+            ]
+        ]
+    },
+    {
+        "id": "fb0deae.818b418",
+        "type": "execute",
+        "name": "execute: backupConfiguration",
+        "xml": "<execute plugin='org.openecomp.appc.dg.netconf.NetconfClientPlugin' method='backupConfiguration' >\n<parameter name=\"connection-details\" value=\"`$connection-details`\" />\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 950.333251953125,
+        "y": 1038.9999465942383,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "b5901988.ad9d58",
+                "4a35b9ce.b82b38"
+            ]
+        ]
+    },
+    {
+        "id": "b5901988.ad9d58",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1159.4444580078125,
+        "y": 1014.7777786254883,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "e305119d.ed993"
+            ]
+        ]
+    },
+    {
+        "id": "4a35b9ce.b82b38",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1164.0001220703125,
+        "y": 1059.3333206176758,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "fd7e26ec.f67a88"
+            ]
+        ]
+    },
+    {
+        "id": "fd7e26ec.f67a88",
+        "type": "returnSuccess",
+        "name": "return success",
+        "xml": "<return status='success'>\n \t<parameter name='error-code' value='200' />",
+        "comments": "",
+        "x": 1458.5557556152344,
+        "y": 1058.4444961547852,
+        "z": "b4822c6c.4b863",
+        "wires": []
+    },
+    {
+        "id": "e305119d.ed993",
+        "type": "execute",
+        "name": "execute: handleErrorToDCAE",
+        "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"org.openecomp.appc.dg.error\" value=\"`$org.openecomp.appc.dg.error`\" />\n<parameter name='output.status.message' value=\"`$org.openecomp.appc.dg.error`\" />\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1340.2223815917969,
+        "y": 631.333366394043,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "354c4873.8508a8"
+            ]
+        ]
+    },
+    {
+        "id": "8c61f324.ae24",
+        "type": "execute",
+        "name": "execute: operationStateValidation",
+        "xml": "<execute plugin='org.openecomp.appc.dg.netconf.NetconfClientPlugin' method='operationStateValidation' >\n<parameter name=\"vnf-host-ip-address\" value=\"`$vnf-host-ip-address`\" />\n<parameter name=\"connection-details\" value=\"`$connection-details`\" />\n<parameter name=\"org.openecomp.appc.vftype\" value=\"`$vnf-type`\" />\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 820.6666870117188,
+        "y": 956.0000839233398,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "e5e25242.4d628",
+                "873a0a33.5a6f68"
+            ]
+        ]
+    },
+    {
+        "id": "873a0a33.5a6f68",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1059.4444580078125,
+        "y": 943.7778472900391,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "e305119d.ed993"
+            ]
+        ]
+    },
+    {
+        "id": "e5e25242.4d628",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1056.3334350585938,
+        "y": 981.2222442626953,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "fb0deae.818b418"
+            ]
+        ]
+    },
+    {
+        "id": "1a23a9aa.d63826",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>\n<parameter name='error-code' value=\"401\" />\n<parameter name='error-message' value=\"`$org.openecomp.appc.dg.error`\" />\n<parameter name='output.status.code' value='401'/>\n",
+        "comments": "",
+        "x": 1691.8096923828125,
+        "y": 630.857177734375,
+        "z": "b4822c6c.4b863",
+        "wires": []
+    },
+    {
+        "id": "2e25a000.04c5c",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 338.6667175292969,
+        "y": 467.99996185302734,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "bb5aec54.cbbe6"
+            ]
+        ]
+    },
+    {
+        "id": "12f26606.82d0fa",
+        "type": "execute",
+        "name": "execute: getVNFData",
+        "xml": "<execute plugin='org.openecomp.appc.dg.aai.AAIPlugin' method='getGenericVnfData' >",
+        "comments": "",
+        "outputs": 1,
+        "x": 354.6665954589844,
+        "y": 404.0000534057617,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "2e25a000.04c5c",
+                "85e8fad3.0a8fd8"
+            ]
+        ]
+    },
+    {
+        "id": "538c4326.ceed4c",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic='true'>",
+        "atomic": "true",
+        "comments": "",
+        "outputs": 1,
+        "x": 287.6667175292969,
+        "y": 343.0000228881836,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "12f26606.82d0fa",
+                "a8e2d4ed.3f69c8"
+            ]
+        ]
+    },
+    {
+        "id": "85e8fad3.0a8fd8",
+        "type": "failure",
+        "name": "failure",
+        "xml": "<outcome value='failure'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 669.6667175292969,
+        "y": 397.3332748413086,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "5efd9802.fe2b28"
+            ]
+        ]
+    },
+    {
+        "id": "a8e2d4ed.3f69c8",
+        "type": "set",
+        "name": "set",
+        "xml": "<set>\n\t<parameter name='aai.vnfID' value=\"`$input.action-identifiers.vnf-id`\" />\n\t<parameter name='aai.prefix' value='aai.input.data' />\t",
+        "comments": "",
+        "x": 487.6667175292969,
+        "y": 301.0000228881836,
+        "z": "b4822c6c.4b863",
+        "wires": []
+    },
+    {
+        "id": "ac24dc8.2d2022",
+        "type": "method",
+        "name": "vSBG ModifyConfig",
+        "xml": "<method rpc='VSBG_ModifyConfig' mode='sync'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 182.5555877685547,
+        "y": 185.77777099609375,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "8e0514c2.f1c608"
+            ]
+        ]
+    },
+    {
+        "id": "5efd9802.fe2b28",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>\n\n",
+        "comments": "",
+        "x": 824.6667175292969,
+        "y": 397.3332748413086,
+        "z": "b4822c6c.4b863",
+        "wires": []
+    },
+    {
+        "id": "37ba4fbf.e4911",
+        "type": "service-logic",
+        "name": "Appc-API 2.0.0.1",
+        "module": "Appc-API",
+        "version": "2.0.0.1",
+        "comments": "test service logic",
+        "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='Appc-API' version='2.0.0.1'>",
+        "outputs": 1,
+        "x": 123.55558776855469,
+        "y": 141.55555725097656,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "ac24dc8.2d2022"
+            ]
+        ]
+    },
+    {
+        "id": "3afe95c0.5e0aaa",
+        "type": "dgstart",
+        "name": "DGSTART",
+        "outputs": 1,
+        "x": 112.66671752929688,
+        "y": 68,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "37ba4fbf.e4911"
+            ]
+        ]
+    },
+    {
+        "id": "e0a9dcc8.bb81a",
+        "type": "set",
+        "name": "set",
+        "xml": "<set>\n\t<parameter name='org.openecomp.appc.vftype' value='`$aai.input.data.vnf-type`' />\t\n\t<parameter name='vnf-type' value='`$aai.input.data.vnf-type`' />",
+        "comments": "",
+        "x": 628.6667175292969,
+        "y": 536.9999923706055,
+        "z": "b4822c6c.4b863",
+        "wires": []
+    },
+    {
+        "id": "bb5aec54.cbbe6",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic='true'>",
+        "atomic": "true",
+        "comments": "",
+        "outputs": 1,
+        "x": 403.6667175292969,
+        "y": 537.9999923706055,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "e0a9dcc8.bb81a",
+                "7803fc.b785cc04"
+            ]
+        ]
+    },
+    {
+        "id": "8e0514c2.f1c608",
+        "type": "execute",
+        "name": "execute: flatAndAddToContext",
+        "xml": "<execute plugin='org.openecomp.appc.dg.common.JsonDgUtil' method='flatAndAddToContext' >\n<parameter name=\"payload\" value=\"`$input.payload`\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 268.3333435058594,
+        "y": 259.6666488647461,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "89097e7c.7a1c2",
+                "e199c03e.60f2"
+            ]
+        ]
+    },
+    {
+        "id": "89097e7c.7a1c2",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 281,
+        "y": 303.6666488647461,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "538c4326.ceed4c"
+            ]
+        ]
+    },
+    {
+        "id": "e199c03e.60f2",
+        "type": "failure",
+        "name": "failure",
+        "xml": "<outcome value='failure'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 508,
+        "y": 160.66666412353516,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2c1a225a.7bc46e",
+        "type": "execute",
+        "name": "Report_Success_in_ModifyConfig",
+        "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='reportSuccess' >\n<parameter name=\"eventId\" value=\"`$input.action-identifiers.vnf-id`\" />\n<parameter name=\"output.status.message\" value=\"ModifyConfig event executed successfully\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 803.9999389648438,
+        "y": 873.6667098999023,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "2ac625be.770a7a",
+                "88f7850e.5ad108"
+            ]
+        ]
+    },
+    {
+        "id": "2ac625be.770a7a",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 742,
+        "y": 922.6667098999023,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "8c61f324.ae24"
+            ]
+        ]
+    },
+    {
+        "id": "88f7850e.5ad108",
+        "type": "failure",
+        "name": "failure",
+        "xml": "<outcome value='failure'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1065,
+        "y": 889.6667098999023,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "e305119d.ed993"
+            ]
+        ]
+    },
+    {
+        "id": "354c4873.8508a8",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1544,
+        "y": 631,
+        "z": "b4822c6c.4b863",
+        "wires": [
+            [
+                "1a23a9aa.d63826"
+            ]
+        ]
+    }
+]

@@ -1,0 +1,581 @@
+[
+  {
+    "id": "45094e01.04b5",
+    "type": "dgstart",
+    "name": "DGSTART",
+    "outputs": 1,
+    "x": 118,
+    "y": 60,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "2edc368c.b0f64a"
+      ]
+    ]
+  },
+  {
+    "id": "2edc368c.b0f64a",
+    "type": "service-logic",
+    "name": "APPC 2.0.0",
+    "module": "APPC",
+    "version": "2.0.0",
+    "comments": "",
+    "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.0'>",
+    "outputs": 1,
+    "x": 271.0000762939453,
+    "y": 59.566673278808594,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "65d6d2.3359293"
+      ]
+    ]
+  },
+  {
+    "id": "65d6d2.3359293",
+    "type": "method",
+    "name": "StopApplication_VM_VSCP",
+    "xml": "<method rpc='StopApplication_VM_vSCP' mode='sync'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 483.5000915527344,
+    "y": 59.56667232513428,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "a649fe4e.d578c"
+      ]
+    ]
+  },
+  {
+    "id": "a649fe4e.d578c",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 172,
+    "y": 140,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "3befe32a.cda1ac",
+        "38e0f472.ba404c",
+        "bb87dbed.34a348",
+        "593a11f2.81bf1",
+        "d6d1b7f.22dce48"
+      ]
+    ]
+  },
+  {
+    "id": "3befe32a.cda1ac",
+    "type": "switchNode",
+    "name": "Connection details already exist ?",
+    "xml": "<switch test='`length($connection-details) == 0`'>\n\n\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 455,
+    "y": 200,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "4e1f878a.293dd8"
+      ]
+    ]
+  },
+  {
+    "id": "4e1f878a.293dd8",
+    "type": "outcomeTrue",
+    "name": "none found",
+    "xml": "<outcome value='true'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 704.5,
+    "y": 200,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "c48be551.f0b508"
+      ]
+    ]
+  },
+  {
+    "id": "631a6eca.08715",
+    "type": "outcome",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 690,
+    "y": 380,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "ba6732ad.5b2b7"
+      ]
+    ]
+  },
+  {
+    "id": "90519af5.3cf8f8",
+    "type": "not-found",
+    "name": "not-found",
+    "xml": "<outcome value='not-found'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 699,
+    "y": 320,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "7bf6eaa2.0c00b4"
+      ]
+    ]
+  },
+  {
+    "id": "c48be551.f0b508",
+    "type": "execute",
+    "name": "Execute retrieve connection",
+    "xml": "<execute plugin='org.openecomp.appc.dg.ssh.SshDBPlugin' method='retrieveConnectionDetails' >\n<parameter name=\"vnf-host-ip-address\" value=\"`$vnf-host-ip-address`\" />\n<parameter name='vnf-type' value=\"`$vnf.type`\" />\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 936.5,
+    "y": 200,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "c24e43e3.47358"
+      ]
+    ]
+  },
+  {
+    "id": "c24e43e3.47358",
+    "type": "failure",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1130,
+    "y": 200,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "7000ea12.cc2c54"
+      ]
+    ]
+  },
+  {
+    "id": "cba91b7e.1a9828",
+    "type": "execute",
+    "name": "Execute stop node",
+    "xml": "<execute plugin='com.att.appc.dg.vSCP.v3_5_5.VSCPDGUtils' method='stopNode'>\n<parameter name=\"node-name\" value=\"`$healthcheck.vm[0].nodeName`\" />\n<parameter name=\"node-status\" value=\"`$healthcheck.vm[0].status`\" />\n<parameter name=\"vm-url\" value=\"`$stop-vm-url`\" />\n<parameter name=\"connection-details\" value=\"`$connection-details`\" />",
+    "comments": "",
+    "outputs": 1,
+    "x": 907.5,
+    "y": 440,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "3e771072.dff42",
+        "4c818d83.efdfa4"
+      ]
+    ]
+  },
+  {
+    "id": "7000ea12.cc2c54",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1270,
+    "y": 200,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "9ed7e5c6.794218",
+        "625a967b.641258"
+      ]
+    ]
+  },
+  {
+    "id": "9ed7e5c6.794218",
+    "type": "set",
+    "name": "Set event message",
+    "xml": "<set>\n<parameter name=\"event-message\" value=\"`'Failed to retrieve connection details for vnfc : ' + $vnfcType`\"/> ",
+    "comments": "",
+    "x": 1609.5,
+    "y": 200,
+    "z": "4469619c.5c5ce",
+    "wires": []
+  },
+  {
+    "id": "2e18822.6fd057e",
+    "type": "set",
+    "name": "Set event message",
+    "xml": "<set>\n<parameter name='event-message' value=\"`'Stop failed for the node : ' + $healthcheck.vm[0].nodeName`\"/>",
+    "comments": "",
+    "x": 1609.5,
+    "y": 440,
+    "z": "4469619c.5c5ce",
+    "wires": []
+  },
+  {
+    "id": "3e771072.dff42",
+    "type": "other",
+    "name": "other",
+    "xml": "<outcome value='Other'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1130,
+    "y": 440,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "87e9f084.dc614"
+      ]
+    ]
+  },
+  {
+    "id": "38e0f472.ba404c",
+    "type": "set",
+    "name": "init",
+    "xml": "<set>\n<parameter name='current-dg-name' value=\"StopApplication_VM_vSCP\"/>\n<parameter name=\"healthcheck.vmCount\" value=\"1\" />\n<parameter name=\"retry-healthcheck\" value=\"false\"/>\n<parameter name=\"exitLoop\" value=\"false\"/>\n<parameter name=\"stopSucceeded\" value=\"false\"/>\n<parameter name=\"healthcheck.vm[0].url\" value=\"`$stop-vm-url`\" />",
+    "comments": "",
+    "outputs": 1,
+    "x": 370,
+    "y": 140,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "bb87dbed.34a348",
+    "type": "execute",
+    "name": "Healthcheck to get Node Name",
+    "xml": "<execute plugin='com.att.appc.dg.vSCP.v3_5_5.VSCPDGUtils' method='healthCheckVMs'>\n<parameter name=\"org.openecomp.appc.identity.url\" value=\"`$AICIdentity`\" />\n<parameter name=\"connection-details\" value=\"`$connection-details`\" />\n<parameter name=\"org.openecomp.appc.provider.name\" value=\"OpenStack\"/>\n<parameter name=\"retry-healthcheck\" value=\"`$retry-healthcheck`\"/>",
+    "comments": "",
+    "outputs": 1,
+    "x": 447.5,
+    "y": 320,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "90519af5.3cf8f8",
+        "631a6eca.08715"
+      ]
+    ]
+  },
+  {
+    "id": "593a11f2.81bf1",
+    "type": "switchNode",
+    "name": "Healthcheck status ?",
+    "xml": "<switch test=\"`$healthcheck.vm[0].status`\">\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 414.5,
+    "y": 440,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "4c418f9c.9c0fb",
+        "13d3d83.6ec2928",
+        "1d8db4ea.ee850b"
+      ]
+    ]
+  },
+  {
+    "id": "4c418f9c.9c0fb",
+    "type": "other",
+    "name": "DOWN",
+    "xml": "<outcome value='DOWN'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 690.5,
+    "y": 560,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "a188ecb2.2c019"
+      ]
+    ]
+  },
+  {
+    "id": "87e9f084.dc614",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1272,
+    "y": 440,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "2e18822.6fd057e",
+        "625a967b.641258"
+      ]
+    ]
+  },
+  {
+    "id": "2572bd6f.e17262",
+    "type": "returnSuccess",
+    "name": "return success",
+    "xml": "<return status='success'>\n",
+    "comments": "",
+    "x": 1295,
+    "y": 500,
+    "z": "4469619c.5c5ce",
+    "wires": []
+  },
+  {
+    "id": "13d3d83.6ec2928",
+    "type": "other",
+    "name": "UP",
+    "xml": "<outcome value='UP'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 690,
+    "y": 440,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "cba91b7e.1a9828"
+      ]
+    ]
+  },
+  {
+    "id": "4c818d83.efdfa4",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1134,
+    "y": 500,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "2572bd6f.e17262"
+      ]
+    ]
+  },
+  {
+    "id": "d6d1b7f.22dce48",
+    "type": "execute",
+    "name": "Select vnf-host-ip via connection test",
+    "xml": "<execute plugin='com.att.appc.dg.vSCP.v3_5_5.VSCPDGUtils' method='selectActiveConnectionDetails'>\n<parameter name=\"connection-details\" value=\"`$connection-details`\" />\n<parameter name=\"vnf-host-ip-address\" value=\"`$vnf-host-ip-address`\" />\n<parameter name=\"vnf-host-ip2-address\" value=\"`$vnf-host-ip2-address`\" />\n\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 464.5,
+    "y": 260,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "d9e8802e.e0979"
+      ]
+    ]
+  },
+  {
+    "id": "d9e8802e.e0979",
+    "type": "failure",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 690,
+    "y": 260,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "960cbdd2.f45fa"
+      ]
+    ]
+  },
+  {
+    "id": "960cbdd2.f45fa",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1270,
+    "y": 260,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "93f6e97f.86f498",
+        "625a967b.641258"
+      ]
+    ]
+  },
+  {
+    "id": "93f6e97f.86f498",
+    "type": "set",
+    "name": "Set event message",
+    "xml": "<set>\n<parameter name=\"event-message\" value=\"`'Failed to ssh to vnfc : ' + $vnfcType`\"/> ",
+    "comments": "",
+    "x": 1609.5,
+    "y": 260,
+    "z": "4469619c.5c5ce",
+    "wires": []
+  },
+  {
+    "id": "7bf6eaa2.0c00b4",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1270,
+    "y": 320,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "fbbe6078.75537",
+        "625a967b.641258"
+      ]
+    ]
+  },
+  {
+    "id": "fbbe6078.75537",
+    "type": "set",
+    "name": "Set event message",
+    "xml": "<set>\n<parameter name=\"event-message\" value=\"Health Check not found\"/> ",
+    "comments": "",
+    "x": 1609.5,
+    "y": 320,
+    "z": "4469619c.5c5ce",
+    "wires": []
+  },
+  {
+    "id": "ba6732ad.5b2b7",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1270,
+    "y": 380,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "5d6a8bd9.c4f1a4",
+        "625a967b.641258"
+      ]
+    ]
+  },
+  {
+    "id": "5d6a8bd9.c4f1a4",
+    "type": "set",
+    "name": "Set event message",
+    "xml": "<set>\n<parameter name=\"event-message\" value=\"Health Check failed\"/> ",
+    "comments": "",
+    "x": 1609.5,
+    "y": 380,
+    "z": "4469619c.5c5ce",
+    "wires": []
+  },
+  {
+    "id": "625a967b.641258",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value='`$error-message`' />\n<parameter name='output.status.code' value='401'/>\n",
+    "comments": "",
+    "x": 1589,
+    "y": 500,
+    "z": "4469619c.5c5ce",
+    "wires": []
+  },
+  {
+    "id": "a188ecb2.2c019",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 870,
+    "y": 560,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "623a9eea.473fc",
+        "6b885833.1ca728"
+      ]
+    ]
+  },
+  {
+    "id": "623a9eea.473fc",
+    "type": "set",
+    "name": "Set success message",
+    "xml": "<set>\n<parameter name='success-message' value=\"`'Node already down: ' + $healthcheck.vm[0].nodeName`\"/>",
+    "comments": "",
+    "x": 1177.5,
+    "y": 560,
+    "z": "4469619c.5c5ce",
+    "wires": []
+  },
+  {
+    "id": "1d8db4ea.ee850b",
+    "type": "other",
+    "name": "UNKNOWN",
+    "xml": "<outcome value='UNKNOWN'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 705,
+    "y": 620,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "5945a3dd.87e51c"
+      ]
+    ]
+  },
+  {
+    "id": "5945a3dd.87e51c",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 870,
+    "y": 620,
+    "z": "4469619c.5c5ce",
+    "wires": [
+      [
+        "4a02e5a3.cf7dcc",
+        "6b885833.1ca728"
+      ]
+    ]
+  },
+  {
+    "id": "4a02e5a3.cf7dcc",
+    "type": "set",
+    "name": "Set success message",
+    "xml": "<set>\n<parameter name='success-message' value=\"Application Shutdown unnessecary for node in state UNKNOWN.\"/>",
+    "comments": "",
+    "x": 1177.5,
+    "y": 620,
+    "z": "4469619c.5c5ce",
+    "wires": []
+  },
+  {
+    "id": "6b885833.1ca728",
+    "type": "returnSuccess",
+    "name": "return success",
+    "xml": "<return status='success'>\n",
+    "comments": "",
+    "x": 1157,
+    "y": 680,
+    "z": "4469619c.5c5ce",
+    "wires": []
+  }
+]

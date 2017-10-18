@@ -1,0 +1,121 @@
+[
+    {
+        "id": "9b0d47e6.16eff8",
+        "type": "dgstart",
+        "name": "DGSTART",
+        "outputs": 1,
+        "x": 238,
+        "y": 137,
+        "z": "3db25098.787c1",
+        "wires": [
+            [
+                "cc93a914.9f00f8"
+            ]
+        ]
+    },
+    {
+        "id": "cc93a914.9f00f8",
+        "type": "service-logic",
+        "name": "Appc-API 2.0.0.0",
+        "module": "Appc-API",
+        "version": "2.0.0.0",
+        "comments": "",
+        "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='Appc-API' version='2.0.0.0'>",
+        "outputs": 1,
+        "x": 361,
+        "y": 195,
+        "z": "3db25098.787c1",
+        "wires": [
+            [
+                "3652cb36.ce8014"
+            ]
+        ]
+    },
+    {
+        "id": "3652cb36.ce8014",
+        "type": "method",
+        "name": "VNF_HealthCheck",
+        "xml": "<method rpc='VNF_HealthCheck' mode='sync'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 452,
+        "y": 257,
+        "z": "3db25098.787c1",
+        "wires": [
+            [
+                "f1d1c6be.6d74e8"
+            ]
+        ]
+    },
+    {
+        "id": "f1d1c6be.6d74e8",
+        "type": "execute",
+        "name": "execute: handleUpgradeStub",
+        "xml": "<execute plugin='org.openecomp.appc.dg.util.UpgradeStubNode' method='handleUpgradeStub' >\n<parameter name=\"failureIndicator\" value=\"`$failureIndicator`\" />\n\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 568,
+        "y": 317,
+        "z": "3db25098.787c1",
+        "wires": [
+            [
+                "e3d4660c.ea71e8",
+                "4c962a0d.b1d5c4"
+            ]
+        ]
+    },
+    {
+        "id": "e3d4660c.ea71e8",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 788,
+        "y": 294,
+        "z": "3db25098.787c1",
+        "wires": [
+            [
+                "668719c4.5a7da8"
+            ]
+        ]
+    },
+    {
+        "id": "4c962a0d.b1d5c4",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 786,
+        "y": 341,
+        "z": "3db25098.787c1",
+        "wires": [
+            [
+                "1ec055ee.ff19ca"
+            ]
+        ]
+    },
+    {
+        "id": "668719c4.5a7da8",
+        "type": "returnSuccess",
+        "name": "return success",
+        "xml": "<return status='success'>\n<parameter name='error-code' value='200' />\n<parameter name='error-message' value=\"For testing only... success in HealthCheck\" />",
+        "comments": "",
+        "x": 974,
+        "y": 294,
+        "z": "3db25098.787c1",
+        "wires": []
+    },
+    {
+        "id": "1ec055ee.ff19ca",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>\n<parameter name='error-code' value=\"500\" />\n<parameter name='error-message' value=\"For testing only... failure in HealthCheck\" />\n",
+        "comments": "",
+        "x": 972,
+        "y": 342,
+        "z": "3db25098.787c1",
+        "wires": []
+    }
+]

@@ -1,0 +1,577 @@
+[
+  {
+    "id": "5e8f7716.499198",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 555,
+    "y": 396.55555629730225,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "4b22d8a1.f3d148"
+      ]
+    ]
+  },
+  {
+    "id": "145d561d.5cc62a",
+    "type": "execute",
+    "name": "execute_getVNF_Hierarchy",
+    "xml": "<execute plugin='org.openecomp.appc.dg.util.ExecuteNodeAction' method='getVnfHierarchy'>\n<parameter name=\"resourceKey\" value=\"`$input.action-identifiers.vnf-id`\" />",
+    "comments": "",
+    "outputs": 1,
+    "x": 318,
+    "y": 396.55555629730225,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "5e8f7716.499198",
+        "bb8a0f0f.b2fe4",
+        "a25b25dc.c0a438"
+      ]
+    ]
+  },
+  {
+    "id": "4b22d8a1.f3d148",
+    "type": "switchNode",
+    "name": "switch",
+    "xml": "<switch test='`$getVnfHierarchy_result`'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 692.0000610351562,
+    "y": 396.55555629730225,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "25fd98ba.13e158",
+        "606b452c.8152dc"
+      ]
+    ]
+  },
+  {
+    "id": "bb8a0f0f.b2fe4",
+    "type": "failure",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 848,
+    "y": 235.55555629730225,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "c13d50ec.a9c2"
+      ]
+    ]
+  },
+  {
+    "id": "a25b25dc.c0a438",
+    "type": "other",
+    "name": "other",
+    "xml": "<outcome value='Other'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 863,
+    "y": 155.55555629730225,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "c13d50ec.a9c2"
+      ]
+    ]
+  },
+  {
+    "id": "6d026903.3c9f08",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 318.66668701171875,
+    "y": 319.4444417953491,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "145d561d.5cc62a"
+      ]
+    ]
+  },
+  {
+    "id": "25fd98ba.13e158",
+    "type": "outcome",
+    "name": "SUCCESS",
+    "xml": "<outcome value='SUCCESS'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 657,
+    "y": 563.5555562973022,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "7d6b675f.944888"
+      ]
+    ]
+  },
+  {
+    "id": "606b452c.8152dc",
+    "type": "outcome",
+    "name": "FAILURE",
+    "xml": "<outcome value='FAILURE'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 860,
+    "y": 325.55555629730225,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "c13d50ec.a9c2"
+      ]
+    ]
+  },
+  {
+    "id": "c13d50ec.a9c2",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1045,
+    "y": 269.55555629730225,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "6b85300.44ae5d",
+        "b50265a4.9ec658",
+        "ff92154a.222ad8"
+      ]
+    ]
+  },
+  {
+    "id": "f205d4a8.a6d008",
+    "type": "execute",
+    "name": "execute: flatAndAddToContext",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.JsonDgUtil' method='flatAndAddToContext' >\n<parameter name=\"payload\" value=\"`$input.payload`\" />",
+    "comments": "",
+    "outputs": 1,
+    "x": 273.6666564941406,
+    "y": 255.44444179534912,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "6d026903.3c9f08",
+        "d9efdcd7.d999"
+      ]
+    ]
+  },
+  {
+    "id": "7d6b675f.944888",
+    "type": "switchNode",
+    "name": "switch",
+    "xml": "<switch test='`$VNF.VMCount`'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 803.0000305175781,
+    "y": 563.5555562973022,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "b3dc1924.975c18",
+        "61b52cec.5b91d4"
+      ]
+    ]
+  },
+  {
+    "id": "6b85300.44ae5d",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n",
+    "comments": "",
+    "x": 1308,
+    "y": 205.55555725097656,
+    "z": "75a9f4e5.a1649c",
+    "wires": []
+  },
+  {
+    "id": "b50265a4.9ec658",
+    "type": "execute",
+    "name": "execute_SendUEBEvent",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"apiVer\" value=\"1.01\"/>\n<parameter name=\"eventId\" value=\"`$input.action-identifiers.vnf-id`\" />\n<parameter name=\"org.openecomp.appc.dg.error\" value=\"Exception in getting VNF Hierachy\"/>\n<parameter name='output.status.message' value=\"Exception in getting VNF Hierachy\"/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1315,
+    "y": 91.55555725097656,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "d9efdcd7.d999",
+    "type": "other",
+    "name": "other",
+    "xml": "<outcome value='Other'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 529.6666870117188,
+    "y": 196.44444179534912,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "b3dc1924.975c18",
+    "type": "other",
+    "name": "outcome_0",
+    "xml": "<outcome value='0'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 881,
+    "y": 481.55555629730225,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "7edbf7e6.e29b28"
+      ]
+    ]
+  },
+  {
+    "id": "61b52cec.5b91d4",
+    "type": "other",
+    "name": "other",
+    "xml": "<outcome value='Other'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 865,
+    "y": 652.5555562973022,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "1afd140e.b8e10c"
+      ]
+    ]
+  },
+  {
+    "id": "7edbf7e6.e29b28",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1002,
+    "y": 405.55555629730225,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "ce24c821.4cd8e8",
+        "c6500acc.d09d98",
+        "f9c012e3.68717"
+      ]
+    ]
+  },
+  {
+    "id": "1afd140e.b8e10c",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>\n",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1016.0000610351562,
+    "y": 653.5556173324585,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "e690e466.a45438"
+      ]
+    ]
+  },
+  {
+    "id": "ce24c821.4cd8e8",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n",
+    "comments": "",
+    "x": 1230,
+    "y": 496.5555419921875,
+    "z": "75a9f4e5.a1649c",
+    "wires": []
+  },
+  {
+    "id": "c6500acc.d09d98",
+    "type": "execute",
+    "name": "execute_SendUEBEvent",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"apiVer\" value=\"1.01\"/>\n<parameter name=\"eventId\" value=\"`$input.action-identifiers.vnf-id`\" />\n<parameter name=\"org.openecomp.appc.dg.error\" value=\"VM Count is 0\"/>\n<parameter name='output.status.message' value=\"VM Count is 0\"/>\n\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1260,
+    "y": 347.55555629730225,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "e690e466.a45438",
+    "type": "execute",
+    "name": "execute_RollbackStack",
+    "xml": "<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='restoreStack' >\n <parameter name=\"org.openecomp.appc.provider.name\" value=\"OpenStack\"/>\n <parameter name=\"org.openecomp.appc.instance.url\" value=\"`$VNF.VM[0].URL`\" />\n <parameter name=\"org.openecomp.appc.identity.url\" value=\"`$input.identity-url`\" />\n <parameter name=\"org.openecomp.appc.stack.id\" value =\"`$VNF.heat-stack-id`\" />\n <parameter name=\"org.openecomp.appc.snapshot.id\" value=\"`$input.snapshot-id`\" />",
+    "comments": "",
+    "outputs": 1,
+    "x": 1235,
+    "y": 653.5555562973022,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "755e1d66.83efb4",
+        "99ec0c41.3c7b8",
+        "e20a4882.f1ee38"
+      ]
+    ]
+  },
+  {
+    "id": "755e1d66.83efb4",
+    "type": "outcome",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1383,
+    "y": 751.5555419921875,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "2d2f9438.4676ec"
+      ]
+    ]
+  },
+  {
+    "id": "99ec0c41.3c7b8",
+    "type": "failure",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1378,
+    "y": 560.5555562973022,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "4ef40628.63bd68"
+      ]
+    ]
+  },
+  {
+    "id": "e20a4882.f1ee38",
+    "type": "other",
+    "name": "other",
+    "xml": "<outcome value='Other'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1434,
+    "y": 653.5556783676147,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "4ef40628.63bd68"
+      ]
+    ]
+  },
+  {
+    "id": "290b41b8.e128ee",
+    "type": "returnSuccess",
+    "name": "return success",
+    "xml": "<return status='success'>",
+    "comments": "",
+    "x": 1813.4285888671875,
+    "y": 800.126953125,
+    "z": "75a9f4e5.a1649c",
+    "wires": []
+  },
+  {
+    "id": "4ef40628.63bd68",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1627.4285888671875,
+    "y": 653.6983785629272,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "da2d458c.b135f8",
+        "57c76a69.3aba64",
+        "c1763a92.eaaf28"
+      ]
+    ]
+  },
+  {
+    "id": "da2d458c.b135f8",
+    "type": "execute",
+    "name": "execute_SendUEBEvent",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"apiVer\" value=\"1.01\"/>\n<parameter name=\"eventId\" value=\"`$input.action-identifiers.vnf-id`\" />\n<parameter name=\"org.openecomp.appc.dg.error\" value=\"`'Error occured during rollback Stack '+$VNF.heat-stack-id + ' to snapshot ' + $snapshot-id`\"/>\n<parameter name='output.status.message' value=\"`'Error occured during rollback Stack '+$VNF.heat-stack-id + ' to snapshot ' + $snapshot-id`\"/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1888,
+    "y": 520.5555419921875,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "4571b850.f77f68"
+      ]
+    ]
+  },
+  {
+    "id": "57c76a69.3aba64",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n",
+    "comments": "",
+    "x": 1877,
+    "y": 648.5555419921875,
+    "z": "75a9f4e5.a1649c",
+    "wires": []
+  },
+  {
+    "id": "4571b850.f77f68",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2111.666748046875,
+    "y": 494.888916015625,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "7068b4fa.7f618c",
+    "type": "dgstart",
+    "name": "DGSTART",
+    "outputs": 1,
+    "x": 111.66665649414062,
+    "y": 20,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "3f3fa052.71537"
+      ]
+    ]
+  },
+  {
+    "id": "3f3fa052.71537",
+    "type": "service-logic",
+    "name": "APPC-API 2.0.0.0",
+    "module": "APPC-API",
+    "version": "2.0.0.0",
+    "comments": "",
+    "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC-API' version='2.0.0.0'>",
+    "outputs": 1,
+    "x": 145.66665649414062,
+    "y": 114,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "90f1096d.987a68"
+      ]
+    ]
+  },
+  {
+    "id": "90f1096d.987a68",
+    "type": "method",
+    "name": "VNF_Rollback",
+    "xml": "<method rpc='VNF_Rollback' mode='sync'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 145.66665649414062,
+    "y": 187,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "f205d4a8.a6d008"
+      ]
+    ]
+  },
+  {
+    "id": "ff92154a.222ad8",
+    "type": "execute",
+    "name": "Set failure code and message",
+    "xml": "<set>\n<parameter name='error-code' value='401'/>\n<parameter name='error-message' value=\"Exception in getting VNF Hierachy\"/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1331,
+    "y": 150,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "f9c012e3.68717",
+    "type": "execute",
+    "name": "Set failure code and message",
+    "xml": "<set>\n<parameter name='error-code' value='401'/>\n<parameter name='error-message' value=\"VM Count is 0\"/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1257,
+    "y": 424,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "c1763a92.eaaf28",
+    "type": "execute",
+    "name": "Set failure code and message",
+    "xml": "<set>\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value=\"`'Error occured during rollback Stack '+$VNF.heat-stack-id + ' to snapshot ' + $snapshot-id`\"/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1904,
+    "y": 586,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "2d2f9438.4676ec",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1567,
+    "y": 754,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      [
+        "290b41b8.e128ee",
+        "b75c6c94.830d4"
+      ]
+    ]
+  },
+  {
+    "id": "b75c6c94.830d4",
+    "type": "execute",
+    "name": "Set success code and message",
+    "xml": "<set>\n<parameter name='error-code' value='400'/>\n<parameter name='error-message' value=\"Success\"/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1833,
+    "y": 731,
+    "z": "75a9f4e5.a1649c",
+    "wires": [
+      []
+    ]
+  }
+]

@@ -1,0 +1,121 @@
+[
+    {
+        "id": "1c2d2c19.e3d2d4",
+        "type": "dgstart",
+        "name": "DGSTART",
+        "outputs": 1,
+        "x": 193,
+        "y": 200,
+        "z": "73df06d5.b89fa8",
+        "wires": [
+            [
+                "a3835946.5c7ca8"
+            ]
+        ]
+    },
+    {
+        "id": "a3835946.5c7ca8",
+        "type": "service-logic",
+        "name": "Appc-API 2.0.0.0",
+        "module": "Appc-API",
+        "version": "2.0.0.0",
+        "comments": "test service logic",
+        "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='Appc-API' version='2.0.0.0'>",
+        "outputs": 1,
+        "x": 259,
+        "y": 283,
+        "z": "73df06d5.b89fa8",
+        "wires": [
+            [
+                "faa0f08b.055f1"
+            ]
+        ]
+    },
+    {
+        "id": "1c0a1696.e3f5e9",
+        "type": "execute",
+        "name": "execute-netconf-config",
+        "xml": "<execute plugin='org.openecomp.appc.dg.netconf.NetconfClientPlugin' method='configure' >\n\t<parameter name=\"org.openecomp.appc.payload\" value=\"`$org.openecomp.appc.payload`\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 511,
+        "y": 363,
+        "z": "73df06d5.b89fa8",
+        "wires": [
+            [
+                "9f0c88c7.60f378",
+                "ab656d56.549a9"
+            ]
+        ]
+    },
+    {
+        "id": "9f0c88c7.60f378",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 730,
+        "y": 293,
+        "z": "73df06d5.b89fa8",
+        "wires": [
+            [
+                "9be9d7cb.641628"
+            ]
+        ]
+    },
+    {
+        "id": "ab656d56.549a9",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 726,
+        "y": 432,
+        "z": "73df06d5.b89fa8",
+        "wires": [
+            [
+                "6f27856e.90d87c"
+            ]
+        ]
+    },
+    {
+        "id": "6f27856e.90d87c",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>\n<parameter name='error-code' value='failure' />\n<parameter name='error-message' value='netconf configuration failed' />\n",
+        "comments": "",
+        "x": 912,
+        "y": 432,
+        "z": "73df06d5.b89fa8",
+        "wires": []
+    },
+    {
+        "id": "9be9d7cb.641628",
+        "type": "returnSuccess",
+        "name": "return success",
+        "xml": "<return status='success'>\n",
+        "comments": "",
+        "x": 918,
+        "y": 293,
+        "z": "73df06d5.b89fa8",
+        "wires": []
+    },
+    {
+        "id": "faa0f08b.055f1",
+        "type": "method",
+        "name": "method",
+        "xml": "<method rpc='NETCONF_Configure' mode='sync'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 292,
+        "y": 358,
+        "z": "73df06d5.b89fa8",
+        "wires": [
+            [
+                "1c0a1696.e3f5e9"
+            ]
+        ]
+    }
+]

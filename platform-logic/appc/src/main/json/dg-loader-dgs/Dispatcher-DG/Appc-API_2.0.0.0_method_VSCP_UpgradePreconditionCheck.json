@@ -1,0 +1,231 @@
+[
+    {
+        "id": "ce2213a9.8b1db",
+        "type": "dgstart",
+        "name": "DGSTART",
+        "outputs": 1,
+        "x": 113,
+        "y": 70,
+        "z": "3adbb6b3.ff597a",
+        "wires": [
+            [
+                "c59f5d5e.ea6f8"
+            ]
+        ]
+    },
+    {
+        "id": "c59f5d5e.ea6f8",
+        "type": "service-logic",
+        "name": "Appc-API 2.0.0.0",
+        "module": "Appc-API",
+        "version": "2.0.0.0",
+        "comments": "",
+        "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='Appc-API' version='2.0.0.0'>",
+        "outputs": 1,
+        "x": 186,
+        "y": 123.99999237060547,
+        "z": "3adbb6b3.ff597a",
+        "wires": [
+            [
+                "933cde30.9a082"
+            ]
+        ]
+    },
+    {
+        "id": "933cde30.9a082",
+        "type": "method",
+        "name": "VSCP_UpgradePreconditionCheck",
+        "xml": "<method rpc='VSCP_UpgradePreconditionCheck' mode='sync'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 301,
+        "y": 174.99999237060547,
+        "z": "3adbb6b3.ff597a",
+        "wires": [
+            [
+                "d55c4630.1bcfc8"
+            ]
+        ]
+    },
+    {
+        "id": "d55c4630.1bcfc8",
+        "type": "call",
+        "name": "call_VSCP_HealthCheck",
+        "xml": "<call rpc='VSCP_HealthCheck' mode='sync' version='2.0.0.0' >\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 347,
+        "y": 239.99999237060547,
+        "z": "3adbb6b3.ff597a",
+        "wires": [
+            [
+                "77b0172.d053ce8",
+                "136d1da3.0df512"
+            ]
+        ]
+    },
+    {
+        "id": "136d1da3.0df512",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 549.9999694824219,
+        "y": 286.99999237060547,
+        "z": "3adbb6b3.ff597a",
+        "wires": [
+            [
+                "85331eac.44b8c"
+            ]
+        ]
+    },
+    {
+        "id": "77b0172.d053ce8",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 541.9999694824219,
+        "y": 239.99999237060547,
+        "z": "3adbb6b3.ff597a",
+        "wires": [
+            [
+                "631a551d.c6b7bc"
+            ]
+        ]
+    },
+    {
+        "id": "631a551d.c6b7bc",
+        "type": "execute",
+        "name": "execute: handleErrorToDCAE",
+        "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"org.openecomp.appc.dg.error\" value=\"`$org.openecomp.appc.dg.error`\" />\n<parameter name='output.status.message' value=\"`$error-message`\"/>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 986,
+        "y": 345.9999694824219,
+        "z": "3adbb6b3.ff597a",
+        "wires": [
+            [
+                "8d35aa54.0046a8"
+            ]
+        ]
+    },
+    {
+        "id": "1290b9ad.560676",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value='`$error-message`' />\n<parameter name='output.status.code' value='401'/>\n",
+        "comments": "",
+        "x": 1343,
+        "y": 346.0000305175781,
+        "z": "3adbb6b3.ff597a",
+        "wires": []
+    },
+    {
+        "id": "85331eac.44b8c",
+        "type": "execute",
+        "name": "Execute: PreUpgradeHealthCheck",
+        "xml": "<execute plugin='com.att.appc.dg.vSCP.v3_5_5.VSCPDGUtils' method='executePreUpgradeHealthCheck'>\n<parameter name=\"connection-details\" value=\"`$connection-details`\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 311.9999694824219,
+        "y": 384.0000305175781,
+        "z": "3adbb6b3.ff597a",
+        "wires": [
+            [
+                "668bbccc.14b154",
+                "4e1ac240.56a37c"
+            ]
+        ]
+    },
+    {
+        "id": "4e1ac240.56a37c",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 551,
+        "y": 398.0000305175781,
+        "z": "3adbb6b3.ff597a",
+        "wires": [
+            [
+                "5d443bdd.126684"
+            ]
+        ]
+    },
+    {
+        "id": "668bbccc.14b154",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 548,
+        "y": 344,
+        "z": "3adbb6b3.ff597a",
+        "wires": [
+            [
+                "6efa56e5.3d01c8"
+            ]
+        ]
+    },
+    {
+        "id": "5d443bdd.126684",
+        "type": "returnSuccess",
+        "name": "return success",
+        "xml": "<return status='success'>\n<parameter name='error-code' value='400' />\n",
+        "comments": "",
+        "x": 731,
+        "y": 401.0000305175781,
+        "z": "3adbb6b3.ff597a",
+        "wires": []
+    },
+    {
+        "id": "6efa56e5.3d01c8",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 716,
+        "y": 345,
+        "z": "3adbb6b3.ff597a",
+        "wires": [
+            [
+                "631a551d.c6b7bc",
+                "d51f8ea3.b2afc"
+            ]
+        ]
+    },
+    {
+        "id": "8d35aa54.0046a8",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1192,
+        "y": 346,
+        "z": "3adbb6b3.ff597a",
+        "wires": [
+            [
+                "1290b9ad.560676"
+            ]
+        ]
+    },
+    {
+        "id": "d51f8ea3.b2afc",
+        "type": "set",
+        "name": "set",
+        "xml": "<set>\n<parameter name='error-message' value='Failed to retrieve SSH credentials' />\n",
+        "comments": "",
+        "x": 911,
+        "y": 297,
+        "z": "3adbb6b3.ff597a",
+        "wires": []
+    }
+]

@@ -1,0 +1,627 @@
+[
+  {
+    "id": "4a37fdf2.6a2504",
+    "type": "dgstart",
+    "name": "DGSTART",
+    "outputs": 1,
+    "x": 114,
+    "y": 144,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "24ca19d3.fe69f6"
+      ]
+    ]
+  },
+  {
+    "id": "24ca19d3.fe69f6",
+    "type": "service-logic",
+    "name": "APPC 2.0.0",
+    "module": "APPC",
+    "version": "2.0.0",
+    "comments": "",
+    "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.0'>",
+    "outputs": 1,
+    "x": 261,
+    "y": 144,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "68e5e092.be1d4"
+      ]
+    ]
+  },
+  {
+    "id": "68e5e092.be1d4",
+    "type": "method",
+    "name": "Stop_VM",
+    "xml": "<method rpc='Stop_VM' mode='sync'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 413.5,
+    "y": 144,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "79ce376b.14ba38"
+      ]
+    ]
+  },
+  {
+    "id": "546085a8.48136c",
+    "type": "execute",
+    "name": "Resolve Stop Application DG",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.VNFCDgResolverPlugin' method='resolveVNFCDg'>\n<parameter name=\"vnfType\" value='`$vnf.type`' />\n<parameter name=\"vnfcType\" value='`$vnfcFlow[$i].vnfcType`' /> \n<parameter name=\"action\" value=\"Stop_Application\" />\n<parameter name=\"api-ver\" value='`$input.common-header.api-ver`' />\n<parameter name=\"prefix\" value='StopApplication' />",
+    "comments": "",
+    "outputs": 1,
+    "x": 315.5,
+    "y": 364,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "af254db7.09d53",
+        "27344cac.0eda34"
+      ]
+    ]
+  },
+  {
+    "id": "af254db7.09d53",
+    "type": "failure",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 546,
+    "y": 444,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "b3421a0a.ab34d8"
+      ]
+    ]
+  },
+  {
+    "id": "4a4711ec.83e88",
+    "type": "call",
+    "name": "Call Stop Application DG",
+    "xml": "<call module='`$StopApplication.dg_module`' rpc='`$StopApplication.dg_name`' mode='sync' >\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 742,
+    "y": 364,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "5b84fc8a.59ac94",
+        "c108322b.df0e7",
+        "3efda8ab.632bf8"
+      ]
+    ]
+  },
+  {
+    "id": "5b84fc8a.59ac94",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 990,
+    "y": 364,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "3c46d78d.4277c8"
+      ]
+    ]
+  },
+  {
+    "id": "7892211.d99b2e",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>\n",
+    "atomic": "false",
+    "comments": "",
+    "outputs": 1,
+    "x": 1146,
+    "y": 244,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "b3421a0a.ab34d8",
+        "2013c4a3.b2f33c",
+        "f600a7ce.f7f418"
+      ]
+    ]
+  },
+  {
+    "id": "b3421a0a.ab34d8",
+    "type": "call",
+    "name": "Call StopVM_VM",
+    "xml": "<call module='APPC' rpc='StopVM_VM' mode='sync' >\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1398,
+    "y": 444,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "823575c7.9529b8",
+        "403b9a.8f504468",
+        "ff7db04.0cfe85"
+      ]
+    ]
+  },
+  {
+    "id": "823575c7.9529b8",
+    "type": "failure",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1646,
+    "y": 304,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "f628fc33.96856"
+      ]
+    ]
+  },
+  {
+    "id": "403b9a.8f504468",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1650,
+    "y": 444,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "ea7f288e.c58648"
+      ]
+    ]
+  },
+  {
+    "id": "27344cac.0eda34",
+    "type": "other",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 546,
+    "y": 364,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "4a4711ec.83e88"
+      ]
+    ]
+  },
+  {
+    "id": "c108322b.df0e7",
+    "type": "other",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 986,
+    "y": 244,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "7892211.d99b2e"
+      ]
+    ]
+  },
+  {
+    "id": "3efda8ab.632bf8",
+    "type": "not-found",
+    "name": "not-found",
+    "xml": "<outcome value='not-found'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 995,
+    "y": 144,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "191e02b6.f79f4d"
+      ]
+    ]
+  },
+  {
+    "id": "191e02b6.f79f4d",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>\n",
+    "atomic": "false",
+    "comments": "",
+    "outputs": 1,
+    "x": 1806,
+    "y": 144,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "8812042b.ba9358",
+        "f628fc33.96856"
+      ]
+    ]
+  },
+  {
+    "id": "8812042b.ba9358",
+    "type": "set",
+    "name": "Set event message",
+    "xml": "<set>\n<parameter name='event-message' value=\"`'Cannot find DG: ' + $StopApplication.dg_module + ' ' + $StopApplication.dg_name`\"/>\n\n\n",
+    "comments": "",
+    "x": 2085.5,
+    "y": 144,
+    "z": "bff4e0f.991972",
+    "wires": []
+  },
+  {
+    "id": "59b9a03e.8323b",
+    "type": "set",
+    "name": "init",
+    "xml": "<set>\n<parameter name='StopApplicationFailed' value='false' />\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 246,
+    "y": 244,
+    "z": "bff4e0f.991972",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "79ce376b.14ba38",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>\n",
+    "atomic": "false",
+    "comments": "",
+    "outputs": 1,
+    "x": 106,
+    "y": 244,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "59b9a03e.8323b",
+        "546085a8.48136c"
+      ]
+    ]
+  },
+  {
+    "id": "ea7f288e.c58648",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>\n",
+    "atomic": "false",
+    "comments": "",
+    "outputs": 1,
+    "x": 1806,
+    "y": 444,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "d59b6aa1.c91618",
+        "b8335fae.52296"
+      ]
+    ]
+  },
+  {
+    "id": "3c46d78d.4277c8",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>\n",
+    "atomic": "false",
+    "comments": "",
+    "outputs": 1,
+    "x": 1146,
+    "y": 364,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "b3421a0a.ab34d8",
+        "b8335fae.52296"
+      ]
+    ]
+  },
+  {
+    "id": "2013c4a3.b2f33c",
+    "type": "set",
+    "name": "Set Stop Application Failed",
+    "xml": "<set>\n<parameter name='StopApplicationFailed' value='true' />\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1429.5,
+    "y": 204,
+    "z": "bff4e0f.991972",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "d59b6aa1.c91618",
+    "type": "switchNode",
+    "name": "Switch Stop Application Failed",
+    "xml": "<switch test=\"`$StopApplicationFailed`\">\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2035.5,
+    "y": 471,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "b987da03.0dc0f8",
+        "8fa7fbb8.8355c8"
+      ]
+    ]
+  },
+  {
+    "id": "b987da03.0dc0f8",
+    "type": "outcomeTrue",
+    "name": "true",
+    "xml": "<outcome value='true'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2266,
+    "y": 444,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "98412d6e.2237"
+      ]
+    ]
+  },
+  {
+    "id": "98412d6e.2237",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n",
+    "comments": "",
+    "x": 2465,
+    "y": 444,
+    "z": "bff4e0f.991972",
+    "wires": []
+  },
+  {
+    "id": "fffd4e3c.8b204",
+    "type": "returnSuccess",
+    "name": "return success",
+    "xml": "<return status='success'>\n",
+    "comments": "",
+    "x": 2471,
+    "y": 504,
+    "z": "bff4e0f.991972",
+    "wires": []
+  },
+  {
+    "id": "8fa7fbb8.8355c8",
+    "type": "other",
+    "name": "other",
+    "xml": "<outcome value='Other'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2266,
+    "y": 504,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "fffd4e3c.8b204"
+      ]
+    ]
+  },
+  {
+    "id": "ff7db04.0cfe85",
+    "type": "not-found",
+    "name": "not-found",
+    "xml": "<outcome value='not-found'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1655,
+    "y": 204,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "c640b015.2be11"
+      ]
+    ]
+  },
+  {
+    "id": "1dffaf3f.e12151",
+    "type": "execute",
+    "name": "OutputMessageBuilder",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.OutputMessagePlugin' method='outputMessageBuilder' >\n<parameter name=\"error-message\" value=\"`$error-message`\" />\n<parameter name=\"event-message\" value=\"`$event-message`\"/>",
+    "comments": "",
+    "outputs": 1,
+    "x": 2509,
+    "y": 122,
+    "z": "bff4e0f.991972",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "f628fc33.96856",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>\n",
+    "atomic": "false",
+    "comments": "",
+    "outputs": 1,
+    "x": 2046,
+    "y": 304,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "f600a7ce.f7f418",
+        "cf5c9d26.942c4"
+      ]
+    ]
+  },
+  {
+    "id": "c41ea253.33c72",
+    "type": "set",
+    "name": "Set event message",
+    "xml": "<set>\n<parameter name='event-message' value=\"Cannot find DG: StopVM_VM\"/>\n\n\n",
+    "comments": "",
+    "x": 2085.5,
+    "y": 204,
+    "z": "bff4e0f.991972",
+    "wires": []
+  },
+  {
+    "id": "2186d059.4b82f",
+    "type": "record",
+    "name": "Log error",
+    "xml": "<record plugin=\"org.openecomp.sdnc.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"error\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"record\" value=\"`$event-message`\"/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2465,
+    "y": 71,
+    "z": "bff4e0f.991972",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "cf5c9d26.942c4",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n",
+    "comments": "",
+    "x": 2465,
+    "y": 304,
+    "z": "bff4e0f.991972",
+    "wires": []
+  },
+  {
+    "id": "c640b015.2be11",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>\n",
+    "atomic": "false",
+    "comments": "",
+    "outputs": 1,
+    "x": 1806,
+    "y": 204,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "c41ea253.33c72",
+        "f628fc33.96856"
+      ]
+    ]
+  },
+  {
+    "id": "5fb32110.cadf8",
+    "type": "execute",
+    "name": "Report Error",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"event-message\" value=\"`$event-message`\" />",
+    "comments": "",
+    "outputs": 1,
+    "x": 2478,
+    "y": 176,
+    "z": "bff4e0f.991972",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "f600a7ce.f7f418",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>\n",
+    "atomic": "false",
+    "comments": "",
+    "outputs": 1,
+    "x": 2266,
+    "y": 244,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "2186d059.4b82f",
+        "1dffaf3f.e12151",
+        "5fb32110.cadf8",
+        "a2ebc53c.230e08"
+      ]
+    ]
+  },
+  {
+    "id": "b8335fae.52296",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>\n",
+    "atomic": "false",
+    "comments": "",
+    "outputs": 1,
+    "x": 2446,
+    "y": 364,
+    "z": "bff4e0f.991972",
+    "wires": [
+      [
+        "72a691f7.431cd",
+        "2b14f2c8.13f01e",
+        "292317f2.1be5c8"
+      ]
+    ]
+  },
+  {
+    "id": "2b14f2c8.13f01e",
+    "type": "execute",
+    "name": "Report Success",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='reportSuccess' >\n<parameter name=\"event-message\" value=\"`$success-message`\" />",
+    "comments": "",
+    "outputs": 1,
+    "x": 2684.5,
+    "y": 358,
+    "z": "bff4e0f.991972",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "72a691f7.431cd",
+    "type": "record",
+    "name": "Log success",
+    "xml": "<record plugin=\"org.openecomp.sdnc.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"record\" value=\"`$success-message`\"/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2674,
+    "y": 300,
+    "z": "bff4e0f.991972",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "a2ebc53c.230e08",
+    "type": "set",
+    "name": "Set failure code and message",
+    "xml": "<set>\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value=\"`$event-message`\" />\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2531,
+    "y": 229,
+    "z": "bff4e0f.991972",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "292317f2.1be5c8",
+    "type": "set",
+    "name": "Set success code and message",
+    "xml": "<set>\n<parameter name='error-code' value='400' />\n<parameter name='error-message' value=\"`$success-message`\" />\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2737,
+    "y": 412,
+    "z": "bff4e0f.991972",
+    "wires": [
+      []
+    ]
+  }
+]

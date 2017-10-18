@@ -1,0 +1,683 @@
+[
+    {
+        "id": "99bfac0c.66405",
+        "type": "service-logic",
+        "name": "APPC 2.0.0",
+        "module": "APPC",
+        "version": "2.0.0",
+        "comments": "",
+        "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.0'>",
+        "outputs": 1,
+        "x": 114.75,
+        "y": 78,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "87a31d5f.785ce"
+            ]
+        ]
+    },
+    {
+        "id": "5284c172.ad7b4",
+        "type": "dgstart",
+        "name": "DGSTART",
+        "outputs": 1,
+        "x": 121.75,
+        "y": 28,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "99bfac0c.66405"
+            ]
+        ]
+    },
+    {
+        "id": "b69b6144.4964a",
+        "type": "switchNode",
+        "name": "action",
+        "xml": "<switch test='`$org.openecomp.appc.action`'>\n",
+        "comments": "What method should we try to call. Closely maps to __action__Server()",
+        "outputs": 1,
+        "x": 112.75,
+        "y": 160,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "3c76f1b.fc3890e",
+                "3bbff8f1.c44008",
+                "67723fa.f988dc",
+                "82f997d3.7d0668",
+                "bb942a8e.446bd8",
+                "3d16f80b.b81e98"
+            ]
+        ]
+    },
+    {
+        "id": "3c76f1b.fc3890e",
+        "type": "outcome",
+        "name": "restart",
+        "xml": "<outcome value='restart'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 267.75,
+        "y": 175,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "f6ee74ac.091188"
+            ]
+        ]
+    },
+    {
+        "id": "3bbff8f1.c44008",
+        "type": "outcome",
+        "name": "rebuild",
+        "xml": "<outcome value='rebuild'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 279,
+        "y": 301,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "336f5c4b.cc90a4"
+            ]
+        ]
+    },
+    {
+        "id": "67723fa.f988dc",
+        "type": "other",
+        "name": "Unknown",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "Unknown action provided. Fail",
+        "outputs": 1,
+        "x": 285,
+        "y": 785,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "90b7e545.6f4818"
+            ]
+        ]
+    },
+    {
+        "id": "90b7e545.6f4818",
+        "type": "returnFailure",
+        "name": "Unknown Action",
+        "xml": "<return status='failure'>\n<parameter name='error-code' value='404' />\n<parameter name='error-message' value='Unknown action specified' />\n",
+        "comments": "",
+        "x": 886.5,
+        "y": 785,
+        "z": "551b1552.aae4ec",
+        "wires": []
+    },
+    {
+        "id": "f6ee74ac.091188",
+        "type": "execute",
+        "name": "restartServer()",
+        "xml": "<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='restartServer'>\n<parameter name=\"org.openecomp.appc.provider.name\" value=\"OpenStack\" />\n<parameter name=\"org.openecomp.appc.instance.url\" value=\"`$org.openecomp.appc.vmid`\" />\n<parameter name=\"org.openecomp.appc.identity.url\" value=\"`$org.openecomp.appc.identity.url`\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 430.75,
+        "y": 177,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "3e552093.c1aae",
+                "df92233b.206de"
+            ]
+        ]
+    },
+    {
+        "id": "3e552093.c1aae",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 579.75,
+        "y": 178,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "60e4194b.9f1be8"
+            ]
+        ]
+    },
+    {
+        "id": "60e4194b.9f1be8",
+        "type": "returnSuccess",
+        "name": "return success",
+        "xml": "<return status='success'>\n",
+        "comments": "",
+        "x": 922.75,
+        "y": 302,
+        "z": "551b1552.aae4ec",
+        "wires": []
+    },
+    {
+        "id": "fda90bc9.0256f8",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>\n<!--\n<parameter name='error-code' value='500' />\n<parameter name='error-message' value='failed' />\n-->",
+        "comments": "",
+        "x": 920.75,
+        "y": 478,
+        "z": "551b1552.aae4ec",
+        "wires": []
+    },
+    {
+        "id": "336f5c4b.cc90a4",
+        "type": "execute",
+        "name": "rebuildServer()",
+        "xml": "<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='rebuildServer'>\n<parameter name=\"org.openecomp.appc.provider.name\" value=\"OpenStack\" />\n<parameter name=\"org.openecomp.appc.instance.url\" value=\"`$org.openecomp.appc.vmid`\" />\n<parameter name=\"org.openecomp.appc.identity.url\" value=\"`$org.openecomp.appc.identity.url`\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 441.75,
+        "y": 302,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "8981943d.767e68",
+                "444dcc7.fbbb234"
+            ]
+        ]
+    },
+    {
+        "id": "8981943d.767e68",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 591.75,
+        "y": 301,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "60e4194b.9f1be8"
+            ]
+        ]
+    },
+    {
+        "id": "87a31d5f.785ce",
+        "type": "method",
+        "name": "method",
+        "xml": "<method rpc='topology-operation-all' mode='sync'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 272.75,
+        "y": 78,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "b69b6144.4964a"
+            ]
+        ]
+    },
+    {
+        "id": "82f997d3.7d0668",
+        "type": "outcome",
+        "name": "migrate",
+        "xml": "<outcome value='migrate'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 281.5,
+        "y": 421,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "ae163e95.51e9c"
+            ]
+        ]
+    },
+    {
+        "id": "ae163e95.51e9c",
+        "type": "execute",
+        "name": "migrateServer()",
+        "xml": "<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='migrateServer'>\n<parameter name=\"org.openecomp.appc.provider.name\" value=\"OpenStack\" />\n<parameter name=\"org.openecomp.appc.instance.url\" value=\"`$org.openecomp.appc.vmid`\" />\n<parameter name=\"org.openecomp.appc.identity.url\" value=\"`$org.openecomp.appc.identity.url`\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 444.5,
+        "y": 420,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "f18ec542.0e7138",
+                "4c64d27c.b39b2c"
+            ]
+        ]
+    },
+    {
+        "id": "f18ec542.0e7138",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 600,
+        "y": 420,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "60e4194b.9f1be8"
+            ]
+        ]
+    },
+    {
+        "id": "4c64d27c.b39b2c",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 596,
+        "y": 460,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "fda90bc9.0256f8"
+            ]
+        ]
+    },
+    {
+        "id": "444dcc7.fbbb234",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 587.75,
+        "y": 339,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "fda90bc9.0256f8"
+            ]
+        ]
+    },
+    {
+        "id": "84b5bf3d.7b4a4",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 595,
+        "y": 700,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "b99f0467.4660f8"
+            ]
+        ]
+    },
+    {
+        "id": "84f23c8f.7b0dc",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 598,
+        "y": 664,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "b99f0467.4660f8"
+            ]
+        ]
+    },
+    {
+        "id": "707eb288.8f814c",
+        "type": "execute",
+        "name": "evacuateServer()",
+        "xml": "<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='evacuateServer'>\n<parameter name=\"org.openecomp.appc.provider.name\" value=\"OpenStack\" />\n<parameter name=\"org.openecomp.appc.instance.url\" value=\"`$org.openecomp.appc.vmid`\" />\n<parameter name=\"org.openecomp.appc.identity.url\" value=\"`$org.openecomp.appc.identity.url`\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 442.5,
+        "y": 664,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "84b5bf3d.7b4a4",
+                "84f23c8f.7b0dc"
+            ]
+        ]
+    },
+    {
+        "id": "bb942a8e.446bd8",
+        "type": "outcome",
+        "name": "migrate",
+        "xml": "<outcome value='evacuate'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 279.5,
+        "y": 665,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "707eb288.8f814c"
+            ]
+        ]
+    },
+    {
+        "id": "df92233b.206de",
+        "type": "failure",
+        "name": "failure",
+        "xml": "<outcome value='failure'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 583,
+        "y": 224,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "fda90bc9.0256f8"
+            ]
+        ]
+    },
+    {
+        "id": "b99f0467.4660f8",
+        "type": "returnFailure",
+        "name": "Not Yet Implemented",
+        "xml": "<return status='failure'>\n<parameter name='error-code' value='500' />\n<parameter name='error-message' value='This action is not yet implemented' />\n",
+        "comments": "",
+        "x": 898,
+        "y": 683,
+        "z": "551b1552.aae4ec",
+        "wires": []
+    },
+    {
+        "id": "3d16f80b.b81e98",
+        "type": "outcome",
+        "name": "snapshot",
+        "xml": "<outcome value='snapshot'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 282,
+        "y": 533,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "7b8aa37e.280c6c"
+            ]
+        ]
+    },
+    {
+        "id": "7b8aa37e.280c6c",
+        "type": "execute",
+        "name": "createSnapshot()",
+        "xml": "<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='createSnapshot'>\n<parameter name=\"org.openecomp.appc.provider.name\" value=\"OpenStack\" />\n<parameter name=\"org.openecomp.appc.instance.url\" value=\"`$org.openecomp.appc.vmid`\" />\n<parameter name=\"org.openecomp.appc.identity.url\" value=\"`$org.openecomp.appc.identity.url`\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 445,
+        "y": 532,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "b2fdd324.e7734",
+                "72f58d9a.ca2144"
+            ]
+        ]
+    },
+    {
+        "id": "b2fdd324.e7734",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 600.5,
+        "y": 532,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "60e4194b.9f1be8"
+            ]
+        ]
+    },
+    {
+        "id": "72f58d9a.ca2144",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 596.5,
+        "y": 572,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "fda90bc9.0256f8"
+            ]
+        ]
+    },
+    {
+        "id": "7fee971b.b82fe8",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 962,
+        "y": 556,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "fba5b0ee.57367"
+            ]
+        ]
+    },
+    {
+        "id": "fba5b0ee.57367",
+        "type": "returnSuccess",
+        "name": "return success",
+        "xml": "<return status='success'>\n",
+        "comments": "",
+        "x": 1275,
+        "y": 617,
+        "z": "551b1552.aae4ec",
+        "wires": []
+    },
+    {
+        "id": "c6eec239.65f49",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>\n<!--\n<parameter name='error-code' value='500' />\n<parameter name='error-message' value='failed' />\n-->",
+        "comments": "",
+        "x": 1285,
+        "y": 812,
+        "z": "551b1552.aae4ec",
+        "wires": []
+    },
+    {
+        "id": "aebd3b77.717c8",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 974,
+        "y": 679,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "fba5b0ee.57367"
+            ]
+        ]
+    },
+    {
+        "id": "61570f13.03e13",
+        "type": "outcome",
+        "name": "migrate",
+        "xml": "<outcome value='migrate'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 663.75,
+        "y": 799,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "4b9dc5bd.fed9ac"
+            ]
+        ]
+    },
+    {
+        "id": "4b9dc5bd.fed9ac",
+        "type": "execute",
+        "name": "migrateServer()",
+        "xml": "<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='migrateServer'>\n<parameter name=\"org.openecomp.appc.provider.name\" value=\"OpenStack\" />\n<parameter name=\"org.openecomp.appc.instance.url\" value=\"`$org.openecomp.appc.vmid`\" />\n<parameter name=\"org.openecomp.appc.identity.url\" value=\"`$org.openecomp.appc.identity.url`\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 826.75,
+        "y": 798,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "54315afb.9b2a34",
+                "1a5da1c6.c6a002"
+            ]
+        ]
+    },
+    {
+        "id": "54315afb.9b2a34",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 982.25,
+        "y": 798,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "fba5b0ee.57367"
+            ]
+        ]
+    },
+    {
+        "id": "1a5da1c6.c6a002",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 978.25,
+        "y": 838,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "c6eec239.65f49"
+            ]
+        ]
+    },
+    {
+        "id": "15e18db0.b27eda",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 970,
+        "y": 717,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "c6eec239.65f49"
+            ]
+        ]
+    },
+    {
+        "id": "b92b57bc.074df8",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 979.25,
+        "y": 954,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "f2833507.0f2148"
+            ]
+        ]
+    },
+    {
+        "id": "d669863.db192b8",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 982.25,
+        "y": 918,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "f2833507.0f2148"
+            ]
+        ]
+    },
+    {
+        "id": "69143893.52d5d",
+        "type": "execute",
+        "name": "evacuateServer()",
+        "xml": "<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='evacuateServer'>\n<parameter name=\"org.openecomp.appc.provider.name\" value=\"OpenStack\" />\n<parameter name=\"org.openecomp.appc.instance.url\" value=\"`$org.openecomp.appc.vmid`\" />\n<parameter name=\"org.openecomp.appc.identity.url\" value=\"`$org.openecomp.appc.identity.url`\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 826.75,
+        "y": 918,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "d669863.db192b8",
+                "b92b57bc.074df8"
+            ]
+        ]
+    },
+    {
+        "id": "8e670719.e182d8",
+        "type": "outcome",
+        "name": "migrate",
+        "xml": "<outcome value='evacuate'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 663.75,
+        "y": 919,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "69143893.52d5d"
+            ]
+        ]
+    },
+    {
+        "id": "15ac686f.889474",
+        "type": "failure",
+        "name": "failure",
+        "xml": "<outcome value='failure'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 965.25,
+        "y": 602,
+        "z": "551b1552.aae4ec",
+        "wires": [
+            [
+                "c6eec239.65f49"
+            ]
+        ]
+    },
+    {
+        "id": "f2833507.0f2148",
+        "type": "returnFailure",
+        "name": "Not Yet Implemented",
+        "xml": "<return status='failure'>\n<parameter name='error-code' value='500' />\n<parameter name='error-message' value='This action is not yet implemented' />\n",
+        "comments": "",
+        "x": 1282.25,
+        "y": 937,
+        "z": "551b1552.aae4ec",
+        "wires": []
+    }
+]

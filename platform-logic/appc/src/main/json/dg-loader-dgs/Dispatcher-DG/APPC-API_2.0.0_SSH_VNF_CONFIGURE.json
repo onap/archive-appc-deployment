@@ -1,0 +1,121 @@
+[
+    {
+        "id": "aaf4237b.4a939",
+        "type": "dgstart",
+        "name": "DGSTART",
+        "outputs": 1,
+        "x": 163.66666158040363,
+        "y": 140.33332824707028,
+        "z": "95fc7c0a.f0bc9",
+        "wires": [
+            [
+                "de0ac7d0.e14e98"
+            ]
+        ]
+    },
+    {
+        "id": "de0ac7d0.e14e98",
+        "type": "service-logic",
+        "name": "APPC-API 2.0.0",
+        "module": "APPC-API",
+        "version": "2.0.0",
+        "comments": "",
+        "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC-API' version='2.0.0'>",
+        "outputs": 1,
+        "x": 361.99999237060547,
+        "y": 140.33332061767578,
+        "z": "95fc7c0a.f0bc9",
+        "wires": [
+            [
+                "e81270a0.727e8"
+            ]
+        ]
+    },
+    {
+        "id": "e81270a0.727e8",
+        "type": "method",
+        "name": "SSH_VNF_Configure",
+        "xml": "<method rpc='VNF_Configure' mode='sync'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 607.9524536132812,
+        "y": 139.61906337738037,
+        "z": "95fc7c0a.f0bc9",
+        "wires": [
+            [
+                "63ff76d8.f656f8"
+            ]
+        ]
+    },
+    {
+        "id": "4c02a583.c4889c",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 484.14294052124023,
+        "y": 280.45239639282227,
+        "z": "95fc7c0a.f0bc9",
+        "wires": [
+            [
+                "86035845.07e918"
+            ]
+        ]
+    },
+    {
+        "id": "86035845.07e918",
+        "type": "returnSuccess",
+        "name": "return success",
+        "xml": "<return status='success'>\n<parameter name='status' value='`$status`' />\n<parameter name='stdout' value='`$stdout`' />\n<parameter name='stderr' value='`$stderr`' />\n",
+        "comments": "",
+        "x": 761.4049072265625,
+        "y": 278.9880847930908,
+        "z": "95fc7c0a.f0bc9",
+        "wires": []
+    },
+    {
+        "id": "2b985227.d5b28e",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 482.85715103149414,
+        "y": 421.3571548461914,
+        "z": "95fc7c0a.f0bc9",
+        "wires": [
+            [
+                "ffcc42ac.b88d7"
+            ]
+        ]
+    },
+    {
+        "id": "ffcc42ac.b88d7",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status='failure'>\n<parameter name='status' value='$status`' />\n<parameter name='stdout' value='`$stdout`' />\n<parameter name='stderr' value='`$stderr`' />\n",
+        "comments": "",
+        "x": 764.0000877380371,
+        "y": 420.9643087387085,
+        "z": "95fc7c0a.f0bc9",
+        "wires": []
+    },
+    {
+        "id": "63ff76d8.f656f8",
+        "type": "execute",
+        "name": "execute ssh command",
+        "xml": "<execute plugin='org.openecomp.appc.dg.ssh.SshService' method='execWithStatusCheck' >\n<parameter name='host' value='`$host`' />\n<parameter name='port' value='`$port`' />\n<parameter name='username' value='`$username`' />\n<parameter name='password' value='`$password`' />\n<parameter name='command' value='`$command`' />\n\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 189.17861938476562,
+        "y": 346.67860412597656,
+        "z": "95fc7c0a.f0bc9",
+        "wires": [
+            [
+                "4c02a583.c4889c",
+                "2b985227.d5b28e"
+            ]
+        ]
+    }
+]

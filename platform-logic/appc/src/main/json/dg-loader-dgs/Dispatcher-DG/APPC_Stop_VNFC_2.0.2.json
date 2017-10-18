@@ -1,0 +1,850 @@
+[
+  {
+    "id": "6bb80f2c.7080b",
+    "type": "dgstart",
+    "name": "DGSTART",
+    "outputs": 1,
+    "x": 158,
+    "y": 80,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "6b619ec8.d45c4"
+      ]
+    ]
+  },
+  {
+    "id": "6b619ec8.d45c4",
+    "type": "service-logic",
+    "name": "APPC 2.0.2",
+    "module": "APPC",
+    "version": "2.0.2",
+    "comments": "",
+    "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.2'>",
+    "outputs": 1,
+    "x": 326.0001220703125,
+    "y": 81,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "c6bac291.2c2d3"
+      ]
+    ]
+  },
+  {
+    "id": "c6bac291.2c2d3",
+    "type": "method",
+    "name": "Stop_VNFC",
+    "xml": "<method rpc='Stop_VNFC' mode='sync'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 254.00015258789062,
+    "y": 155,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "f6ef3aa.b96dbc8"
+      ]
+    ]
+  },
+  {
+    "id": "f6ef3aa.b96dbc8",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "false",
+    "comments": "",
+    "outputs": 1,
+    "x": 204.0001220703125,
+    "y": 237.99999809265137,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "7faaeb57.5e7824",
+        "fc170e86.4107f",
+        "5ea187ee.d6e158",
+        "41b645cc.41c3fc"
+      ]
+    ]
+  },
+  {
+    "id": "7faaeb57.5e7824",
+    "type": "execute",
+    "name": "Update_AAI_Stopping",
+    "xml": "<execute plugin='org.openecomp.appc.dg.util.ExecuteNodeAction' method='postResource'>\n<parameter name=\"resourceType\" value=\"vnfc\" />\n<parameter name=\"prefix\" value=\"vnfc\" />\n<parameter name=\"resourceKey\" value='vnfc-name =  $vnfcName' />\n<parameter name=\"attributeName\" value=\"orchestration-status\" />\n<parameter name=\"attributeValue\" value=\"Stopping\" />",
+    "comments": "",
+    "outputs": 1,
+    "x": 920.00048828125,
+    "y": 172,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "76cf3ef.ad105c",
+        "3e9e1468.83185c",
+        "3f3edb07.2f9944"
+      ]
+    ]
+  },
+  {
+    "id": "3e9e1468.83185c",
+    "type": "not-found",
+    "name": "not-found",
+    "xml": "<outcome value='not-found'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1666.000732421875,
+    "y": 275.99999809265137,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "c1bc1cba.f920b"
+      ]
+    ]
+  },
+  {
+    "id": "3f3edb07.2f9944",
+    "type": "failure",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1682,
+    "y": 339.99999809265137,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "f8673aca.705658"
+      ]
+    ]
+  },
+  {
+    "id": "76cf3ef.ad105c",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1663.0000305175781,
+    "y": 409,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "c832b521.3d9768"
+      ]
+    ]
+  },
+  {
+    "id": "c1bc1cba.f920b",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>\n",
+    "atomic": "false",
+    "comments": "",
+    "outputs": 1,
+    "x": 1838.8891906738281,
+    "y": 273.8888854980469,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "8cac271.4e263d8",
+        "d65062b7.3cbfd"
+      ]
+    ]
+  },
+  {
+    "id": "f8673aca.705658",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>\n",
+    "atomic": "false",
+    "comments": "",
+    "outputs": 1,
+    "x": 1914.8892059326172,
+    "y": 338.35894775390625,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "71a4120e.5d054c",
+        "4a1462f9.672d7c"
+      ]
+    ]
+  },
+  {
+    "id": "c832b521.3d9768",
+    "type": "switchNode",
+    "name": "switch",
+    "xml": "<switch test='`$postResource_result`'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1810.1106262207031,
+    "y": 407.8888854980469,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "c52b0e2c.d1338",
+        "e724ae4f.d3c13"
+      ]
+    ]
+  },
+  {
+    "id": "c52b0e2c.d1338",
+    "type": "outcome",
+    "name": "NOT_FOUND",
+    "xml": "<outcome value='NOT_FOUND'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1976.1111145019531,
+    "y": 388.8888854980469,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "c7d68d2.879e37"
+      ]
+    ]
+  },
+  {
+    "id": "e724ae4f.d3c13",
+    "type": "outcome",
+    "name": "FAILURE",
+    "xml": "<outcome value='FAILURE'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1970.1112670898438,
+    "y": 447.8888854980469,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "f34e4663.0043f8"
+      ]
+    ]
+  },
+  {
+    "id": "c7d68d2.879e37",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 2158.1114807128906,
+    "y": 386.8888854980469,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "40cd2698.77b968",
+        "fdb3d9d6.7fb368"
+      ]
+    ]
+  },
+  {
+    "id": "f34e4663.0043f8",
+    "type": "block",
+    "name": "block",
+    "xml": "<block>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 2152.1114807128906,
+    "y": 448.888916015625,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "88d48d7b.011a9",
+        "b834e7a3.fb5ca8"
+      ]
+    ]
+  },
+  {
+    "id": "b834e7a3.fb5ca8",
+    "type": "execute",
+    "name": "OutputMessageBuilder",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.OutputMessagePlugin' method='outputMessageBuilder' >\n<parameter name=\"error-message\" value=\"`$error-message`\" />\n<parameter name=\"event-message\" value=\"`'Error occurred while updating VNF details in A&amp;AI for '+ $vnfcName`\"/>",
+    "comments": "",
+    "outputs": 1,
+    "x": 2391.1122131347656,
+    "y": 437.8889465332031,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "b735bff9.feb5e"
+      ]
+    ]
+  },
+  {
+    "id": "88d48d7b.011a9",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n",
+    "comments": "",
+    "x": 2374.1122131347656,
+    "y": 497.888916015625,
+    "z": "b84e704e.6dc59",
+    "wires": []
+  },
+  {
+    "id": "8cac271.4e263d8",
+    "type": "execute",
+    "name": "OutputMessageBuilder",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.OutputMessagePlugin' method='outputMessageBuilder' >\n<parameter name=\"error-message\" value=\"`$error-message`\" />\n<parameter name=\"event-message\" value=\"`'Error occurred while updating VNF details in A&amp;AI for '+ $vnfcName`\"/>\n\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2063.2223358154297,
+    "y": 190.88888549804688,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "d058580f.a167c8"
+      ]
+    ]
+  },
+  {
+    "id": "d65062b7.3cbfd",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n",
+    "comments": "",
+    "x": 2060.2223358154297,
+    "y": 237.88885498046875,
+    "z": "b84e704e.6dc59",
+    "wires": []
+  },
+  {
+    "id": "4a1462f9.672d7c",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n",
+    "comments": "",
+    "x": 2103.2223358154297,
+    "y": 336.8888854980469,
+    "z": "b84e704e.6dc59",
+    "wires": []
+  },
+  {
+    "id": "71a4120e.5d054c",
+    "type": "execute",
+    "name": "OutputMessageBuilder",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.OutputMessagePlugin' method='outputMessageBuilder' >\n<parameter name=\"error-message\" value=\"`$error-message`\" />\n<parameter name=\"event-message\" value=\"`'Error occurred while updating VNF details in A&amp;AI for '+ $vnfcName`\"/>",
+    "comments": "",
+    "outputs": 1,
+    "x": 2112.2223358154297,
+    "y": 289.888916015625,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "b49279c1.cbf648"
+      ]
+    ]
+  },
+  {
+    "id": "fdb3d9d6.7fb368",
+    "type": "execute",
+    "name": "OutputMessageBuilder",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.OutputMessagePlugin' method='outputMessageBuilder' >\n<parameter name=\"error-message\" value=\"`$error-message`\" />\n<parameter name=\"event-message\" value=\"`'Error occurred while updating VNF details in A&amp;AI for : '+ $vnfcName`\"/>\n\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2391.2220764160156,
+    "y": 339.8888854980469,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "78ec3f34.90138"
+      ]
+    ]
+  },
+  {
+    "id": "40cd2698.77b968",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n",
+    "comments": "",
+    "x": 2373.2220764160156,
+    "y": 385.88885498046875,
+    "z": "b84e704e.6dc59",
+    "wires": []
+  },
+  {
+    "id": "fc170e86.4107f",
+    "type": "for",
+    "name": "for_each_vm",
+    "xml": "<for index=\"i\" start=\"0\" end=\"`$vmCount`\" >",
+    "comments": "",
+    "outputs": 1,
+    "x": 408.00018310546875,
+    "y": 261.8888854980469,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "ad2f571e.472378"
+      ]
+    ]
+  },
+  {
+    "id": "c04c4a2.7a0a3b8",
+    "type": "execute",
+    "name": "Update_AA&I_Error",
+    "xml": "<execute plugin='org.openecomp.appc.dg.util.ExecuteNodeAction' method='postResource'>\n<parameter name=\"resourceType\" value=\"vnfc\" />\n<parameter name=\"prefix\" value=\"vnfc\" />\n<parameter name=\"resourceKey\" value='vnfc-name = $vnfcName' />\n<parameter name=\"attributeName\" value=\"orchestration-status\" />\n<parameter name=\"attributeValue\" value=\"Error\" />\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1292.0003967285156,
+    "y": 520.5237102508545,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "3e9e1468.83185c",
+        "3f3edb07.2f9944",
+        "76cf3ef.ad105c"
+      ]
+    ]
+  },
+  {
+    "id": "2b6c1bfa.73a104",
+    "type": "execute",
+    "name": "update_AA&I_Stopped",
+    "xml": "<execute plugin='org.openecomp.appc.dg.util.ExecuteNodeAction' method='postResource'>\n<parameter name=\"resourceType\" value=\"vnfc\" />\n<parameter name=\"prefix\" value=\"vnfc\" />\n<parameter name=\"resourceKey\" value='vnfc-name = $vnfcName' />\n<parameter name=\"attributeName\" value=\"orchestration-status\" />\n<parameter name=\"attributeValue\" value=\"Stopped\" />\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1268.4282531738281,
+    "y": 639.9525737762451,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "3e9e1468.83185c",
+        "3f3edb07.2f9944",
+        "76cf3ef.ad105c"
+      ]
+    ]
+  },
+  {
+    "id": "ad2f571e.472378",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>\n",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 454.0000915527344,
+    "y": 331.8888854980469,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "e049cef5.ca3d3",
+        "6103761f.d41698",
+        "f1d156a7.37a158"
+      ]
+    ]
+  },
+  {
+    "id": "630101.74f3df",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 963.7541046142578,
+    "y": 420.9959783554077,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "2057f935.74b346",
+        "523d6a77.8b8ea4",
+        "b06e9efa.c9bbb"
+      ]
+    ]
+  },
+  {
+    "id": "5ea187ee.d6e158",
+    "type": "set",
+    "name": "init_vm_failed_count",
+    "xml": "<set>\n<parameter name='stopFailedVmCount' value='0' />\n",
+    "comments": "",
+    "x": 568.7778625488281,
+    "y": 165.88888549804688,
+    "z": "b84e704e.6dc59",
+    "wires": []
+  },
+  {
+    "id": "41b645cc.41c3fc",
+    "type": "switchNode",
+    "name": "switch VNFC Stop Success",
+    "xml": "<switch test='`$stopFailedVmCount == 0`'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 486,
+    "y": 615.8890228271484,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "d6d0256a.e73ea8",
+        "e60e85fa.0569a8"
+      ]
+    ]
+  },
+  {
+    "id": "e60e85fa.0569a8",
+    "type": "outcomeTrue",
+    "name": "true",
+    "xml": "<outcome value='true'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 756.7500305175781,
+    "y": 655.6389141082764,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "8b02220e.5cbf4"
+      ]
+    ]
+  },
+  {
+    "id": "d6d0256a.e73ea8",
+    "type": "outcomeFalse",
+    "name": "false",
+    "xml": "<outcome value='false'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 761.2500610351562,
+    "y": 579.6388854980469,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "ed61f50.6ab0708"
+      ]
+    ]
+  },
+  {
+    "id": "72ebe700.9eb218",
+    "type": "returnSuccess",
+    "name": "return success",
+    "xml": "<return status='success'>\n",
+    "comments": "",
+    "x": 1259.749755859375,
+    "y": 717.5555400848389,
+    "z": "b84e704e.6dc59",
+    "wires": []
+  },
+  {
+    "id": "370d52b3.3d830e",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n",
+    "comments": "",
+    "x": 1274.5188751220703,
+    "y": 601.1556091308594,
+    "z": "b84e704e.6dc59",
+    "wires": []
+  },
+  {
+    "id": "8b02220e.5cbf4",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1010,
+    "y": 656.1110820770264,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "72ebe700.9eb218",
+        "2b6c1bfa.73a104",
+        "b07b98f7.65d868"
+      ]
+    ]
+  },
+  {
+    "id": "ed61f50.6ab0708",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 1042.0000610351562,
+    "y": 579.1110534667969,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "370d52b3.3d830e",
+        "c04c4a2.7a0a3b8",
+        "170bee40.e3fdf2"
+      ]
+    ]
+  },
+  {
+    "id": "2057f935.74b346",
+    "type": "set",
+    "name": "Update Error message and Counts",
+    "xml": "<set>\n<parameter name=\"stopFailedVmCount\" value=\"`$stopFailedVmCount + 1`\" />\n<parameter name=\"event-message\" value=\"`'Error occurred while stopping VM: ' + $vm[$i].url`\" />\n",
+    "comments": "",
+    "x": 1256.0000610351562,
+    "y": 366,
+    "z": "b84e704e.6dc59",
+    "wires": []
+  },
+  {
+    "id": "523d6a77.8b8ea4",
+    "type": "record",
+    "name": "Log event",
+    "xml": "<record plugin=\"org.openecomp.sdnc.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"error\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"record\" value=\"`$event-message`\"/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1207.2222290039062,
+    "y": 413,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "b06e9efa.c9bbb",
+    "type": "execute",
+    "name": "OutputMessageBuilder",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.OutputMessagePlugin' method='outputMessageBuilder' >\n<parameter name=\"error-message\" value=\"`$error-message`\" />\n<parameter name=\"event-message\" value=\"`$event-message`\"/>",
+    "comments": "",
+    "outputs": 1,
+    "x": 1189.0896606445312,
+    "y": 466.1873149871826,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "3ccb5c62.3b2bb4"
+      ]
+    ]
+  },
+  {
+    "id": "e049cef5.ca3d3",
+    "type": "record",
+    "name": "Log message",
+    "xml": "<record plugin=\"org.openecomp.sdnc.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"debug\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"record\" value=\"`'Attempting to stop the server : ' + $vm[$i].url`\"/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 674.4287185668945,
+    "y": 237.82540893554688,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "6103761f.d41698",
+    "type": "set",
+    "name": "set stop parameters",
+    "xml": "<set>\n<parameter name=\"stop-vm-url\" value=\"`$vm[$i].url`\" />\n<parameter name='stopRetryCount' value='3'/>\n",
+    "comments": "",
+    "x": 692.089729309082,
+    "y": 299.2539978027344,
+    "z": "b84e704e.6dc59",
+    "wires": []
+  },
+  {
+    "id": "f1d156a7.37a158",
+    "type": "call",
+    "name": "Stop_VM",
+    "xml": "<call module='APPC' rpc='Stop_VM' mode='sync' >\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 639.089729309082,
+    "y": 418.2539978027344,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "e3e85aa1.954ea8",
+        "e5db30a9.cda31"
+      ]
+    ]
+  },
+  {
+    "id": "e3e85aa1.954ea8",
+    "type": "not-found",
+    "name": "not-found",
+    "xml": "<outcome value='not-found'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 805.0001220703125,
+    "y": 419.1111145019531,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "630101.74f3df"
+      ]
+    ]
+  },
+  {
+    "id": "3ccb5c62.3b2bb4",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 1367.0000610351562,
+    "y": 467,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "ecdcb16f.8d932"
+      ]
+    ]
+  },
+  {
+    "id": "d058580f.a167c8",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2559.9999237060547,
+    "y": 181.9999542236328,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "ecdcb16f.8d932"
+      ]
+    ]
+  },
+  {
+    "id": "b49279c1.cbf648",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2570.9999237060547,
+    "y": 280.9999542236328,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "ecdcb16f.8d932"
+      ]
+    ]
+  },
+  {
+    "id": "78ec3f34.90138",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2573.0001678466797,
+    "y": 347.99998474121094,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "ecdcb16f.8d932"
+      ]
+    ]
+  },
+  {
+    "id": "b735bff9.feb5e",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2576.0001678466797,
+    "y": 434.99998474121094,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "ecdcb16f.8d932"
+      ]
+    ]
+  },
+  {
+    "id": "ecdcb16f.8d932",
+    "type": "execute",
+    "name": "Report_Error_To_DCAE",
+    "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"event-message\" value=\"`$event-message`\" />",
+    "comments": "",
+    "outputs": 1,
+    "x": 2441.666793823242,
+    "y": 916.0000457763672,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "e628d16a.c904d"
+      ]
+    ]
+  },
+  {
+    "id": "e628d16a.c904d",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 2512.9525604248047,
+    "y": 987.4286804199219,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "170bee40.e3fdf2",
+    "type": "set",
+    "name": "Set AAI update Flag",
+    "xml": "<set>\n<parameter name='AAIUpdateSuccessFlag' value='true' />\n",
+    "comments": "",
+    "x": 1288.0000305175781,
+    "y": 562,
+    "z": "b84e704e.6dc59",
+    "wires": []
+  },
+  {
+    "id": "b07b98f7.65d868",
+    "type": "set",
+    "name": "Set AAI update Flag",
+    "xml": "<set>\n<parameter name='AAIUpdateSuccessFlag' value='true' />\n",
+    "comments": "",
+    "x": 1265.0000305175781,
+    "y": 678.9999980926514,
+    "z": "b84e704e.6dc59",
+    "wires": []
+  },
+  {
+    "id": "e71ab49c.bd0528",
+    "type": "comment",
+    "name": "Reporting handled in Stop_VM",
+    "info": "",
+    "comments": "",
+    "x": 575.5000152587891,
+    "y": 461.42862701416016,
+    "z": "b84e704e.6dc59",
+    "wires": []
+  },
+  {
+    "id": "e5db30a9.cda31",
+    "type": "failure",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 796.5000152587891,
+    "y": 346.75000762939453,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "1826c546.16091b"
+      ]
+    ]
+  },
+  {
+    "id": "1826c546.16091b",
+    "type": "block",
+    "name": "block : atomic",
+    "xml": "<block atomic='true'>",
+    "atomic": "true",
+    "comments": "",
+    "outputs": 1,
+    "x": 958.2500152587891,
+    "y": 343.7500047683716,
+    "z": "b84e704e.6dc59",
+    "wires": [
+      [
+        "2057f935.74b346"
+      ]
+    ]
+  }
+]
