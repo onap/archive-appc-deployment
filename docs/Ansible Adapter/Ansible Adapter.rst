@@ -172,15 +172,20 @@ Table 2: Output Variables set by Ansible DG Variable
 
       All VNF credentials stored in a unique file (or in a SQL database depending on the ansible server runtime configuration):
 
-      [host]
-      localhost ansible\_connection=local
+      .. code:: bash
 
-      [hostgroup1] hostname11 ansible\_connection=ssh
-      ansible\_ssh\_user=loginid11 ansible\_ssh\_pass=passwd11 hostname12
-      ansible\_connection=ssh ansible\_ssh\_user=loginid12
-      ansible\_ssh\_private\_key\_file=kefile12 … [hostgroup2] hostname21
-      ansible\_connection=ssh ansible\_ssh\_user=loginid21
-      ansible\_ssh\_private\_key\_file=keyfile21 …. [hostgroup3] …
+        [host]
+        localhost ansible\_connection=local
+        ... 
+        [hostgroup1]
+        hostname11 ansible\_connection=ssh ansible\_ssh\_user=loginid11 ansible\_ssh\_pass=passwd11
+        hostname12 ansible\_connection=ssh ansible\_ssh\_user=loginid12 ansible\_ssh\_private\_key\_file=kefile12
+        ...
+        [hostgroup2]
+        hostname21 ansible\_connection=ssh ansible\_ssh\_user=loginid21 ansible\_ssh\_private\_key\_file=keyfile21
+        ...
+        [hostgroup3]
+        ...
 
     c. Playbooks
 
@@ -295,31 +300,39 @@ Table 2: Output Variables set by Ansible DG Variable
 
       Ansible server is executed through RestServer.py. Its configuration file consists of the following:
 
-      # Host definition
-      ip: 0.0.0.0
-      port: 8000
-      # Security (controls use of TLS encrypton and RestServer authentication)
-      tls: no
-      auth: no
-      # TLS certificates (must be built on application host)
-      priv: provide\_privated\_key.pem
-      pub: provide\_public\_key.pem 
-      # RestServer authentication
-      id: provide\_RestServer\_id
-      psswd: provide\_password\_4\_RestServer\_id
-      # Mysql
-      host: localhost
-      user: mysql\_user\_id
-      passwd: password\_4\_mysql\_user\_id
-      db: ansible 
-      #Playbooks
-      from\_files: yes
-      ansible\_path: /home/ubuntu/RestServerOpenSource
-      ansible\_inv: Ansible\_inventory
-      ansible\_temp: PlaybooksTemp
-      timeout\_seconds: 60
-      # Blocking on GetResults
-      getresults\_block: yes
+      .. code:: bash
+
+        # Host definition
+        ip: 0.0.0.0
+        port: 8000
+
+        # Security (controls use of TLS encrypton and RestServer authentication)
+        tls: no
+        auth: no
+
+        # TLS certificates (must be built on application host)
+        priv: provide\_privated\_key.pem
+        pub: provide\_public\_key.pem 
+
+        # RestServer authentication
+        id: provide\_RestServer\_id
+        psswd: provide\_password\_4\_RestServer\_id
+
+        # Mysql
+        host: localhost
+        user: mysql\_user\_id
+        passwd: password\_4\_mysql\_user\_id
+        db: ansible 
+
+        #Playbooks
+        from\_files: yes
+        ansible\_path: /home/ubuntu/RestServerOpenSource
+        ansible\_inv: Ansible\_inventory
+        ansible\_temp: PlaybooksTemp
+        timeout\_seconds: 60
+
+        # Blocking on GetResults
+        getresults\_block: yes
 
 Execution and testing steps:
 
