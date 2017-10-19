@@ -16,14 +16,14 @@
 .. ============LICENSE_END============================================
 .. ECOMP is a trademark and service mark of AT&T Intellectual Property.
 
-APPC Deployment Documentation Repository
-----------------------------------------
+APPC Deployment Documentation
+-----------------------------
 .. toctree::
    :maxdepth: 2
 
    APPC Deployment Guidelines/APPC Deployment Guidelines
-   Testing an ONAP Component Locally/Testing an ONAP Component Locally
-   Chef Adapter/Chef Adapter
-   Ansible Adapter/Ansible Adapter
-   Platform Logic/Platform Logic
+   APPC Testing of a Local ONAP Component/APPC Testing of a Local ONAP Component
+   APPC Chef Adapter/APPC Chef Adapter
+   APPC Ansible Adapter/APPC Ansible Adapter
+   APPC Platform Logic/APPC Platform Logic
    APPC Properties/APPC Properties

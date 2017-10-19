@@ -16,9 +16,9 @@
 .. ============LICENSE_END============================================
 .. ECOMP is a trademark and service mark of AT&T Intellectual Property.
 
-=================================
-Testing an ONAP Component Locally
-=================================
+======================================
+APPC Testing of a Local ONAP Component
+======================================
 
 
 *NOTE: Tested on APPC ONAP Component only, on a single Ubuntu 16.04 LTS

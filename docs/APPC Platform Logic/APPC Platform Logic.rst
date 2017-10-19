@@ -16,9 +16,9 @@
 .. ============LICENSE_END============================================
 .. ECOMP is a trademark and service mark of AT&T Intellectual Property.
 
-==============
-Platform Logic
-==============
+===================
+APPC Platform Logic
+===================
 
 Platform Logic is a SDNC-based component that was re-purposed in APPC to also be able to load Directed Graphs (DGs) into the APPC MySQL Database, especifically in the SVC_LOGIC table where all the DGs are loaded and activated for use.
 
