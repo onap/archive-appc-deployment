@@ -16,9 +16,9 @@
 .. ============LICENSE_END============================================
 .. ECOMP is a trademark and service mark of AT&T Intellectual Property.
 
-===============================
-APPC Chef Adapter Documentation
-===============================
+=================
+APPC Chef Adapter
+=================
 
 This wiki provides  documentation regarding the design, capabilities and usage of the Chef Extension for APPC.
 

@@ -16,9 +16,9 @@
 .. ============LICENSE_END============================================
 .. ECOMP is a trademark and service mark of AT&T Intellectual Property.
 
-==================================
-APPC Ansible Adapter Documentation
-==================================
+====================
+APPC Ansible Adapter
+====================
 
 This wiki provides documentation regarding the design, capabilities and
 usage of the Ansible Extension for APP-C. Ansible_ is a an open-source
