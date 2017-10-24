@@ -22,8 +22,8 @@
 ###
 
 #
-# This script takes care of installing the SDN-C & APP-C platform components 
-#  if not already installed, and starts the APP-C Docker Container
+# This script takes care of installing the SDNC & APPC platform components 
+#  if not already installed, and starts the APPC Docker Container
 #
 
 ODL_HOME=${ODL_HOME:-/opt/opendaylight/current}
@@ -64,9 +64,9 @@ echo -e "\nmysql ready"
 
 if [ ! -f ${SDNC_HOME}/.installed ]
 then
-	echo "Installing SDN-C database"
+	echo "Installing SDNC database"
 	${SDNC_HOME}/bin/installSdncDb.sh
-	echo "Installing APP-C database"
+	echo "Installing APPC database"
 	${APPC_HOME}/bin/installAppcDb.sh
 	echo "Starting OpenDaylight"
 	${ODL_HOME}/bin/start
@@ -75,7 +75,7 @@ then
 	echo "Inserting modified installFeatures.sh for sdnc"
 	rm ${SDNC_HOME}/bin/installFeatures.sh
 	cp ${APPC_HOME}/data/sdncInstallFeatures.sh ${SDNC_HOME}/bin/installFeatures.sh
-	echo "Installing SDN-C platform features"
+	echo "Installing SDNC platform features"
 	${SDNC_HOME}/bin/installFeatures.sh
 	if [ -x ${SDNC_HOME}/svclogic/bin/install.sh ]
 	then
@@ -83,12 +83,18 @@ then
 		${SDNC_HOME}/svclogic/bin/install.sh
 	fi
 	
-	echo "Installing APP-C platform features"
+	echo "Installing APPC platform features"
 	${APPC_HOME}/bin/installFeatures.sh
 	if [ -x ${APPC_HOME}/svclogic/bin/install.sh ]
 	then
-		echo "Installing directed graphs for APP-C"
+		echo "Installing APPC DGs using platform-logic"
 		${APPC_HOME}/svclogic/bin/install.sh
+	fi
+
+	if [ -x ${APPC_HOME}/svclogic/bin/install-converted-dgs.sh ]
+	then
+		echo "Installing APPC JSON DGs converted to XML using dg-loader"
+		${APPC_HOME}/svclogic/bin/install-converted-dgs.sh
 	fi
 
 	echo "Restarting OpenDaylight"

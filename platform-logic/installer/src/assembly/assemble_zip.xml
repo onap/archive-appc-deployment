@@ -38,7 +38,9 @@
 			<outputDirectory>svclogic/graphs</outputDirectory>
 			<includes>
 				<include>**/*.xml</include>
+				<include>**/*.json</include>
 				<include>**/graph.versions</include>
+				<include>**/dg_activate.txt</include>
 			</includes>
 			<lineEnding>unix</lineEnding>
 		</fileSet>
