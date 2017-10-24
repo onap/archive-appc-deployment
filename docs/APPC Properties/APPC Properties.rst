@@ -44,7 +44,6 @@ Notes
 appc.properties
 ===============
 
-The following features have properties that can be defined by the user as explained below:
 **Event Listener Properties**
 
 Each event listener which is defined ("LCM" and "demo" by default) has the following properties. Each property name is prefixed by the event listener which the property is for (for example
@@ -71,28 +70,6 @@ appc.demo.property_name or appc.LCM.property_name). In the below list, each prop
 -  **appc.eventListener.provider.user / appc.eventListener.provider.pass**:
    The username and password for the local OpenDaylight instance, defined by the url property above.
 
--  **Example**:
-
-  .. code:: bash
-
-	### Asynchronous responses ###
-	dmaap.topic.write=<WRITE_TOPIC> // e.g. async_demo
-	dmaap.poolMembers= <HOST_IP_1>:<PORT_NUMBER>,<HOST_IP_2>:<PORT_NUMBER> # e.g. 192.168.1.10:3904
-
-	### DG events (asynchronous) in case of failures ###
-	DCAE.event.topic.write=<WRITE_TOPIC> // e.g. event_demo
-	DCAE.event.pool.members=<HOST_IP_1>:<PORT_NUMBER>,<HOST_IP_2>:<PORT_NUMBER> # e.g. 192.168.1.10:3904
-
-	### LCM API (rpc) – synchronous ###
-	# The following properties are required for sending an LCM request over DMaaP
-	appc.LCM.poolMembers=<HOST_IP_1>:<PORT_NUMBER>,<HOST_IP_2>:<PORT_NUMBER> # e.g. 192.168.1.10:3904
-	appc.LCM.topic.read=<READ_TOPIC> # e.g. test123
-	appc.LCM.topic.write=<WRITE_TOPIC> # e.g. APPC-LCM-TEST
-	appc.LCM.client.name=<CLIENT_NAME> # e.g name1
-	appc.LCM.client.name.id=<CLIENT_ID> # e.g 0
-	appc.LCM.provider.url=https://localhost:8443/restconf/operations/appc-provider-lcm
-	appc.LCM.provider.user=<LCM PROVIDER Username> # e.g. admin
-	appc.LCM.provider.pass=<LCM PROVIDER Username> # e.g. admin
 
 **Properties specific to the demo event listener and use case**
 
