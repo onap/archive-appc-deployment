@@ -53,7 +53,15 @@ APPC_FEATURES=" \
  appc-iaas-adapter \
  appc-ansible-adapter \
  appc-oam \
- appc-sequence-generator"
+ appc-sequence-generator \
+ appc-config-generator \
+ appc-config-data-services \
+ appc-artifact-handler \
+ appc-config-adaptor \
+ appc-config-audit \
+ appc-config-encryption-tool \
+ appc-config-flow-controller \
+ appc-config-params"
 
 APPC_VERSION=${APPC_VERSION:-0.0.1}
 APPC_OAM_VERSION=${APPC_OAM_VERSION:-0.1.1}

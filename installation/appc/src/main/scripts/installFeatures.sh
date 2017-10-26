@@ -56,7 +56,15 @@ APPC_FEATURES=" \
  appc-oam \
  appc-iaas-adapter \
  appc-ansible-adapter \
- appc-sequence-generator"
+ appc-sequence-generator \
+ appc-config-generator \
+ appc-config-data-services \
+ appc-artifact-handler \
+ appc-config-adaptor \
+ appc-config-audit \
+ appc-config-encryption-tool \
+ appc-config-flow-controller \
+ appc-config-params"
 
 # Temp fix to fix bouncycastle issue that is preventing netconf to work correctly
 apt-get -y install wget
