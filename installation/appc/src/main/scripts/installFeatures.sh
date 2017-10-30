@@ -64,7 +64,8 @@ APPC_FEATURES=" \
  appc-config-audit \
  appc-config-encryption-tool \
  appc-config-flow-controller \
- appc-config-params"
+ appc-config-params \
+ appc-aai-client"
 
 # Temp fix to fix bouncycastle issue that is preventing netconf to work correctly
 apt-get -y install wget

@@ -61,7 +61,8 @@ APPC_FEATURES=" \
  appc-config-audit \
  appc-config-encryption-tool \
  appc-config-flow-controller \
- appc-config-params"
+ appc-config-params \
+ appc-aai-client"
 
 APPC_VERSION=${APPC_VERSION:-0.0.1}
 APPC_OAM_VERSION=${APPC_OAM_VERSION:-0.1.1}
