@@ -30,6 +30,9 @@ export APPC_HOME=${APPC_HOME:-/opt/openecomp/appc}
 # SVCLOGIC_DIR env variable points to /opt/openecomp/appc/svclogic
 export SVCLOGIC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
+#Path to the dg-loader jar file
+export DG_LOADER=${APPC_HOME}/data/dg-loader-provider-1.1.0-jar-with-dependencies.jar
+
 # Check if the JSON Directory exists under the env. variable defined
 export DG_JSON_DIR=${SVCLOGIC_DIR}/graphs/appc/json/dg-loader-dgs
 echo "Processing DG JSON directory : ${DG_JSON_DIR}"
@@ -39,19 +42,17 @@ then
 exit 1
 fi
 
-# Temporarily use wget to download the JAR needed to execute the dg-loader actions below (NEEDS TO GET THE JAR WITH DEPENDENCIES)
-wget -P ${SVCLOGIC_DIR}/lib https://nexus.onap.org/content/groups/staging/org/openecomp/appc/plugins/dg-loader-provider/1.1.0/dg-loader-provider-1.1.0.jar
 
 cd ${DG_JSON_DIR}
 mkdir -p ${DG_JSON_DIR}/converted-xml
 
 # Generate XML DGs from JSON DGs
-$JAVA_HOME/bin/java -cp ${SVCLOGIC_DIR}/lib/dg-loader-jar-with-dependencies.jar org.openecomp.sdnc.dg.loader.DGXMLGenerator ${DG_JSON_DIR} ${DG_JSON_DIR}/converted-xml
+$JAVA_HOME/bin/java -cp ${DG_LOADER} org.openecomp.sdnc.dg.loader.DGXMLGenerator ${DG_JSON_DIR} ${DG_JSON_DIR}/converted-xml
 
 # Load converted XML DGs to the SVC_LOGIC DB in the MySQL Docker Container
-$JAVA_HOME/bin/java -cp ${SVCLOGIC_DIR}/lib/dg-loader-jar-with-dependencies.jar org.openecomp.sdnc.dg.loader.DGXMLLoad ${DG_JSON_DIR}/converted-xml ${APPC_HOME}/data/properties/dblib.properties
+$JAVA_HOME/bin/java -cp ${DG_LOADER} org.openecomp.sdnc.dg.loader.DGXMLLoad ${DG_JSON_DIR}/converted-xml ${APPC_HOME}/data/properties/dblib.properties
 
 # Activate converted XML DGs to the SVC_LOGIC DB in the MySQL Docker Container
-$JAVA_HOME/bin/java -cp ${SVCLOGIC_DIR}/lib/dg-loader-jar-with-dependencies.jar org.openecomp.sdnc.dg.loader.DGXMLActivate ${DG_JSON_DIR}/dg_activate.txt ${APPC_HOME}/data/properties/dblib.properties
+$JAVA_HOME/bin/java -cp ${DG_LOADER} org.openecomp.sdnc.dg.loader.DGXMLActivate ${DG_JSON_DIR}/dg_activate.txt ${APPC_HOME}/data/properties/dblib.properties
 
 exit 0
