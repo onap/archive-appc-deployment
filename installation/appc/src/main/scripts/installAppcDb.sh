@@ -46,3 +46,8 @@ if [ -f ${APPC_HOME}/data/sdnctl.dump ]
 then
   mysql -h dbhost -u root -p${MYSQL_PASSWD} sdnctl < ${APPC_HOME}/data/sdnctl.dump
 fi
+
+if [ -f ${APPC_HOME}/data/sqlData.dump ]
+then
+  mysql -h dbhost -u root -p${MYSQL_PASSWD} sdnctl < ${APPC_HOME}/data/sqlData.dump
+fi
