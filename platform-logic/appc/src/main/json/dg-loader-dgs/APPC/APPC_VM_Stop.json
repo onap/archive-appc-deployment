@@ -1,257 +1,257 @@
 [
-  {
-    "id": "a36507bd.9411a8",
-    "type": "dgstart",
-    "name": "DGSTART",
-    "outputs": 1,
-    "x": 129,
-    "y": 66,
-    "z": "602aa70d.a192e8",
-    "wires": [
-      [
-        "c156b4fa.66d0a8"
-      ]
-    ]
-  },
-  {
-    "id": "c156b4fa.66d0a8",
-    "type": "service-logic",
-    "name": "APPC 2.0.0",
-    "module": "APPC",
-    "version": "2.0.0",
-    "comments": "",
-    "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.0'>",
-    "outputs": 1,
-    "x": 306.0000915527344,
-    "y": 65.5666732788086,
-    "z": "602aa70d.a192e8",
-    "wires": [
-      [
-        "6c3d7cf.b631784"
-      ]
-    ]
-  },
-  {
-    "id": "6c3d7cf.b631784",
-    "type": "method",
-    "name": "VM_Stop",
-    "xml": "<method rpc='VM_Stop' mode='sync'>\n",
-    "comments": "",
-    "outputs": 1,
-    "x": 248.46435165405273,
-    "y": 157.3880786895752,
-    "z": "602aa70d.a192e8",
-    "wires": [
-      [
-        "8896d091.49bc2"
-      ]
-    ]
-  },
-  {
-    "id": "8896d091.49bc2",
-    "type": "execute",
-    "name": "Stop",
-    "xml": "<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='stopServer'>\n<parameter name=\"org.openecomp.appc.provider.name\" value=\"OpenStack\"/>\n<parameter name=\"org.openecomp.appc.instance.url\" value=\"`$vm-id`\" />\n<parameter name=\"org.openecomp.appc.identity.url\" value=\"`$identity-url`\" />\n",
-    "comments": "",
-    "outputs": 1,
-    "x": 409,
-    "y": 158.50000762939453,
-    "z": "602aa70d.a192e8",
-    "wires": [
-      [
-        "985b942b.ec64e8",
-        "34939973.cf1fd6"
-      ]
-    ]
-  },
-  {
-    "id": "34939973.cf1fd6",
-    "type": "success",
-    "name": "success",
-    "xml": "<outcome value='success'>\n",
-    "comments": "",
-    "outputs": 1,
-    "x": 582.1170654296875,
-    "y": 159.4286117553711,
-    "z": "602aa70d.a192e8",
-    "wires": [
-      [
-        "f35d3b53.86e768"
-      ]
-    ]
-  },
-  {
-    "id": "f35d3b53.86e768",
-    "type": "switchNode",
-    "name": "switch STATUS",
-    "xml": "<switch test='`$STOP_STATUS`'>\n",
-    "comments": "",
-    "outputs": 1,
-    "x": 764.9102783203125,
-    "y": 158.98406219482422,
-    "z": "602aa70d.a192e8",
-    "wires": [
-      [
-        "885dbd51.87507",
-        "10f2aa34.ea80d6"
-      ]
-    ]
-  },
-  {
-    "id": "985b942b.ec64e8",
-    "type": "failure",
-    "name": "failure",
-    "xml": "<outcome value='failure'>\n",
-    "comments": "",
-    "outputs": 1,
-    "x": 589.9047241210938,
-    "y": 342.07161712646484,
-    "z": "602aa70d.a192e8",
-    "wires": [
-      [
-        "28dfcdd7.ba3e32"
-      ]
-    ]
-  },
-  {
-    "id": "9d1c57f6.77ce08",
-    "type": "returnFailure",
-    "name": "return failure",
-    "xml": "<return status='failure'>\n",
-    "comments": "",
-    "x": 1315,
-    "y": 408.7500228881836,
-    "z": "602aa70d.a192e8",
-    "wires": []
-  },
-  {
-    "id": "885dbd51.87507",
-    "type": "success",
-    "name": "SUCCESS",
-    "xml": "<outcome value='SUCCESS'>\n",
-    "comments": "",
-    "outputs": 1,
-    "x": 958.5,
-    "y": 133.5,
-    "z": "602aa70d.a192e8",
-    "wires": [
-      [
-        "8b1c6f1d.bf4c"
-      ]
-    ]
-  },
-  {
-    "id": "10f2aa34.ea80d6",
-    "type": "other",
-    "name": "ERROR",
-    "xml": "<outcome value='ERROR'>\n",
-    "comments": "",
-    "outputs": 1,
-    "x": 947.5713500976562,
-    "y": 205.0000457763672,
-    "z": "602aa70d.a192e8",
-    "wires": [
-      [
-        "149167fb.227158"
-      ]
-    ]
-  },
-  {
-    "id": "ec5b4ab9.b62488",
-    "type": "set",
-    "name": "set success code and message",
-    "xml": "<set>\n<parameter name='error-code' value='400' />\n<parameter name='error-message' value='Success' />\n",
-    "comments": "",
-    "x": 1361,
-    "y": 109.5666732788086,
-    "z": "602aa70d.a192e8",
-    "wires": []
-  },
-  {
-    "id": "fdfee58d.d86908",
-    "type": "returnSuccess",
-    "name": "return success",
-    "xml": "<return status='success'>\n",
-    "comments": "",
-    "x": 1316,
-    "y": 173.56666564941406,
-    "z": "602aa70d.a192e8",
-    "wires": []
-  },
-  {
-    "id": "149167fb.227158",
-    "type": "block",
-    "name": "block : atomic",
-    "xml": "<block atomic='true'>",
-    "atomic": "true",
-    "comments": "",
-    "outputs": 1,
-    "x": 1119,
-    "y": 214.56666564941406,
-    "z": "602aa70d.a192e8",
-    "wires": [
-      [
-        "32f7f639.b0517a",
-        "9d1c57f6.77ce08"
-      ]
-    ]
-  },
-  {
-    "id": "28dfcdd7.ba3e32",
-    "type": "block",
-    "name": "block : atomic",
-    "xml": "<block atomic='true'>",
-    "atomic": "true",
-    "comments": "",
-    "outputs": 1,
-    "x": 765,
-    "y": 341.5666732788086,
-    "z": "602aa70d.a192e8",
-    "wires": [
-      [
-        "dcf150a2.8fa62",
-        "9d1c57f6.77ce08"
-      ]
-    ]
-  },
-  {
-    "id": "32f7f639.b0517a",
-    "type": "set",
-    "name": "set error code and message",
-    "xml": "<set>\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value='Stop VM status is error' />\n",
-    "comments": "",
-    "x": 1345,
-    "y": 241.5666732788086,
-    "z": "602aa70d.a192e8",
-    "wires": []
-  },
-  {
-    "id": "dcf150a2.8fa62",
-    "type": "set",
-    "name": "set error code and message",
-    "xml": "<set>\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value='Stop VM failed' />\n",
-    "comments": "",
-    "x": 1056,
-    "y": 309.5666732788086,
-    "z": "602aa70d.a192e8",
-    "wires": []
-  },
-  {
-    "id": "8b1c6f1d.bf4c",
-    "type": "block",
-    "name": "block : atomic",
-    "xml": "<block atomic='true'>\n",
-    "atomic": "false",
-    "comments": "",
-    "outputs": 1,
-    "x": 1120,
-    "y": 142,
-    "z": "602aa70d.a192e8",
-    "wires": [
-      [
-        "ec5b4ab9.b62488",
-        "fdfee58d.d86908"
-      ]
-    ]
-  }
+    {
+        "id": "a36507bd.9411a8",
+        "name": "DGSTART",
+        "outputs": 1,
+        "type": "dgstart",
+        "wires": [
+            [
+                "c156b4fa.66d0a8"
+            ]
+        ],
+        "x": 129,
+        "y": 66,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "c156b4fa.66d0a8",
+        "module": "APPC",
+        "name": "APPC 2.0.0",
+        "outputs": 1,
+        "type": "service-logic",
+        "version": "2.0.0",
+        "wires": [
+            [
+                "6c3d7cf.b631784"
+            ]
+        ],
+        "x": 306.0000915527344,
+        "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.0'>",
+        "y": 65.5666732788086,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "6c3d7cf.b631784",
+        "name": "VM_Stop",
+        "outputs": 1,
+        "type": "method",
+        "wires": [
+            [
+                "8896d091.49bc2"
+            ]
+        ],
+        "x": 248.46435165405273,
+        "xml": "<method rpc='VM_Stop' mode='sync'>\n",
+        "y": 157.3880786895752,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "8896d091.49bc2",
+        "name": "Stop",
+        "outputs": 1,
+        "type": "execute",
+        "wires": [
+            [
+                "985b942b.ec64e8",
+                "34939973.cf1fd6"
+            ]
+        ],
+        "x": 409,
+        "xml": "<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='stopServer'>\n<parameter name=\"org.openecomp.appc.provider.name\" value=\"OpenStack\"/>\n<parameter name=\"org.openecomp.appc.instance.url\" value=\"`$vm-id`\" />\n<parameter name=\"org.openecomp.appc.identity.url\" value=\"`$identity-url`\" />\n",
+        "y": 158.50000762939453,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "34939973.cf1fd6",
+        "name": "success",
+        "outputs": 1,
+        "type": "success",
+        "wires": [
+            [
+                "f35d3b53.86e768"
+            ]
+        ],
+        "x": 582.1170654296875,
+        "xml": "<outcome value='success'>\n",
+        "y": 159.4286117553711,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "f35d3b53.86e768",
+        "name": "switch STATUS",
+        "outputs": 1,
+        "type": "switchNode",
+        "wires": [
+            [
+                "885dbd51.87507",
+                "10f2aa34.ea80d6"
+            ]
+        ],
+        "x": 764.9102783203125,
+        "xml": "<switch test='`$STOP_STATUS`'>\n",
+        "y": 158.98406219482422,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "985b942b.ec64e8",
+        "name": "failure",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "28dfcdd7.ba3e32"
+            ]
+        ],
+        "x": 589.9047241210938,
+        "xml": "<outcome value='failure'>\n",
+        "y": 342.07161712646484,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "9d1c57f6.77ce08",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 1315,
+        "xml": "<return status='failure'>\n",
+        "y": 408.7500228881836,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "885dbd51.87507",
+        "name": "SUCCESS",
+        "outputs": 1,
+        "type": "success",
+        "wires": [
+            [
+                "8b1c6f1d.bf4c"
+            ]
+        ],
+        "x": 958.5,
+        "xml": "<outcome value='SUCCESS'>\n",
+        "y": 133.5,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "10f2aa34.ea80d6",
+        "name": "ERROR",
+        "outputs": 1,
+        "type": "other",
+        "wires": [
+            [
+                "149167fb.227158"
+            ]
+        ],
+        "x": 947.5713500976562,
+        "xml": "<outcome value='ERROR'>\n",
+        "y": 205.0000457763672,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "ec5b4ab9.b62488",
+        "name": "set success code and message",
+        "type": "set",
+        "wires": [],
+        "x": 1361,
+        "xml": "<set>\n<parameter name='error-code' value='400' />\n<parameter name='error-message' value='Success' />\n",
+        "y": 109.5666732788086,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "fdfee58d.d86908",
+        "name": "return success",
+        "type": "returnSuccess",
+        "wires": [],
+        "x": 1316,
+        "xml": "<return status='success'>\n",
+        "y": 173.56666564941406,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "atomic": "true",
+        "comments": "",
+        "id": "149167fb.227158",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "32f7f639.b0517a",
+                "9d1c57f6.77ce08"
+            ]
+        ],
+        "x": 1119,
+        "xml": "<block atomic='true'>",
+        "y": 214.56666564941406,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "atomic": "true",
+        "comments": "",
+        "id": "28dfcdd7.ba3e32",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "dcf150a2.8fa62",
+                "9d1c57f6.77ce08"
+            ]
+        ],
+        "x": 765,
+        "xml": "<block atomic='true'>",
+        "y": 341.5666732788086,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "32f7f639.b0517a",
+        "name": "set error code and message",
+        "type": "set",
+        "wires": [],
+        "x": 1345,
+        "xml": "<set>\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value='Stop VM status is error' />\n",
+        "y": 241.5666732788086,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "comments": "",
+        "id": "dcf150a2.8fa62",
+        "name": "set error code and message",
+        "type": "set",
+        "wires": [],
+        "x": 1056,
+        "xml": "<set>\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value='Stop VM failed' />\n",
+        "y": 309.5666732788086,
+        "z": "602aa70d.a192e8"
+    },
+    {
+        "atomic": "false",
+        "comments": "",
+        "id": "8b1c6f1d.bf4c",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "ec5b4ab9.b62488",
+                "fdfee58d.d86908"
+            ]
+        ],
+        "x": 1120,
+        "xml": "<block atomic='true'>\n",
+        "y": 142,
+        "z": "602aa70d.a192e8"
+    }
 ]

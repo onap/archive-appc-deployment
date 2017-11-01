@@ -1,1 +1,683 @@
-[{"id":"8ee93af3.e76758","type":"switchNode","name":"switch config-type","xml":"<switch test='`$config-type`'>\n","comments":"","outputs":1,"x":431.6666564941406,"y":315.8253974914551,"z":"a49375c8.88c748","wires":[["617b6511.320aec","d2208875.808258"]]},{"id":"617b6511.320aec","type":"success","name":"outcome: template","xml":"<outcome value=\"template\">","comments":"","outputs":1,"x":649.8214435577393,"y":317.1111030578613,"z":"a49375c8.88c748","wires":[["9708e2c6.a3ce4"]]},{"id":"6f91db3d.8b0924","type":"call","name":"call: GenerateTemplateConfig","xml":"<call module=\"APPC\" rpc=\"GenerateTemplateConfig\" mode=\"sync\">","comments":"","outputs":1,"x":1061.4881992340088,"y":447.36110496520996,"z":"a49375c8.88c748","wires":[["75d7daa7.8058a4","6a26f541.aa907c"]]},{"id":"75d7daa7.8058a4","type":"failure","name":"not-found","xml":"<outcome value='not-found'>\n","comments":"","outputs":1,"x":1292.0713901519775,"y":448.02779388427734,"z":"a49375c8.88c748","wires":[["314e0e4f.5adb22"]]},{"id":"314e0e4f.5adb22","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":null,"outputs":1,"x":1464.488145828247,"y":447.6944193840027,"z":"a49375c8.88c748","wires":[["bdc01df2.1a5d8"]]},{"id":"bdc01df2.1a5d8","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"'DG Workflow GenerateTemplateConfig not found'`\"/>\n\t","comments":"","x":1658.5714015960693,"y":448.44441986083984,"z":"a49375c8.88c748","wires":[]},{"id":"6a26f541.aa907c","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":1292.1547679901123,"y":506.527792930603,"z":"a49375c8.88c748","wires":[["7ba894b.5d3a46c"]]},{"id":"7ba894b.5d3a46c","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":null,"outputs":1,"x":1467.154893875122,"y":507.027792930603,"z":"a49375c8.88c748","wires":[["9728b5f9.536268"]]},{"id":"9728b5f9.536268","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n\t\n\t","comments":"","x":1667.988145828247,"y":507.44441986083984,"z":"a49375c8.88c748","wires":[]},{"id":"7e6e5c1a.29c4a4","type":"comment","name":"templatename cases","info":"","comments":"","x":642.7381381988525,"y":370.4444465637207,"z":"a49375c8.88c748","wires":[]},{"id":"37b38554.dad0ca","type":"comment","name":"merge ASDC template and data","info":"","comments":"","x":968.9881381988525,"y":674.0277881622314,"z":"a49375c8.88c748","wires":[]},{"id":"63a29ad8.8e05e4","type":"comment","name":"configBlock with or without parameters","info":"","comments":"","x":620.9881076812744,"y":647.8611078262329,"z":"a49375c8.88c748","wires":[]},{"id":"9708e2c6.a3ce4","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":null,"outputs":1,"x":843.904821395874,"y":318.5277290344238,"z":"a49375c8.88c748","wires":[["6f91db3d.8b0924","9ebb8ed8.eaa4e"]]},{"id":"9ebb8ed8.eaa4e","type":"execute","name":"execute getTemplate","xml":"<execute plugin=\"org.openecomp.appc.data.services.node.ConfigResourceNode\" method=\"getTemplate\">\n<parameter name=\"fileCategory\" value=\"config_template\" />\n<parameter name=\"responsePrefix\" value=\"config-template\" />","comments":"","outputs":1,"x":1048.8214511871338,"y":315.6111030578613,"z":"a49375c8.88c748","wires":[["367ba220.8bea8e","8c4d147f.36cf68"]]},{"id":"367ba220.8bea8e","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":1232.4881420135498,"y":375.2777318954468,"z":"a49375c8.88c748","wires":[["9f013009.4fb92"]]},{"id":"9f013009.4fb92","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":null,"outputs":1,"x":1415.238145828247,"y":369.527792930603,"z":"a49375c8.88c748","wires":[["e5aa2afa.241d48"]]},{"id":"e5aa2afa.241d48","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"`$config-template.error-message`\"/>\n\t\n\t\n\t","comments":"","x":1596.9881496429443,"y":368.52773094177246,"z":"a49375c8.88c748","wires":[]},{"id":"8c4d147f.36cf68","type":"failure","name":"not-found","xml":"<outcome value='not-found'>\n","comments":"","outputs":1,"x":1230.1548900604248,"y":285.69444847106934,"z":"a49375c8.88c748","wires":[["b643f5da.9fc9b8"]]},{"id":"b643f5da.9fc9b8","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":null,"outputs":1,"x":1400.738145828247,"y":286.0277919769287,"z":"a49375c8.88c748","wires":[["7e56335c.a0b01c"]]},{"id":"7e56335c.a0b01c","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"Unable to get template info\"/>\n\t\n\t\n\t","comments":"","x":1595.7382717132568,"y":286.2777614593506,"z":"a49375c8.88c748","wires":[]},{"id":"d2208875.808258","type":"success","name":"outcome: Other","xml":"<outcome value=\"Other\">","comments":"","outputs":1,"x":613.4881000518799,"y":576.8611087799072,"z":"a49375c8.88c748","wires":[["a7aad416.c57578"]]},{"id":"a7aad416.c57578","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":null,"outputs":1,"x":803.238130569458,"y":584.8611087799072,"z":"a49375c8.88c748","wires":[["efd06d3f.ada62"]]},{"id":"efd06d3f.ada62","type":"call","name":"call: GenerateConfig","xml":"<call module=\"APPC\" rpc=\"GenerateConfig\" mode=\"sync\">","comments":"","outputs":1,"x":1017.7381381988525,"y":597.8611087799072,"z":"a49375c8.88c748","wires":[["af0cd93c.94b1b8","4352a232.eb3aec"]]},{"id":"af0cd93c.94b1b8","type":"failure","name":"not-found","xml":"<outcome value='not-found'>\n","comments":"","outputs":1,"x":1223.7381420135498,"y":596.8611068725586,"z":"a49375c8.88c748","wires":[["f4ef6668.6a1018"]]},{"id":"f4ef6668.6a1018","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":null,"outputs":1,"x":1393.238145828247,"y":597.6111068725586,"z":"a49375c8.88c748","wires":[["39d87011.2d87b"]]},{"id":"39d87011.2d87b","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"'DG Workflow GenerateConfig not found'`\"/>\n\t","comments":"","x":1577.988145828247,"y":597.1111068725586,"z":"a49375c8.88c748","wires":[]},{"id":"4352a232.eb3aec","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":1216.7381381988525,"y":687.6111087799072,"z":"a49375c8.88c748","wires":[["37a5a6a1.b52c9a"]]},{"id":"37a5a6a1.b52c9a","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":null,"outputs":1,"x":1390.2381381988525,"y":681.8611087799072,"z":"a49375c8.88c748","wires":[["26d3fdda.ad1b12"]]},{"id":"26d3fdda.ad1b12","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n\t\n\t","comments":"","x":1575.238145828247,"y":680.1111097335815,"z":"a49375c8.88c748","wires":[]},{"id":"ff782964.e94288","type":"dgstart","name":"DGSTART","outputs":1,"x":176.1825466156006,"y":83.33332920074463,"z":"a49375c8.88c748","wires":[["eadfabd6.6161f8"]]},{"id":"eadfabd6.6161f8","type":"service-logic","name":"APPC 4.0.0","module":"APPC","version":"4.0.0","comments":"","xml":"<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='4.0.0'>","outputs":1,"x":409.2936382293701,"y":84.55554962158203,"z":"a49375c8.88c748","wires":[["7cd40519.3b23dc"]]},{"id":"7cd40519.3b23dc","type":"method","name":"method MergeTemplateData","xml":"<method rpc='MergeTemplateData' mode='sync'>\n","comments":"","outputs":1,"x":631.3769855499268,"y":83.52777004241943,"z":"a49375c8.88c748","wires":[["3fa03099.10f27"]]},{"id":"3fa03099.10f27","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":null,"outputs":1,"x":169.23812103271484,"y":270.27781772613525,"z":"a49375c8.88c748","wires":[["8ee93af3.e76758","6fc699a0.777a38","5514dd63.d31be4","f310f0a8.6039f","a2cedd5c.acad2"]]},{"id":"6fc699a0.777a38","type":"record","name":"record","xml":"<record plugin=\"org.openecomp.sdnc.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"CONFIGPARAMS\" value=\"`$config-data`\"/>\n<parameter name=\"CONFIGPARAMS1\" value=\"`$block_configuration-parameters`\"/>\n<parameter name=\"TEMPLATENAME\" value=\"`$template-name`\"/>\n<parameter name=\"CONFIGURATION\" value=\"`$configuration`\"/>\n<parameter name=\"CONFIGURATION1\" value=\"`$block_configuration`\"/>\n\n","comments":"","outputs":1,"x":834.1985054016113,"y":130.43650484085083,"z":"a49375c8.88c748","wires":[[]]},{"id":"a2cedd5c.acad2","type":"call","name":"call: ProcessParameterDefinition","xml":"<call module=\"APPC\" rpc=\"ProcessParameterDefinition\" mode=\"sync\">","comments":"","outputs":1,"x":788.5318756103516,"y":207.13093757629395,"z":"a49375c8.88c748","wires":[["66999aa1.1b0464","62eeaa57.a2b194"]]},{"id":"66999aa1.1b0464","type":"failure","name":"not-found","xml":"<outcome value='not-found'>\n","comments":"","outputs":1,"x":1153.5595512390137,"y":134.57539558410645,"z":"a49375c8.88c748","wires":[["65712e43.c571a"]]},{"id":"65712e43.c571a","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":null,"outputs":1,"x":1340.3095531463623,"y":132.5753936767578,"z":"a49375c8.88c748","wires":[["1eaf25d0.77480a"]]},{"id":"1eaf25d0.77480a","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"'DG Workflow ProcessParameterDefinition not found'`\"/>\n\t","comments":"","x":1523.8095569610596,"y":132.07539558410645,"z":"a49375c8.88c748","wires":[]},{"id":"62eeaa57.a2b194","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":1140.0595531463623,"y":191.57539653778076,"z":"a49375c8.88c748","wires":[["cba7e8ee.c38b88"]]},{"id":"cba7e8ee.c38b88","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":null,"outputs":1,"x":1324.3095531463623,"y":191.82539463043213,"z":"a49375c8.88c748","wires":[["f131fee9.6e3c4"]]},{"id":"5514dd63.d31be4","type":"execute","name":"execute saveTxLog","xml":"<execute plugin=\"org.openecomp.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"log\" />\n<parameter name=\"message\" value=\"Prepare Success\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n","comments":"","outputs":1,"x":520.4166278839111,"y":803.0277366638184,"z":"a49375c8.88c748","wires":[["5d3a75fc.b01dec"]]},{"id":"5d3a75fc.b01dec","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":722.5833492279053,"y":817.1110496520996,"z":"a49375c8.88c748","wires":[["414c097b.0db3f8"]]},{"id":"414c097b.0db3f8","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":null,"outputs":1,"x":950.6666660308838,"y":814.8610496520996,"z":"a49375c8.88c748","wires":[[]]},{"id":"f310f0a8.6039f","type":"record","name":"record","xml":"<record plugin=\"org.openecomp.sdnc.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"CONFIGPARAMS\" value=\"`$config-data`\"/>\n","comments":"","outputs":1,"x":443.3333110809326,"y":920.9444265365601,"z":"a49375c8.88c748","wires":[[]]},{"id":"f131fee9.6e3c4","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n\t\n\t","comments":"","x":1514.7262878417969,"y":190.15872383117676,"z":"a49375c8.88c748","wires":[]}]
+[
+    {
+        "comments": "",
+        "id": "8ee93af3.e76758",
+        "name": "switch config-type",
+        "outputs": 1,
+        "type": "switchNode",
+        "wires": [
+            [
+                "617b6511.320aec",
+                "d2208875.808258"
+            ]
+        ],
+        "x": 431.6666564941406,
+        "xml": "<switch test='`$config-type`'>\n",
+        "y": 315.8253974914551,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "617b6511.320aec",
+        "name": "outcome: template",
+        "outputs": 1,
+        "type": "success",
+        "wires": [
+            [
+                "9708e2c6.a3ce4"
+            ]
+        ],
+        "x": 649.8214435577393,
+        "xml": "<outcome value=\"template\">",
+        "y": 317.1111030578613,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "6f91db3d.8b0924",
+        "name": "call: GenerateTemplateConfig",
+        "outputs": 1,
+        "type": "call",
+        "wires": [
+            [
+                "75d7daa7.8058a4",
+                "6a26f541.aa907c"
+            ]
+        ],
+        "x": 1061.4881992340088,
+        "xml": "<call module=\"APPC\" rpc=\"GenerateTemplateConfig\" mode=\"sync\">",
+        "y": 447.36110496520996,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "75d7daa7.8058a4",
+        "name": "not-found",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "314e0e4f.5adb22"
+            ]
+        ],
+        "x": 1292.0713901519775,
+        "xml": "<outcome value='not-found'>\n",
+        "y": 448.02779388427734,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "atomic": "true",
+        "comments": null,
+        "id": "314e0e4f.5adb22",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "bdc01df2.1a5d8"
+            ]
+        ],
+        "x": 1464.488145828247,
+        "xml": "<block atomic=\"true\">",
+        "y": 447.6944193840027,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "bdc01df2.1a5d8",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 1658.5714015960693,
+        "xml": "<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"'DG Workflow GenerateTemplateConfig not found'`\"/>\n\t",
+        "y": 448.44441986083984,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "6a26f541.aa907c",
+        "name": "failure",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "7ba894b.5d3a46c"
+            ]
+        ],
+        "x": 1292.1547679901123,
+        "xml": "<outcome value='failure'>\n",
+        "y": 506.527792930603,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "atomic": "true",
+        "comments": null,
+        "id": "7ba894b.5d3a46c",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "9728b5f9.536268"
+            ]
+        ],
+        "x": 1467.154893875122,
+        "xml": "<block atomic=\"true\">",
+        "y": 507.027792930603,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "9728b5f9.536268",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 1667.988145828247,
+        "xml": "<return status=\"failure\">\n\t\n\t",
+        "y": 507.44441986083984,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "7e6e5c1a.29c4a4",
+        "info": "",
+        "name": "templatename cases",
+        "type": "comment",
+        "wires": [],
+        "x": 642.7381381988525,
+        "y": 370.4444465637207,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "37b38554.dad0ca",
+        "info": "",
+        "name": "merge ASDC template and data",
+        "type": "comment",
+        "wires": [],
+        "x": 968.9881381988525,
+        "y": 674.0277881622314,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "63a29ad8.8e05e4",
+        "info": "",
+        "name": "configBlock with or without parameters",
+        "type": "comment",
+        "wires": [],
+        "x": 620.9881076812744,
+        "y": 647.8611078262329,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "atomic": "true",
+        "comments": null,
+        "id": "9708e2c6.a3ce4",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "6f91db3d.8b0924",
+                "9ebb8ed8.eaa4e"
+            ]
+        ],
+        "x": 843.904821395874,
+        "xml": "<block atomic=\"true\">",
+        "y": 318.5277290344238,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "9ebb8ed8.eaa4e",
+        "name": "execute getTemplate",
+        "outputs": 1,
+        "type": "execute",
+        "wires": [
+            [
+                "367ba220.8bea8e",
+                "8c4d147f.36cf68"
+            ]
+        ],
+        "x": 1048.8214511871338,
+        "xml": "<execute plugin=\"org.openecomp.appc.data.services.node.ConfigResourceNode\" method=\"getTemplate\">\n<parameter name=\"fileCategory\" value=\"config_template\" />\n<parameter name=\"responsePrefix\" value=\"config-template\" />",
+        "y": 315.6111030578613,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "367ba220.8bea8e",
+        "name": "failure",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "9f013009.4fb92"
+            ]
+        ],
+        "x": 1232.4881420135498,
+        "xml": "<outcome value='failure'>\n",
+        "y": 375.2777318954468,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "atomic": "true",
+        "comments": null,
+        "id": "9f013009.4fb92",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "e5aa2afa.241d48"
+            ]
+        ],
+        "x": 1415.238145828247,
+        "xml": "<block atomic=\"true\">",
+        "y": 369.527792930603,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "e5aa2afa.241d48",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 1596.9881496429443,
+        "xml": "<return status=\"failure\">\n<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"`$config-template.error-message`\"/>\n\t\n\t\n\t",
+        "y": 368.52773094177246,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "8c4d147f.36cf68",
+        "name": "not-found",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "b643f5da.9fc9b8"
+            ]
+        ],
+        "x": 1230.1548900604248,
+        "xml": "<outcome value='not-found'>\n",
+        "y": 285.69444847106934,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "atomic": "true",
+        "comments": null,
+        "id": "b643f5da.9fc9b8",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "7e56335c.a0b01c"
+            ]
+        ],
+        "x": 1400.738145828247,
+        "xml": "<block atomic=\"true\">",
+        "y": 286.0277919769287,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "7e56335c.a0b01c",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 1595.7382717132568,
+        "xml": "<return status=\"failure\">\n<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"Unable to get template info\"/>\n\t\n\t\n\t",
+        "y": 286.2777614593506,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "d2208875.808258",
+        "name": "outcome: Other",
+        "outputs": 1,
+        "type": "success",
+        "wires": [
+            [
+                "a7aad416.c57578"
+            ]
+        ],
+        "x": 613.4881000518799,
+        "xml": "<outcome value=\"Other\">",
+        "y": 576.8611087799072,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "atomic": "true",
+        "comments": null,
+        "id": "a7aad416.c57578",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "efd06d3f.ada62"
+            ]
+        ],
+        "x": 803.238130569458,
+        "xml": "<block atomic=\"true\">",
+        "y": 584.8611087799072,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "efd06d3f.ada62",
+        "name": "call: GenerateConfig",
+        "outputs": 1,
+        "type": "call",
+        "wires": [
+            [
+                "af0cd93c.94b1b8",
+                "4352a232.eb3aec"
+            ]
+        ],
+        "x": 1017.7381381988525,
+        "xml": "<call module=\"APPC\" rpc=\"GenerateConfig\" mode=\"sync\">",
+        "y": 597.8611087799072,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "af0cd93c.94b1b8",
+        "name": "not-found",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "f4ef6668.6a1018"
+            ]
+        ],
+        "x": 1223.7381420135498,
+        "xml": "<outcome value='not-found'>\n",
+        "y": 596.8611068725586,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "atomic": "true",
+        "comments": null,
+        "id": "f4ef6668.6a1018",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "39d87011.2d87b"
+            ]
+        ],
+        "x": 1393.238145828247,
+        "xml": "<block atomic=\"true\">",
+        "y": 597.6111068725586,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "39d87011.2d87b",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 1577.988145828247,
+        "xml": "<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"'DG Workflow GenerateConfig not found'`\"/>\n\t",
+        "y": 597.1111068725586,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "4352a232.eb3aec",
+        "name": "failure",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "37a5a6a1.b52c9a"
+            ]
+        ],
+        "x": 1216.7381381988525,
+        "xml": "<outcome value='failure'>\n",
+        "y": 687.6111087799072,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "atomic": "true",
+        "comments": null,
+        "id": "37a5a6a1.b52c9a",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "26d3fdda.ad1b12"
+            ]
+        ],
+        "x": 1390.2381381988525,
+        "xml": "<block atomic=\"true\">",
+        "y": 681.8611087799072,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "26d3fdda.ad1b12",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 1575.238145828247,
+        "xml": "<return status=\"failure\">\n\t\n\t",
+        "y": 680.1111097335815,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "id": "ff782964.e94288",
+        "name": "DGSTART",
+        "outputs": 1,
+        "type": "dgstart",
+        "wires": [
+            [
+                "eadfabd6.6161f8"
+            ]
+        ],
+        "x": 176.1825466156006,
+        "y": 83.33332920074463,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "eadfabd6.6161f8",
+        "module": "APPC",
+        "name": "APPC 4.0.0",
+        "outputs": 1,
+        "type": "service-logic",
+        "version": "4.0.0",
+        "wires": [
+            [
+                "7cd40519.3b23dc"
+            ]
+        ],
+        "x": 409.2936382293701,
+        "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='4.0.0'>",
+        "y": 84.55554962158203,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "7cd40519.3b23dc",
+        "name": "method MergeTemplateData",
+        "outputs": 1,
+        "type": "method",
+        "wires": [
+            [
+                "3fa03099.10f27"
+            ]
+        ],
+        "x": 631.3769855499268,
+        "xml": "<method rpc='MergeTemplateData' mode='sync'>\n",
+        "y": 83.52777004241943,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "atomic": "true",
+        "comments": null,
+        "id": "3fa03099.10f27",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "8ee93af3.e76758",
+                "6fc699a0.777a38",
+                "5514dd63.d31be4",
+                "f310f0a8.6039f",
+                "a2cedd5c.acad2"
+            ]
+        ],
+        "x": 169.23812103271484,
+        "xml": "<block atomic=\"true\">",
+        "y": 270.27781772613525,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "6fc699a0.777a38",
+        "name": "record",
+        "outputs": 1,
+        "type": "record",
+        "wires": [
+            []
+        ],
+        "x": 834.1985054016113,
+        "xml": "<record plugin=\"org.onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"CONFIGPARAMS\" value=\"`$config-data`\"/>\n<parameter name=\"CONFIGPARAMS1\" value=\"`$block_configuration-parameters`\"/>\n<parameter name=\"TEMPLATENAME\" value=\"`$template-name`\"/>\n<parameter name=\"CONFIGURATION\" value=\"`$configuration`\"/>\n<parameter name=\"CONFIGURATION1\" value=\"`$block_configuration`\"/>\n\n",
+        "y": 130.43650484085083,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "a2cedd5c.acad2",
+        "name": "call: ProcessParameterDefinition",
+        "outputs": 1,
+        "type": "call",
+        "wires": [
+            [
+                "66999aa1.1b0464",
+                "62eeaa57.a2b194"
+            ]
+        ],
+        "x": 788.5318756103516,
+        "xml": "<call module=\"APPC\" rpc=\"ProcessParameterDefinition\" mode=\"sync\">",
+        "y": 207.13093757629395,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "66999aa1.1b0464",
+        "name": "not-found",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "65712e43.c571a"
+            ]
+        ],
+        "x": 1153.5595512390137,
+        "xml": "<outcome value='not-found'>\n",
+        "y": 134.57539558410645,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "atomic": "true",
+        "comments": null,
+        "id": "65712e43.c571a",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "1eaf25d0.77480a"
+            ]
+        ],
+        "x": 1340.3095531463623,
+        "xml": "<block atomic=\"true\">",
+        "y": 132.5753936767578,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "1eaf25d0.77480a",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 1523.8095569610596,
+        "xml": "<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"'DG Workflow ProcessParameterDefinition not found'`\"/>\n\t",
+        "y": 132.07539558410645,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "62eeaa57.a2b194",
+        "name": "failure",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "cba7e8ee.c38b88"
+            ]
+        ],
+        "x": 1140.0595531463623,
+        "xml": "<outcome value='failure'>\n",
+        "y": 191.57539653778076,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "atomic": "true",
+        "comments": null,
+        "id": "cba7e8ee.c38b88",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "f131fee9.6e3c4"
+            ]
+        ],
+        "x": 1324.3095531463623,
+        "xml": "<block atomic=\"true\">",
+        "y": 191.82539463043213,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "5514dd63.d31be4",
+        "name": "execute saveTxLog",
+        "outputs": 1,
+        "type": "execute",
+        "wires": [
+            [
+                "5d3a75fc.b01dec"
+            ]
+        ],
+        "x": 520.4166278839111,
+        "xml": "<execute plugin=\"org.openecomp.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"log\" />\n<parameter name=\"message\" value=\"Prepare Success\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n",
+        "y": 803.0277366638184,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "5d3a75fc.b01dec",
+        "name": "failure",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "414c097b.0db3f8"
+            ]
+        ],
+        "x": 722.5833492279053,
+        "xml": "<outcome value='failure'>\n",
+        "y": 817.1110496520996,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "atomic": "true",
+        "comments": null,
+        "id": "414c097b.0db3f8",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            []
+        ],
+        "x": 950.6666660308838,
+        "xml": "<block atomic=\"true\">",
+        "y": 814.8610496520996,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "f310f0a8.6039f",
+        "name": "record",
+        "outputs": 1,
+        "type": "record",
+        "wires": [
+            []
+        ],
+        "x": 443.3333110809326,
+        "xml": "<record plugin=\"org.onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"CONFIGPARAMS\" value=\"`$config-data`\"/>\n",
+        "y": 920.9444265365601,
+        "z": "a49375c8.88c748"
+    },
+    {
+        "comments": "",
+        "id": "f131fee9.6e3c4",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 1514.7262878417969,
+        "xml": "<return status=\"failure\">\n\t\n\t",
+        "y": 190.15872383117676,
+        "z": "a49375c8.88c748"
+    }
+]

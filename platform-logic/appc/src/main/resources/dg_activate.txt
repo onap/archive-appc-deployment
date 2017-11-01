@@ -67,11 +67,19 @@ APPC:MigrateVM:2.0.0:sync
 APPC:RestartVMCommonFlow:2.0.0:sync
 APPC:RestartVMVNFCommonFlow:2.0.0:sync
 
-APPC:setInputParams:4:0:0:sync
-APPC:healthcheck:4:0:0:sync
-APPC:chef:4:0:0sync
-APPC:ansible-adapter-1.0:4:0:0:sync
-APPC:Generic_AnsibleDG:4:0:0:sync
-APPC:GetTemplateConfig_Ansible:4:0:0:sync
-APPC:GetTemplateConfig_Chef:4:0:0:sync
-APPC_Generic_ChefDG:4:0:0:sync
+APPC:healthcheck:4.0.0:sync
+APPC:chef:3.0.0:sync
+APPC:ansible-adapter-1.0:2.0.1:sync
+APPC:Generic_AnsibleDG:4.0.0:sync
+APPC:GetTemplateConfig_Ansible:4.0.0:sync
+APPC:GetTemplateConfig_Chef:4.0.0:sync
+APPC_Generic_ChefDG:4.0.0:sync
+
+#
+APPC:DGOrchestrator:4.0.0:sync
+APPC:setInputParams:4.0.0:sync
+APPC:GetAaiInfo:4.0.0:sync
+APPC:loadTeamplate:4.0.0:sync
+APPC:MergeTemplateData:4.0.0:sync
+APPC:VM_Start:2.0.0:sync
+APPC:VM_Stop:2.0.0:sync
