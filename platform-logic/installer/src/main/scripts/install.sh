@@ -45,12 +45,3 @@ do
      $BASEDIR/bin/svclogic.sh activate $module $rpc $version $mode $BASEDIR/config/svclogic.properties
   done < <(cat $graphlist)
 done
-
-MYSQL_USER=${MYSQL_USER:-sdnctl}
-MYSQL_PWD=${MYSQL_PWD:-gamma}
-MYSQL_DB=${MYSQL_DB:-sdnctl}
-MYSQL_HOST=${MYSQL_HOST:-dbhost}
-
-mysql --user=${MYSQL_USER} --password=${MYSQL_PWD} --host=${MYSQL_HOST} ${MYSQL_DB} <<-END
-SOURCE /opt/openecomp/appc/svclogic/config/VNF_DG_MAPPING.sql
-END

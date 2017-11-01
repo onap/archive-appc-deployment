@@ -1,10 +1,17 @@
 USE sdnctl;
+
+
+LOCK TABLES `VNF_DG_MAPPING` WRITE;
+INSERT INTO `VNF_DG_MAPPING` VALUES ('Restart','2.01','','','Generic_Restart','3.0.0','APPC'),('Restart','2.00','','','Generic_Restart','3.0.0','APPC'),('Configure',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('ConfigModify',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('Rebuild',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('Restart',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('HealthCheck',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('StartApplication',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('StopApplication',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('Migrate',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('Snapshot',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('ConfigRestore',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('ConfigBackup',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('Evacuate',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('Stop',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC'),('Start',NULL,NULL,NULL,'DGOrchestrator','4.0.0','APPC');
+UNLOCK TABLES;
+
+
 LOCK TABLES `ACTION_LEVEL_REFERENCE` WRITE;
 INSERT INTO `ACTION_LEVEL_REFERENCE` VALUES (1,'vnf-id','vnf'),(2,'vserver-id','vm'),(3,'vnfc-name','vnfc'),(4,'vf-module-id','vf-module');
 UNLOCK TABLES;
 
 LOCK TABLES `MULTISTEP_FLOW_REFERENCE` WRITE;
-INSERT INTO `MULTISTEP_FLOW_REFERENCE` VALUES (1,'Restart','vnf','vFW',NULL,'multistep_flow_reference.category',NULL,NULL,'ac204h','2017-10-30 19:23:07');
+INSERT INTO `MULTISTEP_FLOW_REFERENCE` VALUES (1,'Restart','vnf','vFW',NULL,'multistep_flow_reference.category',NULL,NULL,'userid','2017-10-30 19:23:07');
 UNLOCK TABLES;
 
 LOCK TABLES `PROCESS_FLOW_REFERENCE` WRITE;
