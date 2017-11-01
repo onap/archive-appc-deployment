@@ -1,1 +1,289 @@
-[{"id":"2a18327b.190d5e","type":"dgstart","name":"DGSTART","outputs":1,"x":138,"y":65,"z":"a83714d9.fe1b58","wires":[["b64ac861.3c4448"]]},{"id":"b64ac861.3c4448","type":"service-logic","name":"APPC 4.0.0","module":"APPC","version":"4.0.0","comments":"","xml":"<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='4.0.0'>","outputs":1,"x":307,"y":65,"z":"a83714d9.fe1b58","wires":[["3bbeff64.7fc8e"]]},{"id":"3bbeff64.7fc8e","type":"method","name":"method GetAaiInfo","xml":"<method rpc='GetAaiInfo' mode='sync'>\n","comments":"","outputs":1,"x":520,"y":64,"z":"a83714d9.fe1b58","wires":[["5c608a98.0bf024"]]},{"id":"5c608a98.0bf024","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","outputs":1,"x":146,"y":147,"z":"a83714d9.fe1b58","wires":[["97f65464.3d36f8","a6922b1b.264198","1a8c611b.0adb8f"]]},{"id":"1a8c611b.0adb8f","type":"execute","name":"execute getAllVServersVnfcsInfo","xml":"<execute plugin=\"org.openecomp.appc.aai.client.node.AAIResourceNode\" method=\"getAllVServersVnfcsInfo\">\n<parameter name=\"responsePrefix\" value=\"tmp.vnfInfo\" />\n","comments":"","outputs":1,"x":271.5,"y":560,"z":"a83714d9.fe1b58","wires":[["58a50d95.a39f74","7cb8a280.e67fdc"]]},{"id":"58a50d95.a39f74","type":"failure","name":"not-found","xml":"<outcome value='not-found'>\n","comments":"","outputs":1,"x":536.5,"y":562,"z":"a83714d9.fe1b58","wires":[["cca89eac.a4cc9"]]},{"id":"7cb8a280.e67fdc","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":534.5,"y":604,"z":"a83714d9.fe1b58","wires":[["e7e14ccf.66209"]]},{"id":"cca89eac.a4cc9","type":"block","name":"block","xml":"<block>\n","atomic":"false","comments":"","outputs":1,"x":684.5,"y":560,"z":"a83714d9.fe1b58","wires":[["6fc8268c.676d48"]]},{"id":"e7e14ccf.66209","type":"block","name":"block","xml":"<block>\n","atomic":"false","comments":"","outputs":1,"x":667.5,"y":604,"z":"a83714d9.fe1b58","wires":[["b227c95d.666fb8"]]},{"id":"b227c95d.666fb8","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value=\"`$tmp.vnfInfo.error-message`\" />\n\n\n\t","comments":"","x":833.5,"y":605,"z":"a83714d9.fe1b58","wires":[]},{"id":"97f65464.3d36f8","type":"execute","name":"execute getVnfInfo","xml":"<execute plugin=\"org.openecomp.appc.aai.client.node.AAIResourceNode\" method=\"getVnfInfo\">\n<parameter name=\"vnfId\" value=\"`$vnf-id`\" />\n<parameter name=\"responsePrefix\" value=\"tmp.vnfInfo\" />\n","comments":"","outputs":1,"x":385,"y":141,"z":"a83714d9.fe1b58","wires":[["75b9e9c.a60e318","90e21982.e540b8"]]},{"id":"75b9e9c.a60e318","type":"failure","name":"not-found","xml":"<outcome value='not-found'>\n","comments":"","outputs":1,"x":574,"y":140,"z":"a83714d9.fe1b58","wires":[["a8b107b4.c7e7d8"]]},{"id":"a8b107b4.c7e7d8","type":"block","name":"block","xml":"<block>\n","atomic":"false","comments":"","outputs":1,"x":730,"y":143,"z":"a83714d9.fe1b58","wires":[["fd247ef0.16c0a"]]},{"id":"fd247ef0.16c0a","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value=\"Unable to get Vnf Info from A&amp;AI\" />\n\n\n\t","comments":"","x":901,"y":145,"z":"a83714d9.fe1b58","wires":[]},{"id":"90e21982.e540b8","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":568,"y":195,"z":"a83714d9.fe1b58","wires":[["a1033df9.8163a"]]},{"id":"a1033df9.8163a","type":"block","name":"block","xml":"<block>\n","atomic":"false","comments":"","outputs":1,"x":719,"y":197,"z":"a83714d9.fe1b58","wires":[["b4abe73d.5ece28"]]},{"id":"b4abe73d.5ece28","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value=\"`$tmp.vnfInfo.error-message`\" />\n\n\n\t","comments":"","x":879,"y":196,"z":"a83714d9.fe1b58","wires":[]},{"id":"a6922b1b.264198","type":"set","name":"set vnf-type, name","xml":"<set>\n<parameter name='vnf-type' value='`$tmp.vnfInfo.vnf.vnf-type`' /> \n<parameter name='vnf-name' value='`$tmp.vnfInfo.vnf.vnf-name`' />\n\n","comments":"","x":349,"y":248,"z":"a83714d9.fe1b58","wires":[]},{"id":"6fc8268c.676d48","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value=\"Unable to get VServer Info from A&amp;AI\" />\n\n\n\t","comments":"","x":849,"y":559,"z":"a83714d9.fe1b58","wires":[]}]
+[
+    {
+        "id": "2a18327b.190d5e",
+        "name": "DGSTART",
+        "outputs": 1,
+        "type": "dgstart",
+        "wires": [
+            [
+                "b64ac861.3c4448"
+            ]
+        ],
+        "x": 138,
+        "y": 65,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "b64ac861.3c4448",
+        "module": "APPC",
+        "name": "APPC 4.0.0",
+        "outputs": 1,
+        "type": "service-logic",
+        "version": "4.0.0",
+        "wires": [
+            [
+                "3bbeff64.7fc8e"
+            ]
+        ],
+        "x": 307,
+        "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='4.0.0'>",
+        "y": 65,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "3bbeff64.7fc8e",
+        "name": "method GetAaiInfo",
+        "outputs": 1,
+        "type": "method",
+        "wires": [
+            [
+                "5c608a98.0bf024"
+            ]
+        ],
+        "x": 520,
+        "xml": "<method rpc='GetAaiInfo' mode='sync'>\n",
+        "y": 64,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "atomic": "true",
+        "id": "5c608a98.0bf024",
+        "name": "block : atomic",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "97f65464.3d36f8",
+                "a6922b1b.264198",
+                "1a8c611b.0adb8f"
+            ]
+        ],
+        "x": 146,
+        "xml": "<block atomic=\"true\">",
+        "y": 147,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "1a8c611b.0adb8f",
+        "name": "execute getAllVServersVnfcsInfo",
+        "outputs": 1,
+        "type": "execute",
+        "wires": [
+            [
+                "58a50d95.a39f74",
+                "7cb8a280.e67fdc"
+            ]
+        ],
+        "x": 271.5,
+        "xml": "<execute plugin=\"org.openecomp.appc.aai.client.node.AAIResourceNode\" method=\"getAllVServersVnfcsInfo\">\n<parameter name=\"responsePrefix\" value=\"tmp.vnfInfo\" />\n",
+        "y": 560,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "58a50d95.a39f74",
+        "name": "not-found",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "cca89eac.a4cc9"
+            ]
+        ],
+        "x": 536.5,
+        "xml": "<outcome value='not-found'>\n",
+        "y": 562,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "7cb8a280.e67fdc",
+        "name": "failure",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "e7e14ccf.66209"
+            ]
+        ],
+        "x": 534.5,
+        "xml": "<outcome value='failure'>\n",
+        "y": 604,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "atomic": "false",
+        "comments": "",
+        "id": "cca89eac.a4cc9",
+        "name": "block",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "6fc8268c.676d48"
+            ]
+        ],
+        "x": 684.5,
+        "xml": "<block>\n",
+        "y": 560,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "atomic": "false",
+        "comments": "",
+        "id": "e7e14ccf.66209",
+        "name": "block",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "b227c95d.666fb8"
+            ]
+        ],
+        "x": 667.5,
+        "xml": "<block>\n",
+        "y": 604,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "b227c95d.666fb8",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 833.5,
+        "xml": "<return status=\"failure\">\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value=\"`$tmp.vnfInfo.error-message`\" />\n\n\n\t",
+        "y": 605,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "97f65464.3d36f8",
+        "name": "execute getVnfInfo",
+        "outputs": 1,
+        "type": "execute",
+        "wires": [
+            [
+                "75b9e9c.a60e318",
+                "90e21982.e540b8"
+            ]
+        ],
+        "x": 385,
+        "xml": "<execute plugin=\"org.openecomp.appc.aai.client.node.AAIResourceNode\" method=\"getVnfInfo\">\n<parameter name=\"vnfId\" value=\"`$vnf-id`\" />\n<parameter name=\"responsePrefix\" value=\"tmp.vnfInfo\" />\n",
+        "y": 141,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "75b9e9c.a60e318",
+        "name": "not-found",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "a8b107b4.c7e7d8"
+            ]
+        ],
+        "x": 574,
+        "xml": "<outcome value='not-found'>\n",
+        "y": 140,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "atomic": "false",
+        "comments": "",
+        "id": "a8b107b4.c7e7d8",
+        "name": "block",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "fd247ef0.16c0a"
+            ]
+        ],
+        "x": 730,
+        "xml": "<block>\n",
+        "y": 143,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "fd247ef0.16c0a",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 901,
+        "xml": "<return status=\"failure\">\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value=\"Unable to get Vnf Info from A&amp;AI\" />\n\n\n\t",
+        "y": 145,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "90e21982.e540b8",
+        "name": "failure",
+        "outputs": 1,
+        "type": "failure",
+        "wires": [
+            [
+                "a1033df9.8163a"
+            ]
+        ],
+        "x": 568,
+        "xml": "<outcome value='failure'>\n",
+        "y": 195,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "atomic": "false",
+        "comments": "",
+        "id": "a1033df9.8163a",
+        "name": "block",
+        "outputs": 1,
+        "type": "block",
+        "wires": [
+            [
+                "b4abe73d.5ece28"
+            ]
+        ],
+        "x": 719,
+        "xml": "<block>\n",
+        "y": 197,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "b4abe73d.5ece28",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 879,
+        "xml": "<return status=\"failure\">\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value=\"`$tmp.vnfInfo.error-message`\" />\n\n\n\t",
+        "y": 196,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "a6922b1b.264198",
+        "name": "set vnf-type, name",
+        "type": "set",
+        "wires": [],
+        "x": 349,
+        "xml": "<set>\n<parameter name='vnf-type' value='`$tmp.vnfInfo.vnf.vnf-type`' /> \n<parameter name='vnf-name' value='`$tmp.vnfInfo.vnf.vnf-name`' />\n\n",
+        "y": 248,
+        "z": "a83714d9.fe1b58"
+    },
+    {
+        "comments": "",
+        "id": "6fc8268c.676d48",
+        "name": "return failure",
+        "type": "returnFailure",
+        "wires": [],
+        "x": 849,
+        "xml": "<return status=\"failure\">\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value=\"Unable to get VServer Info from A&amp;AI\" />\n\n\n\t",
+        "y": 559,
+        "z": "a83714d9.fe1b58"
+    }
+]
