@@ -169,6 +169,63 @@ To initialize AAI services on an APPC instance, the following AAI properties nee
 	org.onap.ccsdk.sli.adaptors.aai.ssl.trust.psswd=<SSL_Keystore_Password> # Default value for the default keystore is adminadmin
 	org.onap.ccsdk.sli.adaptors.aai.uri=<AAI_INSTANCE_LOCATION> # Default value is https://aai.api.simpledemo.openecomp.org:8443
 
+appc-config-adaptor.properties
+==============================
+
+These properties provide urls and authentication for the appc config component and appc audit component services. These properties are used in the appc-config-adaptor bundle.
+
+- **Example**:
+
+  .. code:: bash
+
+	configComponent.url=
+	configComponent.user= 
+	configComponent.passwd=
+	service-configuration-notification-url= 
+
+appc-flow-controller.properties
+===============================
+
+These properties provide urls and authentication to the sequence generator and healthcheck. Both of these are services are running in OpenDaylight.
+
+- **Example**:
+
+  .. code:: bash
+
+	seq_generator_url=http://localhost:8181/restconf/operations/sequence-generator:generate-sequence
+	seq_generator.uid=admin
+	seq_generator.pwd=Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U
+	HealthCheck.mock=true
+	HealthCheck.context=/restconf/operations/appc-provider-lcm:health-check
+	HealthCheck.default-rest-user=TestUser
+	HealthCheck.default-rest-pass=TestPass
+
+
+mdsal-resource.properties
+=========================
+
+These properties provide connection configuration for the ccsdk sli mdsal OpenDaylight feature.
+
+- **Example**:
+
+  .. code:: bash
+
+	org.onap.ccsdk.sli.adaptors.resource.mdsal.sdnc-user=admin
+	org.onap.ccsdk.sli.adaptors.resource.mdsal.sdnc-passwd=admin
+	org.onap.ccsdk.sli.adaptors.resource.mdsal.sdnc-host=localhost
+	org.onap.ccsdk.sli.adaptors.resource.mdsal.sdnc-protocol=http
+	org.onap.ccsdk.sli.adaptors.resource.mdsal.sdnc-port=8181
+
+sql-resource.properties
+=======================
+
+This file should be pre-populated with a key used by the sdnc-sql-resource feature to decrypt database data.
+
+- **Example**:
+
+  .. code:: bash
+
+	org.openecomp.sdnc.resource.sql.cryptkey=
 
 dblib.properties
 ================
