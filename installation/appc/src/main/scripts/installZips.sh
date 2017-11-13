@@ -96,7 +96,7 @@ mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -D
 unzip -d ${targetDir} /tmp/platform-logic-installer*.zip
 
 echo "Downloading dg-loader-provider jar from nexus"
-mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.openecomp.appc.plugins:dg-loader-provider:1.1.0:jar:jar-with-dependencies -DoutputDirectory=${targetDir}/data
+mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.openecomp.appc.plugins:dg-loader-provider:${APPC_VERSION}:jar:jar-with-dependencies -DoutputDirectory=${targetDir}/data
 mv ${targetDir}/data/dg-loader-provider-*-jar-with-dependencies.jar ${targetDir}/data/dg-loader-provider-jar-with-dependencies.jar
 
 find ${targetDir} -name '*.sh' -exec chmod +x '{}' \;
