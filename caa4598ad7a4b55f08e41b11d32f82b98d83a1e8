@@ -1,0 +1,9 @@
+Code-Review+1: Gregory Glover <gg2147@att.com>
+Code-Review+2: Patrick Brady <pb071s@att.com>
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+2: Randa  Maher <rx196w@att.com>
+Submitted-by: Randa  Maher <rx196w@att.com>
+Submitted-at: Tue, 14 Nov 2017 03:10:03 +0000
+Reviewed-on: http://gerrit.onap.org/r/23371
+Project: appc/deployment
+Branch: refs/heads/master
