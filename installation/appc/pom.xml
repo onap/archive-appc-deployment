@@ -214,7 +214,7 @@
 										if ( project.properties['ver'] != null ) {
 										versionArray = project.properties['ver'].split('\\.');
 										}
-										if ( project.properties['ver'].endsWith("-amsterdam") ) {
+										if ( project.properties['ver'].endsWith("-SNAPSHOT") ) {
 										project.properties['dockertag1']=project.properties['ver'] + "-latest";
 										project.properties['dockertag2']="latest";
 										project.properties['appc.version']=project.properties['appc.snapshot.version'];
