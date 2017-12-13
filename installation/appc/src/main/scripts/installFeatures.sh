@@ -22,7 +22,7 @@
 ###
 
 ODL_HOME=${ODL_HOME:-/opt/opendaylight/current}
-APPC_HOME=${APPC_HOME:-/opt/openecomp/appc}
+APPC_HOME=${APPC_HOME:-/opt/onap/appc}
 APPC_FEATURE_DIR=${APPC_FEATURE_DIR:-${APPC_HOME}/features}
 
 function featureInstall {

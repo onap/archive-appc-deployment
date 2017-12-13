@@ -78,7 +78,7 @@
             ]
         ],
         "x": 271.5,
-        "xml": "<execute plugin=\"org.openecomp.appc.aai.client.node.AAIResourceNode\" method=\"getAllVServersVnfcsInfo\">\n<parameter name=\"responsePrefix\" value=\"tmp.vnfInfo\" />\n",
+        "xml": "<execute plugin=\"org.onap.appc.aai.client.node.AAIResourceNode\" method=\"getAllVServersVnfcsInfo\">\n<parameter name=\"responsePrefix\" value=\"tmp.vnfInfo\" />\n",
         "y": 560,
         "z": "a83714d9.fe1b58"
     },
@@ -172,7 +172,7 @@
             ]
         ],
         "x": 385,
-        "xml": "<execute plugin=\"org.openecomp.appc.aai.client.node.AAIResourceNode\" method=\"getVnfInfo\">\n<parameter name=\"vnfId\" value=\"`$vnf-id`\" />\n<parameter name=\"responsePrefix\" value=\"tmp.vnfInfo\" />\n",
+        "xml": "<execute plugin=\"org.onap.appc.aai.client.node.AAIResourceNode\" method=\"getVnfInfo\">\n<parameter name=\"vnfId\" value=\"`$vnf-id`\" />\n<parameter name=\"responsePrefix\" value=\"tmp.vnfInfo\" />\n",
         "y": 141,
         "z": "a83714d9.fe1b58"
     },

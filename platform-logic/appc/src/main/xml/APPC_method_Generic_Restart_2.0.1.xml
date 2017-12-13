@@ -20,11 +20,11 @@
 -->
 
 <service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.1'><method rpc='Generic_Restart' mode='sync'>
-<execute plugin='org.openecomp.appc.dg.common.JsonDgUtil' method='flatAndAddToContext' >
+<execute plugin='org.onap.appc.dg.common.JsonDgUtil' method='flatAndAddToContext' >
 <parameter name="payload" value="`$input.payload`" /><outcome value='success'>
-<execute plugin='org.openecomp.appc.dg.util.ExecuteNodeAction' method='getVnfHierarchy'>
+<execute plugin='org.onap.appc.dg.util.ExecuteNodeAction' method='getVnfHierarchy'>
 <parameter name="resourceKey" value="`$input.action-identifiers.vnf-id`" /><outcome value='failure'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="Exception in getting VNF Hierachy" />
@@ -36,7 +36,7 @@
 <outcome value='SUCCESS'>
 <switch test='`$VNF.VMCount`'>
 <outcome value='0'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="VM Count is 0" />
@@ -45,7 +45,7 @@
 </return></block></outcome><outcome value='Other'>
 <block atomic='true'>
 <for index="i" start="0" end="`$VNF.VMCount`" ><block atomic='true'>
-<execute plugin='org.openecomp.appc.dg.util.ExecuteNodeAction' method='postResource'>
+<execute plugin='org.onap.appc.dg.util.ExecuteNodeAction' method='postResource'>
 <parameter name="resourceType" value="vnfc" />
 <parameter name="prefix" value="vnfc" />
 <parameter name="resourceKey" value='vnfc-name = $VNF.VM[$i].VNFC' />
@@ -54,24 +54,24 @@
 <outcome value='success'>
 <switch test='`$postResource_result`'>
 <outcome value='NOT_FOUND'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'VNFC not found in AAI : ' + $VNF.VM[$i].VNFC`" />
 <outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome><outcome value='SUCCESS'>
-<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='restartServer'>
-<parameter name="org.openecomp.appc.provider.name" value="OpenStack"/>
-<parameter name="org.openecomp.appc.instance.url" value="`$VNF.VM[$i].URL`" />
-<parameter name="org.openecomp.appc.identity.url" value="`$AICIdentity`" />
+<execute plugin='org.onap.appc.adapter.iaas.ProviderAdapter' method='restartServer'>
+<parameter name="org.onap.appc.provider.name" value="OpenStack"/>
+<parameter name="org.onap.appc.instance.url" value="`$VNF.VM[$i].URL`" />
+<parameter name="org.onap.appc.identity.url" value="`$AICIdentity`" />
 
 <outcome value='failure'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'Failure in restart for:' + $VNF.VM[$i].URL`" /><outcome value='success'>
-</outcome></execute><execute plugin='org.openecomp.appc.dg.util.ExecuteNodeAction' method='postResource'>
+</outcome></execute><execute plugin='org.onap.appc.dg.util.ExecuteNodeAction' method='postResource'>
 <parameter name="resourceType" value="vnfc" />
 <parameter name="prefix" value="vnfc" />
 <parameter name="resourceKey" value='vnfc-name = $VNF.VM[$i].VNFC' />
@@ -82,21 +82,21 @@
 <outcome value='SUCCESS'>
 <return status='failure'>
 </return></outcome><outcome value='NOT_FOUND'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'VNFC not found in AAI : ' + $VNF.VM[$i].VNFC`" />
 <outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome><outcome value='FAILURE'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value='Exception in AAI Update for vnfc $VNF.VM[$i].VNFC' />
 <outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome></switch></outcome><outcome value='failure'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'Failure in updating AAI for' + $VNF.VM[$i].VNFC`" />
@@ -105,11 +105,11 @@
 </return></block></outcome></execute></block></outcome><outcome value='success'>
 <switch test='`$RESTART_STATUS`'>
 <outcome value='ERROR'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'Stop : Error occoured while restarting the server:' + $VNF.VM[$i].URL`" /><outcome value='success'>
-</outcome></execute><execute plugin='org.openecomp.appc.dg.util.ExecuteNodeAction' method='postResource'>
+</outcome></execute><execute plugin='org.onap.appc.dg.util.ExecuteNodeAction' method='postResource'>
 <parameter name="resourceType" value="vnfc" />
 <parameter name="prefix" value="vnfc" />
 <parameter name="resourceKey" value='vnfc-name = $VNF.VM[$i].VNFC' />
@@ -120,32 +120,32 @@
 <outcome value='SUCCESS'>
 <return status='failure'>
 </return></outcome><outcome value='NOT_FOUND'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'VNFC not found in AAI : ' + $VNF.VM[$i].VNFC`" />
 <outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome><outcome value='FAILURE'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value='Exception in AAI Update for vnfc $VNF.VM[$i].VNFC' />
 <outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome></switch></outcome><outcome value='failure'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'Failure in updating AAI for' + $VNF.VM[$i].VNFC`" />
 <outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome></execute></block></outcome><outcome value='CONTEXT_NOT_FOUND'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'Stop : Context not found:' + $VNF.VM[$i].URL`" /><outcome value='success'>
-</outcome></execute><execute plugin='org.openecomp.appc.dg.util.ExecuteNodeAction' method='postResource'>
+</outcome></execute><execute plugin='org.onap.appc.dg.util.ExecuteNodeAction' method='postResource'>
 <parameter name="resourceType" value="vnfc" />
 <parameter name="prefix" value="vnfc" />
 <parameter name="resourceKey" value='vnfc-name = $VNF.VM[$i].VNFC' />
@@ -156,33 +156,33 @@
 <outcome value='SUCCESS'>
 <return status='failure'>
 </return></outcome><outcome value='NOT_FOUND'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'VNFC not found in AAI : ' + $VNF.VM[$i].VNFC`" />
 <outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome><outcome value='FAILURE'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value='Exception in AAI Update for vnfc $VNF.VM[$i].VNFC' />
 <outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome></switch></outcome><outcome value='failure'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'Failure in updating AAI for' + $VNF.VM[$i].VNFC`" />
 <outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome></execute></block></outcome><outcome value='SUCCESS'>
-<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='reportSuccess' >
+<execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='reportSuccess' >
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'Restart event executed successfully for ' + $VNF.VM[$i].URL`" />
 <outcome value='failure'>
 </outcome><outcome value='success'>
-<execute plugin='org.openecomp.appc.dg.util.ExecuteNodeAction' method='postResource'>
+<execute plugin='org.onap.appc.dg.util.ExecuteNodeAction' method='postResource'>
 <parameter name="resourceType" value="vnfc" />
 <parameter name="prefix" value="vnfc" />
 <parameter name="resourceKey" value='vnfc-name = $VNF.VM[$i].VNFC' />
@@ -191,26 +191,26 @@
 <outcome value='success'>
 <switch test='`$postResource_result`'>
 <outcome value='NOT_FOUND'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'VNFC not found in AAI : ' + $VNF.VM[$i].VNFC`" /><outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome><outcome value='SUCCESS'>
 </outcome><outcome value='FAILURE'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'Exception in AAI Update for vnfc' + $VNF.VM[$i].VNFC`" /><outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome></switch></outcome><outcome value='failure'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'Failure in updating AAI for' + $VNF.VM[$i].VNFC`" /><outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome></execute></outcome></execute></outcome></switch></outcome></execute></outcome><outcome value='FAILURE'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'Exception in AAI Update for vnfc ' + $VNF.VM[$i].VNFC`" />
@@ -218,7 +218,7 @@
 <outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome></switch></outcome><outcome value='failure'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="`'Failure in updating AAI for' + $VNF.VM[$i].VNFC`" />
@@ -226,19 +226,19 @@
 </outcome></execute><return status='failure'>
 </return></block></outcome></execute></block></for><return status='success'>
 </return></block></outcome></switch></outcome><outcome value='FAILURE'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="Failure in getting VNF Hierachy" /><outcome value='success'>
 </outcome></execute><return status='failure'>
 </return></block></outcome></switch></outcome></execute></outcome><outcome value='failure'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="Failure in flattening payload Json" /><outcome value='success'>
 </outcome></execute><return status='failure'>
 <parameter name="output.status.message" value="Failure in flattening payload Json" /></return></block></outcome><outcome value='not-found'>
-<block atomic='true'><execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >
+<block atomic='true'><execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >
 <parameter name="apiVer" value="1.01"/>
 <parameter name="eventId" value="`$input.action-identifiers.vnf-id`" />
 <parameter name="output.status.message" value="Failure in loading Json flattening plugin" /><outcome value='success'>

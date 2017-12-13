@@ -38,7 +38,7 @@ Notes
 
 -  When changing a property, please make sure to restart the APPC Docker Container so that the changes kick in using "docker stop <APPC_CONTAINER_NAME>" and then "docker start <APPC_CONTAINER_NAME>".
 
--  When deploying APPC using the `docker-compose.yml <https://gerrit.onap.org/r/gitweb?p=appc/deployment.git;a=blob;f=docker-compose/docker-compose.yml;h=f95a5fed5820a263a546eded6b1e9bdb8eff9a0b;hb=HEAD>`_ script, please make sure that the *SDNC_CONFIG_DIR* environment variable in the appc container configuration parameters points to */opt/openecomp/appc/data/properties* (default parameter value).
+-  When deploying APPC using the `docker-compose.yml <https://gerrit.onap.org/r/gitweb?p=appc/deployment.git;a=blob;f=docker-compose/docker-compose.yml;h=f95a5fed5820a263a546eded6b1e9bdb8eff9a0b;hb=HEAD>`_ script, please make sure that the *SDNC_CONFIG_DIR* environment variable in the appc container configuration parameters points to */opt/onap/appc/data/properties* (default parameter value).
 
 
 appc.properties
@@ -86,7 +86,7 @@ appc.demo.property_name or appc.LCM.property_name). In the below list, each prop
 
 The APPC IaaS Adapter is the southbound adapter of APPC which is responsible of executing VIM-based actions (i.e. OpenStack actions).
 
-To initialize the IaaS Adapter service, the following properties need to be configured in */opt/openecomp/appc/data/properties/appc.properties*. The current default properties for the IaaS adaptor are located in `here <https://gerrit.onap.org/r/gitweb?p=appc/deployment.git;a=blob;f=installation/src/main/properties/appc.properties;h=7900843184eb41f518156e6f285d21adce5fae2e;hb=HEAD>`_.
+To initialize the IaaS Adapter service, the following properties need to be configured in */opt/onap/appc/data/properties/appc.properties*. The current default properties for the IaaS adaptor are located in `here <https://gerrit.onap.org/r/gitweb?p=appc/deployment.git;a=blob;f=installation/src/main/properties/appc.properties;h=7900843184eb41f518156e6f285d21adce5fae2e;hb=HEAD>`_.
 
 Note: The IaaS Adapter currently supports the OpenStack VIM *only*, and uses the CDP Libraries to implement the code necessary to run VIM-based LCM actions.
 
@@ -115,13 +115,13 @@ Note: The IaaS Adapter currently supports the OpenStack VIM *only*, and uses the
 
 -  **Other iaas properties**:
 
-  -  **org.openecomp.appc.iaas.skiphypervisorcheck**:
+  -  **org.onap.appc.iaas.skiphypervisorcheck**:
      Skips the hypervisor check which usually occurs during iaas-adapter-bundle startup.
-  -  **org.openecomp.appc.server.state.change.timeout**:
+  -  **org.onap.appc.server.state.change.timeout**:
      The amount of time, in seconds, that the application waits for a change of state of a server to a known valid state before giving up and failing the request.
-  -  **org.openecomp.appc.openstack.poll.interval**:
+  -  **org.onap.appc.openstack.poll.interval**:
      The amount of time, in seconds, between subsequent polls to the openstack provider to update the state of a resource.
-  -  **org.openecomp.appc.stack.state.change.timeout**:
+  -  **org.onap.appc.stack.state.change.timeout**:
      The amount of time, in seconds, that the application waits for a change of state of a stacj to a known valid state before giving up and failing the request.
 
 
@@ -137,7 +137,7 @@ Note: The IaaS Adapter currently supports the OpenStack VIM *only*, and uses the
   -  Applies to the following features: appc-netconf-adapter-bundle, appc-dg-common
   -  These properties can be defined to define the RESTCONF credentials needed to execute APPC API requests from the features impacted above.
 
--  **org.openecomp.appc.provider.retry.delay / org.openecomp.appc.provider.retry.limit**:
+-  **org.onap.appc.provider.retry.delay / org.onap.appc.provider.retry.limit**:
 
   -  Applies to the following features: appc-rest-adapter-bundle, appc-iaas-adapter-bundle, appc-chef-adapter-bundle
   -  These properties are used to configure the retry logic for connection to the IaaS provider(s).  The retry delay property is the amount of time, in seconds, the application waits between retry attempts.  The retry limit is the number of retries that are allowed before the request is failed.
@@ -149,9 +149,9 @@ Applies to the following features: appc-dg-common, appc-command-executor-core, a
 .. code:: bash
 	
 	# appcctl is the default name of the APPC Database Table, equivalent to sdnctl
-	org.openecomp.appc.db.url.appcctl=jdbc:mysql://<HOST_IP>:3306/appcctl
-	org.openecomp.appc.db.user.appcctl=appcctl
-	org.openecomp.appc.db.pass.appcctl=appcctl
+	org.onap.appc.db.url.appcctl=jdbc:mysql://<HOST_IP>:3306/appcctl
+	org.onap.appc.db.user.appcctl=appcctl
+	org.onap.appc.db.pass.appcctl=appcctl
 
 aaiclient.properties
 ====================
@@ -159,13 +159,13 @@ aaiclient.properties
 
 APPC connects with ONAP AAI using the SDNC AAI service (sdnc-aai-service-<VERSION_NUMBER>.zip).
 
-To initialize AAI services on an APPC instance, the following AAI properties need to be configured in */opt/openecomp/appc/data/properties/aaiclient.properties*. The current default properties for AAI are located in `aaiclient.properties <https://gerrit.onap.org/r/gitweb?p=appc/deployment.git;a=blob;f=installation/src/main/properties/aaiclient.properties;h=c3cd088c2c97253ff56d341d749d5da9df385929;hb=HEAD>`_.
+To initialize AAI services on an APPC instance, the following AAI properties need to be configured in */opt/onap/appc/data/properties/aaiclient.properties*. The current default properties for AAI are located in `aaiclient.properties <https://gerrit.onap.org/r/gitweb?p=appc/deployment.git;a=blob;f=installation/src/main/properties/aaiclient.properties;h=c3cd088c2c97253ff56d341d749d5da9df385929;hb=HEAD>`_.
 
 - **Example**:
 
   .. code:: bash
 
-	org.onap.ccsdk.sli.adaptors.aai.ssl.trust=<SSL_Keystore_location> # Default value is /opt/openecomp/appc/data/stores/truststore.openecomp.client.jks - this default keystore currently exists in that path
+	org.onap.ccsdk.sli.adaptors.aai.ssl.trust=<SSL_Keystore_location> # Default value is /opt/onap/appc/data/stores/truststore.openecomp.client.jks - this default keystore currently exists in that path
 	org.onap.ccsdk.sli.adaptors.aai.ssl.trust.psswd=<SSL_Keystore_Password> # Default value for the default keystore is adminadmin
 	org.onap.ccsdk.sli.adaptors.aai.uri=<AAI_INSTANCE_LOCATION> # Default value is https://aai.api.simpledemo.openecomp.org:8443
 
@@ -233,7 +233,7 @@ dblib.properties
 
 APPC uses the SDNC dblib service (*sdnc-dblib-<VERSION_NUMBER>.zip*) for all database operations. The SQL driver used to connect to the MySQL Database is the MariaDB Driver/Connector.
 
-This library uses the file, */opt/openecomp/appc/data/properties/dblib.properties*, which contains the requisite database properties, such as host, user and password. The current default properties for dblib are located in `dblib.properties <https://gerrit.onap.org/r/gitweb?p=appc/deployment.git;a=blob;f=installation/src/main/properties/dblib.properties;h=baf2f53d2900f5e1cb503951efe1857f7921b810;hb=HEAD>`_.
+This library uses the file, */opt/onap/appc/data/properties/dblib.properties*, which contains the requisite database properties, such as host, user and password. The current default properties for dblib are located in `dblib.properties <https://gerrit.onap.org/r/gitweb?p=appc/deployment.git;a=blob;f=installation/src/main/properties/dblib.properties;h=baf2f53d2900f5e1cb503951efe1857f7921b810;hb=HEAD>`_.
 
 NOTE: The values in the default dblib.properties (link referenced above) are the default ones. These values do not need to be changed and can be left as is in order to connect to the default MySQL Database Docker Container when deploying APPC using docker-compose.
 
@@ -256,7 +256,7 @@ svclogic.properties
 
 APPC uses the SDNC SLI service (*sdnc-sli-<VERSION_NUMBER>.zip*) to execute the DG.
 
-To initialize SLI services, the following properties need to be configured in */opt/openecomp/appc/data/properties/svclogic.properties*. The database operations performed from the DG also use this database configuration. The current default properties for SLI are located in `svclogic.properties <https://gerrit.onap.org/r/gitweb?p=appc/deployment.git;a=blob;f=installation/src/main/properties/svclogic.properties;h=7900843184eb41f518156e6f285d21adce5fae2e;hb=HEAD>`_.
+To initialize SLI services, the following properties need to be configured in */opt/onap/appc/data/properties/svclogic.properties*. The database operations performed from the DG also use this database configuration. The current default properties for SLI are located in `svclogic.properties <https://gerrit.onap.org/r/gitweb?p=appc/deployment.git;a=blob;f=installation/src/main/properties/svclogic.properties;h=7900843184eb41f518156e6f285d21adce5fae2e;hb=HEAD>`_.
 
 .. code:: bash
 	

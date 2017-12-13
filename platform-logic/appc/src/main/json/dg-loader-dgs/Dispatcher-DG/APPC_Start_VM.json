@@ -112,7 +112,7 @@
     "id": "c47aa6c9.8c9378",
     "type": "execute",
     "name": "Resolve Application Start DG",
-    "xml": "<execute plugin='org.openecomp.appc.dg.common.DgResolverPlugin' method='resolveDg'>\n<parameter name=\"vnfType\" value='`$vnf.type`' />\n<parameter name=\"vnfcType\" value='`$vnfcType`' />\n<parameter name=\"action\" value=\"Start_Application\" />\n<parameter name=\"api-ver\" value=\"2.0.0\" />\n<parameter name=\"prefix\" value=\"ApplicationStart\" />\n<parameter name=\"DGResolutionType\" value=\"VNFC\" />\n",
+    "xml": "<execute plugin='org.onap.appc.dg.common.DgResolverPlugin' method='resolveDg'>\n<parameter name=\"vnfType\" value='`$vnf.type`' />\n<parameter name=\"vnfcType\" value='`$vnfcType`' />\n<parameter name=\"action\" value=\"Start_Application\" />\n<parameter name=\"api-ver\" value=\"2.0.0\" />\n<parameter name=\"prefix\" value=\"ApplicationStart\" />\n<parameter name=\"DGResolutionType\" value=\"VNFC\" />\n",
     "comments": "",
     "outputs": 1,
     "x": 349,

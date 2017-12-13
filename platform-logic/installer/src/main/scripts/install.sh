@@ -21,7 +21,7 @@
 # ECOMP is a trademark and service mark of AT&T Intellectual Property.
 ###
 
-# BASEDIR env variable points to /opt/openecomp/appc/svclogic
+# BASEDIR env variable points to /opt/onap/appc/svclogic
 BASEDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 

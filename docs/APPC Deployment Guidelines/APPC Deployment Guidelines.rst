@@ -66,7 +66,7 @@ Docker Registry (Maven Repository). The deployment code can be found in
 the Maven Project that builds and deploys the Docker Images to be
 deployed in the Nexus Repository (current approach is by using Jenkins).
 These Docker Images are composed of the APPC Artifacts
-(org.openecomp.appc.\*) compiled and packaged in the "appc" git
+(org.onap.appc.\*) compiled and packaged in the "appc" git
 repository.
 
 The following Docker images are the actual deployment images used for
@@ -307,7 +307,7 @@ APPC Configuration Model
 
 APPC Configuration model involves using "default.properties" files
 (which are usually located in each of the APPC Features -
-..//src//resources/org/openecomp/appc/default.properties) for APPC
+..//src//resources/org/onap/appc/default.properties) for APPC
 Feature that have default (or null) property values inside the core APPC
 code. These default (or null) properties should be overwritten in the
 properties file called "appc.properties" located in the APPC Deployment
@@ -337,7 +337,7 @@ Currently, there are two ways to change properties for APPC Features:
    compiled).
 -  **Temporary Change (for quick testing/debugging)**: In the APPC
    Docker Container, find the appc.properties file in
-   /opt/openecomp/appc/properties/appc.properties and make changes as
+   /opt/onap/appc/properties/appc.properties and make changes as
    needed. Then, restart the APPC Docker Container by running "docker
    stop " then "docker start ") (NOTE: This approach will lose all
    changes done in appc.properties if the docker container is destroyed

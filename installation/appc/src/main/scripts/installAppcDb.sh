@@ -19,7 +19,7 @@
 ###
 
 SDNC_HOME=${SDNC_HOME:-/opt/onap/sdnc}
-APPC_HOME=${APPC_HOME:-/opt/openecomp/appc}
+APPC_HOME=${APPC_HOME:-/opt/onap/appc}
 MYSQL_PASSWD=${MYSQL_PASSWD:-openECOMP1.0}
 
 APPC_DB_USER=${APPC_DB_USER:-appcctl}

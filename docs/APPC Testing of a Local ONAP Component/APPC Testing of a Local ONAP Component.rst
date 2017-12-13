@@ -282,7 +282,7 @@ active local Nexus 2 Repository (http://localhost:8081/nexus).
 -  Once your build is successful, check that all of the intended APPC
    Core maven artifacts have been successfully uploaded to your local
    Nexus 2 OSS by going on the snapshot repository (located on
-   http://localhost:8081/nexus/content/repositories/snapshots/org/openecomp/appc)
+   http://localhost:8081/nexus/content/repositories/snapshots/org/onap/appc)
 
 -  Now that the APPC Core maven artifacts are hosted and deployed on
    your local Nexus 2 OSS Repository, you can compile and deploy the
@@ -392,14 +392,14 @@ be found on https://dmp.fabric8.io/.
 -  Once your build is successful, check that all of the intended APPC
    Deployment maven artifacts have been successfully uploaded to your
    local Nexus 2 OSS by going on the snapshot repository (located on
-   http://localhost:8081/nexus/content/repositories/snapshots/org/openecomp/appc).
+   http://localhost:8081/nexus/content/repositories/snapshots/org/onap/appc).
    Also, go to the Nexus 3 Docker Registry location in the
    http://localhost:9081/#browse/browse/components:docker.local to make
    sure that your APPC Docker Image has been uploaded.
 
    -  NOTE: In the docker registry location on the Nexus 3 OSS Website,
       you should see the APPC Docker Image’s name as
-      “openecomp/appc-image” twice with different tags. The number of
+      “onap/appc-image” twice with different tags. The number of
       tags for the image will be decided by what is defined on the
       docker maven plugin’s section (note that there are properties to
       be defined in the tags section)

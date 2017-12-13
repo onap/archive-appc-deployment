@@ -1,4 +1,4 @@
-# OpenECOMP APP-C - Available Properties
+# ONAP APP-C - Available Properties
 
 ---
 ---
@@ -38,7 +38,7 @@ The following properties are ready to be defined based on which feature needs to
 
 - appc.asdc.*:
     - Applies to the following feature: appc-asdc-listener-bundle
-    - These properties are used to test integration between the SDC OpenECOMP component & APP-C. Properties such as pointing to the DMaaP listener & topic, SDC credentials to authenticate into the SDC component, define the RESTCONF URL, and others are mapped here.
+    - These properties are used to test integration between the SDC ONAP component & APP-C. Properties such as pointing to the DMaaP listener & topic, SDC credentials to authenticate into the SDC component, define the RESTCONF URL, and others are mapped here.
 
 - Other properties:
     - poolMembers, event.pool.members, restconf.user, restconf.pass

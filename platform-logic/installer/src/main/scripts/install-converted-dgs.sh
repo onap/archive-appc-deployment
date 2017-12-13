@@ -25,9 +25,9 @@
 ### Convert XML DGs to JSON DGs using dg-loader, then load/activate them in the MySQL DB. ###
 ###
 
-export APPC_HOME=${APPC_HOME:-/opt/openecomp/appc}
+export APPC_HOME=${APPC_HOME:-/opt/onap/appc}
 
-# SVCLOGIC_DIR env variable points to /opt/openecomp/appc/svclogic
+# SVCLOGIC_DIR env variable points to /opt/onap/appc/svclogic
 export SVCLOGIC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
 #Path to the dg-loader jar file

@@ -25,11 +25,11 @@ services:
 #    to map to SDN-C AAI Service Bundle's AAI Activator class inside the gerrit sdnc/adaptors repo, so that
 #    the AAI Service bundle loads APP-C's aaiclient.properties instead of SDN-C's aaiclient.properties.
   appc:
-    image: "openecomp/appc-image:latest"
+    image: "onap/appc-image:latest"
     depends_on :
       - db
     container_name: appc_controller_container
-    entrypoint: ["/opt/openecomp/appc/bin/startODL.sh"]
+    entrypoint: ["/opt/onap/appc/bin/startODL.sh"]
     ports:
       - "8282:8181"
       - "1830:1830"
@@ -39,8 +39,8 @@ services:
       - db:sdnctldb02
     environment:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
-      - SDNC_CONFIG_DIR=/opt/openecomp/appc/data/properties
-      - APPC_CONFIG_DIR=/opt/openecomp/appc/data/properties
+      - SDNC_CONFIG_DIR=/opt/onap/appc/data/properties
+      - APPC_CONFIG_DIR=/opt/onap/appc/data/properties
       - DMAAP_TOPIC_ENV=SUCCESS
     logging:
       driver: "json-file"

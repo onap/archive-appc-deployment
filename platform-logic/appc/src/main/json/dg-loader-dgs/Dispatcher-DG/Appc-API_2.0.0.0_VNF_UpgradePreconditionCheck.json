@@ -38,7 +38,7 @@
         "id": "a3be2603.6810f8",
         "type": "execute",
         "name": "execute: handleUpgradeStub",
-        "xml": "<execute plugin='org.openecomp.appc.dg.util.UpgradeStubNode' method='handleUpgradeStub' >\n<parameter name=\"failureIndicator\" value=\"`$failureIndicator`\" />\n\n",
+        "xml": "<execute plugin='org.onap.appc.dg.util.UpgradeStubNode' method='handleUpgradeStub' >\n<parameter name=\"failureIndicator\" value=\"`$failureIndicator`\" />\n\n",
         "comments": "",
         "outputs": 1,
         "x": 637.5182189941406,

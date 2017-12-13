@@ -201,7 +201,7 @@
             ]
         ],
         "x": 1048.8214511871338,
-        "xml": "<execute plugin=\"org.openecomp.appc.data.services.node.ConfigResourceNode\" method=\"getTemplate\">\n<parameter name=\"fileCategory\" value=\"config_template\" />\n<parameter name=\"responsePrefix\" value=\"config-template\" />",
+        "xml": "<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"getTemplate\">\n<parameter name=\"fileCategory\" value=\"config_template\" />\n<parameter name=\"responsePrefix\" value=\"config-template\" />",
         "y": 315.6111030578613,
         "z": "a49375c8.88c748"
     },
@@ -620,7 +620,7 @@
             ]
         ],
         "x": 520.4166278839111,
-        "xml": "<execute plugin=\"org.openecomp.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"log\" />\n<parameter name=\"message\" value=\"Prepare Success\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n",
+        "xml": "<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"log\" />\n<parameter name=\"message\" value=\"Prepare Success\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n",
         "y": 803.0277366638184,
         "z": "a49375c8.88c748"
     },
