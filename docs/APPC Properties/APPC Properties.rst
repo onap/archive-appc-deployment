@@ -115,13 +115,13 @@ Note: The IaaS Adapter currently supports the OpenStack VIM *only*, and uses the
 
 -  **Other iaas properties**:
 
-  -  **org.openecomp.appc.iaas.skiphypervisorcheck**:
+  -  **org.onap.appc.iaas.skiphypervisorcheck**:
      Skips the hypervisor check which usually occurs during iaas-adapter-bundle startup.
-  -  **org.openecomp.appc.server.state.change.timeout**:
+  -  **org.onap.appc.server.state.change.timeout**:
      The amount of time, in seconds, that the application waits for a change of state of a server to a known valid state before giving up and failing the request.
-  -  **org.openecomp.appc.openstack.poll.interval**:
+  -  **org.onap.appc.openstack.poll.interval**:
      The amount of time, in seconds, between subsequent polls to the openstack provider to update the state of a resource.
-  -  **org.openecomp.appc.stack.state.change.timeout**:
+  -  **org.onap.appc.stack.state.change.timeout**:
      The amount of time, in seconds, that the application waits for a change of state of a stacj to a known valid state before giving up and failing the request.
 
 
@@ -137,7 +137,7 @@ Note: The IaaS Adapter currently supports the OpenStack VIM *only*, and uses the
   -  Applies to the following features: appc-netconf-adapter-bundle, appc-dg-common
   -  These properties can be defined to define the RESTCONF credentials needed to execute APPC API requests from the features impacted above.
 
--  **org.openecomp.appc.provider.retry.delay / org.openecomp.appc.provider.retry.limit**:
+-  **org.onap.appc.provider.retry.delay / org.onap.appc.provider.retry.limit**:
 
   -  Applies to the following features: appc-rest-adapter-bundle, appc-iaas-adapter-bundle, appc-chef-adapter-bundle
   -  These properties are used to configure the retry logic for connection to the IaaS provider(s).  The retry delay property is the amount of time, in seconds, the application waits between retry attempts.  The retry limit is the number of retries that are allowed before the request is failed.
@@ -149,9 +149,9 @@ Applies to the following features: appc-dg-common, appc-command-executor-core, a
 .. code:: bash
 	
 	# appcctl is the default name of the APPC Database Table, equivalent to sdnctl
-	org.openecomp.appc.db.url.appcctl=jdbc:mysql://<HOST_IP>:3306/appcctl
-	org.openecomp.appc.db.user.appcctl=appcctl
-	org.openecomp.appc.db.pass.appcctl=appcctl
+	org.onap.appc.db.url.appcctl=jdbc:mysql://<HOST_IP>:3306/appcctl
+	org.onap.appc.db.user.appcctl=appcctl
+	org.onap.appc.db.pass.appcctl=appcctl
 
 aaiclient.properties
 ====================

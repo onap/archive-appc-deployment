@@ -60,7 +60,7 @@
             ]
         ],
         "x": 409,
-        "xml": "<execute plugin='org.openecomp.appc.adapter.iaas.ProviderAdapter' method='stopServer'>\n<parameter name=\"org.openecomp.appc.provider.name\" value=\"OpenStack\"/>\n<parameter name=\"org.openecomp.appc.instance.url\" value=\"`$vm-id`\" />\n<parameter name=\"org.openecomp.appc.identity.url\" value=\"`$identity-url`\" />\n",
+        "xml": "<execute plugin='org.onap.appc.adapter.iaas.ProviderAdapter' method='stopServer'>\n<parameter name=\"org.onap.appc.provider.name\" value=\"OpenStack\"/>\n<parameter name=\"org.onap.appc.instance.url\" value=\"`$vm-id`\" />\n<parameter name=\"org.onap.appc.identity.url\" value=\"`$identity-url`\" />\n",
         "y": 158.50000762939453,
         "z": "602aa70d.a192e8"
     },

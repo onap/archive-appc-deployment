@@ -100,7 +100,7 @@
         "id": "631a551d.c6b7bc",
         "type": "execute",
         "name": "execute: handleErrorToDCAE",
-        "xml": "<execute plugin='org.openecomp.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"org.openecomp.appc.dg.error\" value=\"`$org.openecomp.appc.dg.error`\" />\n<parameter name='output.status.message' value=\"`$error-message`\"/>\n",
+        "xml": "<execute plugin='org.onap.appc.dg.common.DCAEReporterPlugin' method='report' >\n<parameter name=\"org.onap.appc.dg.error\" value=\"`$org.onap.appc.dg.error`\" />\n<parameter name='output.status.message' value=\"`$error-message`\"/>\n",
         "comments": "",
         "outputs": 1,
         "x": 986,

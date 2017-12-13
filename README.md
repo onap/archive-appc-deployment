@@ -21,7 +21,7 @@ APPC (structured as a Maven project) uses the Maven tool to help compile, build,
 In order to deploy APPC, a Docker-ready machine needs to be available in order to deploy the APPC Docker Containers. The following will help explain the requirements in order to run Docker to deploy these containers.
 
 ### APPC Docker Containers
-ONAP APPC docker images are currently stored on the Rackspace Nexus Docker Registry (Maven Repository). The deployment code can be found in the Maven Project that builds and deploys the Docker Images to be deployed in the Nexus Repository (current approach is by using Jenkins). These Docker Images are composed of the APPC Artifacts (org.openecomp.appc.*) compiled and packaged in the "appc" git repository.
+ONAP APPC docker images are currently stored on the Rackspace Nexus Docker Registry (Maven Repository). The deployment code can be found in the Maven Project that builds and deploys the Docker Images to be deployed in the Nexus Repository (current approach is by using Jenkins). These Docker Images are composed of the APPC Artifacts (org.onap.appc.*) compiled and packaged in the "appc" git repository.
 
 The following Docker images are the actual deployment images used for running APPC:
 - **APPC Container**: This Docker container carries the APPC Core Framework (OpenDaylight, Karaf, OSGI Bundles, ODL Functions/APIs, and APPC specific features). This image is built on top of the SDN-C Docker Image, which contains core features (such as dblib as the Database Connector, SLI - the Service Logic Interpreter, and the Active & Available Inventory (A&AI) Listener). Some of these inherited SDN-C features/artifacts are necessary dependencies to build and compile APPC features/artifacts.

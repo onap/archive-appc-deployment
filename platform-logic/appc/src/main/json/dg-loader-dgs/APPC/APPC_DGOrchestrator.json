@@ -114,7 +114,7 @@
             ]
         ],
         "x": 1850.5411643981934,
-        "xml": "<execute plugin=\"org.openecomp.appc.flow.controller.node.FlowControlNode\" method=\"processFlow\">\n<parameter name=\"messageType\" value=\"response\" />\n<parameter name=\"message\" value=\"`$tmp.message`\" />\n<parameter name=\"responsePrefix\" value=\"tmp.flowControl\" />\n",
+        "xml": "<execute plugin=\"org.onap.appc.flow.controller.node.FlowControlNode\" method=\"processFlow\">\n<parameter name=\"messageType\" value=\"response\" />\n<parameter name=\"message\" value=\"`$tmp.message`\" />\n<parameter name=\"responsePrefix\" value=\"tmp.flowControl\" />\n",
         "y": 327.96586418151855,
         "z": "7aa4b695.11473"
     },
@@ -202,7 +202,7 @@
             ]
         ],
         "x": 314.2475776672363,
-        "xml": "<execute plugin=\"org.openecomp.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"response\" />\n<parameter name=\"message\" value=\"`$tmp.message`\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n",
+        "xml": "<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"response\" />\n<parameter name=\"message\" value=\"`$tmp.message`\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n",
         "y": 1005.7912883758545,
         "z": "7aa4b695.11473"
     },
@@ -444,7 +444,7 @@
             ]
         ],
         "x": 831.6644706726074,
-        "xml": "<execute plugin=\"org.openecomp.appc.data.services.node.ConfigResourceNode\" method=\"getCapability\">\n<parameter name=\"caplevel\" value=\"`$action-level`\" />\n<parameter name=\"checkCapability\" value=\"`$request-action`\" />\n<parameter name=\"vnf-type\" value=\"`$vnf-type`\" />\n\n",
+        "xml": "<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"getCapability\">\n<parameter name=\"caplevel\" value=\"`$action-level`\" />\n<parameter name=\"checkCapability\" value=\"`$request-action`\" />\n<parameter name=\"vnf-type\" value=\"`$vnf-type`\" />\n\n",
         "y": 463.6523542404175,
         "z": "7aa4b695.11473"
     },

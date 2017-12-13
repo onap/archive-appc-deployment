@@ -105,7 +105,7 @@
         "id": "63ff76d8.f656f8",
         "type": "execute",
         "name": "execute ssh command",
-        "xml": "<execute plugin='org.openecomp.appc.dg.ssh.SshService' method='execWithStatusCheck' >\n<parameter name='host' value='`$host`' />\n<parameter name='port' value='`$port`' />\n<parameter name='username' value='`$username`' />\n<parameter name='password' value='`$password`' />\n<parameter name='command' value='`$command`' />\n\n",
+        "xml": "<execute plugin='org.onap.appc.dg.ssh.SshService' method='execWithStatusCheck' >\n<parameter name='host' value='`$host`' />\n<parameter name='port' value='`$port`' />\n<parameter name='username' value='`$username`' />\n<parameter name='password' value='`$password`' />\n<parameter name='command' value='`$command`' />\n\n",
         "comments": "",
         "outputs": 1,
         "x": 189.17861938476562,

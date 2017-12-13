@@ -35,7 +35,7 @@
         "id": "1c0a1696.e3f5e9",
         "type": "execute",
         "name": "execute-netconf-config",
-        "xml": "<execute plugin='org.openecomp.appc.dg.netconf.NetconfClientPlugin' method='configure' >\n\t<parameter name=\"org.openecomp.appc.payload\" value=\"`$org.openecomp.appc.payload`\" />",
+        "xml": "<execute plugin='org.onap.appc.dg.netconf.NetconfClientPlugin' method='configure' >\n\t<parameter name=\"org.onap.appc.payload\" value=\"`$org.onap.appc.payload`\" />",
         "comments": "",
         "outputs": 1,
         "x": 511,

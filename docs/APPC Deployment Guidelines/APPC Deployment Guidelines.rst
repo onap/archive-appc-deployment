@@ -66,7 +66,7 @@ Docker Registry (Maven Repository). The deployment code can be found in
 the Maven Project that builds and deploys the Docker Images to be
 deployed in the Nexus Repository (current approach is by using Jenkins).
 These Docker Images are composed of the APPC Artifacts
-(org.openecomp.appc.\*) compiled and packaged in the "appc" git
+(org.onap.appc.\*) compiled and packaged in the "appc" git
 repository.
 
 The following Docker images are the actual deployment images used for

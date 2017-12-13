@@ -154,11 +154,11 @@ Table 2: Output Variables set by Ansible DG Variable
 
     The Ansible Adapter has three configurable parameters related to SSL certificate of the Ansible Server, which can be set from the properties file:
 
-    a. org.openecomp.appc.adapter.ansible.clientType. If set to "TRUST\_ALL", will accept all SSL certificates from any Ansible Server. If set to "TRUST\_CERT", will accept SSL from only those Ansible Servers whose certificate is in the trustStore keystore file. These two options can be used for development environment. Default option is to trust only well known server certificates (use in Production).
+    a. org.onap.appc.adapter.ansible.clientType. If set to "TRUST\_ALL", will accept all SSL certificates from any Ansible Server. If set to "TRUST\_CERT", will accept SSL from only those Ansible Servers whose certificate is in the trustStore keystore file. These two options can be used for development environment. Default option is to trust only well known server certificates (use in Production).
 
-    b. org.openecomp.appc.adapter.ansible.trustStore used to point to the keystore file
+    b. org.onap.appc.adapter.ansible.trustStore used to point to the keystore file
 
-    c. org.openecomp.appc.adapter.ansible.trustStorePasswd used to set password for keystore file
+    c. org.onap.appc.adapter.ansible.trustStorePasswd used to set password for keystore file
 
 3.  **Reference Ansible Server Implementation of APPC / Ansible Interface (for testing purposes only)**
 
