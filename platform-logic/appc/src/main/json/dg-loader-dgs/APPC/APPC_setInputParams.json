@@ -147,7 +147,7 @@
             ]
         ],
         "x": 537.4167098999023,
-        "xml": "<execute plugin=\"org.openecomp.sdnc.config.generator.convert.ConvertNode\" method=\"convertJson2DGContext\">\n<parameter name=\"jsonData\" value=\"`$input.payload`\" />\n<parameter name=\"isEscaped\" value=\"N\" />\n<parameter name=\"blockKeys\" value=\"configuration-parameters,configuration.configuration-string,configuration.configuration-json\" />\n<parameter name=\"responsePrefix\" value=\"tmp.convertnode\" />",
+        "xml": "<execute plugin=\"org.onap.sdnc.config.generator.convert.ConvertNode\" method=\"convertJson2DGContext\">\n<parameter name=\"jsonData\" value=\"`$input.payload`\" />\n<parameter name=\"isEscaped\" value=\"N\" />\n<parameter name=\"blockKeys\" value=\"configuration-parameters,configuration.configuration-string,configuration.configuration-json\" />\n<parameter name=\"responsePrefix\" value=\"tmp.convertnode\" />",
         "y": 183.0555534362793,
         "z": "5ad64f3a.c3774"
     },

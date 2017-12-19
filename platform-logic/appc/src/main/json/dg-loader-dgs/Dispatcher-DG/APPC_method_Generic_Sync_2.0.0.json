@@ -1014,7 +1014,7 @@
     "id": "694c898b.ddbd58",
     "type": "record",
     "name": "record cvass",
-    "xml": "<record plugin=\"org.openecomp.sdnc.sli.recording.FileRecorder\">\n<parameter name=\"file\" value=\"`$cvaas-file-name`\"/>\n<parameter name=\"record\" value=\"`$cvaas-file-content`\"/>",
+    "xml": "<record plugin=\"org.onap.ccsdk.sli.core.sli.recording.FileRecorder\">\n<parameter name=\"file\" value=\"`$cvaas-file-name`\"/>\n<parameter name=\"record\" value=\"`$cvaas-file-content`\"/>",
     "comments": "",
     "outputs": 1,
     "x": 2417.917697906494,

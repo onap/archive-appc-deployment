@@ -47,12 +47,12 @@ cd ${DG_JSON_DIR}
 mkdir -p ${DG_JSON_DIR}/converted-xml
 
 # Generate XML DGs from JSON DGs
-$JAVA_HOME/bin/java -cp ${DG_LOADER} org.openecomp.sdnc.dg.loader.DGXMLGenerator ${DG_JSON_DIR} ${DG_JSON_DIR}/converted-xml
+$JAVA_HOME/bin/java -cp ${DG_LOADER} org.onap.sdnc.dg.loader.DGXMLGenerator ${DG_JSON_DIR} ${DG_JSON_DIR}/converted-xml
 
 # Load converted XML DGs to the SVC_LOGIC DB in the MySQL Docker Container
-$JAVA_HOME/bin/java -cp ${DG_LOADER} org.openecomp.sdnc.dg.loader.DGXMLLoad ${DG_JSON_DIR}/converted-xml ${APPC_HOME}/data/properties/dblib.properties
+$JAVA_HOME/bin/java -cp ${DG_LOADER} org.onap.sdnc.dg.loader.DGXMLLoad ${DG_JSON_DIR}/converted-xml ${APPC_HOME}/data/properties/dblib.properties
 
 # Activate converted XML DGs to the SVC_LOGIC DB in the MySQL Docker Container
-$JAVA_HOME/bin/java -cp ${DG_LOADER} org.openecomp.sdnc.dg.loader.DGXMLActivate ${DG_JSON_DIR}/dg_activate.txt ${APPC_HOME}/data/properties/dblib.properties
+$JAVA_HOME/bin/java -cp ${DG_LOADER} org.onap.sdnc.dg.loader.DGXMLActivate ${DG_JSON_DIR}/dg_activate.txt ${APPC_HOME}/data/properties/dblib.properties
 
 exit 0
