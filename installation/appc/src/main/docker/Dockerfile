@@ -7,6 +7,12 @@ ENV APPC_CONFIG_DIR /opt/onap/appc/data/properties
 
 # Copy the opt folder to the container's /opt folder
 COPY opt /opt
+
+COPY featureDir1 /opt/onap/appc/features
+COPY featureDir2 /opt/onap/appc/features
+COPY featureDir3 /opt/onap/appc/features
+COPY featureDir4 /opt/onap/appc/features
+
 RUN ln -s /opt/onap/appc /opt/appc
 
 # Expose port 8181 for ODL REST calls
