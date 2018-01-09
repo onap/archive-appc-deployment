@@ -401,6 +401,7 @@
 									<arguments>
 										<argument>${basedir}/src/main/scripts/installZips.sh</argument>
 										<argument>${basedir}/target/docker-stage/opt/onap/appc</argument>
+										<argument>${basedir}/target/docker-stage</argument>
 									</arguments>
 								</configuration>
 							</execution>
