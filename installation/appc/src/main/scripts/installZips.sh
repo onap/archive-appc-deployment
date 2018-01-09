@@ -34,7 +34,16 @@ SDNC_HOME=${SDNC_HOME:-/opt/onap/sdnc}
 targetDir=${1:-${APPC_HOME}}
 sdnc_targetDir=${1:-${SDNC_HOME}}
 
-featureDir=${targetDir}/features
+#We are going to use a series of directories in the docker-stage folder to extract features to.
+#By extracting features into more than one directory, we can copy them into the docker image in
+#different parts, creating more even layer sizes in the docker image.
+featureDir=$2/featureDir
+
+#This value determine how many feature directories we want. The featutures will be evenly split
+#into the number of directories specified. Any remainder will be put into the last directory.
+#IF THE FEATURES_DIRECTORY_COUNT IS CHANGED, THE DOCKERFILE MUST ALSO BE UPDATED SINCE IT CONTAINS
+#A COPY COMMAND FOR EACH FEATURE DIRECTORY!! See the Dockerfile for more information.
+FEATURE_DIRECTORY_COUNT=4
 
 APPC_FEATURES=" \
  appc-sdc-listener \
@@ -64,6 +73,8 @@ APPC_FEATURES=" \
  appc-config-params \
  appc-aai-client"
 
+FEATURES_PER_DIRECTORY=$(($(echo $APPC_FEATURES|wc -w)/$FEATURE_DIRECTORY_COUNT))
+
 APPC_VERSION=${APPC_VERSION:-0.0.1}
 APPC_OAM_VERSION=${APPC_OAM_VERSION:-0.1.1}
 
@@ -72,22 +83,31 @@ then
   mkdir -p ${targetDir}
 fi
 
-if [ ! -d ${featureDir} ]
-then
-  mkdir -p ${featureDir}
-fi
-
 cwd=$(pwd)
 
-mavenOpts=${2:-"-s ${SETTINGS_FILE} -gs ${GLOBAL_SETTINGS_FILE}"}
+mavenOpts="-s ${SETTINGS_FILE} -gs ${GLOBAL_SETTINGS_FILE}"
 cd /tmp
 
 echo "Installing APP-C version ${APPC_VERSION}"
+
+#The math for splitting up the features into folders
+featureNumber=1
+featureDirNumber=1
 for feature in ${APPC_FEATURES}
 do
+if (( $featureDirNumber < $FEATURE_DIRECTORY_COUNT ))
+then
+  if (( $featureNumber > $FEATURES_PER_DIRECTORY ))
+  then
+    featureDirNumber=$(($featureDirNumber+1))
+    featureNumber=1
+  fi
+fi
+
  rm -f /tmp/${feature}-installer*.zip
  mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc:${feature}-installer:${APPC_VERSION}:zip -DoutputDirectory=/tmp -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.ssl.insecure=true
- unzip -d ${featureDir} /tmp/${feature}-installer*zip
+ unzip -d ${featureDir}$featureDirNumber /tmp/${feature}-installer*zip
+featureNumber=$(($featureNumber+1))
 done
 
 echo "Installing platform-logic for APP-C"
