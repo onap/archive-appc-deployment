@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_2c50685d",
+        "filename": "installation/appc/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1125
+      },
+      "writtenOn": "2018-01-23T20:09:57Z",
+      "side": 1,
+      "message": "Is there a standard for tabs vs spaces for xml files?",
+      "revId": "c514ea665246c1a6a8207659deb3f5335f5e8c79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_cc4ea4c1",
+        "filename": "installation/appc/src/main/scripts/installZips.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1125
+      },
+      "writtenOn": "2018-01-23T20:09:57Z",
+      "side": 1,
+      "message": "should there be a default value for the second parameter in case it does not exist?",
+      "revId": "c514ea665246c1a6a8207659deb3f5335f5e8c79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_accb181d",
+        "filename": "installation/appc/src/main/scripts/installZips.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1125
+      },
+      "writtenOn": "2018-01-23T20:09:57Z",
+      "side": 1,
+      "message": "If I understand the script correctly, when a bunch of new features are added and FEATURES_PER_DIRECTORY is not updated, then the overflow just goes to the last feature directory.    Maybe FEATURES_PER_DIRECTORY could be calculated from APPC_FEATURES, generating an even distribution automatically.   For example:\n\nFEATURES_PER_DIRECTORY\u003d$(($(echo $APPC_FEATURES|wc -w)/$FEATURE_DIRECTORY_COUNT)).",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 22
+      },
+      "revId": "c514ea665246c1a6a8207659deb3f5335f5e8c79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
