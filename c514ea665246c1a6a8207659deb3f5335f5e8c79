@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_e567f3b5",
+        "filename": "installation/appc/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 49
+      },
+      "writtenOn": "2018-01-24T21:17:55Z",
+      "side": 1,
+      "message": "I could make the whole file into spaces, but maybe that should be its own commit in case this change has to be reverted",
+      "parentUuid": "5a93c517_2c50685d",
+      "revId": "c514ea665246c1a6a8207659deb3f5335f5e8c79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_cc4ea4c1",
         "filename": "installation/appc/src/main/scripts/installZips.sh",
         "patchSetId": 4
