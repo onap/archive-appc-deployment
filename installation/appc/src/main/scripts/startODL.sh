@@ -75,6 +75,8 @@ then
 	echo "Inserting modified installFeatures.sh for sdnc"
 	rm ${SDNC_HOME}/bin/installFeatures.sh
 	cp ${APPC_HOME}/data/sdncInstallFeatures.sh ${SDNC_HOME}/bin/installFeatures.sh
+	echo "Copying a working version of the logging configuration into the opendaylight etc folder"
+	cp ${APPC_HOME}/data/org.ops4j.pax.logging.cfg ${ODL_HOME}/etc/org.ops4j.pax.logging.cfg
 	echo "Installing SDNC platform features"
 	${SDNC_HOME}/bin/installFeatures.sh
 	if [ -x ${SDNC_HOME}/svclogic/bin/install.sh ]
