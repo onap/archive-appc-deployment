@@ -41,7 +41,6 @@ done
 
 APPC_FEATURES=" \
  appc-metric \
- appc-command-executor \
  appc-dmaap-adapter \
  appc-event-listener \
  appc-chef-adapter \
