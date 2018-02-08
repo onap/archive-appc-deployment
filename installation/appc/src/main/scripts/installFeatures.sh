@@ -58,12 +58,12 @@ APPC_FEATURES=" \
  appc-sequence-generator \
  appc-config-generator \
  appc-config-data-services \
- appc-artifact-handler \
  appc-config-adaptor \
  appc-config-audit \
  appc-config-encryption-tool \
  appc-config-flow-controller \
  appc-config-params \
+ appc-artifact-handler \
  appc-aai-client"
 
 # Temp fix to fix bouncycastle issue that is preventing netconf to work correctly
