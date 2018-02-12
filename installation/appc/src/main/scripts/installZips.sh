@@ -48,7 +48,6 @@ FEATURE_DIRECTORY_COUNT=4
 APPC_FEATURES=" \
  appc-sdc-listener \
  appc-lifecycle-management \
- appc-command-executor \
  appc-provider \
  appc-event-listener \
  appc-dispatcher \
