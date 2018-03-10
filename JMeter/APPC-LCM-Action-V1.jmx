@@ -1,0 +1,3131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+============LICENSE_START==========================================
+ONAP : APPC
+===================================================================
+Copyright (C) 2017-2018 AT&T Intellectual Property. All rights reserved.
+===================================================================
+
+Unless otherwise specified, all software contained herein is licensed
+under the Apache License, Version 2.0 (the License);
+you may not use this software except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+ECOMP is a trademark and service mark of AT&T Intellectual Property.
+============LICENSE_END============================================
+-->
+<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Stability-Test-VM1 LCM  Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1518473958000</longProp>
+        <longProp name="ThreadGroup.end_time">1518473958000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="RequestNumber" enabled="true">
+          <stringProp name="CounterConfig.start">1</stringProp>
+          <stringProp name="CounterConfig.end"></stringProp>
+          <stringProp name="CounterConfig.incr">1</stringProp>
+          <stringProp name="CounterConfig.name">request_number</stringProp>
+          <stringProp name="CounterConfig.format">000</stringProp>
+          <boolProp name="CounterConfig.per_user">false</boolProp>
+        </CounterConfig>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="filename">appc-lcm-test.csv</stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+          <boolProp name="stopThread">true</boolProp>
+          <stringProp name="variableNames">dmaap_ip,dmaap_topic_post,dmaap_topic_get,vnf_id,vm_id</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <ConfigTestElement guiclass="SimpleConfigGui" testclass="ConfigTestElement" testname="Simple Config Element" enabled="true"/>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="false">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">3</stringProp>
+        </LoopController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Restart Transaction Controller" enabled="false">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">vars.put(&quot;RESTART_ACCEPTED&quot;,&quot;WAITING&quot;);
+
+StringBuilder timestamp = new StringBuilder();
+//ISO_FORMAT &quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSS&apos;Z&apos;</stringProp>
+            </BeanShellPreProcessor>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Restart HTTP Request" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+    &quot;version&quot;: &quot;2.01&quot;,&#xd;
+    &quot;rpc-name&quot;: &quot;restart&quot;,&#xd;
+    &quot;correlation-id&quot;: &quot;${request_id}&quot;,&#xd;
+    &quot;type&quot;: &quot;request&quot;,&#xd;
+    &quot;body&quot;: {&#xd;
+        &quot;input&quot;: {&#xd;
+            &quot;common-header&quot;: {&#xd;
+                &quot;timestamp&quot;: &quot;${__time(yyyy-MM-dd&apos;T&apos;hh:mm:ss.SSS)}Z&quot;,&#xd;
+                &quot;api-ver&quot;: &quot;2.05&quot;,&#xd;
+                &quot;originator-id&quot;: &quot;${request_id}&quot;,&#xd;
+                &quot;request-id&quot;: &quot;${request_id}&quot;,&#xd;
+                &quot;sub-request-id&quot;: &quot;1&quot;,&#xd;
+                &quot;flags&quot;: {&#xd;
+                    &quot;force&quot;: &quot;TRUE&quot;,&#xd;
+                    &quot;ttl&quot;: 60000&#xd;
+                }&#xd;
+            },&#xd;
+            &quot;action&quot;: &quot;Restart&quot;,&#xd;
+            &quot;action-identifiers&quot;: {&#xd;
+                &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
+                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+            },&#xd;
+            &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/799ea611-bb36-4e49-b043-964f20c442d5\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
+        }&#xd;
+    }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">10.12.5.252</stringProp>
+              <stringProp name="HTTPSampler.port">3904</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/events/APPC-LCM-READ</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor - ReqeustJSON Generator" enabled="true">
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <boolProp name="resetInterpreter">false</boolProp>
+                <stringProp name="script">StringBuilder result = new StringBuilder();
+String newline = System.getProperty(&quot;line.separator&quot;);
+//int max = Integer.parseInt(Parameters);
+//Random random = new Random();
+
+//int counter = Integer.parseInt(vars.get(&quot;request-id&quot;));
+
+result.append(&quot;{&quot;);
+//result.append(&quot;\&quot;version\&quot;: \&quot;2.01\&quot;,&quot;);
+//result.append(&quot;\&quot;rpc-name\&quot;: \&quot;restart\&quot;,&quot;);
+//result.append(&quot;\&quot;correlation-id\&quot;: \&quot;a20e2073-30b1-4357-893b-f5ed57b66ef0-1\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;type\&quot;: \&quot;request\&quot;,&quot;);
+//result.append(&quot;\&quot;vnf-id\&quot;: \&quot;APPC_Test_VM\&quot;&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;body\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;input\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;common-header\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;timestamp\&quot;: \&quot;2018-2-12T21:25:04.244Z\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;api-ver\&quot;: \&quot;2.05\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;originator-id\&quot;: \&quot;664be3d2-6c12-4f4b-a3e7-c349acced200\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;request-id\&quot;: \&quot;664be3d2-6c12-4f4b-a3e7-c349acced200\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;sub-request-id\&quot;: \&quot;1\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;flags\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;force\&quot;: \&quot;TRUE\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;ttl\&quot;: 60000&quot;);
+//result.append(newline);
+//result.append(&quot;}&quot;);
+//result.append(newline);
+//result.append(&quot;},&quot;);  
+//result.append(newline);
+//result.append(&quot;\&quot;action\&quot;: \&quot;Restart\&quot;,&quot;);
+//result.append(newline);  
+//result.append(&quot;\&quot;action-identifiers\&quot;: {&quot;);
+//result.append(newline);  
+//result.append(&quot;\&quot;vnf-id\&quot;: \&quot;APPC_Test_VM\&quot;&quot;);
+//result.append(newline);  
+//result.append(&quot;}&quot;);
+//result.append(newline);
+//result.append(&quot;}&quot;);
+//result.append(newline);
+//result.append(&quot;}&quot;);
+result.append(newline);
+result.append(&quot;}&quot;);               
+
+vars.put(&quot;json&quot;,result.toString());</stringProp>
+              </BeanShellPreProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                <boolProp name="ResultCollector.error_logging">false</boolProp>
+                <objProp>
+                  <name>saveConfig</name>
+                  <value class="SampleSaveConfiguration">
+                    <time>true</time>
+                    <latency>true</latency>
+                    <timestamp>true</timestamp>
+                    <success>true</success>
+                    <label>true</label>
+                    <code>true</code>
+                    <message>true</message>
+                    <threadName>true</threadName>
+                    <dataType>true</dataType>
+                    <encoding>false</encoding>
+                    <assertions>true</assertions>
+                    <subresults>true</subresults>
+                    <responseData>false</responseData>
+                    <samplerData>false</samplerData>
+                    <xml>false</xml>
+                    <fieldNames>true</fieldNames>
+                    <responseHeaders>false</responseHeaders>
+                    <requestHeaders>false</requestHeaders>
+                    <responseDataOnError>false</responseDataOnError>
+                    <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                    <assertionsResultsToSave>0</assertionsResultsToSave>
+                    <bytes>true</bytes>
+                    <sentBytes>true</sentBytes>
+                    <threadCounts>true</threadCounts>
+                    <idleTime>true</idleTime>
+                    <connectTime>true</connectTime>
+                  </value>
+                </objProp>
+                <stringProp name="filename"></stringProp>
+              </ResultCollector>
+              <hashTree/>
+            </hashTree>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Wait for Accepted Response" enabled="true">
+              <stringProp name="WhileController.condition">${__javaScript(&quot;${RESTART_ACCEPTED}&quot;==&quot;WAITING&quot;)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="acceptance_retry" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">acceptance_retry</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">false</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Restart HTTP Accepted" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="filter" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                      <stringProp name="Argument.value">{&quot;class&quot;:&quot;Equals&quot;,&quot;field&quot;:&quot;correlation-id&quot;,&quot;value&quot;:&quot;${request_id}&quot;}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">filter</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">10.12.5.252</stringProp>
+                <stringProp name="HTTPSampler.port">3904</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/events/APPC-LCM-WRITE/appc-jmeter/${__threadNum}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Acceptance JSON Extractor" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">accept_message_old</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.body.output.status.message</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">WAITING</stringProp>
+                </JSONPostProcessor>
+                <hashTree/>
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                  <stringProp name="RegexExtractor.refname">accept_message</stringProp>
+                  <stringProp name="RegexExtractor.regex">&quot;message\\&quot;:\\&quot;(.*?)\\&quot;</stringProp>
+                  <stringProp name="RegexExtractor.template">$1$</stringProp>
+                  <stringProp name="RegexExtractor.default">WAITING</stringProp>
+                  <stringProp name="RegexExtractor.match_number">1</stringProp>
+                </RegexExtractor>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Acceptance JSR223 Assertion" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">String jsonMessage = vars.get(&quot;accept_message&quot;);
+String requestId = vars.get(&quot;request_id&quot;);
+
+log.info(&quot;Restart &quot; + requestId + &quot; acceptance response = &quot; + jsonMessage);
+	
+if(jsonMessage != &quot;WAITING&quot;){
+	vars.put(&quot;RESTART_ACCEPTED&quot;,jsonMessage);
+}
+	</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+                <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename"></stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <RandomController guiclass="RandomControlGui" testclass="RandomController" testname="Random Controller" enabled="true">
+          <intProp name="InterleaveControl.style">1</intProp>
+        </RandomController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Restart Transaction Controller" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+              <boolProp name="ResultCollector.error_logging">false</boolProp>
+              <objProp>
+                <name>saveConfig</name>
+                <value class="SampleSaveConfiguration">
+                  <time>true</time>
+                  <latency>true</latency>
+                  <timestamp>true</timestamp>
+                  <success>true</success>
+                  <label>true</label>
+                  <code>true</code>
+                  <message>true</message>
+                  <threadName>true</threadName>
+                  <dataType>true</dataType>
+                  <encoding>false</encoding>
+                  <assertions>true</assertions>
+                  <subresults>true</subresults>
+                  <responseData>false</responseData>
+                  <samplerData>false</samplerData>
+                  <xml>false</xml>
+                  <fieldNames>true</fieldNames>
+                  <responseHeaders>false</responseHeaders>
+                  <requestHeaders>false</requestHeaders>
+                  <responseDataOnError>false</responseDataOnError>
+                  <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                  <assertionsResultsToSave>0</assertionsResultsToSave>
+                  <bytes>true</bytes>
+                  <sentBytes>true</sentBytes>
+                  <threadCounts>true</threadCounts>
+                  <idleTime>true</idleTime>
+                  <connectTime>true</connectTime>
+                </value>
+              </objProp>
+              <stringProp name="filename"></stringProp>
+            </ResultCollector>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Submit request via DMaaP" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+    &quot;version&quot;: &quot;2.01&quot;,&#xd;
+    &quot;rpc-name&quot;: &quot;restart&quot;,&#xd;
+    &quot;correlation-id&quot;: &quot;${transaction_id}&quot;,&#xd;
+    &quot;type&quot;: &quot;request&quot;,&#xd;
+    &quot;body&quot;: {&#xd;
+        &quot;input&quot;: {&#xd;
+            &quot;common-header&quot;: {&#xd;
+                &quot;timestamp&quot;: &quot;${reqeust_timestamp}&quot;,&#xd;
+                &quot;api-ver&quot;: &quot;2.05&quot;,&#xd;
+                &quot;originator-id&quot;: &quot;${transaction_id}&quot;,&#xd;
+                &quot;request-id&quot;: &quot;${transaction_id}&quot;,&#xd;
+                &quot;sub-request-id&quot;: &quot;1&quot;,&#xd;
+                &quot;flags&quot;: {&#xd;
+                    &quot;force&quot;: &quot;TRUE&quot;,&#xd;
+                    &quot;ttl&quot;: 60000&#xd;
+                }&#xd;
+            },&#xd;
+            &quot;action&quot;: &quot;Restart&quot;,&#xd;
+            &quot;action-identifiers&quot;: {&#xd;
+                &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
+                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+            },&#xd;
+            &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/799ea611-bb36-4e49-b043-964f20c442d5\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
+        }&#xd;
+    }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${dmaap_ip}</stringProp>
+              <stringProp name="HTTPSampler.port">3904</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/events/${dmaap_topic_post}</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+                <boolProp name="resetInterpreter">false</boolProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="script">import java.text.SimpleDateFormat;
+
+String ISO_FORMAT = &quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSS&apos;Z&apos;&quot;;
+SimpleDateFormat isoFormatter = new SimpleDateFormat(ISO_FORMAT);
+isoFormatter.setTimeZone(TimeZone.getTimeZone(&quot;UTC&quot;));
+
+Calendar currentTime = Calendar.getInstance();
+
+String timeStampZuluStr = isoFormatter.format(currentTime.getTime());
+vars.put(&quot;reqeust_timestamp&quot;,timeStampZuluStr);
+vars.put(&quot;action_accepted&quot;,&quot;WAITING&quot;);
+vars.put(&quot;action_completed&quot;,&quot;WAITING&quot;);
+vars.put(&quot;accepted_retry_limit&quot;,&quot;3&quot;);
+vars.put(&quot;completed_retry_limit&quot;,&quot;20&quot;);
+vars.put(&quot;transaction_id&quot;,timeStampZuluStr + &quot;-&quot; + ${__threadNum} + &quot;-&quot; + vars.get(&quot;request_number&quot;));
+
+log.info(vars.get(&quot;reqeust_timestamp&quot;) + &quot; Begin Restart transaction : &quot; + vars.get(&quot;transaction_id&quot;));</stringProp>
+              </BeanShellPreProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                <boolProp name="ResultCollector.error_logging">false</boolProp>
+                <objProp>
+                  <name>saveConfig</name>
+                  <value class="SampleSaveConfiguration">
+                    <time>true</time>
+                    <latency>true</latency>
+                    <timestamp>true</timestamp>
+                    <success>true</success>
+                    <label>true</label>
+                    <code>true</code>
+                    <message>true</message>
+                    <threadName>true</threadName>
+                    <dataType>true</dataType>
+                    <encoding>false</encoding>
+                    <assertions>true</assertions>
+                    <subresults>true</subresults>
+                    <responseData>false</responseData>
+                    <samplerData>false</samplerData>
+                    <xml>false</xml>
+                    <fieldNames>true</fieldNames>
+                    <responseHeaders>false</responseHeaders>
+                    <requestHeaders>false</requestHeaders>
+                    <responseDataOnError>false</responseDataOnError>
+                    <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                    <assertionsResultsToSave>0</assertionsResultsToSave>
+                    <bytes>true</bytes>
+                    <sentBytes>true</sentBytes>
+                    <threadCounts>true</threadCounts>
+                    <idleTime>true</idleTime>
+                    <connectTime>true</connectTime>
+                  </value>
+                </objProp>
+                <stringProp name="filename"></stringProp>
+              </ResultCollector>
+              <hashTree/>
+            </hashTree>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Wait for Accepted Response via DMaaP" enabled="true">
+              <stringProp name="WhileController.condition">${__javaScript(&quot;${action_accepted}&quot;==&quot;WAITING&quot;)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+                <stringProp name="ConstantTimer.delay">3000</stringProp>
+              </ConstantTimer>
+              <hashTree/>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="acceptance_retry" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">acceptance_retry</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SYNC(accepted/rejectd) response via DMaaP" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="filter" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                      <stringProp name="Argument.value">{&quot;class&quot;:&quot;Equals&quot;,&quot;field&quot;:&quot;correlation-id&quot;,&quot;value&quot;:&quot;${transaction_id}&quot;}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">filter</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${dmaap_ip}</stringProp>
+                <stringProp name="HTTPSampler.port">3904</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/events/${dmaap_topic_get}/appc-jmeter/${__threadNum}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Acceptance JSON Extractor" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">accept_message_old</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.body.output.status.message</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">WAITING</stringProp>
+                </JSONPostProcessor>
+                <hashTree/>
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                  <stringProp name="RegexExtractor.refname">accept_message</stringProp>
+                  <stringProp name="RegexExtractor.regex">&quot;message\\&quot;:\\&quot;(.*?)\\&quot;</stringProp>
+                  <stringProp name="RegexExtractor.template">$1$</stringProp>
+                  <stringProp name="RegexExtractor.default">WAITING</stringProp>
+                  <stringProp name="RegexExtractor.match_number">1</stringProp>
+                </RegexExtractor>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Acceptance JSR223 Assertion" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">String jsonMessage = vars.get(&quot;accept_message&quot;);
+String requestId = vars.get(&quot;transaction_id&quot;);
+int retries = Integer.parseInt(vars.get(&quot;acceptance_retry&quot;));
+int limit = Integer.parseInt(vars.get(&quot;accepted_retry_limit&quot;));
+
+log.info(&quot;Restart &quot; + requestId + &quot; acceptance response = &quot; + jsonMessage + &quot; attempt = &quot; + retries);
+log.info(&quot;action_accepted=&quot; + vars.get(&quot;action_accepted&quot;));
+log.info(&quot;action_completed=&quot; + vars.get(&quot;action_completed&quot;));
+
+if(jsonMessage != &quot;WAITING&quot;){
+	log.info(&quot;Received accepted response of &apos;&quot; + jsonMessage + &quot;&apos; for &quot; + requestId);
+	vars.put(&quot;action_accepted&quot;,jsonMessage);
+}else if(retries &gt;= limit){
+	log.info(&quot;Reached maximum retries waiting for Accepted response for transaction &quot; + requestId);
+	vars.put(&quot;action_accepted&quot;,&quot;TIMEOUT&quot;);
+}
+
+</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+                <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename"></stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Wait for Final Response via DMaaP" enabled="true">
+              <stringProp name="WhileController.condition">${__javaScript(&quot;${action_accepted}&quot;==&quot;ACCEPTED - request accepted&quot; &amp;&amp; &quot;${action_completed}&quot;==&quot;WAITING&quot;)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+                <stringProp name="ConstantTimer.delay">10000</stringProp>
+              </ConstantTimer>
+              <hashTree/>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="completed_retry" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">completed_retry</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ASYNC(completed) response via DMaaP " enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${dmaap_ip}</stringProp>
+                <stringProp name="HTTPSampler.port">3904</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/events/${dmaap_topic_get}/appc-jmeter/${__threadNum}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                  <stringProp name="RegexExtractor.refname">finished_message</stringProp>
+                  <stringProp name="RegexExtractor.regex">&quot;reason\\&quot;:\\&quot;(.*?)\\&quot;</stringProp>
+                  <stringProp name="RegexExtractor.template">$1$</stringProp>
+                  <stringProp name="RegexExtractor.default">WAITING</stringProp>
+                  <stringProp name="RegexExtractor.match_number">1</stringProp>
+                </RegexExtractor>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Acceptance JSR223 Assertion" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">String jsonMessage = vars.get(&quot;finished_message&quot;);
+String requestId = vars.get(&quot;transaction_id&quot;);
+int retries = Integer.parseInt(vars.get(&quot;completed_retry&quot;));
+int limit = Integer.parseInt(vars.get(&quot;completed_retry_limit&quot;));
+
+log.info(&quot;Restart &quot; + requestId + &quot; completed response = &quot; + jsonMessage + &quot; attempt = &quot; + retries);
+	
+if(jsonMessage != &quot;WAITING&quot;){
+	vars.put(&quot;action_completed&quot;,jsonMessage);
+}else if(retries &gt;= limit){
+	vars.put(&quot;action_completed&quot;,&quot;TIMEOUT&quot;);
+}
+
+</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+                <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename"></stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Stability-Test-VM2 LCM  Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1518473958000</longProp>
+        <longProp name="ThreadGroup.end_time">1518473958000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="RequestNumber" enabled="true">
+          <stringProp name="CounterConfig.start">1</stringProp>
+          <stringProp name="CounterConfig.end"></stringProp>
+          <stringProp name="CounterConfig.incr">1</stringProp>
+          <stringProp name="CounterConfig.name">request_number</stringProp>
+          <stringProp name="CounterConfig.format">000</stringProp>
+          <boolProp name="CounterConfig.per_user">false</boolProp>
+        </CounterConfig>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="filename">/home/ubuntu/appc-lcm-test-Stability-Test-VM2.csv</stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+          <boolProp name="stopThread">true</boolProp>
+          <stringProp name="variableNames">dmaap_ip,dmaap_topic_post,dmaap_topic_get,vnf_id,vm_id</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <ConfigTestElement guiclass="SimpleConfigGui" testclass="ConfigTestElement" testname="Simple Config Element" enabled="true"/>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Stop Loop Controller" enabled="false">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">3</stringProp>
+        </LoopController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Stop Transaction Controller" enabled="false">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">vars.put(&quot;STOP_ACCEPTED&quot;,&quot;WAITING&quot;);
+
+StringBuilder timestamp = new StringBuilder();
+//ISO_FORMAT &quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSS&apos;Z&apos;</stringProp>
+            </BeanShellPreProcessor>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Stop HTTP Request" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+    &quot;version&quot;: &quot;2.01&quot;,&#xd;
+    &quot;rpc-name&quot;: &quot;stop&quot;,&#xd;
+    &quot;correlation-id&quot;: &quot;${request_id}&quot;,&#xd;
+    &quot;type&quot;: &quot;request&quot;,&#xd;
+    &quot;body&quot;: {&#xd;
+        &quot;input&quot;: {&#xd;
+            &quot;common-header&quot;: {&#xd;
+                &quot;timestamp&quot;: &quot;${__time(yyyy-MM-dd&apos;T&apos;hh:mm:ss.SSS)}Z&quot;,&#xd;
+                &quot;api-ver&quot;: &quot;2.05&quot;,&#xd;
+                &quot;originator-id&quot;: &quot;${request_id}&quot;,&#xd;
+                &quot;request-id&quot;: &quot;${request_id}&quot;,&#xd;
+                &quot;sub-request-id&quot;: &quot;1&quot;,&#xd;
+                &quot;flags&quot;: {&#xd;
+                    &quot;force&quot;: &quot;TRUE&quot;,&#xd;
+                    &quot;ttl&quot;: 60000&#xd;
+                }&#xd;
+            },&#xd;
+            &quot;action&quot;: &quot;Stop&quot;,&#xd;
+            &quot;action-identifiers&quot;: {&#xd;
+                &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
+                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+            },&#xd;
+            &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/c0d9b8c7-9534-4a22-b464-d6aa2c930847\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
+        }&#xd;
+    }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">10.12.5.252</stringProp>
+              <stringProp name="HTTPSampler.port">3904</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/events/APPC-LCM-READ</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor - ReqeustJSON Generator" enabled="true">
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <boolProp name="resetInterpreter">false</boolProp>
+                <stringProp name="script">StringBuilder result = new StringBuilder();
+String newline = System.getProperty(&quot;line.separator&quot;);
+//int max = Integer.parseInt(Parameters);
+//Random random = new Random();
+
+//int counter = Integer.parseInt(vars.get(&quot;request-id&quot;));
+
+result.append(&quot;{&quot;);
+//result.append(&quot;\&quot;version\&quot;: \&quot;2.01\&quot;,&quot;);
+//result.append(&quot;\&quot;rpc-name\&quot;: \&quot;restart\&quot;,&quot;);
+//result.append(&quot;\&quot;correlation-id\&quot;: \&quot;a20e2073-30b1-4357-893b-f5ed57b66ef0-1\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;type\&quot;: \&quot;request\&quot;,&quot;);
+//result.append(&quot;\&quot;vnf-id\&quot;: \&quot;APPC_Test_VM\&quot;&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;body\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;input\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;common-header\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;timestamp\&quot;: \&quot;2018-2-12T21:25:04.244Z\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;api-ver\&quot;: \&quot;2.05\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;originator-id\&quot;: \&quot;664be3d2-6c12-4f4b-a3e7-c349acced200\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;request-id\&quot;: \&quot;664be3d2-6c12-4f4b-a3e7-c349acced200\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;sub-request-id\&quot;: \&quot;1\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;flags\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;force\&quot;: \&quot;TRUE\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;ttl\&quot;: 60000&quot;);
+//result.append(newline);
+//result.append(&quot;}&quot;);
+//result.append(newline);
+//result.append(&quot;},&quot;);  
+//result.append(newline);
+//result.append(&quot;\&quot;action\&quot;: \&quot;Restart\&quot;,&quot;);
+//result.append(newline);  
+//result.append(&quot;\&quot;action-identifiers\&quot;: {&quot;);
+//result.append(newline);  
+//result.append(&quot;\&quot;vnf-id\&quot;: \&quot;APPC_Test_VM\&quot;&quot;);
+//result.append(newline);  
+//result.append(&quot;}&quot;);
+//result.append(newline);
+//result.append(&quot;}&quot;);
+//result.append(newline);
+//result.append(&quot;}&quot;);
+result.append(newline);
+result.append(&quot;}&quot;);               
+
+vars.put(&quot;json&quot;,result.toString());</stringProp>
+              </BeanShellPreProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                <boolProp name="ResultCollector.error_logging">false</boolProp>
+                <objProp>
+                  <name>saveConfig</name>
+                  <value class="SampleSaveConfiguration">
+                    <time>true</time>
+                    <latency>true</latency>
+                    <timestamp>true</timestamp>
+                    <success>true</success>
+                    <label>true</label>
+                    <code>true</code>
+                    <message>true</message>
+                    <threadName>true</threadName>
+                    <dataType>true</dataType>
+                    <encoding>false</encoding>
+                    <assertions>true</assertions>
+                    <subresults>true</subresults>
+                    <responseData>false</responseData>
+                    <samplerData>false</samplerData>
+                    <xml>false</xml>
+                    <fieldNames>true</fieldNames>
+                    <responseHeaders>false</responseHeaders>
+                    <requestHeaders>false</requestHeaders>
+                    <responseDataOnError>false</responseDataOnError>
+                    <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                    <assertionsResultsToSave>0</assertionsResultsToSave>
+                    <bytes>true</bytes>
+                    <sentBytes>true</sentBytes>
+                    <threadCounts>true</threadCounts>
+                    <idleTime>true</idleTime>
+                    <connectTime>true</connectTime>
+                  </value>
+                </objProp>
+                <stringProp name="filename"></stringProp>
+              </ResultCollector>
+              <hashTree/>
+            </hashTree>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Wait for Accepted Response" enabled="true">
+              <stringProp name="WhileController.condition">${__javaScript(&quot;${STOP_ACCEPTED}&quot;==&quot;WAITING&quot;)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="acceptance_retry" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">acceptance_retry</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">false</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Stop HTTP Accepted" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="filter" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                      <stringProp name="Argument.value">{&quot;class&quot;:&quot;Equals&quot;,&quot;field&quot;:&quot;correlation-id&quot;,&quot;value&quot;:&quot;${request_id}&quot;}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">filter</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">10.12.5.252</stringProp>
+                <stringProp name="HTTPSampler.port">3904</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/events/APPC-LCM-WRITE/appc-jmeter/${__threadNum}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Acceptance JSON Extractor" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">accept_message_old</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.body.output.status.message</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">WAITING</stringProp>
+                </JSONPostProcessor>
+                <hashTree/>
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                  <stringProp name="RegexExtractor.refname">accept_message</stringProp>
+                  <stringProp name="RegexExtractor.regex">&quot;message\\&quot;:\\&quot;(.*?)\\&quot;</stringProp>
+                  <stringProp name="RegexExtractor.template">$1$</stringProp>
+                  <stringProp name="RegexExtractor.default">WAITING</stringProp>
+                  <stringProp name="RegexExtractor.match_number">1</stringProp>
+                </RegexExtractor>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Acceptance JSR223 Assertion" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">String jsonMessage = vars.get(&quot;accept_message&quot;);
+String requestId = vars.get(&quot;request_id&quot;);
+
+log.info(&quot;Stop &quot; + requestId + &quot; acceptance response = &quot; + jsonMessage);
+	
+if(jsonMessage != &quot;WAITING&quot;){
+	vars.put(&quot;STOP_ACCEPTED&quot;,jsonMessage);
+}
+	</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+                <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename"></stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Start Loop Controller" enabled="false">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">3</stringProp>
+        </LoopController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Start Transaction Controller" enabled="false">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">vars.put(&quot;START_ACCEPTED&quot;,&quot;WAITING&quot;);
+
+StringBuilder timestamp = new StringBuilder();
+//ISO_FORMAT &quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSS&apos;Z&apos;</stringProp>
+            </BeanShellPreProcessor>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Start HTTP Request" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+    &quot;version&quot;: &quot;2.01&quot;,&#xd;
+    &quot;rpc-name&quot;: &quot;start&quot;,&#xd;
+    &quot;correlation-id&quot;: &quot;${request_id}&quot;,&#xd;
+    &quot;type&quot;: &quot;request&quot;,&#xd;
+    &quot;body&quot;: {&#xd;
+        &quot;input&quot;: {&#xd;
+            &quot;common-header&quot;: {&#xd;
+                &quot;timestamp&quot;: &quot;${__time(yyyy-MM-dd&apos;T&apos;hh:mm:ss.SSS)}Z&quot;,&#xd;
+                &quot;api-ver&quot;: &quot;2.05&quot;,&#xd;
+                &quot;originator-id&quot;: &quot;${request_id}&quot;,&#xd;
+                &quot;request-id&quot;: &quot;${request_id}&quot;,&#xd;
+                &quot;sub-request-id&quot;: &quot;1&quot;,&#xd;
+                &quot;flags&quot;: {&#xd;
+                    &quot;force&quot;: &quot;TRUE&quot;,&#xd;
+                    &quot;ttl&quot;: 60000&#xd;
+                }&#xd;
+            },&#xd;
+            &quot;action&quot;: &quot;Start&quot;,&#xd;
+            &quot;action-identifiers&quot;: {&#xd;
+                &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
+                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+            },&#xd;
+            &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/c0d9b8c7-9534-4a22-b464-d6aa2c930847\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
+        }&#xd;
+    }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">10.12.5.252</stringProp>
+              <stringProp name="HTTPSampler.port">3904</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/events/APPC-LCM-READ</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor - ReqeustJSON Generator" enabled="true">
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <boolProp name="resetInterpreter">false</boolProp>
+                <stringProp name="script">StringBuilder result = new StringBuilder();
+String newline = System.getProperty(&quot;line.separator&quot;);
+//int max = Integer.parseInt(Parameters);
+//Random random = new Random();
+
+//int counter = Integer.parseInt(vars.get(&quot;request-id&quot;));
+
+result.append(&quot;{&quot;);
+//result.append(&quot;\&quot;version\&quot;: \&quot;2.01\&quot;,&quot;);
+//result.append(&quot;\&quot;rpc-name\&quot;: \&quot;restart\&quot;,&quot;);
+//result.append(&quot;\&quot;correlation-id\&quot;: \&quot;a20e2073-30b1-4357-893b-f5ed57b66ef0-1\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;type\&quot;: \&quot;request\&quot;,&quot;);
+//result.append(&quot;\&quot;vnf-id\&quot;: \&quot;APPC_Test_VM\&quot;&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;body\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;input\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;common-header\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;timestamp\&quot;: \&quot;2018-2-12T21:25:04.244Z\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;api-ver\&quot;: \&quot;2.05\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;originator-id\&quot;: \&quot;664be3d2-6c12-4f4b-a3e7-c349acced200\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;request-id\&quot;: \&quot;664be3d2-6c12-4f4b-a3e7-c349acced200\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;sub-request-id\&quot;: \&quot;1\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;flags\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;force\&quot;: \&quot;TRUE\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;ttl\&quot;: 60000&quot;);
+//result.append(newline);
+//result.append(&quot;}&quot;);
+//result.append(newline);
+//result.append(&quot;},&quot;);  
+//result.append(newline);
+//result.append(&quot;\&quot;action\&quot;: \&quot;Restart\&quot;,&quot;);
+//result.append(newline);  
+//result.append(&quot;\&quot;action-identifiers\&quot;: {&quot;);
+//result.append(newline);  
+//result.append(&quot;\&quot;vnf-id\&quot;: \&quot;APPC_Test_VM\&quot;&quot;);
+//result.append(newline);  
+//result.append(&quot;}&quot;);
+//result.append(newline);
+//result.append(&quot;}&quot;);
+//result.append(newline);
+//result.append(&quot;}&quot;);
+result.append(newline);
+result.append(&quot;}&quot;);               
+
+vars.put(&quot;json&quot;,result.toString());</stringProp>
+              </BeanShellPreProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                <boolProp name="ResultCollector.error_logging">false</boolProp>
+                <objProp>
+                  <name>saveConfig</name>
+                  <value class="SampleSaveConfiguration">
+                    <time>true</time>
+                    <latency>true</latency>
+                    <timestamp>true</timestamp>
+                    <success>true</success>
+                    <label>true</label>
+                    <code>true</code>
+                    <message>true</message>
+                    <threadName>true</threadName>
+                    <dataType>true</dataType>
+                    <encoding>false</encoding>
+                    <assertions>true</assertions>
+                    <subresults>true</subresults>
+                    <responseData>false</responseData>
+                    <samplerData>false</samplerData>
+                    <xml>false</xml>
+                    <fieldNames>true</fieldNames>
+                    <responseHeaders>false</responseHeaders>
+                    <requestHeaders>false</requestHeaders>
+                    <responseDataOnError>false</responseDataOnError>
+                    <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                    <assertionsResultsToSave>0</assertionsResultsToSave>
+                    <bytes>true</bytes>
+                    <sentBytes>true</sentBytes>
+                    <threadCounts>true</threadCounts>
+                    <idleTime>true</idleTime>
+                    <connectTime>true</connectTime>
+                  </value>
+                </objProp>
+                <stringProp name="filename"></stringProp>
+              </ResultCollector>
+              <hashTree/>
+            </hashTree>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Wait for Accepted Response" enabled="true">
+              <stringProp name="WhileController.condition">${__javaScript(&quot;${START_ACCEPTED}&quot;==&quot;WAITING&quot;)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="acceptance_retry" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">acceptance_retry</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">false</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Restart HTTP Accepted" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="filter" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                      <stringProp name="Argument.value">{&quot;class&quot;:&quot;Equals&quot;,&quot;field&quot;:&quot;correlation-id&quot;,&quot;value&quot;:&quot;${request_id}&quot;}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">filter</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">10.12.5.252</stringProp>
+                <stringProp name="HTTPSampler.port">3904</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/events/APPC-LCM-WRITE/appc-jmeter/${__threadNum}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Acceptance JSON Extractor" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">accept_message_old</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.body.output.status.message</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">WAITING</stringProp>
+                </JSONPostProcessor>
+                <hashTree/>
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                  <stringProp name="RegexExtractor.refname">accept_message</stringProp>
+                  <stringProp name="RegexExtractor.regex">&quot;message\\&quot;:\\&quot;(.*?)\\&quot;</stringProp>
+                  <stringProp name="RegexExtractor.template">$1$</stringProp>
+                  <stringProp name="RegexExtractor.default">WAITING</stringProp>
+                  <stringProp name="RegexExtractor.match_number">1</stringProp>
+                </RegexExtractor>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Acceptance JSR223 Assertion" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">String jsonMessage = vars.get(&quot;accept_message&quot;);
+String requestId = vars.get(&quot;request_id&quot;);
+
+log.info(&quot;Start &quot; + requestId + &quot; acceptance response = &quot; + jsonMessage);
+	
+if(jsonMessage != &quot;WAITING&quot;){
+	vars.put(&quot;START_ACCEPTED&quot;,jsonMessage);
+}
+	</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+                <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename"></stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <RandomController guiclass="RandomControlGui" testclass="RandomController" testname="Random Controller" enabled="true">
+          <intProp name="InterleaveControl.style">1</intProp>
+        </RandomController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Stop Transaction Controller" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+              <boolProp name="ResultCollector.error_logging">false</boolProp>
+              <objProp>
+                <name>saveConfig</name>
+                <value class="SampleSaveConfiguration">
+                  <time>true</time>
+                  <latency>true</latency>
+                  <timestamp>true</timestamp>
+                  <success>true</success>
+                  <label>true</label>
+                  <code>true</code>
+                  <message>true</message>
+                  <threadName>true</threadName>
+                  <dataType>true</dataType>
+                  <encoding>false</encoding>
+                  <assertions>true</assertions>
+                  <subresults>true</subresults>
+                  <responseData>false</responseData>
+                  <samplerData>false</samplerData>
+                  <xml>false</xml>
+                  <fieldNames>true</fieldNames>
+                  <responseHeaders>false</responseHeaders>
+                  <requestHeaders>false</requestHeaders>
+                  <responseDataOnError>false</responseDataOnError>
+                  <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                  <assertionsResultsToSave>0</assertionsResultsToSave>
+                  <bytes>true</bytes>
+                  <sentBytes>true</sentBytes>
+                  <threadCounts>true</threadCounts>
+                  <idleTime>true</idleTime>
+                  <connectTime>true</connectTime>
+                </value>
+              </objProp>
+              <stringProp name="filename"></stringProp>
+            </ResultCollector>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Submit request via DMaaP" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+    &quot;version&quot;: &quot;2.01&quot;,&#xd;
+    &quot;rpc-name&quot;: &quot;stop&quot;,&#xd;
+    &quot;correlation-id&quot;: &quot;${transaction_id}&quot;,&#xd;
+    &quot;type&quot;: &quot;request&quot;,&#xd;
+    &quot;body&quot;: {&#xd;
+        &quot;input&quot;: {&#xd;
+            &quot;common-header&quot;: {&#xd;
+                &quot;timestamp&quot;: &quot;${reqeust_timestamp}&quot;,&#xd;
+                &quot;api-ver&quot;: &quot;2.05&quot;,&#xd;
+                &quot;originator-id&quot;: &quot;${transaction_id}&quot;,&#xd;
+                &quot;request-id&quot;: &quot;${transaction_id}&quot;,&#xd;
+                &quot;sub-request-id&quot;: &quot;1&quot;,&#xd;
+                &quot;flags&quot;: {&#xd;
+                    &quot;force&quot;: &quot;TRUE&quot;,&#xd;
+                    &quot;ttl&quot;: 60000&#xd;
+                }&#xd;
+            },&#xd;
+            &quot;action&quot;: &quot;Stop&quot;,&#xd;
+            &quot;action-identifiers&quot;: {&#xd;
+                &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
+                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+            },&#xd;
+            &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/c0d9b8c7-9534-4a22-b464-d6aa2c930847\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
+        }&#xd;
+    }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${dmaap_ip}</stringProp>
+              <stringProp name="HTTPSampler.port">3904</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/events/${dmaap_topic_post}</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+                <boolProp name="resetInterpreter">false</boolProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="script">import java.text.SimpleDateFormat;
+
+String ISO_FORMAT = &quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSS&apos;Z&apos;&quot;;
+SimpleDateFormat isoFormatter = new SimpleDateFormat(ISO_FORMAT);
+isoFormatter.setTimeZone(TimeZone.getTimeZone(&quot;UTC&quot;));
+
+Calendar currentTime = Calendar.getInstance();
+
+String timeStampZuluStr = isoFormatter.format(currentTime.getTime());
+vars.put(&quot;reqeust_timestamp&quot;,timeStampZuluStr);
+vars.put(&quot;action_accepted&quot;,&quot;WAITING&quot;);
+vars.put(&quot;action_completed&quot;,&quot;WAITING&quot;);
+vars.put(&quot;accepted_retry_limit&quot;,&quot;3&quot;);
+vars.put(&quot;completed_retry_limit&quot;,&quot;20&quot;);
+vars.put(&quot;transaction_id&quot;,timeStampZuluStr + &quot;-&quot; + ${__threadNum} + &quot;-&quot; + vars.get(&quot;request_number&quot;));
+
+log.info(vars.get(&quot;reqeust_timestamp&quot;) + &quot; Begin Stop transaction : &quot; + vars.get(&quot;transaction_id&quot;));</stringProp>
+              </BeanShellPreProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                <boolProp name="ResultCollector.error_logging">false</boolProp>
+                <objProp>
+                  <name>saveConfig</name>
+                  <value class="SampleSaveConfiguration">
+                    <time>true</time>
+                    <latency>true</latency>
+                    <timestamp>true</timestamp>
+                    <success>true</success>
+                    <label>true</label>
+                    <code>true</code>
+                    <message>true</message>
+                    <threadName>true</threadName>
+                    <dataType>true</dataType>
+                    <encoding>false</encoding>
+                    <assertions>true</assertions>
+                    <subresults>true</subresults>
+                    <responseData>false</responseData>
+                    <samplerData>false</samplerData>
+                    <xml>false</xml>
+                    <fieldNames>true</fieldNames>
+                    <responseHeaders>false</responseHeaders>
+                    <requestHeaders>false</requestHeaders>
+                    <responseDataOnError>false</responseDataOnError>
+                    <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                    <assertionsResultsToSave>0</assertionsResultsToSave>
+                    <bytes>true</bytes>
+                    <sentBytes>true</sentBytes>
+                    <threadCounts>true</threadCounts>
+                    <idleTime>true</idleTime>
+                    <connectTime>true</connectTime>
+                  </value>
+                </objProp>
+                <stringProp name="filename"></stringProp>
+              </ResultCollector>
+              <hashTree/>
+            </hashTree>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Wait for Accepted Response via DMaaP" enabled="true">
+              <stringProp name="WhileController.condition">${__javaScript(&quot;${action_accepted}&quot;==&quot;WAITING&quot;)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+                <stringProp name="ConstantTimer.delay">3000</stringProp>
+              </ConstantTimer>
+              <hashTree/>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="acceptance_retry" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">acceptance_retry</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SYNC(accepted/rejectd) response via DMaaP" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="filter" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                      <stringProp name="Argument.value">{&quot;class&quot;:&quot;Equals&quot;,&quot;field&quot;:&quot;correlation-id&quot;,&quot;value&quot;:&quot;${transaction_id}&quot;}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">filter</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${dmaap_ip}</stringProp>
+                <stringProp name="HTTPSampler.port">3904</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/events/${dmaap_topic_get}/appc-jmeter/${__threadNum}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Acceptance JSON Extractor" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">accept_message_old</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.body.output.status.message</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">WAITING</stringProp>
+                </JSONPostProcessor>
+                <hashTree/>
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                  <stringProp name="RegexExtractor.refname">accept_message</stringProp>
+                  <stringProp name="RegexExtractor.regex">&quot;message\\&quot;:\\&quot;(.*?)\\&quot;</stringProp>
+                  <stringProp name="RegexExtractor.template">$1$</stringProp>
+                  <stringProp name="RegexExtractor.default">WAITING</stringProp>
+                  <stringProp name="RegexExtractor.match_number">1</stringProp>
+                </RegexExtractor>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Acceptance JSR223 Assertion" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">String jsonMessage = vars.get(&quot;accept_message&quot;);
+String requestId = vars.get(&quot;transaction_id&quot;);
+int retries = Integer.parseInt(vars.get(&quot;acceptance_retry&quot;));
+int limit = Integer.parseInt(vars.get(&quot;accepted_retry_limit&quot;));
+
+log.info(&quot;Stop &quot; + requestId + &quot; acceptance response = &quot; + jsonMessage + &quot; attempt = &quot; + retries);
+log.info(&quot;action_accepted=&quot; + vars.get(&quot;action_accepted&quot;));
+log.info(&quot;action_completed=&quot; + vars.get(&quot;action_completed&quot;));
+
+if(jsonMessage != &quot;WAITING&quot;){
+	log.info(&quot;Received accepted response of &apos;&quot; + jsonMessage + &quot;&apos; for &quot; + requestId);
+	vars.put(&quot;action_accepted&quot;,jsonMessage);
+}else if(retries &gt;= limit){
+	log.info(&quot;Reached maximum retries waiting for Accepted response for transaction &quot; + requestId);
+	vars.put(&quot;action_accepted&quot;,&quot;TIMEOUT&quot;);
+}
+
+</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+                <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename"></stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Wait for Final Response via DMaaP" enabled="true">
+              <stringProp name="WhileController.condition">${__javaScript(&quot;${action_accepted}&quot;==&quot;ACCEPTED - request accepted&quot; &amp;&amp; &quot;${action_completed}&quot;==&quot;WAITING&quot;)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+                <stringProp name="ConstantTimer.delay">10000</stringProp>
+              </ConstantTimer>
+              <hashTree/>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="completed_retry" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">completed_retry</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ASYNC(completed) response via DMaaP " enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${dmaap_ip}</stringProp>
+                <stringProp name="HTTPSampler.port">3904</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/events/${dmaap_topic_get}/appc-jmeter/${__threadNum}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                  <stringProp name="RegexExtractor.refname">finished_message</stringProp>
+                  <stringProp name="RegexExtractor.regex">&quot;reason\\&quot;:\\&quot;(.*?)\\&quot;</stringProp>
+                  <stringProp name="RegexExtractor.template">$1$</stringProp>
+                  <stringProp name="RegexExtractor.default">WAITING</stringProp>
+                  <stringProp name="RegexExtractor.match_number">1</stringProp>
+                </RegexExtractor>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Acceptance JSR223 Assertion" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">String jsonMessage = vars.get(&quot;finished_message&quot;);
+String requestId = vars.get(&quot;transaction_id&quot;);
+int retries = Integer.parseInt(vars.get(&quot;completed_retry&quot;));
+int limit = Integer.parseInt(vars.get(&quot;completed_retry_limit&quot;));
+
+log.info(&quot;Stop &quot; + requestId + &quot; completed response = &quot; + jsonMessage + &quot; attempt = &quot; + retries);
+	
+if(jsonMessage != &quot;WAITING&quot;){
+	vars.put(&quot;action_completed&quot;,jsonMessage);
+}else if(retries &gt;= limit){
+	vars.put(&quot;action_completed&quot;,&quot;TIMEOUT&quot;);
+}
+
+</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+                <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename"></stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Start Transaction Controller" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+              <boolProp name="ResultCollector.error_logging">false</boolProp>
+              <objProp>
+                <name>saveConfig</name>
+                <value class="SampleSaveConfiguration">
+                  <time>true</time>
+                  <latency>true</latency>
+                  <timestamp>true</timestamp>
+                  <success>true</success>
+                  <label>true</label>
+                  <code>true</code>
+                  <message>true</message>
+                  <threadName>true</threadName>
+                  <dataType>true</dataType>
+                  <encoding>false</encoding>
+                  <assertions>true</assertions>
+                  <subresults>true</subresults>
+                  <responseData>false</responseData>
+                  <samplerData>false</samplerData>
+                  <xml>false</xml>
+                  <fieldNames>true</fieldNames>
+                  <responseHeaders>false</responseHeaders>
+                  <requestHeaders>false</requestHeaders>
+                  <responseDataOnError>false</responseDataOnError>
+                  <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                  <assertionsResultsToSave>0</assertionsResultsToSave>
+                  <bytes>true</bytes>
+                  <sentBytes>true</sentBytes>
+                  <threadCounts>true</threadCounts>
+                  <idleTime>true</idleTime>
+                  <connectTime>true</connectTime>
+                </value>
+              </objProp>
+              <stringProp name="filename"></stringProp>
+            </ResultCollector>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Submit request via DMaaP" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+    &quot;version&quot;: &quot;2.01&quot;,&#xd;
+    &quot;rpc-name&quot;: &quot;start&quot;,&#xd;
+    &quot;correlation-id&quot;: &quot;${transaction_id}&quot;,&#xd;
+    &quot;type&quot;: &quot;request&quot;,&#xd;
+    &quot;body&quot;: {&#xd;
+        &quot;input&quot;: {&#xd;
+            &quot;common-header&quot;: {&#xd;
+                &quot;timestamp&quot;: &quot;${reqeust_timestamp}&quot;,&#xd;
+                &quot;api-ver&quot;: &quot;2.05&quot;,&#xd;
+                &quot;originator-id&quot;: &quot;${transaction_id}&quot;,&#xd;
+                &quot;request-id&quot;: &quot;${transaction_id}&quot;,&#xd;
+                &quot;sub-request-id&quot;: &quot;1&quot;,&#xd;
+                &quot;flags&quot;: {&#xd;
+                    &quot;force&quot;: &quot;TRUE&quot;,&#xd;
+                    &quot;ttl&quot;: 60000&#xd;
+                }&#xd;
+            },&#xd;
+            &quot;action&quot;: &quot;Start&quot;,&#xd;
+            &quot;action-identifiers&quot;: {&#xd;
+                &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
+                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+            },&#xd;
+            &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/c0d9b8c7-9534-4a22-b464-d6aa2c930847\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
+        }&#xd;
+    }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${dmaap_ip}</stringProp>
+              <stringProp name="HTTPSampler.port">3904</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/events/${dmaap_topic_post}</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+                <boolProp name="resetInterpreter">false</boolProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="script">import java.text.SimpleDateFormat;
+
+String ISO_FORMAT = &quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSS&apos;Z&apos;&quot;;
+SimpleDateFormat isoFormatter = new SimpleDateFormat(ISO_FORMAT);
+isoFormatter.setTimeZone(TimeZone.getTimeZone(&quot;UTC&quot;));
+
+Calendar currentTime = Calendar.getInstance();
+
+String timeStampZuluStr = isoFormatter.format(currentTime.getTime());
+vars.put(&quot;reqeust_timestamp&quot;,timeStampZuluStr);
+vars.put(&quot;action_accepted&quot;,&quot;WAITING&quot;);
+vars.put(&quot;action_completed&quot;,&quot;WAITING&quot;);
+vars.put(&quot;accepted_retry_limit&quot;,&quot;3&quot;);
+vars.put(&quot;completed_retry_limit&quot;,&quot;20&quot;);
+vars.put(&quot;transaction_id&quot;,timeStampZuluStr + &quot;-&quot; + ${__threadNum} + &quot;-&quot; + vars.get(&quot;request_number&quot;));
+
+log.info(vars.get(&quot;reqeust_timestamp&quot;) + &quot; Begin Start transaction : &quot; + vars.get(&quot;transaction_id&quot;));</stringProp>
+              </BeanShellPreProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                <boolProp name="ResultCollector.error_logging">false</boolProp>
+                <objProp>
+                  <name>saveConfig</name>
+                  <value class="SampleSaveConfiguration">
+                    <time>true</time>
+                    <latency>true</latency>
+                    <timestamp>true</timestamp>
+                    <success>true</success>
+                    <label>true</label>
+                    <code>true</code>
+                    <message>true</message>
+                    <threadName>true</threadName>
+                    <dataType>true</dataType>
+                    <encoding>false</encoding>
+                    <assertions>true</assertions>
+                    <subresults>true</subresults>
+                    <responseData>false</responseData>
+                    <samplerData>false</samplerData>
+                    <xml>false</xml>
+                    <fieldNames>true</fieldNames>
+                    <responseHeaders>false</responseHeaders>
+                    <requestHeaders>false</requestHeaders>
+                    <responseDataOnError>false</responseDataOnError>
+                    <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                    <assertionsResultsToSave>0</assertionsResultsToSave>
+                    <bytes>true</bytes>
+                    <sentBytes>true</sentBytes>
+                    <threadCounts>true</threadCounts>
+                    <idleTime>true</idleTime>
+                    <connectTime>true</connectTime>
+                  </value>
+                </objProp>
+                <stringProp name="filename"></stringProp>
+              </ResultCollector>
+              <hashTree/>
+            </hashTree>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Wait for Accepted Response via DMaaP" enabled="true">
+              <stringProp name="WhileController.condition">${__javaScript(&quot;${action_accepted}&quot;==&quot;WAITING&quot;)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+                <stringProp name="ConstantTimer.delay">3000</stringProp>
+              </ConstantTimer>
+              <hashTree/>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="acceptance_retry" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">acceptance_retry</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SYNC(accepted/rejectd) response via DMaaP" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="filter" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                      <stringProp name="Argument.value">{&quot;class&quot;:&quot;Equals&quot;,&quot;field&quot;:&quot;correlation-id&quot;,&quot;value&quot;:&quot;${transaction_id}&quot;}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">filter</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${dmaap_ip}</stringProp>
+                <stringProp name="HTTPSampler.port">3904</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/events/${dmaap_topic_get}/appc-jmeter/${__threadNum}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Acceptance JSON Extractor" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">accept_message_old</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.body.output.status.message</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">WAITING</stringProp>
+                </JSONPostProcessor>
+                <hashTree/>
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                  <stringProp name="RegexExtractor.refname">accept_message</stringProp>
+                  <stringProp name="RegexExtractor.regex">&quot;message\\&quot;:\\&quot;(.*?)\\&quot;</stringProp>
+                  <stringProp name="RegexExtractor.template">$1$</stringProp>
+                  <stringProp name="RegexExtractor.default">WAITING</stringProp>
+                  <stringProp name="RegexExtractor.match_number">1</stringProp>
+                </RegexExtractor>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Acceptance JSR223 Assertion" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">String jsonMessage = vars.get(&quot;accept_message&quot;);
+String requestId = vars.get(&quot;transaction_id&quot;);
+int retries = Integer.parseInt(vars.get(&quot;acceptance_retry&quot;));
+int limit = Integer.parseInt(vars.get(&quot;accepted_retry_limit&quot;));
+
+log.info(&quot;Start &quot; + requestId + &quot; acceptance response = &quot; + jsonMessage + &quot; attempt = &quot; + retries);
+log.info(&quot;action_accepted=&quot; + vars.get(&quot;action_accepted&quot;));
+log.info(&quot;action_completed=&quot; + vars.get(&quot;action_completed&quot;));
+
+if(jsonMessage != &quot;WAITING&quot;){
+	log.info(&quot;Received accepted response of &apos;&quot; + jsonMessage + &quot;&apos; for &quot; + requestId);
+	vars.put(&quot;action_accepted&quot;,jsonMessage);
+}else if(retries &gt;= limit){
+	log.info(&quot;Reached maximum retries waiting for Accepted response for transaction &quot; + requestId);
+	vars.put(&quot;action_accepted&quot;,&quot;TIMEOUT&quot;);
+}
+
+</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+                <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename"></stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Wait for Final Response via DMaaP" enabled="true">
+              <stringProp name="WhileController.condition">${__javaScript(&quot;${action_accepted}&quot;==&quot;ACCEPTED - request accepted&quot; &amp;&amp; &quot;${action_completed}&quot;==&quot;WAITING&quot;)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+                <stringProp name="ConstantTimer.delay">10000</stringProp>
+              </ConstantTimer>
+              <hashTree/>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="completed_retry" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">completed_retry</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ASYNC(completed) response via DMaaP " enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${dmaap_ip}</stringProp>
+                <stringProp name="HTTPSampler.port">3904</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/events/${dmaap_topic_get}/appc-jmeter/${__threadNum}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                  <stringProp name="RegexExtractor.refname">finished_message</stringProp>
+                  <stringProp name="RegexExtractor.regex">&quot;reason\\&quot;:\\&quot;(.*?)\\&quot;</stringProp>
+                  <stringProp name="RegexExtractor.template">$1$</stringProp>
+                  <stringProp name="RegexExtractor.default">WAITING</stringProp>
+                  <stringProp name="RegexExtractor.match_number">1</stringProp>
+                </RegexExtractor>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Acceptance JSR223 Assertion" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">String jsonMessage = vars.get(&quot;finished_message&quot;);
+String requestId = vars.get(&quot;transaction_id&quot;);
+int retries = Integer.parseInt(vars.get(&quot;completed_retry&quot;));
+int limit = Integer.parseInt(vars.get(&quot;completed_retry_limit&quot;));
+
+log.info(&quot;Start &quot; + requestId + &quot; completed response = &quot; + jsonMessage + &quot; attempt = &quot; + retries);
+	
+if(jsonMessage != &quot;WAITING&quot;){
+	vars.put(&quot;action_completed&quot;,jsonMessage);
+}else if(retries &gt;= limit){
+	vars.put(&quot;action_completed&quot;,&quot;TIMEOUT&quot;);
+}
+
+</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+                <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename"></stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Stability-Test-VM3 LCM  Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1518473958000</longProp>
+        <longProp name="ThreadGroup.end_time">1518473958000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="RequestNumber" enabled="true">
+          <stringProp name="CounterConfig.start">1</stringProp>
+          <stringProp name="CounterConfig.end"></stringProp>
+          <stringProp name="CounterConfig.incr">1</stringProp>
+          <stringProp name="CounterConfig.name">request_number</stringProp>
+          <stringProp name="CounterConfig.format">000</stringProp>
+          <boolProp name="CounterConfig.per_user">false</boolProp>
+        </CounterConfig>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="filename">/home/ubuntu/appc-lcm-test-Stability-Test-VM3.csv</stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+          <boolProp name="stopThread">true</boolProp>
+          <stringProp name="variableNames">dmaap_ip,dmaap_topic_post,dmaap_topic_get,vnf_id,vm_id</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <ConfigTestElement guiclass="SimpleConfigGui" testclass="ConfigTestElement" testname="Simple Config Element" enabled="true"/>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Rebuild Loop Controller" enabled="false">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">3</stringProp>
+        </LoopController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Rebuild Transaction Controller" enabled="false">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">vars.put(&quot;REBUILD_ACCEPTED&quot;,&quot;WAITING&quot;);
+
+StringBuilder timestamp = new StringBuilder();
+//ISO_FORMAT &quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSS&apos;Z&apos;</stringProp>
+            </BeanShellPreProcessor>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Rebuild HTTP Request" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+    &quot;version&quot;: &quot;2.01&quot;,&#xd;
+    &quot;rpc-name&quot;: &quot;rebuild&quot;,&#xd;
+    &quot;correlation-id&quot;: &quot;${request_id}&quot;,&#xd;
+    &quot;type&quot;: &quot;request&quot;,&#xd;
+    &quot;body&quot;: {&#xd;
+        &quot;input&quot;: {&#xd;
+            &quot;common-header&quot;: {&#xd;
+                &quot;timestamp&quot;: &quot;${__time(yyyy-MM-dd&apos;T&apos;hh:mm:ss.SSS)}Z&quot;,&#xd;
+                &quot;api-ver&quot;: &quot;2.05&quot;,&#xd;
+                &quot;originator-id&quot;: &quot;${request_id}&quot;,&#xd;
+                &quot;request-id&quot;: &quot;${request_id}&quot;,&#xd;
+                &quot;sub-request-id&quot;: &quot;1&quot;,&#xd;
+                &quot;flags&quot;: {&#xd;
+                    &quot;force&quot;: &quot;TRUE&quot;,&#xd;
+                    &quot;ttl&quot;: 60000&#xd;
+                }&#xd;
+            },&#xd;
+            &quot;action&quot;: &quot;Rebuild&quot;,&#xd;
+            &quot;action-identifiers&quot;: {&#xd;
+                &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
+                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+            },&#xd;
+            &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/3b3d77e0-a79d-4c10-bfac-1b3914af1a14\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
+        }&#xd;
+    }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">10.12.5.252</stringProp>
+              <stringProp name="HTTPSampler.port">3904</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/events/APPC-LCM-READ</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor - ReqeustJSON Generator" enabled="true">
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <boolProp name="resetInterpreter">false</boolProp>
+                <stringProp name="script">StringBuilder result = new StringBuilder();
+String newline = System.getProperty(&quot;line.separator&quot;);
+//int max = Integer.parseInt(Parameters);
+//Random random = new Random();
+
+//int counter = Integer.parseInt(vars.get(&quot;request-id&quot;));
+
+result.append(&quot;{&quot;);
+//result.append(&quot;\&quot;version\&quot;: \&quot;2.01\&quot;,&quot;);
+//result.append(&quot;\&quot;rpc-name\&quot;: \&quot;restart\&quot;,&quot;);
+//result.append(&quot;\&quot;correlation-id\&quot;: \&quot;a20e2073-30b1-4357-893b-f5ed57b66ef0-1\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;type\&quot;: \&quot;request\&quot;,&quot;);
+//result.append(&quot;\&quot;vnf-id\&quot;: \&quot;APPC_Test_VM\&quot;&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;body\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;input\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;common-header\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;timestamp\&quot;: \&quot;2018-2-12T21:25:04.244Z\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;api-ver\&quot;: \&quot;2.05\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;originator-id\&quot;: \&quot;664be3d2-6c12-4f4b-a3e7-c349acced200\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;request-id\&quot;: \&quot;664be3d2-6c12-4f4b-a3e7-c349acced200\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;sub-request-id\&quot;: \&quot;1\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;flags\&quot;: {&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;force\&quot;: \&quot;TRUE\&quot;,&quot;);
+//result.append(newline);
+//result.append(&quot;\&quot;ttl\&quot;: 60000&quot;);
+//result.append(newline);
+//result.append(&quot;}&quot;);
+//result.append(newline);
+//result.append(&quot;},&quot;);  
+//result.append(newline);
+//result.append(&quot;\&quot;action\&quot;: \&quot;Restart\&quot;,&quot;);
+//result.append(newline);  
+//result.append(&quot;\&quot;action-identifiers\&quot;: {&quot;);
+//result.append(newline);  
+//result.append(&quot;\&quot;vnf-id\&quot;: \&quot;APPC_Test_VM\&quot;&quot;);
+//result.append(newline);  
+//result.append(&quot;}&quot;);
+//result.append(newline);
+//result.append(&quot;}&quot;);
+//result.append(newline);
+//result.append(&quot;}&quot;);
+result.append(newline);
+result.append(&quot;}&quot;);               
+
+vars.put(&quot;json&quot;,result.toString());</stringProp>
+              </BeanShellPreProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                <boolProp name="ResultCollector.error_logging">false</boolProp>
+                <objProp>
+                  <name>saveConfig</name>
+                  <value class="SampleSaveConfiguration">
+                    <time>true</time>
+                    <latency>true</latency>
+                    <timestamp>true</timestamp>
+                    <success>true</success>
+                    <label>true</label>
+                    <code>true</code>
+                    <message>true</message>
+                    <threadName>true</threadName>
+                    <dataType>true</dataType>
+                    <encoding>false</encoding>
+                    <assertions>true</assertions>
+                    <subresults>true</subresults>
+                    <responseData>false</responseData>
+                    <samplerData>false</samplerData>
+                    <xml>false</xml>
+                    <fieldNames>true</fieldNames>
+                    <responseHeaders>false</responseHeaders>
+                    <requestHeaders>false</requestHeaders>
+                    <responseDataOnError>false</responseDataOnError>
+                    <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                    <assertionsResultsToSave>0</assertionsResultsToSave>
+                    <bytes>true</bytes>
+                    <sentBytes>true</sentBytes>
+                    <threadCounts>true</threadCounts>
+                    <idleTime>true</idleTime>
+                    <connectTime>true</connectTime>
+                  </value>
+                </objProp>
+                <stringProp name="filename"></stringProp>
+              </ResultCollector>
+              <hashTree/>
+            </hashTree>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Wait for Accepted Response" enabled="true">
+              <stringProp name="WhileController.condition">${__javaScript(&quot;${REBUILD_ACCEPTED}&quot;==&quot;WAITING&quot;)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="acceptance_retry" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">acceptance_retry</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">false</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Restart HTTP Accepted" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="filter" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                      <stringProp name="Argument.value">{&quot;class&quot;:&quot;Equals&quot;,&quot;field&quot;:&quot;correlation-id&quot;,&quot;value&quot;:&quot;${request_id}&quot;}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">filter</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">10.12.5.252</stringProp>
+                <stringProp name="HTTPSampler.port">3904</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/events/APPC-LCM-WRITE/appc-jmeter/${__threadNum}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Acceptance JSON Extractor" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">accept_message_old</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.body.output.status.message</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">WAITING</stringProp>
+                </JSONPostProcessor>
+                <hashTree/>
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                  <stringProp name="RegexExtractor.refname">accept_message</stringProp>
+                  <stringProp name="RegexExtractor.regex">&quot;message\\&quot;:\\&quot;(.*?)\\&quot;</stringProp>
+                  <stringProp name="RegexExtractor.template">$1$</stringProp>
+                  <stringProp name="RegexExtractor.default">WAITING</stringProp>
+                  <stringProp name="RegexExtractor.match_number">1</stringProp>
+                </RegexExtractor>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Acceptance JSR223 Assertion" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">String jsonMessage = vars.get(&quot;accept_message&quot;);
+String requestId = vars.get(&quot;request_id&quot;);
+
+log.info(&quot;Rebuild &quot; + requestId + &quot; acceptance response = &quot; + jsonMessage);
+	
+if(jsonMessage != &quot;WAITING&quot;){
+	vars.put(&quot;REBUILD_ACCEPTED&quot;,jsonMessage);
+}
+	</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+                <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename"></stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <RandomController guiclass="RandomControlGui" testclass="RandomController" testname="Random Controller" enabled="true">
+          <intProp name="InterleaveControl.style">1</intProp>
+        </RandomController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Rebuild Transaction Controller" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+              <boolProp name="ResultCollector.error_logging">false</boolProp>
+              <objProp>
+                <name>saveConfig</name>
+                <value class="SampleSaveConfiguration">
+                  <time>true</time>
+                  <latency>true</latency>
+                  <timestamp>true</timestamp>
+                  <success>true</success>
+                  <label>true</label>
+                  <code>true</code>
+                  <message>true</message>
+                  <threadName>true</threadName>
+                  <dataType>true</dataType>
+                  <encoding>false</encoding>
+                  <assertions>true</assertions>
+                  <subresults>true</subresults>
+                  <responseData>false</responseData>
+                  <samplerData>false</samplerData>
+                  <xml>false</xml>
+                  <fieldNames>true</fieldNames>
+                  <responseHeaders>false</responseHeaders>
+                  <requestHeaders>false</requestHeaders>
+                  <responseDataOnError>false</responseDataOnError>
+                  <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                  <assertionsResultsToSave>0</assertionsResultsToSave>
+                  <bytes>true</bytes>
+                  <sentBytes>true</sentBytes>
+                  <threadCounts>true</threadCounts>
+                  <idleTime>true</idleTime>
+                  <connectTime>true</connectTime>
+                </value>
+              </objProp>
+              <stringProp name="filename"></stringProp>
+            </ResultCollector>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Submit request via DMaaP" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+    &quot;version&quot;: &quot;2.01&quot;,&#xd;
+    &quot;rpc-name&quot;: &quot;rebuild&quot;,&#xd;
+    &quot;correlation-id&quot;: &quot;${transaction_id}&quot;,&#xd;
+    &quot;type&quot;: &quot;request&quot;,&#xd;
+    &quot;body&quot;: {&#xd;
+        &quot;input&quot;: {&#xd;
+            &quot;common-header&quot;: {&#xd;
+                &quot;timestamp&quot;: &quot;${reqeust_timestamp}&quot;,&#xd;
+                &quot;api-ver&quot;: &quot;2.05&quot;,&#xd;
+                &quot;originator-id&quot;: &quot;${transaction_id}&quot;,&#xd;
+                &quot;request-id&quot;: &quot;${transaction_id}&quot;,&#xd;
+                &quot;sub-request-id&quot;: &quot;1&quot;,&#xd;
+                &quot;flags&quot;: {&#xd;
+                    &quot;force&quot;: &quot;TRUE&quot;,&#xd;
+                    &quot;ttl&quot;: 60000&#xd;
+                }&#xd;
+            },&#xd;
+            &quot;action&quot;: &quot;Rebuild&quot;,&#xd;
+            &quot;action-identifiers&quot;: {&#xd;
+                &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
+                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+            },&#xd;
+            &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/3b3d77e0-a79d-4c10-bfac-1b3914af1a14\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
+        }&#xd;
+    }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${dmaap_ip}</stringProp>
+              <stringProp name="HTTPSampler.port">3904</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/events/${dmaap_topic_post}</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+                <boolProp name="resetInterpreter">false</boolProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="script">import java.text.SimpleDateFormat;
+
+String ISO_FORMAT = &quot;yyyy-MM-dd&apos;T&apos;HH:mm:ss.SSS&apos;Z&apos;&quot;;
+SimpleDateFormat isoFormatter = new SimpleDateFormat(ISO_FORMAT);
+isoFormatter.setTimeZone(TimeZone.getTimeZone(&quot;UTC&quot;));
+
+Calendar currentTime = Calendar.getInstance();
+
+String timeStampZuluStr = isoFormatter.format(currentTime.getTime());
+vars.put(&quot;reqeust_timestamp&quot;,timeStampZuluStr);
+vars.put(&quot;action_accepted&quot;,&quot;WAITING&quot;);
+vars.put(&quot;action_completed&quot;,&quot;WAITING&quot;);
+vars.put(&quot;accepted_retry_limit&quot;,&quot;3&quot;);
+vars.put(&quot;completed_retry_limit&quot;,&quot;20&quot;);
+vars.put(&quot;transaction_id&quot;,timeStampZuluStr + &quot;-&quot; + ${__threadNum} + &quot;-&quot; + vars.get(&quot;request_number&quot;));
+
+log.info(vars.get(&quot;reqeust_timestamp&quot;) + &quot; Begin Restart transaction : &quot; + vars.get(&quot;transaction_id&quot;));</stringProp>
+              </BeanShellPreProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                <boolProp name="ResultCollector.error_logging">false</boolProp>
+                <objProp>
+                  <name>saveConfig</name>
+                  <value class="SampleSaveConfiguration">
+                    <time>true</time>
+                    <latency>true</latency>
+                    <timestamp>true</timestamp>
+                    <success>true</success>
+                    <label>true</label>
+                    <code>true</code>
+                    <message>true</message>
+                    <threadName>true</threadName>
+                    <dataType>true</dataType>
+                    <encoding>false</encoding>
+                    <assertions>true</assertions>
+                    <subresults>true</subresults>
+                    <responseData>false</responseData>
+                    <samplerData>false</samplerData>
+                    <xml>false</xml>
+                    <fieldNames>true</fieldNames>
+                    <responseHeaders>false</responseHeaders>
+                    <requestHeaders>false</requestHeaders>
+                    <responseDataOnError>false</responseDataOnError>
+                    <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                    <assertionsResultsToSave>0</assertionsResultsToSave>
+                    <bytes>true</bytes>
+                    <sentBytes>true</sentBytes>
+                    <threadCounts>true</threadCounts>
+                    <idleTime>true</idleTime>
+                    <connectTime>true</connectTime>
+                  </value>
+                </objProp>
+                <stringProp name="filename"></stringProp>
+              </ResultCollector>
+              <hashTree/>
+            </hashTree>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Wait for Accepted Response via DMaaP" enabled="true">
+              <stringProp name="WhileController.condition">${__javaScript(&quot;${action_accepted}&quot;==&quot;WAITING&quot;)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+                <stringProp name="ConstantTimer.delay">3000</stringProp>
+              </ConstantTimer>
+              <hashTree/>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="acceptance_retry" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">acceptance_retry</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SYNC(accepted/rejectd) response via DMaaP" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="filter" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                      <stringProp name="Argument.value">{&quot;class&quot;:&quot;Equals&quot;,&quot;field&quot;:&quot;correlation-id&quot;,&quot;value&quot;:&quot;${transaction_id}&quot;}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                      <stringProp name="Argument.name">filter</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${dmaap_ip}</stringProp>
+                <stringProp name="HTTPSampler.port">3904</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/events/${dmaap_topic_get}/appc-jmeter/${__threadNum}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Acceptance JSON Extractor" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">accept_message_old</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.body.output.status.message</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">WAITING</stringProp>
+                </JSONPostProcessor>
+                <hashTree/>
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                  <stringProp name="RegexExtractor.refname">accept_message</stringProp>
+                  <stringProp name="RegexExtractor.regex">&quot;message\\&quot;:\\&quot;(.*?)\\&quot;</stringProp>
+                  <stringProp name="RegexExtractor.template">$1$</stringProp>
+                  <stringProp name="RegexExtractor.default">WAITING</stringProp>
+                  <stringProp name="RegexExtractor.match_number">1</stringProp>
+                </RegexExtractor>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Acceptance JSR223 Assertion" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">String jsonMessage = vars.get(&quot;accept_message&quot;);
+String requestId = vars.get(&quot;transaction_id&quot;);
+int retries = Integer.parseInt(vars.get(&quot;acceptance_retry&quot;));
+int limit = Integer.parseInt(vars.get(&quot;accepted_retry_limit&quot;));
+
+log.info(&quot;Rebuild &quot; + requestId + &quot; acceptance response = &quot; + jsonMessage + &quot; attempt = &quot; + retries);
+log.info(&quot;action_accepted=&quot; + vars.get(&quot;action_accepted&quot;));
+log.info(&quot;action_completed=&quot; + vars.get(&quot;action_completed&quot;));
+
+if(jsonMessage != &quot;WAITING&quot;){
+	log.info(&quot;Received accepted response of &apos;&quot; + jsonMessage + &quot;&apos; for &quot; + requestId);
+	vars.put(&quot;action_accepted&quot;,jsonMessage);
+}else if(retries &gt;= limit){
+	log.info(&quot;Reached maximum retries waiting for Accepted response for transaction &quot; + requestId);
+	vars.put(&quot;action_accepted&quot;,&quot;TIMEOUT&quot;);
+}
+
+</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+                <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename"></stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+            <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Wait for Final Response via DMaaP" enabled="true">
+              <stringProp name="WhileController.condition">${__javaScript(&quot;${action_accepted}&quot;==&quot;ACCEPTED - request accepted&quot; &amp;&amp; &quot;${action_completed}&quot;==&quot;WAITING&quot;)}</stringProp>
+            </WhileController>
+            <hashTree>
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+                <stringProp name="ConstantTimer.delay">10000</stringProp>
+              </ConstantTimer>
+              <hashTree/>
+              <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="completed_retry" enabled="true">
+                <stringProp name="CounterConfig.start">1</stringProp>
+                <stringProp name="CounterConfig.end"></stringProp>
+                <stringProp name="CounterConfig.incr">1</stringProp>
+                <stringProp name="CounterConfig.name">completed_retry</stringProp>
+                <stringProp name="CounterConfig.format"></stringProp>
+                <boolProp name="CounterConfig.per_user">true</boolProp>
+                <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+              </CounterConfig>
+              <hashTree/>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ASYNC(completed) response via DMaaP " enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <collectionProp name="Arguments.arguments"/>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain">${dmaap_ip}</stringProp>
+                <stringProp name="HTTPSampler.port">3904</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">/events/${dmaap_topic_get}/appc-jmeter/${__threadNum}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+                  <stringProp name="RegexExtractor.refname">finished_message</stringProp>
+                  <stringProp name="RegexExtractor.regex">&quot;reason\\&quot;:\\&quot;(.*?)\\&quot;</stringProp>
+                  <stringProp name="RegexExtractor.template">$1$</stringProp>
+                  <stringProp name="RegexExtractor.default">WAITING</stringProp>
+                  <stringProp name="RegexExtractor.match_number">1</stringProp>
+                </RegexExtractor>
+                <hashTree/>
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Acceptance JSR223 Assertion" enabled="true">
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="script">String jsonMessage = vars.get(&quot;finished_message&quot;);
+String requestId = vars.get(&quot;transaction_id&quot;);
+int retries = Integer.parseInt(vars.get(&quot;completed_retry&quot;));
+int limit = Integer.parseInt(vars.get(&quot;completed_retry_limit&quot;));
+
+log.info(&quot;Rebuild &quot; + requestId + &quot; completed response = &quot; + jsonMessage + &quot; attempt = &quot; + retries);
+	
+if(jsonMessage != &quot;WAITING&quot;){
+	vars.put(&quot;action_completed&quot;,jsonMessage);
+}else if(retries &gt;= limit){
+	vars.put(&quot;action_completed&quot;,&quot;TIMEOUT&quot;);
+}
+
+</stringProp>
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                </JSR223Assertion>
+                <hashTree/>
+                <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename"></stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
