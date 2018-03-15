@@ -19,7 +19,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-ECOMP is a trademark and service mark of AT&T Intellectual Property.
 ============LICENSE_END============================================
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -114,6 +113,7 @@ ECOMP is a trademark and service mark of AT&T Intellectual Property.
     <modules>
         <module>platform-logic</module>
         <module>installation</module>
+        <module>cdt</module>
     </modules>
     <organization>
         <name>ONAP</name>
