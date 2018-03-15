@@ -3,7 +3,7 @@
 ============LICENSE_START==========================================
 ONAP : APPC
 ===================================================================
-Copyright (C) 2017-2018 AT&T Intellectual Property. All rights reserved.
+Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
 ===================================================================
 
 Unless otherwise specified, all software contained herein is licensed
@@ -114,6 +114,7 @@ ECOMP is a trademark and service mark of AT&T Intellectual Property.
     <modules>
         <module>platform-logic</module>
         <module>installation</module>
+        <module>cdt</module>
     </modules>
     <organization>
         <name>ONAP</name>
