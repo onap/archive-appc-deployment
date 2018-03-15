@@ -114,6 +114,7 @@ ECOMP is a trademark and service mark of AT&T Intellectual Property.
     <modules>
         <module>platform-logic</module>
         <module>installation</module>
+        <module>cdt</module>
     </modules>
     <organization>
         <name>ONAP</name>
