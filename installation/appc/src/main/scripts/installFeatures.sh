@@ -28,7 +28,7 @@ APPC_FEATURE_DIR=${APPC_FEATURE_DIR:-${APPC_HOME}/features}
 function featureInstall {
 COUNT=0
 while [ $COUNT -lt 10 ]; do
-  ${ODL_HOME}/bin/client -u karaf feature:install $1 2> /tmp/installErr
+  ${ODL_HOME}/bin/client feature:install $1 2> /tmp/installErr
   cat /tmp/installErr
   if grep -q 'Failed to get the session' /tmp/installErr; then
     sleep 10
@@ -39,7 +39,55 @@ while [ $COUNT -lt 10 ]; do
 done
 }
 
-APPC_FEATURES=" \
+ APPC_FEATURES=" \
+ appc-metric \
+ appc-dmaap-adapter \
+ appc-chef-adapter \
+ appc-netconf-adapter \
+ appc-rest-adapter \
+ appc-lifecycle-management \
+ appc-dispatcher \
+ appc-provider \
+ appc-dg-util \
+ appc-dg-shared \
+ appc-sdc-listener \
+ appc-oam \
+ appc-iaas-adapter \
+ appc-ansible-adapter \
+ appc-sequence-generator \
+ appc-artifact-handler \
+ appc-aai-client"
+
+APPC_FEATURES_1=" \
+ appc-metric \
+ appc-dmaap-adapter \
+ appc-chef-adapter \
+ appc-netconf-adapter \
+ appc-rest-adapter \
+ appc-lifecycle-management \
+ appc-license-manager"
+ 
+ APPC_FEATURES_2=" \
+ appc-provider \
+ appc-dg-util \
+ appc-dg-shared \
+ appc-sdc-listener \
+ appc-oam \
+ appc-iaas-adapter \
+ appc-ansible-adapter \
+ appc-sequence-generator \
+ appc-config-generator \
+ appc-config-data-services \
+ appc-config-adaptor \
+ appc-config-audit \
+ appc-config-encryption-tool \
+ appc-config-flow-controller \
+ appc-config-params \
+ appc-artifact-handler \
+ appc-aai-client \
+ appc-event-listener"
+ 
+ APPC_FEATURES_UNZIP=" \
  appc-metric \
  appc-dmaap-adapter \
  appc-event-listener \
@@ -65,21 +113,21 @@ APPC_FEATURES=" \
  appc-config-params \
  appc-artifact-handler \
  appc-aai-client"
+ 
 
-# Temp fix to fix bouncycastle issue that is preventing netconf to work correctly
-apt-get -y install wget
-wget -P /opt/opendaylight/current/deploy https://www.bouncycastle.org/download/bcprov-jdk15on-158.jar
-wget -P /opt/opendaylight/current/deploy https://www.bouncycastle.org/download/bcprov-ext-jdk15on-158.jar
+ 
+
 
 echo "Enabling core APP-C features"
 featureInstall odl-netconf-connector-all
 featureInstall odl-restconf-noauth
 featureInstall odl-netconf-topology
 
+sleep 7s
 echo "Installing APP-C Features"
 echo ""
 
-for feature in ${APPC_FEATURES}
+for feature in ${APPC_FEATURES_UNZIP}
 do
   if [ -f ${APPC_FEATURE_DIR}/${feature}/install-feature.sh ]
   then
@@ -87,4 +135,36 @@ do
   else
     echo "No installer found for feature ${feature}"
   fi
+done
+
+#${ODL_HOME}/bin/client feature:install appc-metric appc-dmaap-adapter appc-event-listener appc-chef-adapter appc-netconf-adapter appc-rest-adapter appc-lifecycle-management appc-dispatcher appc-provider appc-dg-util appc-dg-shared appc-sdc-listener appc-oam appc-iaas-adapter appc-ansible-adapter appc-sequence-generator appc-config-generator appc-config-data-services appc-config-adaptor appc-config-audit appc-config-encryption-tool appc-config-flow-controller appc-config-params appc-artifact-handler appc-aai-client
+
+for feature in ${APPC_FEATURES_1}
+do
+  echo "Installing ${feature}"
+  start=$(date +%s)
+  ${ODL_HOME}/bin/client "feature:install -r ${feature}"
+  end=$(date +%s)
+  echo "Install of ${feature} took $(expr $end - $start) seconds"
+  sleep 7s
+  echo "Sleep Finished"
+done
+
+  echo "Installing dispatcher features"
+  start=$(date +%s)
+  ${ODL_HOME}/bin/client "feature:install -r appc-request-handler appc-command-executor appc-lifecycle-management appc-workflow-management lock-manager"
+  end=$(date +%s)
+  echo "Install of dispatcher features took $(expr $end - $start) seconds"
+  sleep 7s
+  echo "Sleep Finished"
+
+for feature in ${APPC_FEATURES_2}
+do
+  echo "Installing ${feature}"
+  start=$(date +%s)
+  ${ODL_HOME}/bin/client "feature:install -r ${feature}"
+  end=$(date +%s)
+  echo "Install of ${feature} took $(expr $end - $start) seconds"
+  sleep 7s
+  echo "Sleep Finished"
 done
