@@ -84,7 +84,7 @@ fi
 
 cwd=$(pwd)
 
-mavenOpts="-s ${SETTINGS_FILE} -gs ${GLOBAL_SETTINGS_FILE}"
+mavenOpts="-s ${SETTINGS_FILE} -gs ${GLOBAL_SETTINGS_FILE} -o"
 cd /tmp
 
 echo "Installing APP-C version ${APPC_VERSION}"
