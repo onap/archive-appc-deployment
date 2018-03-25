@@ -28,7 +28,7 @@
 
 ODL_HOME=${ODL_HOME:-/opt/opendaylight/current}
 ODL_ADMIN_PASSWORD=${ODL_ADMIN_PASSWORD:-Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U}
-SDNC_HOME=${SDNC_HOME:-/opt/onap/sdnc}
+SDNC_HOME=${SDNC_HOME:-/opt/onap/ccsdk}
 APPC_HOME=${APPC_HOME:-/opt/onap/appc}
 SLEEP_TIME=${SLEEP_TIME:-120}
 MYSQL_PASSWD=${MYSQL_PASSWD:-openECOMP1.0}
@@ -72,11 +72,8 @@ then
 	${ODL_HOME}/bin/start
 	echo "Waiting ${SLEEP_TIME} seconds for OpenDaylight to initialize"
 	sleep ${SLEEP_TIME}
-	echo "Inserting modified installFeatures.sh for sdnc"
-	rm ${SDNC_HOME}/bin/installFeatures.sh
-	cp ${APPC_HOME}/data/sdncInstallFeatures.sh ${SDNC_HOME}/bin/installFeatures.sh
 	echo "Copying a working version of the logging configuration into the opendaylight etc folder"
-	cp ${APPC_HOME}/data/org.ops4j.pax.logging.cfg ${ODL_HOME}/etc/org.ops4j.pax.logging.cfg
+    cp ${APPC_HOME}/data/org.ops4j.pax.logging.cfg ${ODL_HOME}/etc/org.ops4j.pax.logging.cfg
 	echo "Installing SDNC platform features"
 	${SDNC_HOME}/bin/installFeatures.sh
 	if [ -x ${SDNC_HOME}/svclogic/bin/install.sh ]
@@ -99,8 +96,10 @@ then
 		${APPC_HOME}/svclogic/bin/install-converted-dgs.sh
 	fi
 
-	echo "Restarting OpenDaylight"
-	${ODL_HOME}/bin/stop
+    echo "Restarting OpenDaylight"
+    ${ODL_HOME}/bin/stop
+    echo "Waiting 60 seconds for OpenDaylight stop to complete"
+    sleep 60
 	echo "Installed at `date`" > ${SDNC_HOME}/.installed
 fi
 

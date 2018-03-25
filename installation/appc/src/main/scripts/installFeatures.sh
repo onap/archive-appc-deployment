@@ -66,10 +66,6 @@ APPC_FEATURES=" \
  appc-artifact-handler \
  appc-aai-client"
 
-# Temp fix to fix bouncycastle issue that is preventing netconf to work correctly
-apt-get -y install wget
-wget -P /opt/opendaylight/current/deploy https://www.bouncycastle.org/download/bcprov-jdk15on-158.jar
-wget -P /opt/opendaylight/current/deploy https://www.bouncycastle.org/download/bcprov-ext-jdk15on-158.jar
 
 echo "Enabling core APP-C features"
 featureInstall odl-netconf-connector-all
