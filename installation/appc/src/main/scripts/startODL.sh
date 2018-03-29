@@ -98,6 +98,14 @@ then
 		echo "Installing APPC JSON DGs converted to XML using dg-loader"
 		${APPC_HOME}/svclogic/bin/install-converted-dgs.sh
 	fi
+	
+	echo "Adding a property system.properties for AAF cadi.properties location"
+	echo "" >> ${ODL_HOME}/etc/system.properties
+	echo "cadi_prop_files=${APPC_HOME}/data/properties/cadi.properties" >> ${ODL_HOME}/etc/system.properties
+	echo "" >> ${ODL_HOME}/etc/system.properties
+	
+	echo "Copying a working version of the shiro configuration into the opendaylight etc folder"
+ 	cp ${APPC_HOME}/data/shiro.ini ${ODL_HOME}/etc/shiro.ini
 
 	echo "Restarting OpenDaylight"
 	${ODL_HOME}/bin/stop
