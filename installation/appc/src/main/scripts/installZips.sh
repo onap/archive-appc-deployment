@@ -76,6 +76,7 @@ FEATURES_PER_DIRECTORY=$(($(echo $APPC_FEATURES|wc -w)/$FEATURE_DIRECTORY_COUNT)
 
 APPC_VERSION=${APPC_VERSION:-0.0.1}
 APPC_OAM_VERSION=${APPC_OAM_VERSION:-0.1.1}
+AAF_CADI_SHIRO_VERSION=${AAF_CADI_SHIRO_VERSION:1.5.0-SNAPSHOT}
 
 if [ ! -d ${targetDir} ]
 then
@@ -117,6 +118,10 @@ unzip -d ${targetDir} /tmp/platform-logic-installer*.zip
 echo "Downloading dg-loader-provider jar from nexus"
 mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.plugins:dg-loader-provider:${APPC_VERSION}:jar:jar-with-dependencies -DoutputDirectory=${targetDir}/data
 mv ${targetDir}/data/dg-loader-provider-*-jar-with-dependencies.jar ${targetDir}/data/dg-loader-provider-jar-with-dependencies.jar
+
+echo "Downloading aaf-cadi-shiro from nexus"
+mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.aaf.authz.cadi:aaf-cadi-shiro:${AAF_CADI_SHIRO_VERSION}:jar -DoutputDirectory=${targetDir}/data
+mv ${targetDir}/data/aaf-cadi-shiro-*.jar ${targetDir}/data/aaf-cadi-shiro.jar
 
 find ${targetDir} -name '*.sh' -exec chmod +x '{}' \;
 
