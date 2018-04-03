@@ -76,6 +76,8 @@ then
 	cp ${APPC_HOME}/data/sdncInstallFeatures.sh ${SDNC_HOME}/bin/installFeatures.sh
 	echo "Copying a working version of the logging configuration into the opendaylight etc folder"
 	cp ${APPC_HOME}/data/org.ops4j.pax.logging.cfg ${ODL_HOME}/etc/org.ops4j.pax.logging.cfg
+	echo "Copying a new version of aaf cadi shiro into the opendaylight deploy folder"
+	cp ${APPC_HOME}/data/aaf-cadi-shiro.jar ${ODL_HOME}/deploy/aaf-cadi-shiro.jar
 	echo "Installing SDNC platform features"
 	${SDNC_HOME}/bin/installFeatures.sh
 	if [ -x ${SDNC_HOME}/svclogic/bin/install.sh ]
