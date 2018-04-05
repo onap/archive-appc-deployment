@@ -46,7 +46,7 @@ limitations under the License.
                 <!--This version will be over-ridden by jenkins 
                     injecting the version.properties variable file during docker build-->
         <appc.docker.staging.version>1.0.0</appc.docker.staging.version>
-        <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+        <maven.build.timestamp.format>yyyyMMdd'T'HHmmss'Z'</maven.build.timestamp.format>
     </properties>
 
 
