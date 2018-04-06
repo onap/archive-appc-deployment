@@ -157,7 +157,7 @@ limitations under the License.
                                         }
                                         if ( project.properties['ver'].endsWith("-SNAPSHOT") ) {
                                         project.properties['dockertag1']=project.properties['ver'] + "-latest";
-                                        project.properties['dockertag2']="latest";
+                                        project.properties['dockertag2']=project.properties['ver'] + "-" + project.properties['timestamp'];
                                         project.properties['appc.version']=project.properties['appc.snapshot.version'];
                                         } else {
                                         project.properties['dockertag1']=versionArray[0] + '.' + versionArray[1] + "-STAGING-latest";
