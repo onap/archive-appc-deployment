@@ -76,7 +76,7 @@ FEATURES_PER_DIRECTORY=$(($(echo $APPC_FEATURES|wc -w)/$FEATURE_DIRECTORY_COUNT)
 
 APPC_VERSION=${APPC_VERSION:-0.0.1}
 APPC_OAM_VERSION=${APPC_OAM_VERSION:-0.1.1}
-AAF_CADI_SHIRO_VERSION=${AAF_CADI_SHIRO_VERSION:-1.5.0-SNAPSHOT}
+AAF_SHIRO_VERSION=${AAF_SHIRO_VERSION:-2.1.0}
 
 if [ ! -d ${targetDir} ]
 then
@@ -120,8 +120,8 @@ mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -D
 mv ${targetDir}/data/dg-loader-provider-*-jar-with-dependencies.jar ${targetDir}/data/dg-loader-provider-jar-with-dependencies.jar
 
 echo "Downloading aaf-cadi-shiro from nexus"
-mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.aaf.authz.cadi:aaf-cadi-shiro:${AAF_CADI_SHIRO_VERSION} -DoutputDirectory=${targetDir}/data
-mv ${targetDir}/data/aaf-cadi-shiro-*.jar ${targetDir}/data/aaf-cadi-shiro.jar
+mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.aaf.authz.cadi:aaf-shiro-aafrealm-osgi-bundle:${AAF_SHIRO_VERSION} -DoutputDirectory=${targetDir}/data
+mv ${targetDir}/data/aaf-shiro-aafrealm-osgi-bundle-*.jar ${targetDir}/data/aaf-shiro-aafrealm-osgi-bundle.jar
 
 find ${targetDir} -name '*.sh' -exec chmod +x '{}' \;
 
