@@ -108,8 +108,8 @@ then
 	echo "cadi_prop_files=${APPC_HOME}/data/properties/cadi.properties" >> ${ODL_HOME}/etc/system.properties
 	echo "" >> ${ODL_HOME}/etc/system.properties
 	
-	echo "Copying a working version of the shiro configuration into the opendaylight etc folder"
- 	cp ${APPC_HOME}/data/shiro.ini ${ODL_HOME}/etc/shiro.ini
+	echo "Copying the aaa shiro configuration into opendaylight"
+    cp ${APPC_HOME}/data/aaa-app-config.xml ${ODL_HOME}/etc/opendaylight/datastore/initial/config/aaa-app-config.xml
 
     echo "Restarting OpenDaylight"
     ${ODL_HOME}/bin/stop
