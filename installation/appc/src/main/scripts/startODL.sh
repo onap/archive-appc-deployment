@@ -69,6 +69,8 @@ then
 	${SDNC_HOME}/bin/installSdncDb.sh
 	echo "Installing APPC database"
 	${APPC_HOME}/bin/installAppcDb.sh
+	echo "Installing ODL Host Key"
+	${SDNC_HOME}/bin/installOdlHostKey.sh
 	echo "Starting OpenDaylight"
 	${ODL_HOME}/bin/start
 	echo "Waiting ${SLEEP_TIME} seconds for OpenDaylight to initialize"
