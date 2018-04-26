@@ -73,6 +73,7 @@ APPC:StopVM_VM:2.0.0:sync
 APPC:Stop_VM:2.0.0:sync
 APPC:StopApplication_VM_vSCP:2.0.0:sync
 APPC:Generic_Sync:2.0.0:sync
+APPC:Generic_Restart:3.0.0:sync
 APPC:Generic_Audit:2.0.0:sync
 APPC:Start_VNF:2.0.0:sync
 APPC:Start_VNFC:2.0.0:sync

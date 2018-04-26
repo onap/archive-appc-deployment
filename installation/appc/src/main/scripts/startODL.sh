@@ -91,11 +91,6 @@ then
 	${APPC_HOME}/bin/installFeatures.sh
 	
 	
-	if [ -x ${APPC_HOME}/svclogic/bin/install.sh ]
-	then
-		echo "Installing APPC DGs using platform-logic"
-		${APPC_HOME}/svclogic/bin/install.sh
-	fi
 
 	if [ -x ${APPC_HOME}/svclogic/bin/install-converted-dgs.sh ]
 	then

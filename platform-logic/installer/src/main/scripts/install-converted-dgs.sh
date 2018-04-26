@@ -49,6 +49,9 @@ mkdir -p ${DG_JSON_DIR}/converted-xml
 # Generate XML DGs from JSON DGs
 $JAVA_HOME/bin/java -cp ${DG_LOADER} org.onap.sdnc.dg.loader.DGXMLGenerator ${DG_JSON_DIR} ${DG_JSON_DIR}/converted-xml
 
+#Load legacy xml DGs to the SVC_LOGIC DB in the MySQL Docker Container
+$JAVA_HOME/bin/java -cp ${DG_LOADER} org.onap.sdnc.dg.loader.DGXMLLoad ${SVCLOGIC_DIR}/graphs/appc ${APPC_HOME}/data/properties/dblib.properties
+
 # Load converted XML DGs to the SVC_LOGIC DB in the MySQL Docker Container
 $JAVA_HOME/bin/java -cp ${DG_LOADER} org.onap.sdnc.dg.loader.DGXMLLoad ${DG_JSON_DIR}/converted-xml ${APPC_HOME}/data/properties/dblib.properties
 
