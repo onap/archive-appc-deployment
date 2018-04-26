@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+2: Patrick Brady <pb071s@att.com>
+Code-Review+2: Randa  Maher <rx196w@att.com>
+Submitted-by: Randa  Maher <rx196w@att.com>
+Submitted-at: Thu, 26 Apr 2018 18:56:46 +0000
+Reviewed-on: https://gerrit.onap.org/r/44943
+Project: appc/deployment
+Branch: refs/heads/master
