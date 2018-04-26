@@ -113,8 +113,25 @@ then
 
     echo "Restarting OpenDaylight"
     ${ODL_HOME}/bin/stop
-    echo "Waiting 60 seconds for OpenDaylight stop to complete"
-    sleep 60
+	checkRun () {
+		running=0
+		while read a b c d e f g h
+		do
+		if [ "$h" == "/bin/sh /opt/opendaylight/current/bin/karaf server" ]
+		then
+			running=1
+		fi
+		done < <(ps -eaf)
+		echo $running
+	}
+	
+	while [ $( checkRun ) == 1 ]
+	do
+		echo "Karaf is still running, waiting..."
+		sleep 5s
+	done
+	echo "Karaf process has stopped"
+	sleep 10s
 	echo "Installed at `date`" > ${SDNC_HOME}/.installed
 fi
 
