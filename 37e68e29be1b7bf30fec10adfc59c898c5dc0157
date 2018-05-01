@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Takamune Cho <tc012c@att.com>
+Code-Review+2: Randa  Maher <rx196w@att.com>
+Submitted-by: Randa  Maher <rx196w@att.com>
+Submitted-at: Tue, 01 May 2018 22:10:33 +0000
+Reviewed-on: https://gerrit.onap.org/r/45509
+Project: appc/deployment
+Branch: refs/heads/master
