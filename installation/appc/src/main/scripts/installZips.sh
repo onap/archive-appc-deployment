@@ -70,7 +70,9 @@ APPC_FEATURES=" \
  appc-config-encryption-tool \
  appc-config-flow-controller \
  appc-config-params \
- appc-aai-client"
+ appc-aai-client \
+ appc-network-inventory-client \
+ appc-design-services"
 
 FEATURES_PER_DIRECTORY=$(($(echo $APPC_FEATURES|wc -w)/$FEATURE_DIRECTORY_COUNT))
 

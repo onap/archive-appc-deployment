@@ -85,7 +85,9 @@ APPC_FEATURES_1=" \
  appc-config-params \
  appc-artifact-handler \
  appc-aai-client \
- appc-event-listener"
+ appc-event-listener \
+ appc-network-inventory-client \
+ appc-design-services"
  
  APPC_FEATURES_UNZIP=" \
  appc-metric \
@@ -112,7 +114,9 @@ APPC_FEATURES_1=" \
  appc-config-flow-controller \
  appc-config-params \
  appc-artifact-handler \
- appc-aai-client"
+ appc-aai-client \
+ appc-network-inventory-client \
+ appc-design-services"
  
 
  
