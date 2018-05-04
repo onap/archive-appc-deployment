@@ -72,7 +72,8 @@ APPC_FEATURES=" \
  appc-config-params \
  appc-aai-client \
  appc-network-inventory-client \
- appc-design-services"
+ appc-design-services \
+ appc-interfaces-service"
 
 FEATURES_PER_DIRECTORY=$(($(echo $APPC_FEATURES|wc -w)/$FEATURE_DIRECTORY_COUNT))
 
