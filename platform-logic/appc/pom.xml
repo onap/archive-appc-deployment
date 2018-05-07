@@ -75,39 +75,6 @@ ECOMP is a trademark and service mark of AT&T Intellectual Property.
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Copying the JSON DG Graph scripts from platform-logic/appc/src/main/json/dg-loader-dgs to container's <SVCLOGIC_DIR>/graphs/appc/json/dg-loader-dgs path --> 
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
-				<executions>
-					<execution>
-						<id>copy-dgloader-dgs</id>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<phase>validate</phase>
-						<configuration>
-							<outputDirectory>../target/graphs/appc/json/dg-loader-dgs</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/json/dg-loader-dgs</directory>
-									<includes>
-										<include>**/*.json</include>
-									</includes>
-									<filtering>true</filtering>
-								</resource>
-								<resource>
-									<directory>src/main/resources</directory>
-									<includes>
-										<include>dg_activate.txt</include>
-									</includes>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<!-- Copying the default platform-logic scripts from platform-logic/appc/src/main/json to container's <SVCLOGIC_DIR>/graphs/appc/json path --> 
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
