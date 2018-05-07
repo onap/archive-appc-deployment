@@ -18,7 +18,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ============LICENSE_END=========================================================
-# ECOMP is a trademark and service mark of AT&T Intellectual Property.
 ###
 
 if [ -z "$SETTINGS_FILE" -a -z "$GLOBAL_SETTINGS_FILE" -a -s "$HOME"/.m2/settings.xml ]
@@ -117,6 +116,11 @@ echo "Installing platform-logic for APP-C"
 rm -f /tmp/platform-logic-installer*.zip
 mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.deployment:platform-logic-installer:${APPC_OAM_VERSION}:zip -DoutputDirectory=/tmp -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.ssl.insecure=true
 unzip -d ${targetDir} /tmp/platform-logic-installer*.zip
+
+echo "Downloading dg-loader DGs from nexus"
+mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc:appc-dg-provider:${APPC_VERSION} -DoutputDirectory=/tmp
+unzip -d ${targetDir}/svclogic/graphs/appc/json /tmp/appc-dg-provider*.jar json/**
+mv ${targetDir}/svclogic/graphs/appc/json/json ${targetDir}/svclogic/graphs/appc/json/dg-loader-dgs
 
 echo "Downloading dg-loader-provider jar from nexus"
 mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.plugins:dg-loader-provider:${APPC_VERSION}:jar:jar-with-dependencies -DoutputDirectory=${targetDir}/data
