@@ -1,1 +1,1038 @@
-[{"id":"bcf33378.a06a7","type":"dgstart","name":"DGSTART","outputs":1,"x":115,"y":60.33333778381348,"z":"9adc6d3f.4fd9a","wires":[["9aecacf7.59d93"]]},{"id":"9aecacf7.59d93","type":"service-logic","name":"APPC 4.0.0","module":"APPC","version":"4.0.0","comments":"","xml":"<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='4.0.0'>","outputs":1,"x":298,"y":61.33333778381348,"z":"9adc6d3f.4fd9a","wires":[["d767a7f1.e85ab8"]]},{"id":"d767a7f1.e85ab8","type":"method","name":"method Generic_Configure","xml":"<method rpc='Generic_Configure' mode='sync'>\n","comments":"","outputs":1,"x":513,"y":53.33333778381348,"z":"9adc6d3f.4fd9a","wires":[["9648a68e.58be58"]]},{"id":"9648a68e.58be58","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","outputs":1,"x":132,"y":196.66666316986084,"z":"9adc6d3f.4fd9a","wires":[["b08a9e58.bd07e","ecefd839.64cd58","bbe79244.e2541","7421ecb2.1ac094"]]},{"id":"b08a9e58.bd07e","type":"call","name":"call: DownloadConfig","xml":"<call module=\"APPC\" rpc=\"`$tmp.configureactiondg.DOWNLOAD-CONFIG-DG`\" mode=\"sync\">","comments":"","outputs":1,"x":398.4444351196289,"y":472.77783012390137,"z":"9adc6d3f.4fd9a","wires":[["ef940996.264278","b02b2cdd.876c9","9cdecbc8.ba74f8"]]},{"id":"ef940996.264278","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":623.6666374206543,"y":409.4444389343262,"z":"9adc6d3f.4fd9a","wires":[["41480864.94a478"]]},{"id":"b02b2cdd.876c9","type":"failure","name":"not-found","xml":"<outcome value='not-found'>\n","comments":"","outputs":1,"x":644.9166984558105,"y":576.8334465026855,"z":"9adc6d3f.4fd9a","wires":[["cc065ab0.bbd438"]]},{"id":"9cdecbc8.ba74f8","type":"success","name":" success","xml":"<outcome value=\"success\">","comments":"","outputs":1,"x":593.2500114440918,"y":769.1667022705078,"z":"9adc6d3f.4fd9a","wires":[["2e4169d0.23efc6"]]},{"id":"41480864.94a478","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","outputs":1,"x":832.3333053588867,"y":403.66669845581055,"z":"9adc6d3f.4fd9a","wires":[["10597d65.368c33","c9fe6ef2.b8991","ee63b08a.143ca"]]},{"id":"cc065ab0.bbd438","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","outputs":1,"x":827.8333282470703,"y":622.000072479248,"z":"9adc6d3f.4fd9a","wires":[["b2cd609c.f0e14"]]},{"id":"2e4169d0.23efc6","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","outputs":1,"x":799.2500114440918,"y":760.4167022705078,"z":"9adc6d3f.4fd9a","wires":[["4351ab2.e80d754","5155e2e.c35c01c","ac964ccc.c134e","de42b2.dca01d5"]]},{"id":"10597d65.368c33","type":"record","name":"record","xml":"<record plugin=\"org.onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"field2\" value=\"`'error-code = ' + $error-code`\" />\n<parameter name=\"field3\" value=\"`'error-message = ' + $error-message`\" />\n","comments":"","outputs":1,"x":1095.2222938537598,"y":385.888879776001,"z":"9adc6d3f.4fd9a","wires":[[]]},{"id":"b2cd609c.f0e14","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"`'DG Workflow ' + $tmp.configureactiondg.DOWNLOAD-CONFIG-DG + ' not found'`\"/>\n\t","comments":"","x":1231.2500228881836,"y":646.7500114440918,"z":"9adc6d3f.4fd9a","wires":[]},{"id":"4351ab2.e80d754","type":"record","name":"record","xml":"<record plugin=\"org.onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"field2\" value=\"`'error-code = ' + $error-code`\" />\n<parameter name=\"field3\" value=\"`'error-message = ' + $error-message`\" />\n<parameter name=\"field4\" value=\"ACTIVATESUCCESS\" />","comments":"","outputs":1,"x":1089.750015258789,"y":756.1666979789734,"z":"9adc6d3f.4fd9a","wires":[[]]},{"id":"c9fe6ef2.b8991","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n\t","comments":"","x":1111.777847290039,"y":549.4444303512573,"z":"9adc6d3f.4fd9a","wires":[]},{"id":"ecefd839.64cd58","type":"set","name":"set Download params","xml":"<set>\n<parameter name='host-ip-address' value='`$vnf-host-ip-address`' />\n<parameter name='device-login' value='`$device-authentication.USER-NAME`' />\n<parameter name='device-password' value='`$device-authentication.PASSWORD`' />\n<parameter name='port-number' value='`$device-authentication.PORT-NUMBER`' />\n<parameter name='protocol' value='`$tmp.deviceinterfaceprotocol.PROTOCOL`' />\n<parameter name='device-config' value='`$deviceconfig-file-content`' />","comments":"","x":448.8888473510742,"y":350.4444570541382,"z":"9adc6d3f.4fd9a","wires":[]},{"id":"5155e2e.c35c01c","type":"set","name":"set error-code 400 and message","xml":"<set>\n<parameter name='error-code' value='400' />\n<parameter name=\"error-message\" value=\"SUCCESS - request has been processed successfully\" />\n","comments":"","x":1107.583267211914,"y":707.3333854675293,"z":"9adc6d3f.4fd9a","wires":[]},{"id":"a4b7d4d9.d03ab8","type":"comment","name":"ConfigCompAdaptor resets error code for success cases","info":"","comments":"","x":1461.7500305175781,"y":704.3333892822266,"z":"9adc6d3f.4fd9a","wires":[]},{"id":"bbe79244.e2541","type":"execute","name":"execute saveTxLog","xml":"<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"log\" />\n<parameter name=\"message\" value=\"get Config Info\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n","comments":"","outputs":1,"x":449.55554962158203,"y":269.11108779907227,"z":"9adc6d3f.4fd9a","wires":[["d1d61570.0be3f8"]]},{"id":"ac964ccc.c134e","type":"execute","name":"execute saveTxLog","xml":"<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"log\" />\n<parameter name=\"message\" value=\"400: Download of Config file is Successful\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n","comments":"","outputs":1,"x":1090.000015258789,"y":827.7500171661377,"z":"9adc6d3f.4fd9a","wires":[["93a11316.da719"]]},{"id":"5268669e.4e3c78","type":"execute","name":"execute saveTxLog","xml":"<execute plugin=\"org.onap.appc.config.generator.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"log\" />\n<parameter name=\"message\" value=\"`$tmp.message`\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n","comments":"","outputs":1,"x":1887.8889350891113,"y":551.5555553436279,"z":"9adc6d3f.4fd9a","wires":[[]]},{"id":"77bc4fc2.cc583","type":"set","name":"set tmp.message","xml":"<set>\n<parameter name='tmp.message' value=\"`'Download Failure : ' + $error-code + ' : ' + $error-message`\" />\n","comments":"","x":1889.1110229492188,"y":477.8888874053955,"z":"9adc6d3f.4fd9a","wires":[]},{"id":"ee63b08a.143ca","type":"switchNode","name":"switch: error-code","xml":"<switch test=\"`$error-code`\">\n","comments":"","outputs":1,"x":1120.9999084472656,"y":456.9999694824219,"z":"9adc6d3f.4fd9a","wires":[["b1c4ad91.8aa34","8d980f69.01da2"]]},{"id":"b1c4ad91.8aa34","type":"success","name":"outcome: 400","xml":"<outcome value=\"400\">","comments":"","outputs":1,"x":1316.6666946411133,"y":399.6666660308838,"z":"9adc6d3f.4fd9a","wires":[["8b8d3a30.692328"]]},{"id":"8b8d3a30.692328","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","outputs":1,"x":1551.6666717529297,"y":397.22224521636963,"z":"9adc6d3f.4fd9a","wires":[[]]},{"id":"8d980f69.01da2","type":"success","name":"outcome: Other","xml":"<outcome value=\"Other\">","comments":"","outputs":1,"x":1327.6666259765625,"y":482.444429397583,"z":"9adc6d3f.4fd9a","wires":[["4cb182b1.06d15c"]]},{"id":"4cb182b1.06d15c","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","outputs":1,"x":1551.1110382080078,"y":484.55556869506836,"z":"9adc6d3f.4fd9a","wires":[["77bc4fc2.cc583","5268669e.4e3c78"]]},{"id":"7625e08d.e0025","type":"comment","name":"ISBC cases returns failure to stop polling","info":"","comments":"","x":1601.6665344238281,"y":297.88886165618896,"z":"9adc6d3f.4fd9a","wires":[]},{"id":"93a11316.da719","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":1285.916648864746,"y":823.3333911895752,"z":"9adc6d3f.4fd9a","wires":[["b3148632.6019e8"]]},{"id":"b3148632.6019e8","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","outputs":1,"x":1459.5000267028809,"y":824.8333911895752,"z":"9adc6d3f.4fd9a","wires":[[]]},{"id":"d1d61570.0be3f8","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":648.6666641235352,"y":269.99997329711914,"z":"9adc6d3f.4fd9a","wires":[["8e0a1916.289ea8"]]},{"id":"8e0a1916.289ea8","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","outputs":1,"x":866.8889312744141,"y":272.888897895813,"z":"9adc6d3f.4fd9a","wires":[[]]},{"id":"de42b2.dca01d5","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","outputs":1,"x":1055.000015258789,"y":901.9998970031738,"z":"9adc6d3f.4fd9a","wires":[["547a0900.632ad8","cfef6f4a.c8106"]]},{"id":"cfef6f4a.c8106","type":"call","name":"call: SaveRunningConfig","xml":"<call module=\"APPC\" rpc=\"SaveRunningConfig\" mode=\"sync\">","comments":"","outputs":1,"x":1314.750015258789,"y":900.833270072937,"z":"9adc6d3f.4fd9a","wires":[["bfd5ce67.f2b84"]]},{"id":"547a0900.632ad8","type":"switchNode","name":"switch: request-action","xml":"<switch test=\"`$request-action`\">\n","comments":"","outputs":1,"x":1269.4998970031738,"y":992.4998931884766,"z":"9adc6d3f.4fd9a","wires":[["9e0e7bc6.f3ad08","2bc0abbb.b9c904"]]},{"id":"9e0e7bc6.f3ad08","type":"other","name":"Configure","xml":"<outcome value='Configure'>","comments":"","outputs":1,"x":1516.749900817871,"y":982.4165191650391,"z":"9adc6d3f.4fd9a","wires":[["43f68adb.c89264"]]},{"id":"2bc0abbb.b9c904","type":"other","name":"ConfigScale","xml":"<outcome value='ConfigScale'>","comments":"","outputs":1,"x":1521.5000228881836,"y":1049.4998941421509,"z":"9adc6d3f.4fd9a","wires":[["43f68adb.c89264"]]},{"id":"43f68adb.c89264","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","outputs":1,"x":1798.9165344238281,"y":1029.5832738876343,"z":"9adc6d3f.4fd9a","wires":[["65936072.2b5fa"]]},{"id":"65936072.2b5fa","type":"call","name":"call: UpdateAaiInfo","xml":"<call module=\"APPC\" rpc=\"UpdateAaiInfo\" mode=\"sync\">","comments":"","outputs":1,"x":820.3334465026855,"y":1139.9166431427002,"z":"9adc6d3f.4fd9a","wires":[["9151a526.f94b68"]]},{"id":"9151a526.f94b68","type":"not-found","name":"not-found","xml":"<outcome value='not-found'>\n","comments":"","outputs":1,"x":1027.9167556762695,"y":1144.1666440963745,"z":"9adc6d3f.4fd9a","wires":[["1879d6b6.911e99"]]},{"id":"1879d6b6.911e99","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":"","outputs":1,"x":1222.083267211914,"y":1145.7498989105225,"z":"9adc6d3f.4fd9a","wires":[["e81a1fc0.a272c","f0dd7641.253498"]]},{"id":"e81a1fc0.a272c","type":"set","name":"set:  dcae-error message","xml":"<set>\n\t  <parameter name=\"dcae-error-message\" value=\"DG Workflow UpdateAaiInfo not found\"/>\n\t  ","comments":"","x":1529.2500228881836,"y":1120.3332686424255,"z":"9adc6d3f.4fd9a","wires":[]},{"id":"f0dd7641.253498","type":"record","name":"record","xml":"<record plugin=\"org.onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"DCAEERRORMESSAGE\" value=\"`$dcae-error-message`\"/>\n","comments":"","outputs":1,"x":1472.1666526794434,"y":1166.5832710266113,"z":"9adc6d3f.4fd9a","wires":[[]]},{"id":"6518f897.340dd8","type":"block","name":"block : atomic","xml":"<block atomic=\"true\">","atomic":"true","comments":"","outputs":1,"x":1721.0832748413086,"y":900.9998979568481,"z":"9adc6d3f.4fd9a","wires":[["186de19c.bcf0ae","407c43d8.cfa8ac"]]},{"id":"bfd5ce67.f2b84","type":"not-found","name":"not-found","xml":"<outcome value='not-found'>\n","comments":"","outputs":1,"x":1528.5832748413086,"y":900.7498979568481,"z":"9adc6d3f.4fd9a","wires":[["6518f897.340dd8"]]},{"id":"186de19c.bcf0ae","type":"set","name":"set:  dcae-error message","xml":"<set>\n\t  <parameter name=\"dcae-error-message\" value=\"DG Workflow SaveRunningConfig not found\"/>\n\t ","comments":"","x":2030.0000305175781,"y":903.2498960494995,"z":"9adc6d3f.4fd9a","wires":[]},{"id":"407c43d8.cfa8ac","type":"record","name":"record","xml":"<record plugin=\"org.onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"DCAEERRORMESSAGE\" value=\"`$dcae-error-message`\"/>\n","comments":"","outputs":1,"x":1974.4999084472656,"y":958.0832719802856,"z":"9adc6d3f.4fd9a","wires":[[]]},{"id":"7421ecb2.1ac094","type":"execute","name":"execute getCommonConfigInfo","xml":"<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"getCommonConfigInfo\">\n<parameter name=\"responsePrefix\" value=\"tmp.commonConfigInfo\" />\n","comments":"","outputs":1,"x":517.7777709960938,"y":156.66665649414062,"z":"9adc6d3f.4fd9a","wires":[["b891a8f2.0b2ce8","686bbe23.d037e"]]},{"id":"b891a8f2.0b2ce8","type":"other","name":"other","xml":"<outcome value='Other'>\n","comments":"","outputs":1,"x":785.7778053283691,"y":162.9999771118164,"z":"9adc6d3f.4fd9a","wires":[["17029b5a.574655"]]},{"id":"17029b5a.574655","type":"block","name":"block","xml":"<block>\n","atomic":"false","comments":"","outputs":1,"x":948.7778053283691,"y":166.9999771118164,"z":"9adc6d3f.4fd9a","wires":[["8d2d875d.8b0af8"]]},{"id":"8d2d875d.8b0af8","type":"record","name":"record","xml":"<record plugin=\"org.onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"field2\" value=\"`$request-action`\"/>\n<parameter name=\"field3\" value=\"`$input.action`\"/>\n\n","comments":"","outputs":1,"x":1116.7778053283691,"y":165.9999771118164,"z":"9adc6d3f.4fd9a","wires":[[]]},{"id":"686bbe23.d037e","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":779.7777786254883,"y":237.99999237060547,"z":"9adc6d3f.4fd9a","wires":[["7cedc144.223ff"]]},{"id":"7cedc144.223ff","type":"block","name":"block","xml":"<block>\n","atomic":"false","comments":"","outputs":1,"x":957.1110610961914,"y":238.33336639404297,"z":"9adc6d3f.4fd9a","wires":[["1ab7b9f2.f91326"]]},{"id":"1ab7b9f2.f91326","type":"returnFailure","name":"return failure","xml":"<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"DG Workflow GetAaiInfo not found\"/>\n\t","comments":"","x":1144.7777099609375,"y":236.33328437805176,"z":"9adc6d3f.4fd9a","wires":[]}]
+[
+    {
+        "id": "e1702b02.68c36",
+        "type": "dgstart",
+        "name": "DGSTART",
+        "outputs": 1,
+        "x": 82.5,
+        "y": 39,
+        "z": "672164f1.b5c534",
+        "wires": [["c0473313.dd2c5"]
+        ]
+    }, {
+        "id": "c0473313.dd2c5",
+        "type": "service-logic",
+        "name": "APPC 4.0.0",
+        "module": "APPC",
+        "version": "4.0.0",
+        "comments": "",
+        "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='4.0.0'>",
+        "outputs": 1,
+        "x": 245.5,
+        "y": 29,
+        "z": "672164f1.b5c534",
+        "wires": [["5e833209.a4de04"]
+        ]
+    }, {
+        "id": "5e833209.a4de04",
+        "type": "method",
+        "name": "method Generic_Configure",
+        "xml": "<method rpc='Generic_Configure' mode='sync'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 460.5,
+        "y": 21,
+        "z": "672164f1.b5c534",
+        "wires": [["55219542.2207cc"]
+        ]
+    }, {
+        "id": "55219542.2207cc",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "outputs": 1,
+        "x": 79.5,
+        "y": 164.33332538604736,
+        "z": "672164f1.b5c534",
+        "wires": [["bdcbae80.7c77e", "1390e8d3.cf050f", "be6cbba5.39eb28", "a3e5cec4.d36b18", "1f6bd833.d3d578", "340d308.417f1d", "162fc1e8.dd0ece", "a4e7b53d.c77e", "7b450825.82df6"]
+        ]
+    }, {
+        "id": "bdcbae80.7c77e",
+        "type": "call",
+        "name": "call: DownloadConfig",
+        "xml": "<call module=\"APPC\" rpc=\"`$tmp.configureactiondg.DOWNLOAD-CONFIG-DG`\" mode=\"sync\">",
+        "comments": "",
+        "outputs": 1,
+        "x": 251.0872802734375,
+        "y": 885.5873413085938,
+        "z": "672164f1.b5c534",
+        "wires": [["3bc919ab.cb99ae", "c0c5c085.42dec", "31281c49.cd3134"]
+        ]
+    }, {
+        "id": "3bc919ab.cb99ae",
+        "type": "failure",
+        "name": "failure",
+        "xml": "<outcome value='failure'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 492.452392578125,
+        "y": 780.6824951171875,
+        "z": "672164f1.b5c534",
+        "wires": [["ad3469d5.fc5a78"]
+        ]
+    }, {
+        "id": "c0c5c085.42dec",
+        "type": "failure",
+        "name": "not-found",
+        "xml": "<outcome value='not-found'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 492.41668701171875,
+        "y": 876.5001220703125,
+        "z": "672164f1.b5c534",
+        "wires": [["625b0cb6.92403c"]
+        ]
+    }, {
+        "id": "31281c49.cd3134",
+        "type": "success",
+        "name": " success",
+        "xml": "<outcome value=\"success\">",
+        "comments": "",
+        "outputs": 1,
+        "x": 504.75,
+        "y": 948.8333740234375,
+        "z": "672164f1.b5c534",
+        "wires": [["d057ca8.6b5f838"]
+        ]
+    }, {
+        "id": "ad3469d5.fc5a78",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "outputs": 1,
+        "x": 726.8333129882812,
+        "y": 781.1904907226562,
+        "z": "672164f1.b5c534",
+        "wires": [["442e79b5.66163", "83d73f41.1ccac", "b26d1130.7fb838"]
+        ]
+    }, {
+        "id": "625b0cb6.92403c",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "outputs": 1,
+        "x": 739.3333129882812,
+        "y": 836.666748046875,
+        "z": "672164f1.b5c534",
+        "wires": [["67b9051d.6ff124"]
+        ]
+    }, {
+        "id": "d057ca8.6b5f838",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "outputs": 1,
+        "x": 760.75,
+        "y": 965.0833740234375,
+        "z": "672164f1.b5c534",
+        "wires": [["7ccfd7d2.0672b", "f0728239.b644", "ffc183fc.d618b8", "97945525.9921c8"]
+        ]
+    }, {
+        "id": "442e79b5.66163",
+        "type": "record",
+        "name": "record",
+        "xml": "<record plugin=\"onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"field2\" value=\"`'error-code = ' + $error-code`\" />\n<parameter name=\"field3\" value=\"`'error-message = ' + $error-message`\" />\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 983.7222900390625,
+        "y": 653.5555419921875,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "67b9051d.6ff124",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"`'DG Workflow ' + $tmp.configureactiondg.DOWNLOAD-CONFIG-DG + ' not found'`\"/>\n\t",
+        "comments": "",
+        "x": 1008.75,
+        "y": 804.4166870117188,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "7ccfd7d2.0672b",
+        "type": "record",
+        "name": "record",
+        "xml": "<record plugin=\"onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"field2\" value=\"`'error-code = ' + $error-code`\" />\n<parameter name=\"field3\" value=\"`'error-message = ' + $error-message`\" />\n<parameter name=\"field4\" value=\"ACTIVATESUCCESS\" />",
+        "comments": "",
+        "outputs": 1,
+        "x": 991.25,
+        "y": 887.8333740234375,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "83d73f41.1ccac",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status=\"failure\">\n\t",
+        "comments": "",
+        "x": 1007.27783203125,
+        "y": 762.111083984375,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "1390e8d3.cf050f",
+        "type": "set",
+        "name": "set Download params with login",
+        "xml": "<set>\n<parameter name='host-ip-address' value='`$tmp-host-ip-address`' />\n<parameter name='device-login' value='`$property.user`' />\n<parameter name='device-password' value='`$property.password`' />\n<parameter name='port-number' value='`$property.port`' />\n<parameter name='protocol' value='`$tmp.deviceinterfaceprotocol.PROTOCOL`' />\n<parameter name='device-config' value='`$deviceconfig-file-content`' />\n",
+        "comments": "",
+        "x": 323.9602966308594,
+        "y": 640.2538452148438,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "f0728239.b644",
+        "type": "set",
+        "name": "set error-code 400 and message",
+        "xml": "<set>\n<parameter name='error-code' value='400' />\n<parameter name=\"error-message\" value=\"SUCCESS - request has been processed successfully\" />\n",
+        "comments": "",
+        "x": 1055.083251953125,
+        "y": 843.0000610351562,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "525614da.716174",
+        "type": "comment",
+        "name": "ConfigCompAdaptor resets error code for success cases",
+        "info": "",
+        "comments": "",
+        "x": 1414.25,
+        "y": 813.0000610351562,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "be6cbba5.39eb28",
+        "type": "execute",
+        "name": "execute saveTxLog",
+        "xml": "<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"log\" />\n<parameter name=\"message\" value=\"get Config Info\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 417.48406982421875,
+        "y": 142.20639038085938,
+        "z": "672164f1.b5c534",
+        "wires": [["e1bbeb54.ccc45"]
+        ]
+    }, {
+        "id": "ffc183fc.d618b8",
+        "type": "execute",
+        "name": "execute saveTxLog",
+        "xml": "<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"log\" />\n<parameter name=\"message\" value=\"400: Download of Config file is Successful\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1002.5,
+        "y": 940.4166870117188,
+        "z": "672164f1.b5c534",
+        "wires": [["cc0a3ea8.73a82"]
+        ]
+    }, {
+        "id": "6d2c6e24.0a1d68",
+        "type": "execute",
+        "name": "execute saveTxLog",
+        "xml": "<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"log\" />\n<parameter name=\"message\" value=\"`$tmp.message`\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1760.388916015625,
+        "y": 804.2222290039062,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "6e9aaf18.d8d1b8",
+        "type": "set",
+        "name": "set tmp.message",
+        "xml": "<set>\n<parameter name='tmp.message' value=\"`'Download Failure : ' + $error-code + ' : ' + $error-message`\" />\n",
+        "comments": "",
+        "x": 1748.6109619140625,
+        "y": 740.5555419921875,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "b26d1130.7fb838",
+        "type": "switchNode",
+        "name": "switch: error-code",
+        "xml": "<switch test=\"`$error-code`\">\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1010.4998779296875,
+        "y": 711.6666259765625,
+        "z": "672164f1.b5c534",
+        "wires": [["d8e002b3.d34c3", "f1e440d2.1d1bf8"]
+        ]
+    }, {
+        "id": "d8e002b3.d34c3",
+        "type": "success",
+        "name": "outcome: 400",
+        "xml": "<outcome value=\"400\">",
+        "comments": "",
+        "outputs": 1,
+        "x": 1295.166748046875,
+        "y": 697.3333129882812,
+        "z": "672164f1.b5c534",
+        "wires": [["601f657b.528d94"]
+        ]
+    }, {
+        "id": "601f657b.528d94",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "outputs": 1,
+        "x": 1529.1666259765625,
+        "y": 693.888916015625,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "f1e440d2.1d1bf8",
+        "type": "success",
+        "name": "outcome: Other",
+        "xml": "<outcome value=\"Other\">",
+        "comments": "",
+        "outputs": 1,
+        "x": 1297.1666259765625,
+        "y": 764.111083984375,
+        "z": "672164f1.b5c534",
+        "wires": [["d6b85703.8eadf8"]
+        ]
+    }, {
+        "id": "d6b85703.8eadf8",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "outputs": 1,
+        "x": 1537.611083984375,
+        "y": 761.2222290039062,
+        "z": "672164f1.b5c534",
+        "wires": [["6e9aaf18.d8d1b8", "6d2c6e24.0a1d68"]
+        ]
+    }, {
+        "id": "1ccf22d4.de686d",
+        "type": "comment",
+        "name": "ISBC cases returns failure to stop polling",
+        "info": "",
+        "comments": "",
+        "x": 1549.1665344238281,
+        "y": 265.5555238723755,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "cc0a3ea8.73a82",
+        "type": "failure",
+        "name": "failure",
+        "xml": "<outcome value='failure'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1235.4166259765625,
+        "y": 905.0000610351562,
+        "z": "672164f1.b5c534",
+        "wires": [["5bda7281.8da2c4"]
+        ]
+    }, {
+        "id": "5bda7281.8da2c4",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "outputs": 1,
+        "x": 1462,
+        "y": 902.5000610351562,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "e1bbeb54.ccc45",
+        "type": "failure",
+        "name": "failure",
+        "xml": "<outcome value='failure'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 583.1666870117188,
+        "y": 166.6666259765625,
+        "z": "672164f1.b5c534",
+        "wires": [["c7abf68e.d4ebc"]
+        ]
+    }, {
+        "id": "c7abf68e.d4ebc",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "outputs": 1,
+        "x": 734.388916015625,
+        "y": 165.5555419921875,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "97945525.9921c8",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "outputs": 1,
+        "x": 997.5,
+        "y": 1018.6665649414062,
+        "z": "672164f1.b5c534",
+        "wires": [["e539ffc.4a5c8", "3645eea2.23c422"]
+        ]
+    }, {
+        "id": "3645eea2.23c422",
+        "type": "call",
+        "name": "call: SaveRunningConfig",
+        "xml": "<call module=\"APPC\" rpc=\"SaveRunningConfig\" mode=\"sync\">",
+        "comments": "",
+        "outputs": 1,
+        "x": 1251.25,
+        "y": 952.4999389648438,
+        "z": "672164f1.b5c534",
+        "wires": [["d47766c.a9e8f18"]
+        ]
+    }, {
+        "id": "e539ffc.4a5c8",
+        "type": "switchNode",
+        "name": "switch: request-action",
+        "xml": "<switch test=\"`$request-action`\">\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1219.9998779296875,
+        "y": 1048.1665649414062,
+        "z": "672164f1.b5c534",
+        "wires": [["680c9e09.9e9b7", "58f73e6d.91ff3", "8032f43e.b93c2"]
+        ]
+    }, {
+        "id": "680c9e09.9e9b7",
+        "type": "other",
+        "name": "Configure",
+        "xml": "<outcome value='Configure'>",
+        "comments": "",
+        "outputs": 1,
+        "x": 1468.2498779296875,
+        "y": 995.0831909179688,
+        "z": "672164f1.b5c534",
+        "wires": [["f8f3ebb6.6a7fa8"]
+        ]
+    }, {
+        "id": "58f73e6d.91ff3",
+        "type": "other",
+        "name": "ConfigScale",
+        "xml": "<outcome value='ConfigScale'>",
+        "comments": "",
+        "outputs": 1,
+        "x": 1469,
+        "y": 1043.16650390625,
+        "z": "672164f1.b5c534",
+        "wires": [["f8f3ebb6.6a7fa8"]
+        ]
+    }, {
+        "id": "f8f3ebb6.6a7fa8",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "outputs": 1,
+        "x": 1758.41650390625,
+        "y": 1022.2498779296875,
+        "z": "672164f1.b5c534",
+        "wires": [["5a4163e2.78fc44"]
+        ]
+    }, {
+        "id": "5a4163e2.78fc44",
+        "type": "call",
+        "name": "call: UpdateAaiInfo",
+        "xml": "<call module=\"APPC\" rpc=\"UpdateAaiInfo\" mode=\"sync\">",
+        "comments": "",
+        "outputs": 1,
+        "x": 816.83349609375,
+        "y": 1254.5831909179688,
+        "z": "672164f1.b5c534",
+        "wires": [["44edc7c1.4be9f"]
+        ]
+    }, {
+        "id": "44edc7c1.4be9f",
+        "type": "not-found",
+        "name": "not-found",
+        "xml": "<outcome value='not-found'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 994.416748046875,
+        "y": 1223.8331909179688,
+        "z": "672164f1.b5c534",
+        "wires": [["f13cf115.25f58"]
+        ]
+    }, {
+        "id": "f13cf115.25f58",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "comments": "",
+        "outputs": 1,
+        "x": 1197.583251953125,
+        "y": 1226.4164428710938,
+        "z": "672164f1.b5c534",
+        "wires": [["a8e999d2.e2b12", "6ce22398.19d3b4"]
+        ]
+    }, {
+        "id": "a8e999d2.e2b12",
+        "type": "set",
+        "name": "set:  dcae-error message",
+        "xml": "<set>\n\t  <parameter name=\"dcae-error-message\" value=\"DG Workflow UpdateAaiInfo not found\"/>\n\t  ",
+        "comments": "",
+        "x": 1433.75,
+        "y": 1199.9998168945312,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "6ce22398.19d3b4",
+        "type": "record",
+        "name": "record",
+        "xml": "<record plugin=\"onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"DCAEERRORMESSAGE\" value=\"`$dcae-error-message`\"/>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1384.6666259765625,
+        "y": 1261.2498168945312,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "ad16c81e.3c39a",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "comments": "",
+        "outputs": 1,
+        "x": 1694.583251953125,
+        "y": 942.6665649414062,
+        "z": "672164f1.b5c534",
+        "wires": [["51039d38.2ad664", "8f3913d9.f83b7"]
+        ]
+    }, {
+        "id": "d47766c.a9e8f18",
+        "type": "not-found",
+        "name": "not-found",
+        "xml": "<outcome value='not-found'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1465.083251953125,
+        "y": 947.4165649414062,
+        "z": "672164f1.b5c534",
+        "wires": [["ad16c81e.3c39a"]
+        ]
+    }, {
+        "id": "51039d38.2ad664",
+        "type": "set",
+        "name": "set:  dcae-error message",
+        "xml": "<set>\n\t  <parameter name=\"dcae-error-message\" value=\"DG Workflow SaveRunningConfig not found\"/>\n\t ",
+        "comments": "",
+        "x": 1933.5,
+        "y": 911.9165649414062,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "8f3913d9.f83b7",
+        "type": "record",
+        "name": "record",
+        "xml": "<record plugin=\"onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"DCAEERRORMESSAGE\" value=\"`$dcae-error-message`\"/>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1901.9998779296875,
+        "y": 971.7499389648438,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "a3e5cec4.d36b18",
+        "type": "execute",
+        "name": "execute getCommonConfigInfo",
+        "xml": "<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"getCommonConfigInfo\">\n<parameter name=\"responsePrefix\" value=\"tmp.commonConfigInfo\" />\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 458.70635986328125,
+        "y": 96.047607421875,
+        "z": "672164f1.b5c534",
+        "wires": [["2368b96f.f3ae96", "d4c176f7.6a3d58"]
+        ]
+    }, {
+        "id": "2368b96f.f3ae96",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 728.27783203125,
+        "y": 73.66664123535156,
+        "z": "672164f1.b5c534",
+        "wires": [["640258d9.5e6ca8"]
+        ]
+    }, {
+        "id": "640258d9.5e6ca8",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 865.27783203125,
+        "y": 77.66664123535156,
+        "z": "672164f1.b5c534",
+        "wires": [["c7c2f559.037d6"]
+        ]
+    }, {
+        "id": "c7c2f559.037d6",
+        "type": "record",
+        "name": "record",
+        "xml": "<record plugin=\"onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"field2\" value=\"`$request-action`\"/>\n<parameter name=\"field3\" value=\"`$input.action`\"/>\n\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1016.27783203125,
+        "y": 74.66664123535156,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "d4c176f7.6a3d58",
+        "type": "failure",
+        "name": "failure",
+        "xml": "<outcome value='failure'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 726.2777404785156,
+        "y": 123.80950927734375,
+        "z": "672164f1.b5c534",
+        "wires": [["a249251d.599d3"]
+        ]
+    }, {
+        "id": "a249251d.599d3",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 857.611083984375,
+        "y": 136.00003051757812,
+        "z": "672164f1.b5c534",
+        "wires": [["48ba7f7f.85a5e"]
+        ]
+    }, {
+        "id": "48ba7f7f.85a5e",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"DG Workflow GetAaiInfo not found\"/>\n\t",
+        "comments": "",
+        "x": 1015.2776794433594,
+        "y": 140.7142333984375,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "96902d7d.f094a8",
+        "type": "execute",
+        "name": "execute params",
+        "xml": " <execute plugin=\"org.onap.appc.encryptiontool.wrapper.EncryptionToolDGWrapper\" method =\"getProperty\">\n <parameter name=\"prefix\" value =\"property\"/>\n\n \n  ",
+        "comments": "",
+        "outputs": 1,
+        "x": 448.0038757324219,
+        "y": 359.92860412597656,
+        "z": "672164f1.b5c534",
+        "wires": [["8f082d37.ae0d8", "374d1ce4.f078bc"]
+        ]
+    }, {
+        "id": "8f082d37.ae0d8",
+        "type": "failure",
+        "name": "failure",
+        "xml": "<outcome value='failure'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 603.4682312011719,
+        "y": 336.5357208251953,
+        "z": "672164f1.b5c534",
+        "wires": [["9e197b8e.352ff8"]
+        ]
+    }, {
+        "id": "374d1ce4.f078bc",
+        "type": "not-found",
+        "name": "not-found",
+        "xml": "<outcome value='not-found'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 606.8611145019531,
+        "y": 372.2498321533203,
+        "z": "672164f1.b5c534",
+        "wires": [["9e197b8e.352ff8"]
+        ]
+    }, {
+        "id": "9e197b8e.352ff8",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 786.8610534667969,
+        "y": 338.85716247558594,
+        "z": "672164f1.b5c534",
+        "wires": [["f6be830e.2f3fa"]
+        ]
+    }, {
+        "id": "f6be830e.2f3fa",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status=\"failure\">\n<parameter name='error-code' value=\"401\" />\n<parameter name='error-message' value=\"`$property.error-message`\" />",
+        "comments": "",
+        "x": 955.2538757324219,
+        "y": 330.8214569091797,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "1f6bd833.d3d578",
+        "type": "get-resource",
+        "name": "get-resource: APPC.protocol",
+        "xml": "<get-resource\n\tplugin='onap.ccsdk.sli.core.sli.resource.sql.SqlResource' \n\tresource='SQL'\n\tkey=\"SELECT DISTINCT PROTOCOL FROM PROTOCOL_REFERENCE WHERE ACTION = $input.action AND VNF_TYPE = $vnf-type ;\"\n    force='true'\n\tpfx='APPC.protocol'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 416.64276123046875,
+        "y": 191.85719299316406,
+        "z": "672164f1.b5c534",
+        "wires": [["e2797955.6ef4f", "8c1cf969.8870c8"]
+        ]
+    }, {
+        "id": "e2797955.6ef4f",
+        "type": "failure",
+        "name": "failure",
+        "xml": "<outcome value='failure'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 634.5,
+        "y": 209,
+        "z": "672164f1.b5c534",
+        "wires": [["e9e70e2c.32182"]
+        ]
+    }, {
+        "id": "e9e70e2c.32182",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 764.5,
+        "y": 206,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "8c1cf969.8870c8",
+        "type": "success",
+        "name": "success",
+        "xml": "<outcome value='success'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 636.5,
+        "y": 249,
+        "z": "672164f1.b5c534",
+        "wires": [["cbdcf23e.9de888"]
+        ]
+    }, {
+        "id": "cbdcf23e.9de888",
+        "type": "set",
+        "name": "set protocol",
+        "xml": "<set>\n<parameter name='APPC.protocol.PROTOCOL' value='`$APPC.protocol.PROTOCOL`' />\n\n\n\n\n\n",
+        "comments": "",
+        "x": 816.5,
+        "y": 246,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "340d308.417f1d",
+        "type": "record",
+        "name": "record",
+        "xml": "<record plugin=\"onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name='field2' value='`$APPC.protocol.PROTOCOL`'/>",
+        "comments": "",
+        "outputs": 1,
+        "x": 358.6428527832031,
+        "y": 237.85716247558594,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "162fc1e8.dd0ece",
+        "type": "set",
+        "name": "set Download params",
+        "xml": "<set> \n <parameter name='host-ip-address' value='`$tmp-host-ip-address`' />\n <parameter name='device-authentication.USER-NAME' value='`$device-login`' /> \n <parameter name='device-authentication.PASSWORD' value='`$device-password`' /> \n <parameter name='device-authentication.PORT-NUMBER' value='`$port-number`' /> \n <parameter name='protocol' value='`$tmp.deviceinterfaceprotocol.PROTOCOL`' /> \n <parameter name='device-config' value='`$deviceconfig-file-content`' /> \n\n \n ",
+        "comments": "",
+        "x": 292.7856750488281,
+        "y": 703.4285888671875,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "8fed7962.c1fbf8",
+        "type": "other",
+        "name": "other",
+        "xml": "<outcome value='Other'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 306.6665344238281,
+        "y": 326.8806915283203,
+        "z": "672164f1.b5c534",
+        "wires": [["96902d7d.f094a8"]
+        ]
+    }, {
+        "id": "a4e7b53d.c77e",
+        "type": "switchNode",
+        "name": "switch : Protocol",
+        "xml": "<switch test=\"`$APPC.protocol.PROTOCOL`\">\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 222.38088989257812,
+        "y": 275.45237731933594,
+        "z": "672164f1.b5c534",
+        "wires": [["c723e27d.4cb868", "8fed7962.c1fbf8"]
+        ]
+    }, {
+        "id": "c723e27d.4cb868",
+        "type": "outcome",
+        "name": "CHEF",
+        "xml": "<outcome value='CHEF'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 438.0951843261719,
+        "y": 284.02381896972656,
+        "z": "672164f1.b5c534",
+        "wires": [["852bf086.08e258"]
+        ]
+    }, {
+        "id": "852bf086.08e258",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "outputs": 1,
+        "x": 652.6666564941406,
+        "y": 285.14283752441406,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "7b450825.82df6",
+        "type": "switchNode",
+        "name": "switch: IpAddress In Payload",
+        "xml": "<switch test='`$vnf-host-ip-address`'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 326.5,
+        "y": 494,
+        "z": "672164f1.b5c534",
+        "wires": [["b74c0c1d.39a6e", "bd5e1de.0ed2be"]
+        ]
+    }, {
+        "id": "b74c0c1d.39a6e",
+        "type": "outcome",
+        "name": "null",
+        "xml": "<outcome value=''>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 539.5,
+        "y": 458,
+        "z": "672164f1.b5c534",
+        "wires": [["6146b7f8.e3bd38"]
+        ]
+    }, {
+        "id": "bd5e1de.0ed2be",
+        "type": "success",
+        "name": "outcome: Other",
+        "xml": "<outcome value='Other'>",
+        "comments": "",
+        "outputs": 1,
+        "x": 554.5,
+        "y": 532,
+        "z": "672164f1.b5c534",
+        "wires": [["41a0b133.01e19"]
+        ]
+    }, {
+        "id": "6146b7f8.e3bd38",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 707.5,
+        "y": 457,
+        "z": "672164f1.b5c534",
+        "wires": [["db086f77.248118"]
+        ]
+    }, {
+        "id": "41a0b133.01e19",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 730.5,
+        "y": 532,
+        "z": "672164f1.b5c534",
+        "wires": [["334ab267.54c8de"]
+        ]
+    }, {
+        "id": "db086f77.248118",
+        "type": "switchNode",
+        "name": "switch vnfc-type",
+        "xml": "<switch test='`$vnfc-type`'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 884.5,
+        "y": 453,
+        "z": "672164f1.b5c534",
+        "wires": [["911d73c2.bc39d", "50cb5986.e18778"]
+        ]
+    }, {
+        "id": "334ab267.54c8de",
+        "type": "set",
+        "name": "set payload ip-address",
+        "xml": "<set>\n<parameter name='tmp-host-ip-address' value='`$vnf-host-ip-address`' />\n",
+        "comments": "",
+        "x": 945.5,
+        "y": 532,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "911d73c2.bc39d",
+        "type": "outcome",
+        "name": "null",
+        "xml": "<outcome value=''>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1083.5,
+        "y": 409,
+        "z": "672164f1.b5c534",
+        "wires": [["e395fe1a.0ab418"]
+        ]
+    }, {
+        "id": "50cb5986.e18778",
+        "type": "success",
+        "name": "outcome: Other",
+        "xml": "<outcome value='Other'>",
+        "comments": "",
+        "outputs": 1,
+        "x": 1101.5,
+        "y": 480,
+        "z": "672164f1.b5c534",
+        "wires": [["7bab8d0f.22f39c"]
+        ]
+    }, {
+        "id": "e395fe1a.0ab418",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 1240.5,
+        "y": 407,
+        "z": "672164f1.b5c534",
+        "wires": [["553a5974.6ab79"]
+        ]
+    }, {
+        "id": "553a5974.6ab79",
+        "type": "set",
+        "name": "set vnf ip-address",
+        "xml": "<set>\n<parameter name='tmp-host-ip-address' value='`$tmp.vnfInfo.vnf.ipv4-oam-address`' />\n",
+        "comments": "",
+        "x": 1427.5,
+        "y": 402,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "7bab8d0f.22f39c",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 1264.5,
+        "y": 481,
+        "z": "672164f1.b5c534",
+        "wires": [["6e0daadb.9c7434"]
+        ]
+    }, {
+        "id": "6e0daadb.9c7434",
+        "type": "switchNode",
+        "name": "switch vnfc-type",
+        "xml": "<switch test='`$vnfc-type==$tmp.vnfInfo.vnfcInfo.ipaddress-v4-oam-vip`'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1436.5,
+        "y": 474,
+        "z": "672164f1.b5c534",
+        "wires": [["6f0f9928.17cb48", "52c8f624.7c828"]
+        ]
+    }, {
+        "id": "6f0f9928.17cb48",
+        "type": "outcomeTrue",
+        "name": "true",
+        "xml": "<outcome value='true'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1614.5,
+        "y": 433,
+        "z": "672164f1.b5c534",
+        "wires": [["14b4966c.7020fa"]
+        ]
+    }, {
+        "id": "52c8f624.7c828",
+        "type": "outcomeFalse",
+        "name": "false",
+        "xml": "<outcome value='false'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1608.5,
+        "y": 513,
+        "z": "672164f1.b5c534",
+        "wires": [["f197b970.d0bf1"]
+        ]
+    }, {
+        "id": "14b4966c.7020fa",
+        "type": "set",
+        "name": "set vnfc ip-address",
+        "xml": "<set>\n<parameter name='tmp-host-ip-address' value='`$tmp.vnfInfo.vnfcInfo.ipaddress-v4-oam-vip`' />\n",
+        "comments": "",
+        "x": 1802.5,
+        "y": 433,
+        "z": "672164f1.b5c534",
+        "wires": []
+    }, {
+        "id": "f197b970.d0bf1",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
+        "atomic": "false",
+        "comments": "",
+        "outputs": 1,
+        "x": 1769.5,
+        "y": 513,
+        "z": "672164f1.b5c534",
+        "wires": [[]
+        ]
+    }, {
+        "id": "8032f43e.b93c2",
+        "type": "other",
+        "name": "ConfigScaleOut",
+        "xml": "<outcome value='ConfigScaleOut'>",
+        "comments": "",
+        "outputs": 1,
+        "x": 1465.1500244140625,
+        "y": 1080.083251953125,
+        "z": "672164f1.b5c534",
+        "wires": [["f8f3ebb6.6a7fa8"]
+        ]
+    }
+]

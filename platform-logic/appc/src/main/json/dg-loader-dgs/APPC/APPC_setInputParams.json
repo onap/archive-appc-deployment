@@ -1,1338 +1,1083 @@
 [
     {
-        "comments": "",
-        "id": "c5f27e6b.6555",
-        "name": "execute saveTxLog",
-        "outputs": 1,
+        "id": "e31f43db.52afb8",
         "type": "execute",
-        "wires": [
-            [
-                "9a41a79f.2a2b38"
-            ]
-        ],
-        "x": 331.25,
+        "name": "execute saveTxLog",
         "xml": "<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"log\" />\n<parameter name=\"message\" value=\"SetInputData action complete\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n",
-        "y": 897.1666736602783,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "9a41a79f.2a2b38",
-        "name": "failure",
         "outputs": 1,
+        "x": 278.6111373901367,
+        "y": 898.9444494247437,
+        "z": "3d15e61b.b538a2",
+        "wires": [["8f370dc8.0aa9d8"]
+        ]
+    }, {
+        "id": "8f370dc8.0aa9d8",
         "type": "failure",
-        "wires": [
-            [
-                "be9673a6.ce4fd"
-            ]
-        ],
-        "x": 584.0000114440918,
+        "name": "failure",
         "xml": "<outcome value='failure'>\n",
-        "y": 900.0833206176758,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "comments": "",
+        "outputs": 1,
+        "x": 531.3611488342285,
+        "y": 901.8610963821411,
+        "z": "3d15e61b.b538a2",
+        "wires": [["9d2f9dd1.5ad34"]
+        ]
+    }, {
+        "id": "9d2f9dd1.5ad34",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
         "atomic": "false",
         "comments": "",
-        "id": "be9673a6.ce4fd",
-        "name": "block",
         "outputs": 1,
-        "type": "block",
-        "wires": [
-            []
-        ],
-        "x": 802.333309173584,
-        "xml": "<block>\n",
-        "y": 900.5833616256714,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "id": "4a7685a5.000f1c",
+        "x": 749.6944465637207,
+        "y": 902.3611373901367,
+        "z": "3d15e61b.b538a2",
+        "wires": [[]
+        ]
+    }, {
+        "id": "e88428b3.2a5c78",
+        "type": "dgstart",
         "name": "DGSTART",
         "outputs": 1,
-        "type": "dgstart",
-        "wires": [
-            [
-                "973925de.552808"
-            ]
-        ],
-        "x": 99.63886260986328,
-        "y": 21.222224235534668,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "973925de.552808",
-        "module": "APPC",
-        "name": "APPC 4.0.0",
-        "outputs": 1,
+        "x": 80,
+        "y": 24,
+        "z": "3d15e61b.b538a2",
+        "wires": [["76965916.174af8"]
+        ]
+    }, {
+        "id": "76965916.174af8",
         "type": "service-logic",
+        "name": "APPC 4.0.0",
+        "module": "APPC",
         "version": "4.0.0",
-        "wires": [
-            [
-                "41b485e7.20eb5c"
-            ]
-        ],
-        "x": 269.5118751525879,
+        "comments": "",
         "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='4.0.0'>",
-        "y": 25.500001907348633,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "41b485e7.20eb5c",
-        "name": "method setInputParams",
         "outputs": 1,
+        "x": 216.8730125427246,
+        "y": 27.277777671813965,
+        "z": "3d15e61b.b538a2",
+        "wires": [["2ee9f9ac.028e1e"]
+        ]
+    }, {
+        "id": "2ee9f9ac.028e1e",
         "type": "method",
-        "wires": [
-            [
-                "a74c0e05.af52e"
-            ]
-        ],
-        "x": 513.9206161499023,
+        "name": "method setInputParams",
         "xml": "<method rpc='setInputParams' mode='sync'>\n",
-        "y": 25.55555534362793,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "comments": "",
+        "outputs": 1,
+        "x": 461.28175354003906,
+        "y": 27.33333110809326,
+        "z": "3d15e61b.b538a2",
+        "wires": [["cbec66c0.dc1df8"]
+        ]
+    }, {
+        "id": "cbec66c0.dc1df8",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
         "atomic": "true",
         "comments": "",
-        "id": "a74c0e05.af52e",
-        "name": "block : atomic",
         "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "c5f27e6b.6555",
-                "f65ded23.e6749",
-                "641ea02d.4b382",
-                "d1e77579.e7ab88",
-                "4df171f3.7b5ed",
-                "47641fcb.2cbbc",
-                "499cc381.43b7ac",
-                "581c65dc.66c40c",
-                "960e0153.19089",
-                "df9c11ec.844bb",
-                "c3fc55e7.85ef98",
-                "d62b8ebb.ff133",
-                "e5a060ba.6726c"
-            ]
-        ],
-        "x": 165.46427154541016,
-        "xml": "<block atomic=\"true\">",
-        "y": 113.95236778259277,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "f65ded23.e6749",
+        "x": 112.82540893554688,
+        "y": 115.7301435470581,
+        "z": "3d15e61b.b538a2",
+        "wires": [["e31f43db.52afb8", "b3ff77e9.208a58", "a1931e53.dc4f6", "54d193a.b2730ec", "8981f24b.c7bb8", "83a6dba1.0c51b8", "212442ce.72a3a6", "afe5bf91.dbe17", "2a61203.e302f6", "bb9a7612.837e", "72186ced.310aa4", "63a9b703.13212", "ef53b446.6900c8", "f0fa6b7a.54bc5"]
+        ]
+    }, {
+        "id": "b3ff77e9.208a58",
+        "type": "set",
         "name": "set params based on Dispatcher Input",
-        "type": "set",
-        "wires": [],
-        "x": 738.6943969726562,
         "xml": "<set>\n<parameter name='vnf-id' value='`$input.action-identifiers.vnf-id`' /> \n<parameter name='service-instance-id' value='`$input.action-identifiers.service-instance-id`' />\n<parameter name='vserver-id' value='`$input.action-identifiers.vserver-id`' />\n<parameter name='vf-module-id' value='`$input.action-identifiers.vf-module-id`' />\n<parameter name='vnfc-name' value='`$input.action-identifiers.vnfc-name`' />\n\n<parameter name='request-id' value='`$input.common-header.request-id`' />\n<parameter name='originator-id' value='`$input.common-header.originator-id`' /> \n\n<parameter name='payload' value='`$input.payload`' /> \n<parameter name='api-ver' value='`$input.api-ver`' /> \n<parameter name='request-action' value='`$input.action`' />\n",
-        "y": 66.63888549804688,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "4df171f3.7b5ed",
+        "x": 686.055534362793,
+        "y": 68.4166612625122,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "8981f24b.c7bb8",
+        "type": "execute",
         "name": "execute Convert payload to DG Context ",
-        "outputs": 1,
-        "type": "execute",
-        "wires": [
-            [
-                "13057386.cb05bc",
-                "705bb0fd.6235a"
-            ]
-        ],
-        "x": 537.4167098999023,
         "xml": "<execute plugin=\"org.onap.sdnc.config.generator.convert.ConvertNode\" method=\"convertJson2DGContext\">\n<parameter name=\"jsonData\" value=\"`$input.payload`\" />\n<parameter name=\"isEscaped\" value=\"N\" />\n<parameter name=\"blockKeys\" value=\"configuration-parameters,configuration.configuration-string,configuration.configuration-json\" />\n<parameter name=\"responsePrefix\" value=\"tmp.convertnode\" />",
-        "y": 183.0555534362793,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "13057386.cb05bc",
-        "name": "failure",
         "outputs": 1,
+        "x": 484.77784729003906,
+        "y": 184.83332920074463,
+        "z": "3d15e61b.b538a2",
+        "wires": [["ccfbbfcf.a088d", "5a41202e.9ab0d"]
+        ]
+    }, {
+        "id": "ccfbbfcf.a088d",
         "type": "failure",
-        "wires": [
-            [
-                "58736a12.c8a834"
-            ]
-        ],
-        "x": 860.2222290039062,
+        "name": "failure",
         "xml": "<outcome value='failure'>\n",
-        "y": 156.1388931274414,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "705bb0fd.6235a",
-        "name": "not-found",
         "outputs": 1,
+        "x": 807.583366394043,
+        "y": 157.91666889190674,
+        "z": "3d15e61b.b538a2",
+        "wires": [["62fd515c.2de1"]
+        ]
+    }, {
+        "id": "5a41202e.9ab0d",
         "type": "not-found",
-        "wires": [
-            [
-                "31c8328a.24f9ee"
-            ]
-        ],
-        "x": 862.9166793823242,
+        "name": "not-found",
         "xml": "<outcome value='not-found'>\n",
-        "y": 202.52777481079102,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "comments": "",
+        "outputs": 1,
+        "x": 810.2778167724609,
+        "y": 204.30555057525635,
+        "z": "3d15e61b.b538a2",
+        "wires": [["1e5cda5c.2ca0c6"]
+        ]
+    }, {
+        "id": "62fd515c.2de1",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
         "atomic": "false",
         "comments": "",
-        "id": "58736a12.c8a834",
-        "name": "block",
         "outputs": 1,
+        "x": 1007.9444732666016,
+        "y": 158.27777767181396,
+        "z": "3d15e61b.b538a2",
+        "wires": [["b7b84ae.e7081b8"]
+        ]
+    }, {
+        "id": "1e5cda5c.2ca0c6",
         "type": "block",
-        "wires": [
-            [
-                "f52e91c9.0c54f"
-            ]
-        ],
-        "x": 1060.5833358764648,
+        "name": "block",
         "xml": "<block>\n",
-        "y": 156.50000190734863,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "atomic": "false",
         "comments": "",
-        "id": "31c8328a.24f9ee",
-        "name": "block",
         "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "8778642b.6f0a08"
-            ]
-        ],
-        "x": 1054.8333358764648,
-        "xml": "<block>\n",
-        "y": 204.50000286102295,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "f52e91c9.0c54f",
-        "name": "return failure",
+        "x": 1002.1944732666016,
+        "y": 206.27777862548828,
+        "z": "3d15e61b.b538a2",
+        "wires": [["bb64e972.b7e2b8"]
+        ]
+    }, {
+        "id": "b7b84ae.e7081b8",
         "type": "returnFailure",
-        "wires": [],
-        "x": 1245.333339691162,
+        "name": "return failure",
         "xml": "<return status=\"failure\">\n<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"`$tmp.convertnode.error-message`\"/>\n\t\n\t",
-        "y": 156.75000190734863,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "8778642b.6f0a08",
-        "name": "return failure",
+        "x": 1192.6944770812988,
+        "y": 158.52777767181396,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "bb64e972.b7e2b8",
         "type": "returnFailure",
-        "wires": [],
-        "x": 1248.083339691162,
+        "name": "return failure",
         "xml": "<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"Unable to process input parameters\"/>\n\t",
-        "y": 206.25000381469727,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "d1e77579.e7ab88",
-        "name": "execute saveTxLog",
-        "outputs": 1,
+        "x": 1195.4444770812988,
+        "y": 208.0277795791626,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "54d193a.b2730ec",
         "type": "execute",
-        "wires": [
-            [
-                "dd212aaa.c08fd8"
-            ]
-        ],
-        "x": 574.3333206176758,
+        "name": "execute saveTxLog",
         "xml": "<execute plugin=\"org.onap.appc.data.services.node.ConfigResourceNode\" method=\"saveConfigTransactionLog\">\n<parameter name=\"messageType\" value=\"request\" />\n<parameter name=\"message\" value=\"`$tmp.message`\" />\n<parameter name=\"responsePrefix\" value=\"tmp.saveTxLog\" />\n",
-        "y": 137.75000190734863,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "641ea02d.4b382",
+        "outputs": 1,
+        "x": 521.6944580078125,
+        "y": 139.52777767181396,
+        "z": "3d15e61b.b538a2",
+        "wires": [["d915b9dd.acfb8"]
+        ]
+    }, {
+        "id": "a1931e53.dc4f6",
+        "type": "set",
         "name": "set tmp.message",
-        "type": "set",
-        "wires": [],
-        "x": 672.2777709960938,
         "xml": "<set>\n<parameter name=\"tmp.message\" value=\"`$vnf-id + ' : ' + $request-action +  ': ' + $payload`\" />\n",
-        "y": 99.8888931274414,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "dd212aaa.c08fd8",
-        "name": "failure",
-        "outputs": 1,
+        "x": 619.6389083862305,
+        "y": 101.66666889190674,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "d915b9dd.acfb8",
         "type": "failure",
-        "wires": [
-            [
-                "6f36ee18.a34f3"
-            ]
-        ],
-        "x": 981.0833129882812,
+        "name": "failure",
         "xml": "<outcome value='failure'>\n",
-        "y": 94.25,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "comments": "",
+        "outputs": 1,
+        "x": 928.444450378418,
+        "y": 96.02777576446533,
+        "z": "3d15e61b.b538a2",
+        "wires": [["9d4e5786.743178"]
+        ]
+    }, {
+        "id": "9d4e5786.743178",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
         "atomic": "false",
         "comments": "",
-        "id": "6f36ee18.a34f3",
-        "name": "block",
         "outputs": 1,
-        "type": "block",
-        "wires": [
-            []
-        ],
-        "x": 1138.0833129882812,
-        "xml": "<block>\n",
-        "y": 91.25,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "46672893.29be28",
+        "x": 1085.444450378418,
+        "y": 93.02777576446533,
+        "z": "3d15e61b.b538a2",
+        "wires": [[]
+        ]
+    }, {
+        "id": "f0fa6b7a.54bc5",
+        "type": "call",
         "name": "call: GetAaiInfo",
-        "outputs": 1,
-        "type": "call",
-        "wires": [
-            [
-                "d3c47a04.b4c318",
-                "44eb99ad.384d38"
-            ]
-        ],
-        "x": 825.8888626098633,
         "xml": "<call module=\"APPC\" rpc=\"GetAaiInfo\" mode=\"sync\">",
-        "y": 619.5833129882812,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "d3c47a04.b4c318",
-        "name": "not-found",
         "outputs": 1,
+        "x": 363.25,
+        "y": 540.361083984375,
+        "z": "3d15e61b.b538a2",
+        "wires": [["16c346d3.174521", "f5139b03.a141c"]
+        ]
+    }, {
+        "id": "16c346d3.174521",
         "type": "not-found",
-        "wires": [
-            [
-                "1588264f.0dbc0a"
-            ]
-        ],
-        "x": 1110.5554885864258,
+        "name": "not-found",
         "xml": "<outcome value='not-found'>\n",
-        "y": 592.1666870117188,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "comments": "",
+        "outputs": 1,
+        "x": 870.9166259765625,
+        "y": 575.9444580078125,
+        "z": "3d15e61b.b538a2",
+        "wires": [["7f9a6b24.d958cc"]
+        ]
+    }, {
+        "id": "7f9a6b24.d958cc",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
         "atomic": "false",
         "comments": "",
-        "id": "1588264f.0dbc0a",
-        "name": "block",
         "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "911166e0.3593c8"
-            ]
-        ],
-        "x": 1291.4999465942383,
-        "xml": "<block>\n",
-        "y": 615.8333740234375,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "911166e0.3593c8",
-        "name": "return failure",
+        "x": 1052.861083984375,
+        "y": 585.6111450195312,
+        "z": "3d15e61b.b538a2",
+        "wires": [["3dcdd28.ee2352e"]
+        ]
+    }, {
+        "id": "3dcdd28.ee2352e",
         "type": "returnFailure",
-        "wires": [],
-        "x": 1457.9165725708008,
+        "name": "return failure",
         "xml": "<return status=\"failure\">\n\t",
-        "y": 616.3333129882812,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "44eb99ad.384d38",
-        "name": "failure",
-        "outputs": 1,
+        "x": 1229.2777099609375,
+        "y": 580.111083984375,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "f5139b03.a141c",
         "type": "failure",
-        "wires": [
-            [
-                "1588264f.0dbc0a"
-            ]
-        ],
-        "x": 1104.4445266723633,
+        "name": "failure",
         "xml": "<outcome value='failure'>\n",
-        "y": 637.6943969726562,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "47641fcb.2cbbc",
+        "outputs": 1,
+        "x": 892.8056640625,
+        "y": 614.47216796875,
+        "z": "3d15e61b.b538a2",
+        "wires": [["7f9a6b24.d958cc"]
+        ]
+    }, {
+        "id": "83a6dba1.0c51b8",
+        "type": "switchNode",
         "name": "switch isTemplateDriven.TEMPLATE",
-        "outputs": 1,
-        "type": "switchNode",
-        "wires": [
-            [
-                "9a6ca9b5.a5f1b8",
-                "3e178fb8.db00e"
-            ]
-        ],
-        "x": 422.2499771118164,
         "xml": "<switch test='`$isTemplateDriven.TEMPLATE`'>\n",
-        "y": 810.8333377838135,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "9a6ca9b5.a5f1b8",
-        "name": "outcome: YES",
         "outputs": 1,
+        "x": 369.6111145019531,
+        "y": 812.6111135482788,
+        "z": "3d15e61b.b538a2",
+        "wires": [["14c8e68e.a35ef9", "a3a98651.43bc5"]
+        ]
+    }, {
+        "id": "14c8e68e.a35ef9",
         "type": "success",
-        "wires": [
-            [
-                "90c3ac2d.01d09"
-            ]
-        ],
-        "x": 757.174617767334,
-        "xml": "<outcome value=\"YES\">",
-        "y": 780.8134269714355,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "name": "outcome: Y",
+        "xml": "<outcome value=\"Y\">",
         "comments": "",
-        "id": "3e178fb8.db00e",
+        "outputs": 1,
+        "x": 704.5357551574707,
+        "y": 782.5912027359009,
+        "z": "3d15e61b.b538a2",
+        "wires": [["c555c420.004518"]
+        ]
+    }, {
+        "id": "a3a98651.43bc5",
+        "type": "success",
         "name": "outcome: Other",
-        "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "93a44588.d50728"
-            ]
-        ],
-        "x": 758.9127349853516,
         "xml": "<outcome value='Other'>",
-        "y": 838.9563655853271,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "atomic": "true",
-        "comments": null,
-        "id": "90c3ac2d.01d09",
-        "name": "block : atomic",
-        "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "814dc33.55b844"
-            ]
-        ],
-        "x": 992.8015785217285,
-        "xml": "<block atomic=\"true\">",
-        "y": 787.0793762207031,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "atomic": "true",
-        "comments": null,
-        "id": "93a44588.d50728",
-        "name": "block : atomic",
-        "outputs": 1,
-        "type": "block",
-        "wires": [
-            []
-        ],
-        "x": 1022.8889465332031,
-        "xml": "<block atomic=\"true\">",
-        "y": 838.0278367996216,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "814dc33.55b844",
+        "outputs": 1,
+        "x": 706.2738723754883,
+        "y": 840.7341413497925,
+        "z": "3d15e61b.b538a2",
+        "wires": [["c9988c03.75cca"]
+        ]
+    }, {
+        "id": "c555c420.004518",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "comments": null,
+        "outputs": 1,
+        "x": 940.1627159118652,
+        "y": 788.8571519851685,
+        "z": "3d15e61b.b538a2",
+        "wires": [["92cbaff2.9449e"]
+        ]
+    }, {
+        "id": "c9988c03.75cca",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "comments": null,
+        "outputs": 1,
+        "x": 970.2500839233398,
+        "y": 839.8056125640869,
+        "z": "3d15e61b.b538a2",
+        "wires": [[]
+        ]
+    }, {
+        "id": "92cbaff2.9449e",
+        "type": "call",
         "name": "call: loadTeamplate",
-        "outputs": 1,
-        "type": "call",
-        "wires": [
-            [
-                "b351a17b.41869",
-                "bfe70fa5.66e08"
-            ]
-        ],
-        "x": 1196.3889503479004,
         "xml": "<call module=\"APPC\" rpc=\"loadTeamplate\" mode=\"sync\">",
-        "y": 787.1110744476318,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "b351a17b.41869",
-        "name": "failure",
         "outputs": 1,
+        "x": 1143.750087738037,
+        "y": 788.8888502120972,
+        "z": "3d15e61b.b538a2",
+        "wires": [["c6dd6374.350e58", "fbecd7e9.44967"]
+        ]
+    }, {
+        "id": "c6dd6374.350e58",
         "type": "failure",
-        "wires": [
-            [
-                "33f219a0.9ce106"
-            ]
-        ],
-        "x": 1365.55562210083,
+        "name": "failure",
         "xml": "<outcome value='failure'>\n",
-        "y": 756.8611545562744,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "392a5ccd.227d44",
-        "name": "return failure",
+        "outputs": 1,
+        "x": 1312.9167594909668,
+        "y": 758.6389303207397,
+        "z": "3d15e61b.b538a2",
+        "wires": [["c0464849.df039"]
+        ]
+    }, {
+        "id": "cd4a97eb.6c4ea",
         "type": "returnFailure",
-        "wires": [],
-        "x": 1759.3889694213867,
+        "name": "return failure",
         "xml": "<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"Unable to load Template Information\"/>\n",
-        "y": 752.5277996063232,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "comments": "",
+        "x": 1706.7501068115234,
+        "y": 754.3055753707886,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "c0464849.df039",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">\n\n",
         "atomic": "true",
         "comments": "",
-        "id": "33f219a0.9ce106",
-        "name": "block : atomic",
         "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "392a5ccd.227d44"
-            ]
-        ],
-        "x": 1542.5555877685547,
-        "xml": "<block atomic=\"true\">\n\n",
-        "y": 754.7777805328369,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "bfe70fa5.66e08",
-        "name": "Other",
-        "outputs": 1,
+        "x": 1489.9167251586914,
+        "y": 756.5555562973022,
+        "z": "3d15e61b.b538a2",
+        "wires": [["cd4a97eb.6c4ea"]
+        ]
+    }, {
+        "id": "fbecd7e9.44967",
         "type": "failure",
-        "wires": [
-            [
-                "4782d66.0e30528"
-            ]
-        ],
-        "x": 1356.4722480773926,
+        "name": "Other",
         "xml": "<outcome value='Other'>\n",
-        "y": 869.4444408416748,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "499cc381.43b7ac",
+        "outputs": 1,
+        "x": 1303.8333854675293,
+        "y": 871.2222166061401,
+        "z": "3d15e61b.b538a2",
+        "wires": [["b2880229.432268"]
+        ]
+    }, {
+        "id": "212442ce.72a3a6",
+        "type": "get-resource",
         "name": "get-resource: APPC.action-level",
-        "outputs": 1,
-        "type": "get-resource",
-        "wires": [
-            [
-                "34c05249.d79afe",
-                "59f42bd7.3b8014"
-            ]
-        ],
-        "x": 474.8333206176758,
         "xml": "<get-resource\n\tplugin='org.onap.ccsdk.sli.adaptors.resource.sql.SqlResource' \n\tresource='SQL'\n\tkey=\"SELECT ACTION_LEVEL\n\t     FROM ACTION_LEVEL_REFERENCE\n         WHERE ACTION_IDENTIFIER = $action-identifier ;\"\n    force='true'\n\tpfx='APPC.action-level'>\n",
-        "y": 472.4166946411133,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "comments": "",
+        "outputs": 1,
+        "x": 422.1944580078125,
+        "y": 474.1944704055786,
+        "z": "3d15e61b.b538a2",
+        "wires": [["87de798c.bd2c", "6becf486.cb0c8c"]
+        ]
+    }, {
+        "id": "305b3727.a6b0d",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
         "atomic": "false",
         "comments": "",
-        "id": "70c97dc2.b38574",
-        "name": "block",
         "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "f7860416.1a1108"
-            ]
-        ],
-        "x": 945.5833206176758,
-        "xml": "<block>\n",
-        "y": 489.75000190734863,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "f7860416.1a1108",
-        "name": "return failure",
-        "type": "returnFailure",
-        "wires": [],
-        "x": 1113.8333206176758,
-        "xml": "<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"Unable to retrieve Template Information from Reference table.\"/>\n\t",
-        "y": 487.50000190734863,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "34c05249.d79afe",
-        "name": "failure",
-        "outputs": 1,
+        "x": 881.9444580078125,
+        "y": 478.52777099609375,
+        "z": "3d15e61b.b538a2",
+        "wires": [[]
+        ]
+    }, {
+        "id": "87de798c.bd2c",
         "type": "failure",
-        "wires": [
-            [
-                "70c97dc2.b38574"
-            ]
-        ],
-        "x": 747.9999771118164,
+        "name": "failure",
         "xml": "<outcome value='failure'>\n",
-        "y": 487.3611030578613,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "4782d66.0e30528",
-        "name": "call: MergeTemplateData",
         "outputs": 1,
+        "x": 697.361083984375,
+        "y": 477.13885498046875,
+        "z": "3d15e61b.b538a2",
+        "wires": [["305b3727.a6b0d"]
+        ]
+    }, {
+        "id": "b2880229.432268",
         "type": "call",
-        "wires": [
-            [
-                "55d06171.b5739",
-                "fb63c6c3.f262a8"
-            ]
-        ],
-        "x": 1537.7499618530273,
+        "name": "call: MergeTemplateData",
         "xml": "<call module=\"APPC\" rpc=\"MergeTemplateData\" mode=\"sync\">",
-        "y": 866.2500057220459,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "comments": "",
+        "outputs": 1,
+        "x": 1485.111099243164,
+        "y": 868.0277814865112,
+        "z": "3d15e61b.b538a2",
+        "wires": [["440c17b7.efc1c", "63c31582.8011cc"]
+        ]
+    }, {
+        "id": "4544acb.1e8ff54",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
         "atomic": "true",
         "comments": null,
-        "id": "13067f71.cb0181",
-        "name": "block : atomic",
         "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "569e6b14.42c9e4"
-            ]
-        ],
-        "x": 1931.2619018554688,
-        "xml": "<block atomic=\"true\">",
-        "y": 825.8214569091797,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "55d06171.b5739",
-        "name": "failure",
-        "outputs": 1,
+        "x": 1878.6230392456055,
+        "y": 827.599232673645,
+        "z": "3d15e61b.b538a2",
+        "wires": [["c723a398.547768"]
+        ]
+    }, {
+        "id": "440c17b7.efc1c",
         "type": "failure",
-        "wires": [
-            [
-                "13067f71.cb0181"
-            ]
-        ],
-        "x": 1771.9047546386719,
+        "name": "failure",
         "xml": "<outcome value='failure'>\n",
-        "y": 826.5238094329834,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "fb63c6c3.f262a8",
+        "outputs": 1,
+        "x": 1719.2658920288086,
+        "y": 828.3015851974487,
+        "z": "3d15e61b.b538a2",
+        "wires": [["4544acb.1e8ff54"]
+        ]
+    }, {
+        "id": "63c31582.8011cc",
+        "type": "failure",
         "name": "Other",
-        "outputs": 1,
-        "type": "failure",
-        "wires": [
-            [
-                "2603c6fc.c7658a"
-            ]
-        ],
-        "x": 1775.5714225769043,
         "xml": "<outcome value='Other'>\n",
-        "y": 892.952399969101,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "comments": "",
+        "outputs": 1,
+        "x": 1722.932559967041,
+        "y": 894.7301757335663,
+        "z": "3d15e61b.b538a2",
+        "wires": [["8be5939b.148158"]
+        ]
+    }, {
+        "id": "8be5939b.148158",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
         "atomic": "true",
         "comments": "",
-        "id": "2603c6fc.c7658a",
-        "name": "block : atomic",
         "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "7237869.f38ce78"
-            ]
-        ],
-        "x": 1939.8571548461914,
-        "xml": "<block atomic=\"true\">",
-        "y": 892.523811340332,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "7237869.f38ce78",
-        "name": "record",
-        "outputs": 1,
+        "x": 1887.2182922363281,
+        "y": 894.3015871047974,
+        "z": "3d15e61b.b538a2",
+        "wires": [["67bcde42.d73ac8"]
+        ]
+    }, {
+        "id": "67bcde42.d73ac8",
         "type": "record",
-        "wires": [
-            []
-        ],
-        "x": 2116.428653717041,
-        "xml": "<record plugin=\"org.onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"field2\" value=\"`$request-action`\"/>\n<parameter name=\"field3\" value=\"`$input.action`\"/>\n\n",
-        "y": 894.1428498625755,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "name": "record",
+        "xml": "<record plugin=\"onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"field2\" value=\"`$request-action`\"/>\n<parameter name=\"field3\" value=\"`$input.action`\"/>\n\n",
         "comments": "",
-        "id": "10e21f94.2859d",
-        "name": "return failure",
+        "outputs": 1,
+        "x": 2063.7897911071777,
+        "y": 895.9206256270409,
+        "z": "3d15e61b.b538a2",
+        "wires": [[]
+        ]
+    }, {
+        "id": "d14744ec.dc9b88",
         "type": "returnFailure",
-        "wires": [],
-        "x": 2312.250072479248,
+        "name": "return failure",
         "xml": "<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"Unable to Merge Template and Data Information\"/>\n",
-        "y": 822.7500057220459,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "atomic": "true",
         "comments": "",
-        "id": "569e6b14.42c9e4",
-        "name": "block : atomic",
-        "outputs": 1,
+        "x": 2259.6112098693848,
+        "y": 824.5277814865112,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "c723a398.547768",
         "type": "block",
-        "wires": [
-            [
-                "10e21f94.2859d"
-            ]
-        ],
-        "x": 2124.166648864746,
+        "name": "block : atomic",
         "xml": "<block atomic=\"true\">\n\n",
-        "y": 824.1666307449341,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "atomic": "true",
         "comments": "",
-        "id": "581c65dc.66c40c",
-        "name": "get-resource: isTemplateDriven",
         "outputs": 1,
+        "x": 2071.527786254883,
+        "y": 825.9444065093994,
+        "z": "3d15e61b.b538a2",
+        "wires": [["d14744ec.dc9b88"]
+        ]
+    }, {
+        "id": "afe5bf91.dbe17",
         "type": "get-resource",
-        "wires": [
-            [
-                "236e23a7.75805c"
-            ]
-        ],
-        "x": 423.4166488647461,
+        "name": "get-resource: isTemplateDriven",
         "xml": "<get-resource\n\tplugin='org.onap.ccsdk.sli.adaptors.resource.sql.SqlResource' \n\tresource='SQL'\n\tkey=\"SELECT TEMPLATE\n\t     FROM PROTOCOL_REFERENCE\n         WHERE ACTION = $input.action and VNF_TYPE = $vnf-type and ACTION_LEVEL= $action-level ;\"\n    force='true'\n\tpfx='isTemplateDriven'>\n",
-        "y": 748.3333148956299,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "comments": "",
+        "outputs": 1,
+        "x": 370.7777862548828,
+        "y": 750.1110906600952,
+        "z": "3d15e61b.b538a2",
+        "wires": [["858af835.d4ba4"]
+        ]
+    }, {
+        "id": "3f47ff39.2163e8",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
         "atomic": "false",
         "comments": "",
-        "id": "b342a11f.4cb1a",
-        "name": "block",
         "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "e30e032f.dca54"
-            ]
-        ],
-        "x": 962.4999847412109,
-        "xml": "<block>\n",
-        "y": 732.3333616256714,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "e30e032f.dca54",
-        "name": "return failure",
+        "x": 909.8611221313477,
+        "y": 734.1111373901367,
+        "z": "3d15e61b.b538a2",
+        "wires": [["d7608368.e11928"]
+        ]
+    }, {
+        "id": "d7608368.e11928",
         "type": "returnFailure",
-        "wires": [],
-        "x": 1165.7499923706055,
+        "name": "return failure",
         "xml": "<return status=\"failure\">\n\t<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"Unable to retrieve Template Information from Reference table.\"/>\n\t",
-        "y": 726.7499666213989,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "236e23a7.75805c",
-        "name": "failure",
-        "outputs": 1,
+        "x": 1113.1111297607422,
+        "y": 728.5277423858643,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "858af835.d4ba4",
         "type": "failure",
-        "wires": [
-            [
-                "b342a11f.4cb1a"
-            ]
-        ],
-        "x": 751.5833129882812,
+        "name": "failure",
         "xml": "<outcome value='failure'>\n",
-        "y": 727.1666946411133,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "960e0153.19089",
+        "outputs": 1,
+        "x": 698.944450378418,
+        "y": 728.9444704055786,
+        "z": "3d15e61b.b538a2",
+        "wires": [["3f47ff39.2163e8"]
+        ]
+    }, {
+        "id": "2a61203.e302f6",
+        "type": "set",
         "name": "set Payload params ",
-        "type": "set",
-        "wires": [],
-        "x": 493.4722366333008,
-        "xml": "<set>\n<!-- vnf type, name is from A&AI \n<parameter name='vnf-type' value='`$tmp.vnfInfo.vnf.vnf-type`' />\n<parameter name='vnf-name' value='`$tmp.vnfInfo.vnf.vnf-name`' />\n-->\n<!-- 17.07 Parameters from request -->\n<parameter name='template-name' value='`$request-parameters.template-name`' />\n<parameter name='vnf-host-ip-address' value='`$request-parameters.vnf-host-ip-address`' />\n<parameter name='vnfc-type' value='`$request-parameters.vnfc-type`' /> \n<parameter name='vnf-type' value='`$request-parameters.vnf-type`' />\n<parameter name='vnf-name' value='`$request-parameters.vnf-name`' />\n\n<parameter name='configurationblock' value='`$block_configuration`' />\n\n\n<!-- parameters to be merged with template provided as input-->\n<parameter name='configuration-params' value='`$block_configuration-parameters`' /> \n\n\n\n<!--1702 VM/VNFC Parameters when passed from Request--> \n<parameter name='VNFCTYPE' value='`$request-parameters.vm[0].vnfc[0].vnfc-type`' />\n<parameter name=\"VMNAME0\" value=\"`$request-parameters.vm[0].vm-name`\"/>\n<parameter name=\"VNFCNAME0\" value=\"`$request-parameters.vm[0].vnfc[0].vnfc-name`\"/>\n<parameter name=\"VMLENGTH\" value=\"`$size_request-parameters.vm`\"/>\n<parameter name=\"VNFCLENGTH\" value=\"`$size_request-parameters.vm[0].vnfc`\"/>\n<parameter name=\"CONFIGTYPE\" value=\"`$config-type`\"/>\n\n\n<!-- Not Used?\n<parameter name='site-location' value='`$request-parameters.site-location`' />\n<parameter name='file-name' value='`$request-parameters.file-name`' />\n-->\n\n\n\n\n",
-        "y": 224.08331775665283,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "xml": "<set>\n<!-- vnf type, name is from A&AI \n<parameter name='vnf-type' value='`$tmp.vnfInfo.vnf.vnf-type`' />\n<parameter name='vnf-name' value='`$tmp.vnfInfo.vnf.vnf-name`' />\n-->\n<!-- ConfigScaleOut for Beijing (1806) release -->\n<parameter name='controller-template-id' value='`$request-parameters.controller-template-id`' />\n<parameter name='req-vf-module-id' value='`$request-parameters.vf-module-id`' />\n\n<!-- 17.07 Parameters from request -->\n<parameter name='template-name' value='`$request-parameters.template-name`' />\n<parameter name='vnf-host-ip-address' value='`$request-parameters.vnf-host-ip-address`' />\n<parameter name='vnfc-type' value='`$request-parameters.vnfc-type`' /> \n<parameter name='vnf-type' value='`$request-parameters.vnf-type`' />\n<parameter name='vnf-name' value='`$request-parameters.vnf-name`' />\n\n<parameter name='configurationblock' value='`$block_configuration`' />\n\n\n<!-- parameters to be merged with template provided as input-->\n<parameter name='configuration-params' value='`$block_configuration-parameters`' /> \n\n\n\n<!--1702 VM/VNFC Parameters when passed from Request--> \n<parameter name='VNFCTYPE' value='`$request-parameters.vm[0].vnfc[0].vnfc-type`' />\n<parameter name=\"VMNAME0\" value=\"`$request-parameters.vm[0].vm-name`\"/>\n<parameter name=\"VNFCNAME0\" value=\"`$request-parameters.vm[0].vnfc[0].vnfc-name`\"/>\n<parameter name=\"VMLENGTH\" value=\"`$size_request-parameters.vm`\"/>\n<parameter name=\"VNFCLENGTH\" value=\"`$size_request-parameters.vm[0].vnfc`\"/>\n<parameter name=\"CONFIGTYPE\" value=\"`$config-type`\"/>\n\n\n<!-- Not Used?\n<parameter name='site-location' value='`$request-parameters.site-location`' />\n<parameter name='file-name' value='`$request-parameters.file-name`' />\n-->\n\n\n\n\n",
         "comments": "",
-        "id": "59f42bd7.3b8014",
+        "x": 440.8333740234375,
+        "y": 225.86109352111816,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "6becf486.cb0c8c",
+        "type": "success",
         "name": "success",
-        "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "e0bb5945.ce9928"
-            ]
-        ],
-        "x": 748.8611030578613,
         "xml": "<outcome value='success'>\n",
-        "y": 545.3333215713501,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "e0bb5945.ce9928",
-        "name": "set action-level ",
+        "outputs": 1,
+        "x": 695.2222290039062,
+        "y": 535.111083984375,
+        "z": "3d15e61b.b538a2",
+        "wires": [["68212633.6d95d8"]
+        ]
+    }, {
+        "id": "68212633.6d95d8",
         "type": "set",
-        "wires": [],
-        "x": 965.2777328491211,
+        "name": "set action-level ",
         "xml": "<set>\n<parameter name='action-level' value='`$APPC.action-level.ACTION-LEVEL`' />\n\n\n\n\n\n",
-        "y": 548.3888630867004,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "df9c11ec.844bb",
-        "name": "switch action-level",
-        "outputs": 1,
+        "x": 910.6388549804688,
+        "y": 533.1666259765625,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "bb9a7612.837e",
         "type": "switchNode",
-        "wires": [
-            [
-                "6eb262a7.6f6d0c",
-                "5a3d27a3.2b2d98"
-            ]
-        ],
-        "x": 407.9999771118164,
+        "name": "switch action-level",
         "xml": "<switch test='`$action-level`'>\n",
-        "y": 592.9166965484619,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "6eb262a7.6f6d0c",
+        "outputs": 1,
+        "x": 355.3611145019531,
+        "y": 594.6944723129272,
+        "z": "3d15e61b.b538a2",
+        "wires": [["3c0e3309.13dbf4", "791af30b.fa9c7c"]
+        ]
+    }, {
+        "id": "3c0e3309.13dbf4",
+        "type": "success",
         "name": "outcome: Other",
-        "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "46672893.29be28"
-            ]
-        ],
-        "x": 625.4166564941406,
         "xml": "<outcome value='Other'>",
-        "y": 619.3333377838135,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "5a3d27a3.2b2d98",
-        "name": "outcome: VM",
         "outputs": 1,
+        "x": 572.7777938842773,
+        "y": 621.1111135482788,
+        "z": "3d15e61b.b538a2",
+        "wires": [["46b55a16.74935c"]
+        ]
+    }, {
+        "id": "791af30b.fa9c7c",
         "type": "success",
-        "wires": [
-            [
-                "3e46fb5e.8e8fc4"
-            ]
-        ],
-        "x": 615.4166564941406,
-        "xml": "<outcome value='VM'>",
-        "y": 682.0000276565552,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "name": "outcome: vm",
+        "xml": "<outcome value='vm'>",
+        "comments": "",
+        "outputs": 1,
+        "x": 562.7777938842773,
+        "y": 683.7778034210205,
+        "z": "3d15e61b.b538a2",
+        "wires": [["6a4e76dc.076068"]
+        ]
+    }, {
+        "id": "ba6313fb.b53d78",
+        "type": "success",
+        "name": "outcome: ''",
+        "xml": "<outcome value=''>",
+        "comments": "",
+        "outputs": 1,
+        "x": 1482.5277824401855,
+        "y": 368.44440841674805,
+        "z": "3d15e61b.b538a2",
+        "wires": [["f0eef73e.eb97d"]
+        ]
+    }, {
+        "id": "a82a734a.1e3b28",
+        "type": "success",
+        "name": "outcome: Other",
+        "xml": "<outcome value='Other'>",
+        "comments": "",
+        "outputs": 1,
+        "x": 1416.3494873046875,
+        "y": 464.9206590652466,
+        "z": "3d15e61b.b538a2",
+        "wires": [["657ede7c.dc6c7"]
+        ]
+    }, {
+        "id": "f0eef73e.eb97d",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "comments": "",
+        "outputs": 1,
+        "x": 1013.3493194580078,
+        "y": 441.0158796310425,
+        "z": "3d15e61b.b538a2",
+        "wires": [["bb5436fe.ace878"]
+        ]
+    }, {
+        "id": "657ede7c.dc6c7",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "comments": null,
+        "outputs": 1,
+        "x": 1609.6585693359375,
+        "y": 464.3254442214966,
+        "z": "3d15e61b.b538a2",
+        "wires": [["91ac71dc.ce4e48"]
+        ]
+    }, {
+        "id": "91ac71dc.ce4e48",
+        "type": "set",
+        "name": "setActionLevel VNF",
+        "xml": "<set>\n<parameter name='action-level' value='vnf' />\n<parameter name='action-identifier' value='vnf-id' />",
+        "comments": "",
+        "x": 1814.2777099609375,
+        "y": 464.1110887527466,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "72186ced.310aa4",
+        "type": "switchNode",
+        "name": "switch vnfc-name",
+        "xml": "<switch test='`$vnfc-name`'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 404.6111526489258,
+        "y": 347.58331966400146,
+        "z": "3d15e61b.b538a2",
+        "wires": [["d2b87216.e7176", "22e0fef2.238ef2"]
+        ]
+    }, {
+        "id": "d2b87216.e7176",
+        "type": "success",
+        "name": "outcome: Other",
+        "xml": "<outcome value='Other'>",
+        "comments": "",
+        "outputs": 1,
+        "x": 678.1549301147461,
+        "y": 337.19843578338623,
+        "z": "3d15e61b.b538a2",
+        "wires": [["d66d933d.dd48b8"]
+        ]
+    }, {
+        "id": "d66d933d.dd48b8",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "comments": null,
+        "outputs": 1,
+        "x": 866.1031265258789,
+        "y": 348.3254804611206,
+        "z": "3d15e61b.b538a2",
+        "wires": [["9dbafa7.b763988"]
+        ]
+    }, {
+        "id": "9dbafa7.b763988",
+        "type": "set",
+        "name": "setActionLevel VNFC",
+        "xml": "<set>\n<parameter name='action-level' value='vnfc' />\n<parameter name='action-identifier' value='vnfc-name' />\n",
+        "comments": "",
+        "x": 1153.6112365722656,
+        "y": 259.83330249786377,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "921a2e9a.a3ce38",
+        "type": "switchNode",
+        "name": "switch vserver-id",
+        "xml": "<switch test='`$vserver-id`'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 871.4999465942383,
+        "y": 388.88883686065674,
+        "z": "3d15e61b.b538a2",
+        "wires": [["b54569c0.ffaaa", "fe465154.ede4a"]
+        ]
+    }, {
+        "id": "b54569c0.ffaaa",
+        "type": "success",
+        "name": "outcome: Other",
+        "xml": "<outcome value='Other'>",
+        "comments": "",
+        "outputs": 1,
+        "x": 1127.3771362304688,
+        "y": 311.6984214782715,
+        "z": "3d15e61b.b538a2",
+        "wires": [["f0caa6de.74e288"]
+        ]
+    }, {
+        "id": "f0caa6de.74e288",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "comments": null,
+        "outputs": 1,
+        "x": 1311.825340270996,
+        "y": 293.57544898986816,
+        "z": "3d15e61b.b538a2",
+        "wires": [["1c3af02d.d930c"]
+        ]
+    }, {
+        "id": "1c3af02d.d930c",
+        "type": "set",
+        "name": "setActionLevel VM",
+        "xml": "<set>\n<parameter name='action-level' value='vm' />\n<parameter name='action-identifier' value='vserver-id' />\n\n",
+        "comments": "",
+        "x": 1499.694480895996,
+        "y": 283.7777500152588,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "bb5436fe.ace878",
+        "type": "switchNode",
+        "name": "switch vnf-id",
+        "xml": "<switch test='`$vnf-id`'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1176.7778511047363,
+        "y": 441.6110944747925,
+        "z": "3d15e61b.b538a2",
+        "wires": [["a82a734a.1e3b28", "27a9316.5fdface"]
+        ]
+    }, {
+        "id": "27a9316.5fdface",
+        "type": "success",
+        "name": "outcome: ''",
+        "xml": "<outcome value=''>",
+        "comments": "",
+        "outputs": 1,
+        "x": 1410.8611068725586,
+        "y": 414.94440746307373,
+        "z": "3d15e61b.b538a2",
+        "wires": [["c5076551.610e78"]
+        ]
+    }, {
+        "id": "c5076551.610e78",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "comments": "",
+        "outputs": 1,
+        "x": 1601.0993881225586,
+        "y": 411.34922313690186,
+        "z": "3d15e61b.b538a2",
+        "wires": [["493eb326.1e1154"]
+        ]
+    }, {
+        "id": "493eb326.1e1154",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status=\"failure\">\n<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"Action identifier is missing in the request\"/>\n\t\n\t",
+        "comments": "",
+        "x": 1799.6109886169434,
+        "y": 417.3610944747925,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "6d5ebc24.a08e2c",
+        "type": "switchNode",
+        "name": "switch vf-module-id",
+        "xml": "<switch test='`$vf-module-id`'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 1282.6230697631836,
+        "y": 352.21821117401123,
+        "z": "3d15e61b.b538a2",
+        "wires": [["b9b438ae.0af7c8", "ba6313fb.b53d78"]
+        ]
+    }, {
+        "id": "b9b438ae.0af7c8",
+        "type": "success",
+        "name": "outcome: Other",
+        "xml": "<outcome value='Other'>",
+        "comments": "",
+        "outputs": 1,
+        "x": 1496.944480895996,
+        "y": 325.86106300354004,
+        "z": "3d15e61b.b538a2",
+        "wires": [["a9595695.3e8e6"]
+        ]
+    }, {
+        "id": "a9595695.3e8e6",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "comments": null,
+        "outputs": 1,
+        "x": 1702.5039291381836,
+        "y": 324.7659101486206,
+        "z": "3d15e61b.b538a2",
+        "wires": [["8a557045.80ea4"]
+        ]
+    }, {
+        "id": "8a557045.80ea4",
+        "type": "set",
+        "name": "setActionLevel VF-Module",
+        "xml": "<set>\n<parameter name='action-level' value='vf-module' />\n<parameter name='action-identifier' value='vf-module-id' />\n",
+        "comments": "",
+        "x": 1914.7897033691406,
+        "y": 323.63489818573,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "22e0fef2.238ef2",
+        "type": "success",
+        "name": "outcome: ''",
+        "xml": "<outcome value=''>",
+        "comments": "",
+        "outputs": 1,
+        "x": 672.9444313049316,
+        "y": 383.02777671813965,
+        "z": "3d15e61b.b538a2",
+        "wires": [["921a2e9a.a3ce38"]
+        ]
+    }, {
+        "id": "fe465154.ede4a",
+        "type": "success",
+        "name": "outcome: ''",
+        "xml": "<outcome value=''>",
+        "comments": "",
+        "outputs": 1,
+        "x": 1091.8334159851074,
+        "y": 370.6666612625122,
+        "z": "3d15e61b.b538a2",
+        "wires": [["6d5ebc24.a08e2c"]
+        ]
+    }, {
+        "id": "63a9b703.13212",
+        "type": "record",
+        "name": "record",
+        "xml": "<record plugin=\"onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"field2\" value=\"`$request-action`\"/>\n<parameter name=\"field3\" value=\"`$action-identifier`\"/>\n\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 378.61114501953125,
+        "y": 397.88889598846436,
+        "z": "3d15e61b.b538a2",
+        "wires": [[]
+        ]
+    }, {
+        "id": "ef53b446.6900c8",
+        "type": "switchNode",
+        "name": "switch vnfc-type",
+        "xml": "<switch test='`$vnfc-type`'>\n",
+        "comments": "",
+        "outputs": 1,
+        "x": 414.0277862548828,
+        "y": 280.6666784286499,
+        "z": "3d15e61b.b538a2",
+        "wires": [["26631bbe.8eeeac", "ba39a350.c502a"]
+        ]
+    }, {
+        "id": "26631bbe.8eeeac",
+        "type": "success",
+        "name": "outcome: Other",
+        "xml": "<outcome value='Other'>",
+        "comments": "",
+        "outputs": 1,
+        "x": 689.7937316894531,
+        "y": 245.83735847473145,
+        "z": "3d15e61b.b538a2",
+        "wires": [["40df697d.8f37a"]
+        ]
+    }, {
+        "id": "40df697d.8f37a",
+        "type": "block",
+        "name": "block : atomic",
+        "xml": "<block atomic=\"true\">",
+        "atomic": "true",
+        "comments": null,
+        "outputs": 1,
+        "x": 883.2975578308105,
+        "y": 248.0754690170288,
+        "z": "3d15e61b.b538a2",
+        "wires": [[]
+        ]
+    }, {
+        "id": "ba39a350.c502a",
+        "type": "success",
+        "name": "outcome: ''",
+        "xml": "<outcome value=''>",
+        "comments": "",
+        "outputs": 1,
+        "x": 685.6944046020508,
+        "y": 287.22221755981445,
+        "z": "3d15e61b.b538a2",
+        "wires": [["38bb02b8.138e26"]
+        ]
+    }, {
+        "id": "38bb02b8.138e26",
+        "type": "set",
+        "name": "set vnfc-type ",
+        "xml": "<set>\n<!-- 17.07 If vnfc-type is blank assign Parameters from request in array list -->\n<parameter name='vnfc-type' value='`$VNFCTYPE`' />\n\n\n\n\n\n\n\n\n\n\n\n",
+        "comments": "",
+        "x": 884.0277328491211,
+        "y": 287.3333559036255,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "46b55a16.74935c",
+        "type": "block",
+        "name": "block",
+        "xml": "<block>\n",
         "atomic": "false",
         "comments": "",
-        "id": "3e46fb5e.8e8fc4",
+        "outputs": 1,
+        "x": 730.75,
+        "y": 627.75,
+        "z": "3d15e61b.b538a2",
+        "wires": [["e1dc45c1.f3b33"]
+        ]
+    }, {
+        "id": "6a4e76dc.076068",
+        "type": "block",
         "name": "block",
-        "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "39e6b24d.41090e"
-            ]
-        ],
-        "x": 776.4166526794434,
         "xml": "<block>\n",
-        "y": 683.6666445732117,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "atomic": "false",
         "comments": "",
-        "id": "39e6b24d.41090e",
-        "name": "return success",
+        "outputs": 1,
+        "x": 743.75,
+        "y": 687.75,
+        "z": "3d15e61b.b538a2",
+        "wires": [["e7912b83.532068"]
+        ]
+    }, {
+        "id": "e7912b83.532068",
         "type": "returnSuccess",
-        "wires": [],
-        "x": 1041.7500305175781,
+        "name": "return success",
         "xml": "<return status='success'>\n\n",
-        "y": 679.6666927337646,
-        "z": "5ad64f3a.c3774"
-    },
-    {
         "comments": "",
-        "id": "7ff4860d.906048",
-        "name": "outcome: ''",
-        "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "6913b0fa.1e861"
-            ]
-        ],
-        "x": 1535.1666450500488,
-        "xml": "<outcome value=''>",
-        "y": 366.6666326522827,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "61f421d6.bfea9",
-        "name": "outcome: Other",
-        "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "5b26aeb2.014b5"
-            ]
-        ],
-        "x": 1468.9883499145508,
-        "xml": "<outcome value='Other'>",
-        "y": 463.14288330078125,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "atomic": "true",
-        "comments": "",
-        "id": "6913b0fa.1e861",
-        "name": "block : atomic",
-        "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "8c272d3a.1fda9"
-            ]
-        ],
-        "x": 1065.988182067871,
-        "xml": "<block atomic=\"true\">",
-        "y": 439.23810386657715,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "atomic": "true",
-        "comments": null,
-        "id": "5b26aeb2.014b5",
-        "name": "block : atomic",
-        "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "2f509b0e.830454"
-            ]
-        ],
-        "x": 1662.2974319458008,
-        "xml": "<block atomic=\"true\">",
-        "y": 462.54766845703125,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "2f509b0e.830454",
-        "name": "setActionLevel VNF",
-        "type": "set",
-        "wires": [],
-        "x": 1866.9165725708008,
-        "xml": "<set>\n<parameter name='action-level' value='VNF' />\n<parameter name='action-identifier' value='vnf-id' />",
-        "y": 462.33331298828125,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "c3fc55e7.85ef98",
-        "name": "switch vnfc-name",
-        "outputs": 1,
-        "type": "switchNode",
-        "wires": [
-            [
-                "95399a07.ea4f08",
-                "60550aae.3a6004"
-            ]
-        ],
-        "x": 457.25001525878906,
-        "xml": "<switch test='`$vnfc-name`'>\n",
-        "y": 345.80554389953613,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "95399a07.ea4f08",
-        "name": "outcome: Other",
-        "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "450f80e7.6d15"
-            ]
-        ],
-        "x": 730.7937927246094,
-        "xml": "<outcome value='Other'>",
-        "y": 335.4206600189209,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "atomic": "true",
-        "comments": null,
-        "id": "450f80e7.6d15",
-        "name": "block : atomic",
-        "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "af2df603.4ae968"
-            ]
-        ],
-        "x": 918.7419891357422,
-        "xml": "<block atomic=\"true\">",
-        "y": 346.5477046966553,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "af2df603.4ae968",
-        "name": "setActionLevel VNFC",
-        "type": "set",
-        "wires": [],
-        "x": 1206.250099182129,
-        "xml": "<set>\n<parameter name='action-level' value='VNFC' />\n<parameter name='action-identifier' value='vnfc-name' />\n",
-        "y": 258.05552673339844,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "75506bed.9faa54",
-        "name": "switch vserver-id",
-        "outputs": 1,
-        "type": "switchNode",
-        "wires": [
-            [
-                "79aeaa57.7ae244",
-                "98b876c6.c2b488"
-            ]
-        ],
-        "x": 924.1388092041016,
-        "xml": "<switch test='`$vserver-id`'>\n",
-        "y": 387.1110610961914,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "79aeaa57.7ae244",
-        "name": "outcome: Other",
-        "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "8df97915.365a48"
-            ]
-        ],
-        "x": 1180.015998840332,
-        "xml": "<outcome value='Other'>",
-        "y": 309.92064571380615,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "atomic": "true",
-        "comments": null,
-        "id": "8df97915.365a48",
-        "name": "block : atomic",
-        "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "b97dd2a7.2d3e2"
-            ]
-        ],
-        "x": 1364.4642028808594,
-        "xml": "<block atomic=\"true\">",
-        "y": 291.79767322540283,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "b97dd2a7.2d3e2",
-        "name": "setActionLevel VM",
-        "type": "set",
-        "wires": [],
-        "x": 1552.3333435058594,
-        "xml": "<set>\n<parameter name='action-level' value='VM' />\n<parameter name='action-identifier' value='vserver-id' />\n\n",
-        "y": 281.99997425079346,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "8c272d3a.1fda9",
-        "name": "switch vnf-id",
-        "outputs": 1,
-        "type": "switchNode",
-        "wires": [
-            [
-                "61f421d6.bfea9",
-                "5dee6920.b9c5a8"
-            ]
-        ],
-        "x": 1229.4167137145996,
-        "xml": "<switch test='`$vnf-id`'>\n",
-        "y": 439.83331871032715,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "5dee6920.b9c5a8",
-        "name": "outcome: ''",
-        "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "1edb9ae1.72e305"
-            ]
-        ],
-        "x": 1463.4999694824219,
-        "xml": "<outcome value=''>",
-        "y": 413.1666316986084,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "atomic": "true",
-        "comments": "",
-        "id": "1edb9ae1.72e305",
-        "name": "block : atomic",
-        "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "2ba19f2d.87e9a"
-            ]
-        ],
-        "x": 1653.7382507324219,
-        "xml": "<block atomic=\"true\">",
-        "y": 409.5714473724365,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "2ba19f2d.87e9a",
-        "name": "return failure",
-        "type": "returnFailure",
-        "wires": [],
-        "x": 1852.2498512268066,
-        "xml": "<return status=\"failure\">\n<parameter name=\"error-code\" value=\"401\"/>\n\t<parameter name=\"error-message\" value=\"Action identifier is missing in the request\"/>\n\t\n\t",
-        "y": 415.58331871032715,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "eae00a39.c7edb8",
-        "name": "switch vf-module-id",
-        "outputs": 1,
-        "type": "switchNode",
-        "wires": [
-            [
-                "2fce24e2.84f1cc",
-                "7ff4860d.906048"
-            ]
-        ],
-        "x": 1335.2619323730469,
-        "xml": "<switch test='`$vf-module-id`'>\n",
-        "y": 350.4404354095459,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "2fce24e2.84f1cc",
-        "name": "outcome: Other",
-        "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "6aa3f5cb.2378fc"
-            ]
-        ],
-        "x": 1549.5833435058594,
-        "xml": "<outcome value='Other'>",
-        "y": 324.0832872390747,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "atomic": "true",
-        "comments": null,
-        "id": "6aa3f5cb.2378fc",
-        "name": "block : atomic",
-        "outputs": 1,
-        "type": "block",
-        "wires": [
-            [
-                "6402489b.ea4c28"
-            ]
-        ],
-        "x": 1755.1427917480469,
-        "xml": "<block atomic=\"true\">",
-        "y": 322.9881343841553,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "6402489b.ea4c28",
-        "name": "setActionLevel VF-Module",
-        "type": "set",
-        "wires": [],
-        "x": 1967.428565979004,
-        "xml": "<set>\n<parameter name='action-level' value='VF-MODULE' />\n<parameter name='action-identifier' value='vf-module-id' />\n",
-        "y": 321.85712242126465,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "60550aae.3a6004",
-        "name": "outcome: ''",
-        "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "75506bed.9faa54"
-            ]
-        ],
-        "x": 725.5832939147949,
-        "xml": "<outcome value=''>",
-        "y": 381.2500009536743,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "98b876c6.c2b488",
-        "name": "outcome: ''",
-        "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "eae00a39.c7edb8"
-            ]
-        ],
-        "x": 1144.4722785949707,
-        "xml": "<outcome value=''>",
-        "y": 368.8888854980469,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "comments": "",
-        "id": "d62b8ebb.ff133",
-        "name": "record",
-        "outputs": 1,
+        "x": 917.0833740234375,
+        "y": 682.7500610351562,
+        "z": "3d15e61b.b538a2",
+        "wires": []
+    }, {
+        "id": "e1dc45c1.f3b33",
         "type": "record",
-        "wires": [
-            []
-        ],
-        "x": 431.25000762939453,
-        "xml": "<record plugin=\"org.onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"field2\" value=\"`$request-action`\"/>\n<parameter name=\"field3\" value=\"`$action-identifier`\"/>\n\n",
-        "y": 396.111120223999,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "name": "record",
+        "xml": "<record plugin=\"onap.ccsdk.sli.core.sli.recording.Slf4jRecorder\">\n<parameter name=\"level\" value=\"info\"/>\n<parameter name=\"logger\" value=\"message-log\"/>\n<parameter name=\"field1\" value=\"__TIMESTAMP__\"/>\n<parameter name=\"field2\" value=\"Action Level is not VM:\"/>\n<parameter name=\"field3\" value=\"`$action-level`\"/>\n\n",
         "comments": "",
-        "id": "e5a060ba.6726c",
-        "name": "switch vnfc-type",
         "outputs": 1,
-        "type": "switchNode",
-        "wires": [
-            [
-                "2f46d21c.ad87ce",
-                "1ac83acb.3771a5"
-            ]
-        ],
-        "x": 466.6666488647461,
-        "xml": "<switch test='`$vnfc-type`'>\n",
-        "y": 278.88890266418457,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "x": 1041.75,
+        "y": 638.75,
+        "z": "3d15e61b.b538a2",
+        "wires": [[]
+        ]
+    }, {
+        "id": "70de61d8.63828",
+        "type": "failure",
+        "name": "not-found",
+        "xml": "<outcome value='not-found'>\n",
         "comments": "",
-        "id": "2f46d21c.ad87ce",
-        "name": "outcome: Other",
         "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "ca9a8300.12e3d"
-            ]
-        ],
-        "x": 742.4325942993164,
-        "xml": "<outcome value='Other'>",
-        "y": 244.0595827102661,
-        "z": "5ad64f3a.c3774"
-    },
-    {
-        "atomic": "true",
-        "comments": null,
-        "id": "ca9a8300.12e3d",
-        "name": "block : atomic",
-        "outputs": 1,
+        "x": 1147,
+        "y": 823,
+        "z": "3d15e61b.b538a2",
+        "wires": [["b9e94010.b1f2e8"]
+        ]
+    }, {
+        "id": "b9e94010.b1f2e8",
         "type": "block",
-        "wires": [
-            []
-        ],
-        "x": 935.9364204406738,
-        "xml": "<block atomic=\"true\">",
-        "y": 246.29769325256348,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "name": "block",
+        "xml": "<block>\n",
+        "atomic": "false",
         "comments": "",
-        "id": "1ac83acb.3771a5",
-        "name": "outcome: ''",
         "outputs": 1,
-        "type": "success",
-        "wires": [
-            [
-                "6cee73a9.31fecc"
-            ]
-        ],
-        "x": 738.3332672119141,
-        "xml": "<outcome value=''>",
-        "y": 285.4444417953491,
-        "z": "5ad64f3a.c3774"
-    },
-    {
+        "x": 1311,
+        "y": 821,
+        "z": "3d15e61b.b538a2",
+        "wires": [["a515884.e393bf8"]
+        ]
+    }, {
+        "id": "a515884.e393bf8",
+        "type": "returnFailure",
+        "name": "return failure",
+        "xml": "<return status=\"failure\">\n<parameter name='error-code' value='401' />\n<parameter name='error-message' value=\"Unable to get VServer Info from A&amp;AI\" />\n\n\n\t",
         "comments": "",
-        "id": "6cee73a9.31fecc",
-        "name": "set vnfc-type ",
-        "type": "set",
-        "wires": [],
-        "x": 936.6665954589844,
-        "xml": "<set>\n<!-- 17.07 If vnfc-type is blank assign Parameters from request in array list -->\n<parameter name='vnfc-type' value='`$VNFCTYPE`' />\n\n\n\n\n\n\n\n\n\n\n\n",
-        "y": 285.55558013916016,
-        "z": "5ad64f3a.c3774"
+        "x": 1512.5,
+        "y": 811,
+        "z": "3d15e61b.b538a2",
+        "wires": []
     }
 ]
