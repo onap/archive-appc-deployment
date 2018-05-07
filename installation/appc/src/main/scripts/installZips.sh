@@ -118,6 +118,11 @@ rm -f /tmp/platform-logic-installer*.zip
 mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.deployment:platform-logic-installer:${APPC_OAM_VERSION}:zip -DoutputDirectory=/tmp -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.ssl.insecure=true
 unzip -d ${targetDir} /tmp/platform-logic-installer*.zip
 
+echo "Downloading dg-loader DGs from nexus"
+mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc:appc-dg-provider:${APPC_VERSION} -DoutputDirectory=/tmp
+unzip -d ${targetDir}/svclogic/graphs/appc/json /tmp/appc-dg-provider*.jar json/**
+mv ${targetDir}/svclogic/graphs/appc/json/json ${targetDir}/svclogic/graphs/appc/json/dg-loader-dgs
+
 echo "Downloading dg-loader-provider jar from nexus"
 mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.plugins:dg-loader-provider:${APPC_VERSION}:jar:jar-with-dependencies -DoutputDirectory=${targetDir}/data
 mv ${targetDir}/data/dg-loader-provider-*-jar-with-dependencies.jar ${targetDir}/data/dg-loader-provider-jar-with-dependencies.jar
