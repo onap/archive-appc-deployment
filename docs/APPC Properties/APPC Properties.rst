@@ -142,6 +142,11 @@ Note: The IaaS Adapter currently supports the OpenStack VIM *only*, and uses the
   -  Applies to the following features: appc-rest-adapter-bundle, appc-iaas-adapter-bundle, appc-chef-adapter-bundle
   -  These properties are used to configure the retry logic for connection to the IaaS provider(s).  The retry delay property is the amount of time, in seconds, the application waits between retry attempts.  The retry limit is the number of retries that are allowed before the request is failed.
 
+-  **appc.LCM.scopeOverlap.endpoint**:
+
+  -  Applies to appc-request-handler-core
+  -  Used to define the RESTCONF url of the interfaces-service
+  
 **APPC Transactions Database Connection**
 
 Applies to the following features: appc-dg-common, appc-command-executor-core, appc-request-handler-core, appc-workflow-management-core.
