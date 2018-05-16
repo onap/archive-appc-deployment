@@ -1,6 +1,6 @@
 .. ============LICENSE_START==========================================
 .. ===================================================================
-.. Copyright © 2017 AT&T Intellectual Property. All rights reserved.
+.. Copyright © 2017-2018 AT&T Intellectual Property. All rights reserved.
 .. ===================================================================
 .. Licensed under the Creative Commons License, Attribution 4.0 Intl.  (the "License");
 .. you may not use this documentation except in compliance with the License.
@@ -14,7 +14,6 @@
 .. See the License for the specific language governing permissions and
 .. limitations under the License.
 .. ============LICENSE_END============================================
-.. ECOMP is a trademark and service mark of AT&T Intellectual Property.
 
 ===============
 APPC Properties
@@ -272,3 +271,16 @@ To initialize SLI services, the following properties need to be configured in */
 	org.onap.ccsdk.sli.jdbc.database=<DB_NAME> # e.g. sdnctl
 	org.onap.ccsdk.sli.jdbc.user=<USER> # e.g. sdnctl
 	org.onap.ccsdk.sli.jdbc.password=<PASSWORD>
+
+designService.properties
+========================
+
+APPC uses design-services to support the Controller Design Tool
+
+To configure design services to work correctly, the following properties need to be configured in */opt/onap/appc/data/properties/designService.properties*. The current default properties for design services is located in `designService.properties <https://gerrit.onap.org/r/gitweb?p=appc/deployment.git;a=blob;f=installation/src/main/properties/designService.properties;h=7900843184eb41f518156e6f285d21adce5fae2e;hb=HEAD>`_.
+
+.. code:: bash
+	
+	appc.upload.user=<USER> //Eg: admin
+	appc.upload.pass=<PASSWORD> //Eg: admin
+	appc.upload.provider.url=<RestConf End Point for Artifact handler:uploadArtifact> // Eg:http://localhost:8181/restconf/operations/artifact-handler:uploadartifact
