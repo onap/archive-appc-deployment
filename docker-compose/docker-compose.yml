@@ -52,6 +52,7 @@ services:
     ports:
       - "8282:8181"
       - "1830:1830"
+      - "9090:9191"
     links:
       - db:dbhost
       - db:sdnctldb01
