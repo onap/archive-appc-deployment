@@ -46,6 +46,8 @@ limitations under the License.
                     injecting the version.properties variable file during docker build-->
 		<appc.docker.staging.version>1.0.0</appc.docker.staging.version>
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss'Z'</maven.build.timestamp.format>
+		<!--Determines the version of the cdt-proxy-service to download and install-->
+		<appc.cdt.version>1.3.0-SNAPSHOT</appc.cdt.version>
 	</properties>
 
 
@@ -177,6 +179,7 @@ limitations under the License.
 							<executable>bash</executable>
 							<environmentVariables>
 								<APPC_VERSION>${appc.version}</APPC_VERSION>
+								<APPC_CDT_VERSION>1.6.0-SNAPSHOT</APPC_CDT_VERSION>
 								<APPC_OAM_VERSION>${project.version}</APPC_OAM_VERSION>
 								<SDNC_OAM_VERSION>${project.version}</SDNC_OAM_VERSION>
 							</environmentVariables>

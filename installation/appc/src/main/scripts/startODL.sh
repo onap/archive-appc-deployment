@@ -133,4 +133,7 @@ fi
 	appcInstallEndTime=$(date +%s)
 	echo "Total Appc install took $(expr $appcInstallEndTime - $appcInstallStartTime) seconds"
 
+echo "Starting cdt-proxy-service jar, logging to ${APPC_HOME}/cdt-proxy-service/jar.log"
+java -jar ${APPC_HOME}/cdt-proxy-service/cdt-proxy-service.jar > ${APPC_HOME}/cdt-proxy-service/jar.log &
+
 exec ${ODL_HOME}/bin/karaf
