@@ -41,8 +41,8 @@ limitations under the License.
 
     <properties>
         <image.name>onap/appc-cdt-image</image.name>
-        <appc.release.version>1.6.0</appc.release.version>
-        <appc.snapshot.version>1.6.0-SNAPSHOT</appc.snapshot.version>
+        <appc.release.version>1.3.0</appc.release.version>
+        <appc.snapshot.version>1.3.0-SNAPSHOT</appc.snapshot.version>
                 <!--This version will be over-ridden by jenkins 
                     injecting the version.properties variable file during docker build-->
         <appc.docker.staging.version>1.0.0</appc.docker.staging.version>
