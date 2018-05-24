@@ -21,7 +21,7 @@
 # ============LICENSE_END============================================
 
 # Base ubuntu with added packages needed for ONAP
-FROM onap/ccsdk-odlsli-image:0.2.2-SNAPSHOT-STAGING-20180518T124329Z
+FROM onap/ccsdk-odlsli-image:0.2.3
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
 # Set the Env. Variable in the container to add the APPC CONFIG DIR (the SDNC_CONFIG_DIR is inherited from SDNC Image)
