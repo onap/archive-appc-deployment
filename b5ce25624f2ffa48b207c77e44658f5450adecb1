@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+2: Patrick Brady <pb071s@att.com>
+Code-Review+2: Randa  Maher <rx196w@att.com>
+Submitted-by: Randa  Maher <rx196w@att.com>
+Submitted-at: Fri, 25 May 2018 19:05:34 +0000
+Reviewed-on: https://gerrit.onap.org/r/49165
+Project: appc/deployment
+Branch: refs/heads/beijing
