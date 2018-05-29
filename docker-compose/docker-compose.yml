@@ -101,15 +101,14 @@ services:
       - db
     container_name: appc_cdt_container
     entrypoint:
-       - "/bin/bash"
-       - "-c"
-       - "cd /usr/local/apache2/ && /usr/local/apache2/bin/httpd -D FOREGROUND && wait"
+       - "/opt/startCdt.sh"
     ports:
       - "8080:80"
     links:
       - appc:sdnhost
     environment:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
+      - CDT_PORT=9090
     logging:
       driver: "json-file"
       options:
