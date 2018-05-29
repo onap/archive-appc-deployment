@@ -54,6 +54,7 @@ echo "Downloading cdt code from nexus"
 mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.cdt:config-design-tool:${APPC_VERSION}:zip -DoutputDirectory=/tmp
 unzip -d ${targetDir}/config-design-tool /tmp/config-design-tool*.zip
 
+find ${targetDir} -name '*.sh' -exec chmod +x '{}' \;
 
 cd $cwd
 
