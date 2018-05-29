@@ -77,15 +77,14 @@ limitations under the License.
                             </resources>
                         </configuration>
                     </execution>
-
-                    <!--<execution>
+                    <execution>
                         <id>copy-scripts</id>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <phase>validate</phase>
                         <configuration>
-                            <outputDirectory>${basedir}/target/docker-stage/opt/onap/appc/bin</outputDirectory>
+                            <outputDirectory>${basedir}/target/docker-stage</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>src/main/scripts</directory>
@@ -96,8 +95,7 @@ limitations under the License.
                                 </resource>
                             </resources>
                         </configuration>
-                    </execution> -->
-                    
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -233,6 +231,25 @@ limitations under the License.
                                                 <include>Dockerfile</include>
                                             </includes>
                                             <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-scripts</id>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <phase>validate</phase>
+                                <configuration>
+                                    <outputDirectory>${basedir}/target/docker-stage</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>src/main/scripts</directory>
+                                            <includes>
+                                                <include>*.sh</include>
+                                            </includes>
+                                            <filtering>false</filtering>
                                         </resource>
                                     </resources>
                                 </configuration>

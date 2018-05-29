@@ -24,3 +24,5 @@ FROM httpd
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
 COPY config-design-tool /usr/local/apache2/htdocs/
+
+COPY startCdt.sh /opt

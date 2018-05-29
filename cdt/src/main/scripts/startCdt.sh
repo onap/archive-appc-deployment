@@ -20,41 +20,8 @@
 # ============LICENSE_END=========================================================
 ###
 
-if [ -z "$SETTINGS_FILE" -a -z "$GLOBAL_SETTINGS_FILE" -a -s "$HOME"/.m2/settings.xml ]
-then
-  DEFAULT_MAVEN_SETTINGS=${HOME}/.m2/settings.xml
-  SETTINGS_FILE=${SETTINGS_FILE:-${DEFAULT_MAVEN_SETTINGS}}
-  GLOBAL_SETTINGS_FILE=${GLOBAL_SETTINGS_FILE:-${DEFAULT_MAVEN_SETTINGS}}
-fi
+CDT_PORT=${CDT_PORT:-30232}
+echo "Setting CDT port to $CDT_PORT"
+sed -i -e "s/30290/$CDT_PORT/" /usr/local/apache2/htdocs/main.bundle.js
 
-APPC_HOME=${APPC_HOME:-/opt/onap/appc}
-SDNC_HOME=${SDNC_HOME:-/opt/onap/sdnc}
-
-targetDir=${1}
-sdnc_targetDir=${1}
-
-
-
-APPC_VERSION=${APPC_VERSION:-0.0.1}
-APPC_OAM_VERSION=${APPC_OAM_VERSION:-0.1.1}
-
-if [ ! -d ${targetDir} ]
-then
-  mkdir -p ${targetDir}
-fi
-
-cwd=$(pwd)
-
-mavenOpts="-s ${SETTINGS_FILE} -gs ${GLOBAL_SETTINGS_FILE}"
-cd /tmp
-
-
-
-echo "Downloading cdt code from nexus"
-mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.cdt:config-design-tool:${APPC_VERSION}:zip -DoutputDirectory=/tmp
-unzip -d ${targetDir}/config-design-tool /tmp/config-design-tool*.zip
-
-find ${targetDir} -name '*.sh' -exec chmod +x '{}' \;
-
-cd $cwd
-
+exec /usr/local/bin/httpd-foreground
