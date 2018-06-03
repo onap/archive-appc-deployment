@@ -47,7 +47,7 @@ limitations under the License.
 		<appc.docker.staging.version>1.0.0</appc.docker.staging.version>
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss'Z'</maven.build.timestamp.format>
 		<!--Determines the version of the cdt-proxy-service to download and install-->
-		<appc.cdt.version>1.3.0-SNAPSHOT</appc.cdt.version>
+		<appc.cdt.version>1.3.0</appc.cdt.version>
 	</properties>
 
 
