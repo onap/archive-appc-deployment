@@ -136,6 +136,7 @@ limitations under the License.
 									<includes>
 										<include>*.jks</include>
 										<include>*.p12</include>
+										<include>*keyfile</include>
 									</includes>
 									<filtering>false</filtering>
 								</resource>
@@ -380,6 +381,7 @@ limitations under the License.
 											<includes>
 												<include>*.jks</include>
 												<include>*.p12</include>
+												<include>*.keyfile</include>
 											</includes>
 											<filtering>false</filtering>
 										</resource>

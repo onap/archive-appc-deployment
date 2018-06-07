@@ -131,6 +131,9 @@ echo "Downloading aaf-cadi-shiro from nexus"
 mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.aaf.authz:aaf-shiro-aafrealm-osgi-bundle:${AAF_SHIRO_VERSION} -DoutputDirectory=${targetDir}/data
 mv ${targetDir}/data/aaf-shiro-aafrealm-osgi-bundle-*.jar ${targetDir}/data/aaf-shiro-aafrealm-osgi-bundle.jar
 
+echo "Setting keyfile to readonly"
+chmod 400 ${targetDir}/data/stores/org.onap.appc.keyfile
+
 echo "Downloading CDT Proxy Jar from nexus"
 mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.cdt:cdt-proxy-service:${APPC_CDT_VERSION} -DoutputDirectory=${targetDir}/cdt-proxy-service
 mv ${targetDir}/cdt-proxy-service/cdt-proxy-service-*.jar ${targetDir}/cdt-proxy-service/cdt-proxy-service.jar
