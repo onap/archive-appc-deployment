@@ -51,8 +51,17 @@ cd /tmp
 
 
 echo "Downloading cdt code from nexus"
-mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.cdt:config-design-tool:${APPC_VERSION}:zip -DoutputDirectory=/tmp
-unzip -d ${targetDir}/config-design-tool /tmp/config-design-tool*.zip
+
+CDT_TEMP_DIR=/tmp/appc-config-design-tool-${APPC_VERSION}
+if [ ! -d ${CDT_TEMP_DIR} ]
+then
+  mkdir -p ${CDT_TEMP_DIR}
+fi
+
+rm ${CDT_TEMP_DIR}/config-design-tool*.zip
+
+mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.cdt:config-design-tool:${APPC_VERSION}:zip -DoutputDirectory=${CDT_TEMP_DIR}
+unzip -d ${targetDir}/config-design-tool ${CDT_TEMP_DIR}/config-design-tool*.zip
 
 find ${targetDir} -name '*.sh' -exec chmod +x '{}' \;
 
