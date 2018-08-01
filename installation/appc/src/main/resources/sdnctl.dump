@@ -20,11 +20,9 @@
 --  ECOMP is a trademark and service mark of AT&T Intellectual Property.
 --  ============LICENSE_END============================================
 
-CREATE DATABASE  IF NOT EXISTS `sdnctl` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `sdnctl`;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `sdnctl` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
-SET @@SESSION.SQL_LOG_BIN= 0;
+USE `sdnctl`;
 
 --
 -- Table structure for table `ACTION_LEVEL_REFERENCE`
@@ -42,25 +40,16 @@ CREATE TABLE `ACTION_LEVEL_REFERENCE` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `APPC_AUTHENTICATION`
+-- Table structure for table `APPC_HEALTH`
 --
 
-DROP TABLE IF EXISTS `APPC_AUTHENTICATION`;
+DROP TABLE IF EXISTS `APPC_HEALTH`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `APPC_AUTHENTICATION` (
-  `APPC_AUTHENTICATION_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `VNF_TYPE` varchar(255) DEFAULT NULL,
-  `PROTOCOL` varchar(255) DEFAULT NULL,
-  `ACTION` varchar(255) DEFAULT NULL,
-  `USER_NAME` varchar(255) DEFAULT NULL,
-  `PASSWORD` varchar(255) DEFAULT NULL,
-  `PORT_NUMBER` int(11) DEFAULT NULL,
-  `URL` varchar(1024) DEFAULT NULL,
-  PRIMARY KEY (`APPC_AUTHENTICATION_ID`),
-  UNIQUE KEY `VNF_TYPE` (`VNF_TYPE`),
-  KEY `PROTOCOL` (`PROTOCOL`),
-  KEY `ACTION` (`ACTION`)
+CREATE TABLE `APPC_HEALTH` (
+  `APPC_HEALTH_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `HEALTHY` varchar(30) NOT NULL,
+  PRIMARY KEY (`APPC_HEALTH_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -92,7 +81,7 @@ CREATE TABLE `ASDC_ARTIFACTS` (
   `ARTIFACT_CONTENT` longtext,
   PRIMARY KEY (`ASDC_ARTIFACTS_ID`),
   UNIQUE KEY `ASDC_ARTIFACTS_ID` (`ASDC_ARTIFACTS_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1412 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1219 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +101,7 @@ CREATE TABLE `ASDC_REFERENCE` (
   `ARTIFACT_NAME` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ASDC_REFERENCE_ID`),
   UNIQUE KEY `ASDC_REFERENCE_ID` (`ASDC_REFERENCE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +128,7 @@ CREATE TABLE `CONFIGFILES` (
   `VNF_NAME` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`CONFIG_FILE_ID`),
   UNIQUE KEY `CONFIG_FILE_ID` (`CONFIG_FILE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=688 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +146,7 @@ CREATE TABLE `CONFIGURE_ACTION_DG` (
   `DOWNLOAD_CONFIG_DG` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`CONFIGURE_ACTION_DG_ID`),
   UNIQUE KEY ` CONFIGURE_ACTION_DG_ID` (`CONFIGURE_ACTION_DG_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +169,7 @@ CREATE TABLE `CONFIG_FILE_REFERENCE` (
   `FILE_NAME` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`CONFIG_FILE_REFERENCE_ID`),
   UNIQUE KEY `CONFIG_FILE_REFERENCE_ID` (`CONFIG_FILE_REFERENCE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +187,7 @@ CREATE TABLE `CONFIG_TRANSACTION_LOG` (
   `MESSAGE` longtext,
   PRIMARY KEY (`CONFIG_TRANSACTION_LOG_ID`),
   UNIQUE KEY ` CONFIG_TRANSACTION_LOG_ID` (`CONFIG_TRANSACTION_LOG_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7872 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6470 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,20 +199,22 @@ DROP TABLE IF EXISTS `DEVICE_AUTHENTICATION`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `DEVICE_AUTHENTICATION` (
   `DEVICE_AUTHENTICATION_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `VNF_TYPE` varchar(150) DEFAULT NULL,
-  `PROTOCOL` varchar(150) DEFAULT NULL,
-  `ACTION` varchar(150) DEFAULT NULL,
-  `USER_NAME` varchar(50) DEFAULT NULL,
-  `PASSWORD` varchar(100) DEFAULT NULL,
-  `PORT_NUMBER` varchar(50) DEFAULT NULL,
-  `URL` varchar(150) DEFAULT NULL,
+  `VNF_TYPE` varchar(255) NOT NULL,
+  `PROTOCOL` varchar(255) NOT NULL,
+  `ACTION` varchar(255) NOT NULL,
+  `USER_NAME` varchar(255) DEFAULT NULL,
+  `PASSWORD` varchar(255) DEFAULT NULL,
+  `PORT_NUMBER` int(11) DEFAULT NULL,
+  `URL` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`DEVICE_AUTHENTICATION_ID`),
-  UNIQUE KEY `DEVICE_AUTHENTICATION_ID` (`DEVICE_AUTHENTICATION_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `VNF_TYPE_UNIQ` (`VNF_TYPE`,`PROTOCOL`,`ACTION`),
+  KEY `PROTOCOL` (`PROTOCOL`),
+  KEY `ACTION` (`ACTION`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Temporary view structure for view `DEVICE_CONFIGURATION`
+-- Temporary table structure for view `DEVICE_CONFIGURATION`
 --
 
 DROP TABLE IF EXISTS `DEVICE_CONFIGURATION`;
@@ -280,9 +271,8 @@ CREATE TABLE `DEVICE_INTERFACE_PROTOCOL` (
   `MODULE` varchar(50) DEFAULT NULL,
   `DG_RPC` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`DEVICE_INTERFACE_PROTOCOL_ID`),
-  UNIQUE KEY `DEVICE_INTERFACE_PROTOCOL_ID` (`DEVICE_INTERFACE_PROTOCOL_ID`),
-  UNIQUE KEY `VNF_TYPE` (`VNF_TYPE`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `DEVICE_INTERFACE_PROTOCOL_ID` (`DEVICE_INTERFACE_PROTOCOL_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -299,7 +289,7 @@ CREATE TABLE `DOWNLOAD_CONFIG_TEMPLATE` (
   `TEMPLATE` longtext,
   PRIMARY KEY (`DOWNLOAD_CONFIG_TEMPLATE_ID`),
   UNIQUE KEY `DOWNLOAD_CONFIG_TEMPLATE_ID` (`DOWNLOAD_CONFIG_TEMPLATE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -439,7 +429,7 @@ CREATE TABLE `GET_CONFIG_TEMPLATE` (
   UNIQUE KEY `GET_CONFIG_TEMPLATE_ID` (`GET_CONFIG_TEMPLATE_ID`),
   KEY `get_config_template_ibfk_1` (`DEVICE_INTERFACE_PROTOCOL_ID`),
   CONSTRAINT `get_config_template_ibfk_1` FOREIGN KEY (`DEVICE_INTERFACE_PROTOCOL_ID`) REFERENCES `DEVICE_INTERFACE_PROTOCOL` (`DEVICE_INTERFACE_PROTOCOL_ID`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -461,7 +451,7 @@ CREATE TABLE `MULTISTEP_FLOW_REFERENCE` (
   `CREATOR` varchar(50) DEFAULT NULL,
   `UPDATED_DATE` datetime DEFAULT NULL,
   UNIQUE KEY ` MULTISTEP_FLOW_REFERENCE_ID` (`MULTISTEP_FLOW_REFERENCE_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -475,6 +465,620 @@ CREATE TABLE `NODE_TYPES` (
   `nodetype` varchar(80) NOT NULL,
   PRIMARY KEY (`nodetype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_AIC_HOSTS`
+--
+
+DROP TABLE IF EXISTS `OPS_AIC_HOSTS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_AIC_HOSTS` (
+  `REGION_ID` varchar(16) NOT NULL,
+  `HOST` varchar(64) NOT NULL,
+  `HOST_IP` varchar(64) DEFAULT NULL,
+  `EQUIPMENT_VENDOR` varchar(32) DEFAULT NULL,
+  `EQUIPMENT_PRODUCT` varchar(32) DEFAULT NULL,
+  `EQUIPMENT_MODEL` varchar(32) DEFAULT NULL,
+  `EQUIPMENT_VERSION` varchar(32) DEFAULT NULL,
+  `CREATED` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`REGION_ID`,`HOST`),
+  CONSTRAINT `fk_aic_hosts` FOREIGN KEY (`REGION_ID`) REFERENCES `OPS_AIC_REGIONS` (`REGION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_AIC_REGIONS`
+--
+
+DROP TABLE IF EXISTS `OPS_AIC_REGIONS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_AIC_REGIONS` (
+  `REGION_ID` varchar(16) NOT NULL,
+  `IDENTITY_URL` varchar(256) NOT NULL,
+  `HOST_DISCOVERY` varchar(3) NOT NULL DEFAULT 'NO',
+  `ADMIN_TENANT_ID` varchar(64) DEFAULT NULL,
+  `ADMIN_TENANT_NAME` varchar(64) DEFAULT 'admin',
+  `CREATED` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`REGION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_AIC_SCHEDULER_EVENTS`
+--
+
+DROP TABLE IF EXISTS `OPS_AIC_SCHEDULER_EVENTS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_AIC_SCHEDULER_EVENTS` (
+  `REGION_ID` varchar(16) NOT NULL,
+  `HOST` varchar(64) NOT NULL DEFAULT '',
+  `STATE` enum('COMPLETE','PROGRESS') DEFAULT NULL,
+  `STATUS` enum('SUCCESS','FAILED','PARTIAL') DEFAULT NULL,
+  `CREATED` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `RUNTIME` varchar(8) NOT NULL DEFAULT '',
+  `RETRIES` int(11) NOT NULL DEFAULT '0',
+  `ERROR` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`REGION_ID`,`HOST`),
+  CONSTRAINT `fk_aic_sch_events` FOREIGN KEY (`REGION_ID`) REFERENCES `OPS_AIC_REGIONS` (`REGION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_EXPORT_SCRIPT`
+--
+
+DROP TABLE IF EXISTS `OPS_EXPORT_SCRIPT`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_EXPORT_SCRIPT` (
+  `ID` varchar(15) NOT NULL,
+  `SCRIPT` text NOT NULL,
+  `CREATEDON` datetime NOT NULL,
+  `CREATEDBY` varchar(10) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_HCAGGMETRICS`
+--
+
+DROP TABLE IF EXISTS `OPS_HCAGGMETRICS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_HCAGGMETRICS` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `AGG_TIME` datetime DEFAULT NULL,
+  `CNT` int(11) DEFAULT NULL,
+  `HCCODE` varchar(45) DEFAULT NULL,
+  `SUCCESS` varchar(20) DEFAULT NULL,
+  `MIN_DUR` float DEFAULT NULL,
+  `AVG_DUR` float DEFAULT NULL,
+  `MAX_DUR` float DEFAULT NULL,
+  `STDDEV_DUR` float DEFAULT NULL,
+  `SDNOINSTANCE` varchar(45) DEFAULT NULL,
+  `HCNODETYPE` varchar(45) DEFAULT NULL,
+  `CLIENTNAME` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_HCGROUPS`
+--
+
+DROP TABLE IF EXISTS `OPS_HCGROUPS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_HCGROUPS` (
+  `HCGROUPID` int(11) NOT NULL AUTO_INCREMENT,
+  `HCCODE` varchar(45) NOT NULL,
+  `CHCCODE` varchar(45) NOT NULL,
+  `EXECPRIORITY` int(11) DEFAULT NULL,
+  `CREATEDBY` varchar(45) DEFAULT NULL,
+  `CREATEDON` datetime DEFAULT NULL,
+  `UPDATEDON` datetime DEFAULT NULL,
+  `UPDATEDBY` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`HCGROUPID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_HCRESPARCHIVE`
+--
+
+DROP TABLE IF EXISTS `OPS_HCRESPARCHIVE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_HCRESPARCHIVE` (
+  `HCRESPONSEID` int(11) NOT NULL AUTO_INCREMENT,
+  `HCTRANSID` varchar(128) DEFAULT NULL,
+  `REFHCTRANSID` varchar(128) DEFAULT NULL,
+  `SDNOTRANSID` varchar(255) DEFAULT NULL,
+  `HOSTIP` varchar(45) DEFAULT NULL,
+  `HCRESPONSESTATUS` varchar(20) DEFAULT NULL,
+  `HCRESPONSE` longtext,
+  `CREATEDON` datetime DEFAULT NULL,
+  `SDNOINSTANCE` varchar(45) NOT NULL,
+  `SDNOINSTANCESERVER` varchar(45) DEFAULT NULL,
+  `DMAAPSENT` varchar(1) NOT NULL DEFAULT 'N',
+  `NODETYPE` varchar(45) DEFAULT NULL,
+  `HCCODE` varchar(45) DEFAULT NULL,
+  `USERID` varchar(10) DEFAULT NULL,
+  `CLIENTNAME` varchar(45) DEFAULT NULL,
+  `HDSTARTTIME` datetime DEFAULT NULL,
+  `HDENDTIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`HCRESPONSEID`),
+  KEY `hctransid_idx` (`HCTRANSID`),
+  KEY `sdnotransid_idx` (`SDNOTRANSID`),
+  KEY `clientname_idx` (`CLIENTNAME`),
+  KEY `nodetype_idx` (`NODETYPE`),
+  KEY `hccode_idx` (`HCCODE`),
+  KEY `hostip_idx` (`HOSTIP`),
+  KEY `createdon_idx` (`CREATEDON`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_HCRESPCACHE`
+--
+
+DROP TABLE IF EXISTS `OPS_HCRESPCACHE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_HCRESPCACHE` (
+  `HCRESPONSEID` int(11) NOT NULL AUTO_INCREMENT,
+  `SDNOTRANSID` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `HOSTIP` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `HCRESPONSESTATUS` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
+  `HCRESPONSE` longtext CHARACTER SET utf8,
+  `CREATEDON` datetime DEFAULT NULL,
+  `SDNOINSTANCE` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `SDNOINSTANCESERVER` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `DMAAPSENT` varchar(1) CHARACTER SET utf8 NOT NULL DEFAULT 'N',
+  `NODETYPE` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `HCCODE` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `USERID` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
+  `CLIENTNAME` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `HDSTARTTIME` datetime DEFAULT NULL,
+  `HDENDTIME` datetime DEFAULT NULL,
+  `CACHEEXPIRETIME` datetime DEFAULT NULL,
+  `HDEXPECTEDENDTIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`HCRESPONSEID`),
+  KEY `cacheexpiretime_idx` (`CACHEEXPIRETIME`),
+  KEY `hdexpectedendtime_idx` (`HDEXPECTEDENDTIME`),
+  KEY `hdendtime_idx` (`HDENDTIME`),
+  KEY `hdstarttime_idx` (`HDSTARTTIME`)
+) ENGINE=InnoDB AUTO_INCREMENT=383 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Temporary table structure for view `OPS_HCRESPCACHEVIEW`
+--
+
+DROP TABLE IF EXISTS `OPS_HCRESPCACHEVIEW`;
+/*!50001 DROP VIEW IF EXISTS `OPS_HCRESPCACHEVIEW`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `OPS_HCRESPCACHEVIEW` AS SELECT 
+ 1 AS `ACTIVE`,
+ 1 AS `HCRESPONSEID`,
+ 1 AS `SDNOTRANSID`,
+ 1 AS `HOSTIP`,
+ 1 AS `HCRESPONSESTATUS`,
+ 1 AS `HCRESPONSE`,
+ 1 AS `CREATEDON`,
+ 1 AS `SDNOINSTANCE`,
+ 1 AS `SDNOINSTANCESERVER`,
+ 1 AS `DMAAPSENT`,
+ 1 AS `NODETYPE`,
+ 1 AS `HCCODE`,
+ 1 AS `USERID`,
+ 1 AS `CLIENTNAME`,
+ 1 AS `HDSTARTTIME`,
+ 1 AS `HDENDTIME`,
+ 1 AS `CACHEEXPIRETIME`,
+ 1 AS `HDEXPECTEDENDTIME`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `OPS_HCRESPCOMPACT`
+--
+
+DROP TABLE IF EXISTS `OPS_HCRESPCOMPACT`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_HCRESPCOMPACT` (
+  `HCRESPONSEID` int(11) NOT NULL AUTO_INCREMENT,
+  `HCTRANSID` varchar(128) DEFAULT NULL,
+  `HOSTIP` varchar(45) DEFAULT NULL,
+  `HCRESPONSESTATUS` varchar(20) DEFAULT NULL,
+  `SDNOINSTANCE` varchar(45) NOT NULL,
+  `SDNOINSTANCESERVER` varchar(45) DEFAULT NULL,
+  `NODETYPE` varchar(45) DEFAULT NULL,
+  `HCCODE` varchar(45) DEFAULT NULL,
+  `USERID` varchar(10) DEFAULT NULL,
+  `CLIENTNAME` varchar(45) DEFAULT NULL,
+  `HDSTARTTIME` datetime DEFAULT NULL,
+  `HDENDTIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`HCRESPONSEID`),
+  KEY `clientname_idx` (`CLIENTNAME`),
+  KEY `nodetype_idx` (`NODETYPE`),
+  KEY `hccode_idx` (`HCCODE`),
+  KEY `hcresponsestatus_idx` (`HCRESPONSESTATUS`),
+  KEY `hdstarttime_idx` (`HDSTARTTIME`),
+  KEY `hdendtime_idx` (`HDENDTIME`)
+) ENGINE=InnoDB AUTO_INCREMENT=15378 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_HCTYPES`
+--
+
+DROP TABLE IF EXISTS `OPS_HCTYPES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_HCTYPES` (
+  `HCTYPEID` int(11) NOT NULL AUTO_INCREMENT,
+  `HCCODE` varchar(45) DEFAULT NULL,
+  `HCDESCR` varchar(45) DEFAULT NULL,
+  `HCNODETYPE` varchar(45) DEFAULT NULL,
+  `NODETYPEVERSION` varchar(15) DEFAULT NULL,
+  `STACKLEVEL` varchar(15) DEFAULT 'VM',
+  `ACTIVE` varchar(5) DEFAULT NULL,
+  `EXECPRIORITY` int(11) DEFAULT NULL,
+  `SBINTERFACE` varchar(45) DEFAULT 'ssh',
+  `SELECTABLE` varchar(2) DEFAULT 'Y',
+  `EXECTIME` int(11) DEFAULT '10' COMMENT 'expected execution time in secs',
+  `DEFAULT4NODETYPE` varchar(2) DEFAULT 'N' COMMENT 'default HD for this nodetype',
+  `CACHEDURATION` int(5) DEFAULT '2' COMMENT 'cache default is in minutes',
+  `LOGCMDRESP2DB` varchar(2) DEFAULT 'Y',
+  `VERSIONCHKHD` varchar(45) DEFAULT NULL,
+  `SBIALTSRVR` varchar(255) DEFAULT NULL,
+  `CREATEDON` datetime DEFAULT NULL,
+  `CREATEDBY` varchar(15) DEFAULT NULL,
+  `UPDATEDON` datetime DEFAULT NULL,
+  `UPDATEDBY` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`HCTYPEID`),
+  KEY `hcnodetype_idx` (`HCNODETYPE`),
+  KEY `hccode_idx` (`HCCODE`),
+  KEY `active_idx` (`ACTIVE`),
+  KEY `default4nodetype_idx` (`DEFAULT4NODETYPE`)
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Temporary table structure for view `OPS_HCVIEW`
+--
+
+DROP TABLE IF EXISTS `OPS_HCVIEW`;
+/*!50001 DROP VIEW IF EXISTS `OPS_HCVIEW`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `OPS_HCVIEW` AS SELECT 
+ 1 AS `HCCODE`,
+ 1 AS `CHCCODE`,
+ 1 AS `HCNODETYPE2`,
+ 1 AS `STACKLEVEL`,
+ 1 AS `SBINTERFACE`,
+ 1 AS `COMMAND`,
+ 1 AS `COMMANDDESC`,
+ 1 AS `EXITONFAIL`,
+ 1 AS `PATTERNMATCH`,
+ 1 AS `TIMEOUT`,
+ 1 AS `PROMPTCHECK`,
+ 1 AS `SENDCMDRESP`,
+ 1 AS `MANUALEFFORT`,
+ 1 AS `FLIPRXRSLT`,
+ 1 AS `EXECPRIORITY`,
+ 1 AS `VERSION`,
+ 1 AS `GPRIORITY`,
+ 1 AS `HCNODETYPE`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `OPS_HEALTHCHECK`
+--
+
+DROP TABLE IF EXISTS `OPS_HEALTHCHECK`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_HEALTHCHECK` (
+  `HCID` int(11) NOT NULL AUTO_INCREMENT,
+  `HCCODE` varchar(45) DEFAULT NULL,
+  `COMMAND` varchar(512) DEFAULT NULL,
+  `ACTIVE` varchar(1) DEFAULT 'N',
+  `PROMPTCHECK` varchar(32) DEFAULT NULL,
+  `EXECPRIORITY` int(11) DEFAULT NULL,
+  `TIMEOUT` int(11) DEFAULT NULL,
+  `PATTERNMATCH` varchar(512) DEFAULT NULL,
+  `FLIPRXRSLT` varchar(45) NOT NULL DEFAULT 'N',
+  `EXITONFAIL` varchar(6) DEFAULT 'N',
+  `SENDCMDRESP` varchar(5) DEFAULT 'Y',
+  `MANUALEFFORT` int(11) DEFAULT '2' COMMENT 'manual execution estimate in mins',
+  `COMMANDDESC` varchar(100) DEFAULT NULL,
+  `VERSION` varchar(45) DEFAULT 'none',
+  `CREATEDON` datetime DEFAULT NULL,
+  `CREATEDBY` varchar(15) DEFAULT NULL,
+  `UPDATEDON` datetime DEFAULT NULL,
+  `UPDATEDBY` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`HCID`),
+  KEY `hccode_idx` (`HCCODE`),
+  KEY `active_idx` (`ACTIVE`)
+) ENGINE=InnoDB AUTO_INCREMENT=445 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_HEALTHCHECKRESPONSE`
+--
+
+DROP TABLE IF EXISTS `OPS_HEALTHCHECKRESPONSE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_HEALTHCHECKRESPONSE` (
+  `HCRESPONSEID` int(11) NOT NULL AUTO_INCREMENT,
+  `HCTRANSID` varchar(128) DEFAULT NULL,
+  `REFHCTRANSID` varchar(128) DEFAULT NULL,
+  `SDNOTRANSID` varchar(255) DEFAULT NULL,
+  `HOSTIP` varchar(45) DEFAULT NULL,
+  `HCRESPONSESTATUS` varchar(20) DEFAULT NULL,
+  `HCRESPONSE` longtext,
+  `CREATEDON` datetime DEFAULT NULL,
+  `SDNOINSTANCE` varchar(45) NOT NULL,
+  `SDNOINSTANCESERVER` varchar(45) DEFAULT NULL,
+  `DMAAPSENT` varchar(1) NOT NULL DEFAULT 'N',
+  `NODETYPE` varchar(45) DEFAULT NULL,
+  `HCCODE` varchar(45) DEFAULT NULL,
+  `USERID` varchar(10) DEFAULT NULL,
+  `CLIENTNAME` varchar(45) DEFAULT NULL,
+  `HDSTARTTIME` datetime DEFAULT NULL,
+  `HDENDTIME` datetime DEFAULT NULL,
+  PRIMARY KEY (`HCRESPONSEID`),
+  KEY `hctransid_idx` (`HCTRANSID`),
+  KEY `sdnotransid_idx` (`SDNOTRANSID`),
+  KEY `clientname_idx` (`CLIENTNAME`),
+  KEY `nodetype_idx` (`NODETYPE`),
+  KEY `hccode_idx` (`HCCODE`),
+  KEY `hostip_idx` (`HOSTIP`),
+  KEY `createdon_idx` (`CREATEDON`)
+) ENGINE=InnoDB AUTO_INCREMENT=15380 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = latin1 */ ;
+/*!50003 SET character_set_results = latin1 */ ;
+/*!50003 SET collation_connection  = latin1_swedish_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`sdnctl`@`%`*/ /*!50003 TRIGGER `OPS_HEALTHCHECKRESPONSE_BEFORE_INSERT` BEFORE INSERT ON `OPS_HEALTHCHECKRESPONSE` FOR EACH ROW
+BEGIN
+    declare reftransid varchar(128);
+    declare ccount int;
+    declare ahostip varchar(45);
+    declare ahdcode varchar(45);
+    declare ahdendtime datetime;
+    declare ahdstarttime datetime;
+    declare acacheexpiretime datetime;
+    declare hdexectime INT DEFAULT 5;
+    declare hdexpectedendtime datetime;
+    declare nowtime datetime;
+    declare acacheduration INT;
+    declare maxtimeintbl INT DEFAULT 1800;
+    
+    SET nowtime:=utc_timestamp();
+    SET ahdcode:=NEW.HCCODE;
+    SET ahostip:=NEW.HOSTIP;
+    SET reftransid:=trim(NEW.REFHCTRANSID);
+    SET new.CREATEDON = nowtime;
+    SET new.HDSTARTTIME = nowtime;
+    
+    delete from OPS_HCRESPCACHE where HDENDTIME is null AND time_to_sec(timediff(nowtime, HDSTARTTIME))>maxtimeintbl;
+    
+	IF (reftransid is null) then
+        select CACHEDURATION, EXECTIME into acacheduration, hdexectime from OPS_HCTYPES where HCCODE=ahdcode;
+        select count(*) into ccount from OPS_HCRESPCACHE where HCCODE=ahdcode and hostip=ahostip AND HDENDTIME is not null AND HCRESPONSEID>0;
+		if (ccount > 0) then
+            select HDSTARTTIME, HDENDTIME, CACHEEXPIRETIME into ahdstarttime, ahdendtime, acacheexpiretime from OPS_HCRESPCACHE where
+				HCCODE=ahdcode and hostip=ahostip AND HDENDTIME is not null AND HCRESPONSEID>0 order by HDENDTIME desc limit 1 ;
+            select time_to_sec(timediff(ahdendtime, ahdstarttime)) into hdexectime;
+		end if;
+
+        if (acacheduration > 0) then
+			set hdexpectedendtime = nowtime + INTERVAL hdexectime second;
+			insert into OPS_HCRESPCACHE(HCRESPONSEID,SDNOTRANSID,HOSTIP,HCRESPONSESTATUS,HCRESPONSE,CREATEDON,SDNOINSTANCE,SDNOINSTANCESERVER,DMAAPSENT,
+				   NODETYPE,HCCODE,USERID,CLIENTNAME,HDSTARTTIME,HDENDTIME,CACHEEXPIRETIME,HDEXPECTEDENDTIME)
+				VALUES(NEW.HCRESPONSEID,NEW.SDNOTRANSID,NEW.HOSTIP,null,null,nowtime,NEW.SDNOINSTANCE,NEW.SDNOINSTANCESERVER,NEW.DMAAPSENT,
+				   NEW.NODETYPE,NEW.HCCODE,NEW.USERID,NEW.CLIENTNAME,NEW.HDSTARTTIME,null,null,hdexpectedendtime);
+		end if;
+   
+    END IF;    
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = latin1 */ ;
+/*!50003 SET character_set_results = latin1 */ ;
+/*!50003 SET collation_connection  = latin1_swedish_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`sdnctl`@`%`*/ /*!50003 TRIGGER `sdnctl`.`OPS_HEALTHCHECKRESPONSE_BEFORE_UPDATE` BEFORE UPDATE ON `OPS_HEALTHCHECKRESPONSE` FOR EACH ROW
+BEGIN
+	Declare aduration INT;
+    declare reftransid varchar(128);
+	DECLARE cachetime datetime;
+    declare ahostip varchar(45);
+    declare ahdcode varchar(45);
+    declare ahdendtime datetime;
+
+    SET ahdcode:=NEW.HCCODE;
+    SET ahostip:=NEW.HOSTIP;
+    SET ahdendtime:=NEW.HDENDTIME;
+    SET reftransid:=trim(NEW.REFHCTRANSID);
+    
+    if (NEW.DMAAPSENT in ('U','Y')) then
+		update OPS_HCRESPCACHE 
+				set DMAAPSENT=NEW.DMAAPSENT where OLD.SDNOTRANSID=NEW.SDNOTRANSID and OLD.CREATEDON=NEW.CREATEDON;
+    ELSEIF (reftransid is null and OLD.HCRESPONSESTATUS is null) then
+		select cacheduration into aduration from OPS_HCTYPES where HCCODE=ahdcode; 
+		if (aduration > 0) then
+			select ahdendtime + INTERVAL aduration MINUTE into cachetime from OPS_HCTYPES where HCCODE=ahdcode;     
+			update OPS_HCRESPCACHE 
+				set HCRESPONSESTATUS=NEW.HCRESPONSESTATUS,HCRESPONSE=NEW.HCRESPONSE,HDENDTIME=NEW.HDENDTIME,CACHEEXPIRETIME=cachetime,HDEXPECTEDENDTIME=null
+                where SDNOTRANSID=NEW.SDNOTRANSID and CREATEDON=NEW.CREATEDON;
+			insert into OPS_HCRESPCOMPACT (HCRESPONSEID, HCTRANSID, HOSTIP, HCRESPONSESTATUS, SDNOINSTANCE, SDNOINSTANCESERVER, NODETYPE, HCCODE, USERID, CLIENTNAME, HDSTARTTIME, HDENDTIME)
+				values(NEW.HCRESPONSEID, NEW.HCTRANSID, NEW.HOSTIP, NEW.HCRESPONSESTATUS, NEW.SDNOINSTANCE, NEW.SDNOINSTANCESERVER, NEW.NODETYPE, NEW.HCCODE, NEW.USERID, NEW.CLIENTNAME, NEW.HDSTARTTIME, NEW.HDENDTIME);
+		end if;
+    END IF;    
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `OPS_MAPNODETYPES`
+--
+
+DROP TABLE IF EXISTS `OPS_MAPNODETYPES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_MAPNODETYPES` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `INNODETYPE` varchar(45) DEFAULT NULL COMMENT 'nodetype value in incoming API',
+  `TBLNODETYPE` varchar(45) DEFAULT NULL COMMENT 'nodetype value as stored in db',
+  PRIMARY KEY (`ID`),
+  KEY `tablnodetype_idx` (`TBLNODETYPE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_NODEINFO`
+--
+
+DROP TABLE IF EXISTS `OPS_NODEINFO`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_NODEINFO` (
+  `NODEID` int(11) NOT NULL AUTO_INCREMENT,
+  `NODETYPE` varchar(255) DEFAULT NULL,
+  `HOSTIP` varchar(45) DEFAULT NULL,
+  `STACKLEVEL` varchar(15) DEFAULT 'VM',
+  `HOSTUSER` varchar(45) DEFAULT NULL,
+  `HOSTPASSWORD` varchar(45) DEFAULT NULL,
+  `PROMPTCMD` varchar(256) DEFAULT NULL,
+  `PREPROMPTSTRS` varchar(45) DEFAULT NULL COMMENT 'Strings to send before login prompt',
+  `LABNODETYPE` varchar(256) DEFAULT NULL,
+  `MULTIVERSIONS` varchar(2) DEFAULT 'N',
+  `JUMPSERVERIP` varchar(45) DEFAULT NULL,
+  `JUMPSERVERUSER` varchar(45) DEFAULT NULL,
+  `JUMPSERVERPASSWORD` varchar(45) DEFAULT NULL,
+  `VSERVERID` varchar(128) DEFAULT NULL,
+  `SELFSERVLINK` varchar(1024) DEFAULT NULL,
+  `TENANTID` varchar(128) DEFAULT NULL,
+  `IDENTITYURL` varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (`NODEID`),
+  KEY `hostname_idx` (`NODETYPE`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_NODETYPE2SDNO`
+--
+
+DROP TABLE IF EXISTS `OPS_NODETYPE2SDNO`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_NODETYPE2SDNO` (
+  `VNFTYPEID` int(11) NOT NULL AUTO_INCREMENT,
+  `VNFTYPECODE` varchar(45) DEFAULT NULL,
+  `VNFTYPENAME` varchar(256) DEFAULT NULL,
+  `VNFCLLI` varchar(20) DEFAULT NULL,
+  `DEFAULT_4_UNK_CLLI` varchar(2) DEFAULT NULL,
+  `SDNOINSTANCE` varchar(45) NOT NULL,
+  PRIMARY KEY (`VNFTYPEID`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_NODE_PROPERTIES`
+--
+
+DROP TABLE IF EXISTS `OPS_NODE_PROPERTIES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_NODE_PROPERTIES` (
+  `NODETYPE` varchar(64) NOT NULL,
+  `PROPERTY` varchar(64) NOT NULL,
+  `VALUE` varchar(128) NOT NULL,
+  `CREATED` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`NODETYPE`,`PROPERTY`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_SDNOINFO`
+--
+
+DROP TABLE IF EXISTS `OPS_SDNOINFO`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_SDNOINFO` (
+  `SDNOID` int(11) NOT NULL AUTO_INCREMENT,
+  `SDNOINSTANCE` varchar(45) DEFAULT NULL,
+  `URI` varchar(1000) NOT NULL,
+  PRIMARY KEY (`SDNOID`),
+  UNIQUE KEY `SDNOINSTANCE_UNIQUE` (`SDNOINSTANCE`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_SQLMGR`
+--
+
+DROP TABLE IF EXISTS `OPS_SQLMGR`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_SQLMGR` (
+  `SQLID` int(11) NOT NULL AUTO_INCREMENT,
+  `SQLTEXT` longtext,
+  `SQLSTATUS` int(11) DEFAULT '0',
+  `COMMENTS` varchar(255) DEFAULT NULL,
+  `CREATEDBY` varchar(15) DEFAULT NULL,
+  `CREATEDON` datetime DEFAULT NULL,
+  PRIMARY KEY (`SQLID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `OPS_TRUSTED_PARTNER`
+--
+
+DROP TABLE IF EXISTS `OPS_TRUSTED_PARTNER`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_TRUSTED_PARTNER` (
+  `PARTNERID` int(11) NOT NULL AUTO_INCREMENT,
+  `PARTNER_NAME` varchar(256) NOT NULL,
+  `PARTNER_PUBLIC_KEY` varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (`PARTNERID`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -496,7 +1100,7 @@ CREATE TABLE `PREPARE_FILE_RELATIONSHIP` (
   KEY `ie2_prepare_file_relationship` (`ASDC_ARTIFACTS_ID`),
   CONSTRAINT `prepare_file_relationship_ibfk_2` FOREIGN KEY (`ASDC_ARTIFACTS_ID`) REFERENCES `ASDC_ARTIFACTS` (`ASDC_ARTIFACTS_ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `prepare_file_replationship_ibfk_1` FOREIGN KEY (`CONFIG_FILE_ID`) REFERENCES `CONFIGFILES` (`CONFIG_FILE_ID`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=558 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=338 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -518,7 +1122,7 @@ CREATE TABLE `PROCESS_FLOW_REFERENCE` (
   `GET_RUNNING_CONFIG` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`PROCESS_FLOW_REFERENCE_ID`),
   UNIQUE KEY `PROCESS_FLOW_REFERENCE_ID` (`PROCESS_FLOW_REFERENCE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -538,7 +1142,7 @@ CREATE TABLE `PROTOCOL_REFERENCE` (
   `ACTION_LEVEL` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`PROTOCOL_REFERENCE_ID`),
   UNIQUE KEY ` PROTOCOL_REFERENCE_ID` (`PROTOCOL_REFERENCE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -559,7 +1163,7 @@ CREATE TABLE `REQUEST_ARTIFACTS` (
   `UPDATED_DATE` datetime DEFAULT NULL,
   PRIMARY KEY (`REQUEST_ARTIFACTS_ID`),
   UNIQUE KEY `REQUEST_ARTIFACTS_ID` (`REQUEST_ARTIFACTS_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1962 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -576,6 +1180,7 @@ CREATE TABLE `SVC_LOGIC` (
   `mode` varchar(5) NOT NULL,
   `active` varchar(1) NOT NULL,
   `graph` longblob,
+  `md5sum` varchar(32) NOT NULL DEFAULT '',
   PRIMARY KEY (`module`,`rpc`,`version`,`mode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -635,7 +1240,7 @@ CREATE TABLE `UPLOAD_CONFIG` (
   `CONTENT` longtext,
   PRIMARY KEY (`UPLOAD_CONFIG_ID`),
   UNIQUE KEY `UPLOAD_CONFIG_ID` (`UPLOAD_CONFIG_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=224 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -646,6 +1251,7 @@ DROP TABLE IF EXISTS `VNFC_DG_MAPPING`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `VNFC_DG_MAPPING` (
+  `VNFC_DG_MAPPING_ID` int(11) NOT NULL AUTO_INCREMENT,
   `ACTION` varchar(50) DEFAULT NULL,
   `API_VERSION` varchar(10) DEFAULT NULL,
   `VNF_TYPE` varchar(150) DEFAULT NULL,
@@ -653,8 +1259,8 @@ CREATE TABLE `VNFC_DG_MAPPING` (
   `DG_NAME` varchar(50) NOT NULL,
   `DG_VERSION` varchar(50) DEFAULT NULL,
   `DG_MODULE` varchar(50) NOT NULL,
-  UNIQUE KEY `INPUT_CONSTRAINT` (`ACTION`,`API_VERSION`,`VNF_TYPE`,`VNFC_TYPE`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`VNFC_DG_MAPPING_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -673,12 +1279,12 @@ CREATE TABLE `VNFC_REFERENCE` (
   `VNFC_TYPE` varchar(50) NOT NULL,
   `VNFC_FUNCTION_CODE` varchar(50) NOT NULL,
   `IPADDRESS_V4_OAM_VIP` varchar(50) DEFAULT NULL,
-  `TEMPLATE_ID` varchar(100) DEFAULT NULL,
   `GROUP_NOTATION_TYPE` varchar(50) DEFAULT NULL,
   `GROUP_NOTATION_VALUE` varchar(50) DEFAULT NULL,
+  `TEMPLATE_ID` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`VNFC_REFERENCE_ID`),
   UNIQUE KEY ` VNFC_REFERENCE_ID` (`VNFC_REFERENCE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -689,15 +1295,16 @@ DROP TABLE IF EXISTS `VNF_DG_MAPPING`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `VNF_DG_MAPPING` (
-  `action` varchar(50) NOT NULL,
-  `api_version` varchar(50) DEFAULT NULL,
+  `VNF_DG_MAPPING_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ACTION` varchar(50) NOT NULL,
+  `API_VERSION` varchar(50) DEFAULT NULL,
   `VNF_TYPE` varchar(150) DEFAULT NULL,
-  `vnf_version` varchar(50) DEFAULT NULL,
-  `dg_name` varchar(50) NOT NULL,
-  `dg_version` varchar(50) DEFAULT NULL,
-  `dg_module` varchar(50) NOT NULL,
-  UNIQUE KEY `INPUT_CONSTRAINT` (`action`,`api_version`,`vnf_type`,`vnf_version`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `VNF_VERSION` varchar(50) DEFAULT NULL,
+  `DG_NAME` varchar(50) NOT NULL,
+  `DG_VERSION` varchar(50) DEFAULT NULL,
+  `DG_MODULE` varchar(50) NOT NULL,
+  PRIMARY KEY (`VNF_DG_MAPPING_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=576 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -709,7 +1316,7 @@ DROP TABLE IF EXISTS `VNF_LOCK_MANAGEMENT`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `VNF_LOCK_MANAGEMENT` (
   `RESOURCE_ID` varchar(50) NOT NULL,
-  `OWNER_ID` varchar(50) DEFAULT NULL,
+  `OWNER_ID` varchar(255) DEFAULT NULL,
   `UPDATED` bigint(20) unsigned NOT NULL,
   `TIMEOUT` int(10) unsigned NOT NULL,
   `VER` int(10) unsigned NOT NULL DEFAULT '1',
@@ -732,29 +1339,4 @@ CREATE TABLE `VNF_STATE_MANAGEMENT` (
   `VER` int(10) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`VNF_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS `TRANSACTIONS`;
-CREATE TABLE `TRANSACTIONS` (
-  `TRANSACTION_ID` varchar(75) NOT NULL,
-  `ORIGIN_TIMESTAMP` datetime(3) NOT NULL,
-  `REQUEST_ID` varchar(256) NOT NULL,
-  `SUBREQUEST_ID` varchar(256) DEFAULT NULL,
-  `ORIGINATOR_ID` varchar(256) DEFAULT NULL,
-  `START_TIME` datetime(3) NOT NULL,
-  `END_TIME` datetime(3) DEFAULT NULL,
-  `TARGET_ID` varchar(256) ,
-  `TARGET_TYPE` varchar(256) DEFAULT NULL,
-  `OPERATION` varchar(256) NOT NULL,
-  `RESULT_CODE` int(11) DEFAULT NULL,
-  `DESCRIPTION` text,
-  `STATE` varchar(50) NOT NULL,
-  `SERVICE_INSTANCE_ID` varchar(256) DEFAULT NULL,
-  `VNFC_NAME` varchar(256) DEFAULT NULL,
-  `VSERVER_ID` varchar(256) DEFAULT NULL,
-  `VF_MODULE_ID` varchar(256) DEFAULT NULL,
-  `MODE` varchar(50) NOT NULL,
-  PRIMARY KEY (`TRANSACTION_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
+/*!40101 SET character_set_client = @saved_cs_client */;
