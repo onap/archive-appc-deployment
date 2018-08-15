@@ -45,6 +45,7 @@ featureDir=$2/featureDir
 FEATURE_DIRECTORY_COUNT=4
 
 APPC_FEATURES=" \
+ appc-core \
  appc-sdc-listener \
  appc-lifecycle-management \
  appc-provider \
