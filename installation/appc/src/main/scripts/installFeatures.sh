@@ -86,9 +86,7 @@ APPC_FEATURES_1=" \
  onap-appc-config-params \
  onap-appc-aai-client \
  onap-appc-event-listener \
- onap-appc-network-inventory-client \
- onap-appc-design-services \
- onap-appc-interfaces-service"
+ onap-appc-network-inventory-client"
  
  APPC_FEATURES_UNZIP=" \
  appc-core \
