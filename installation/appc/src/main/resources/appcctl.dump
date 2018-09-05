@@ -46,4 +46,4 @@ CREATE TABLE `transactions` (
     varchar(256) DEFAULT NULL,
     `DESCRIPTION`
     text
-) ENGINE = InnoDB DEFAULT CHARSET = latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -24,6 +24,8 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `sdnctl` /*!40100 DEFAULT CHARACTER SET
 
 USE `sdnctl`;
 
+SET FOREIGN_KEY_CHECKS = 0;
+
 --
 -- Table structure for table `ACTION_LEVEL_REFERENCE`
 --
@@ -1340,3 +1342,6 @@ CREATE TABLE `VNF_STATE_MANAGEMENT` (
   PRIMARY KEY (`VNF_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
