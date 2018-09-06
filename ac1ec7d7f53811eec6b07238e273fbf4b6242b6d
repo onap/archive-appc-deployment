@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Jim Hahn <jrh3@att.com>
+Code-Review+2: Takamune Cho <tc012c@att.com>
+Submitted-by: Takamune Cho <tc012c@att.com>
+Submitted-at: Thu, 06 Sep 2018 14:43:47 +0000
+Reviewed-on: https://gerrit.onap.org/r/64949
+Project: appc/deployment
+Branch: refs/heads/master
