@@ -84,9 +84,12 @@ APPC_FEATURES_1=" \
  onap-appc-config-encryption-tool \
  onap-appc-config-flow-controller \
  onap-appc-config-params \
+ onap-appc-artifact-handler
  onap-appc-aai-client \
  onap-appc-event-listener \
- onap-appc-network-inventory-client"
+ onap-appc-network-inventory-client \
+ appc-design-services \
+ appc-design-services"
  
  APPC_FEATURES_UNZIP=" \
  appc-core \

@@ -113,7 +113,6 @@ limitations under the License.
     <modules>
         <module>platform-logic</module>
         <module>installation</module>
-        <module>cdt</module>
     </modules>
     <organization>
         <name>ONAP</name>
