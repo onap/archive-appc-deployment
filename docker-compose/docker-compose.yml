@@ -27,7 +27,7 @@ networks:
 
 services:
   db:
-    image: mysql/mysql-server:5.6
+    image: mariadb:10.1.11
     container_name: sdnc_db_container
     ports:
       - "3306"
@@ -40,6 +40,25 @@ services:
         max-size: "30m"
         max-file: "5"
 
+  ansible:
+    image: onap/sdnc-ansible-server-image:latest
+    depends_on :
+      - db
+    container_name: appc_ansible_container
+    entrypoint: ["/opt/onap/ccsdk/startAnsibleServer.sh"]
+    ports:
+      - "8000"
+    links:
+      - db:dbhost
+    environment:
+      - MYSQL_ROOT_PASSWORD=openECOMP1.0
+    logging:
+      driver:   "json-file"
+      options:
+        max-size: "30m"
+        max-file: "5"
+
+
 # Tweaking SDNC_CONFIG_DIR temporarily from ../sdnc/.. to ../appc/.. since it may be needed in this script
 #    to map to SDN-C AAI Service Bundle's AAI Activator class inside the gerrit sdnc/adaptors repo, so that
 #    the AAI Service bundle loads APP-C's aaiclient.properties instead of SDN-C's aaiclient.properties.
@@ -47,6 +66,7 @@ services:
     image: "onap/appc-image:latest"
     depends_on :
       - db
+      - ansible
     container_name: appc_controller_container
     entrypoint: ["/opt/onap/appc/bin/startODL.sh"]
     ports:
@@ -56,8 +76,7 @@ services:
       - "30290:9191"
     links:
       - db:dbhost
-      - db:sdnctldb01
-      - db:sdnctldb02
+      - ansible:ansiblehost
     environment:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
       - SDNC_CONFIG_DIR=/opt/onap/appc/data/properties
@@ -83,8 +102,6 @@ services:
       - "3000:3100"
     links:
       - db:dbhost
-      - db:sdnctldb01
-      - db:sdnctldb02
       - appc:sdnhost
     environment:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
