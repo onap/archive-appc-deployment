@@ -27,7 +27,7 @@ networks:
 
 services:
   db:
-    image: mysql/mysql-server:5.6
+    image: mariadb:10.1.11
     container_name: sdnc_db_container
     ports:
       - "3306"
