@@ -50,6 +50,8 @@ services:
       - "8000"
     links:
       - db:dbhost
+      - db:sdnctldb01
+      - db:sdnctldb02
     environment:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
     logging:
@@ -76,6 +78,8 @@ services:
       - "30290:9191"
     links:
       - db:dbhost
+      - db:sdnctldb01
+      - db:sdnctldb02
       - ansible:ansiblehost
     environment:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
@@ -102,6 +106,8 @@ services:
       - "3000:3100"
     links:
       - db:dbhost
+      - db:sdnctldb01
+      - db:sdnctldb02
       - appc:sdnhost
     environment:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
