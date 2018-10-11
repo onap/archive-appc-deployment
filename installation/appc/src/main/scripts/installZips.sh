@@ -82,15 +82,22 @@ APPC_CDT_VERSION=${APPC_CDT_VERSION:-0.0.1}
 APPC_OAM_VERSION=${APPC_OAM_VERSION:-0.1.1}
 AAF_SHIRO_VERSION=${AAF_SHIRO_VERSION:-2.1.0-SNAPSHOT}
 
+tmpDir=/tmp/appc-${APPC_VERSION}
+
 if [ ! -d ${targetDir} ]
 then
   mkdir -p ${targetDir}
 fi
 
+if [ ! -d ${tmpDir} ]
+then
+  mkdir -p ${tmpDir}
+fi
+
 cwd=$(pwd)
 
 mavenOpts="-s ${SETTINGS_FILE} -gs ${GLOBAL_SETTINGS_FILE}"
-cd /tmp
+cd ${tmpDir}
 
 echo "Installing APP-C version ${APPC_VERSION}"
 
@@ -108,20 +115,20 @@ then
   fi
 fi
 
- rm -f /tmp/${feature}-installer*.zip
- mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc:${feature}-installer:${APPC_VERSION}:zip -DoutputDirectory=/tmp -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.ssl.insecure=true
- unzip -d ${featureDir}$featureDirNumber /tmp/${feature}-installer*zip
+ rm -f ${tmpDir}/${feature}-installer*.zip
+ mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc:${feature}-installer:${APPC_VERSION}:zip -DoutputDirectory=${tmpDir} -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.ssl.insecure=true
+ unzip -d ${featureDir}$featureDirNumber ${tmpDir}/${feature}-installer*zip
 featureNumber=$(($featureNumber+1))
 done
 
 echo "Installing platform-logic for APP-C"
-rm -f /tmp/platform-logic-installer*.zip
-mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.deployment:platform-logic-installer:${APPC_OAM_VERSION}:zip -DoutputDirectory=/tmp -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.ssl.insecure=true
-unzip -d ${targetDir} /tmp/platform-logic-installer*.zip
+rm -f ${tmpDir}/platform-logic-installer*.zip
+mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.deployment:platform-logic-installer:${APPC_OAM_VERSION}:zip -DoutputDirectory=${tmpDir} -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.ssl.insecure=true
+unzip -d ${targetDir} ${tmpDir}/platform-logic-installer*.zip
 
 echo "Downloading dg-loader DGs from nexus"
-mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc:appc-dg-provider:${APPC_VERSION} -DoutputDirectory=/tmp
-unzip -d ${targetDir}/svclogic/graphs/appc/json /tmp/appc-dg-provider*.jar json/**
+mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc:appc-dg-provider:${APPC_VERSION} -DoutputDirectory=${tmpDir}
+unzip -d ${targetDir}/svclogic/graphs/appc/json ${tmpDir}/appc-dg-provider*.jar json/**
 mv ${targetDir}/svclogic/graphs/appc/json/json ${targetDir}/svclogic/graphs/appc/json/dg-loader-dgs
 
 echo "Downloading dg-loader-provider jar from nexus"
