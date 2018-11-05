@@ -30,7 +30,7 @@ make up these functions. Therefore, this allows the cloud to be
 abstracted from Virtual Functions in order to enable repeatable actions,
 as well as enabling automation and a dynamic configuration approach.
 
-ONAP APPC is delivered with **3 Docker Containers**, which are deployed
+ONAP APPC is delivered with **4 Docker Containers**, which are deployed
 using Docker Images already containing the APPC Framework Suite. NOTE:
 All three containers are hosted on Ubuntu 14.04 LTS OS.
 
@@ -80,8 +80,11 @@ running APPC:
    Active & Available Inventory (A&AI) Listener). Some of these
    inherited SDN-C features/artifacts are necessary dependencies to
    build and compile APPC features/artifacts.
--  **MySQL DB Container (Version 5.6)**: This is the database for APPC.
-   It is currently using MySQL Community Version (Open-Source version).
+-  **Maria DB Container (Version 10.1.11)**: This is the database for APPC.
+   It’s made by the original developers of MySQL and guaranteed to stay 
+   open source.
+-  **Ansible Server Container**: This ansible server is for VNF owner 
+   to write playbook using APPC to send LCM API command.
 -  **Node Red / DGBuilder**: This container has the visual tool used to
    assemble DGs in order to put together flows or services used to serve
    Virtual Functions. NOTE: This container is deployed using a Docker
