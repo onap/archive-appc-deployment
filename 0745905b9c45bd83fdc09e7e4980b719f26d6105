@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9adffdf1_8e22f7b7",
+        "filename": "installation/appc/src/main/scripts/installZips.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1733
+      },
+      "writtenOn": "2018-11-09T19:00:17Z",
+      "side": 1,
+      "message": "2.1.7-SNAPSHOT",
+      "range": {
+        "startLine": 83,
+        "startChar": 43,
+        "endLine": 83,
+        "endChar": 44
+      },
+      "revId": "0745905b9c45bd83fdc09e7e4980b719f26d6105",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
