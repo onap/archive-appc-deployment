@@ -136,7 +136,7 @@ mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -D
 mv ${targetDir}/data/dg-loader-provider-*-jar-with-dependencies.jar ${targetDir}/data/dg-loader-provider-jar-with-dependencies.jar
 
 echo "Downloading aaf-cadi-shiro from nexus"
-mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.aaf.authz:aaf-shiro-aafrealm-osgi-bundle:${AAF_SHIRO_VERSION} -DoutputDirectory=${targetDir}/data
+mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.aaf.cadi:aaf-cadi-shiro:${AAF_SHIRO_VERSION} -DoutputDirectory=${targetDir}/data
 mv ${targetDir}/data/aaf-shiro-aafrealm-osgi-bundle-*.jar ${targetDir}/data/aaf-shiro-aafrealm-osgi-bundle.jar
 
 echo "Setting keyfile to readonly"
