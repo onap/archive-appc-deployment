@@ -1,0 +1,7 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+2: Takamune Cho <takamune.cho@att.com>
+Submitted-by: Takamune Cho <takamune.cho@att.com>
+Submitted-at: Tue, 13 Nov 2018 20:59:54 +0000
+Reviewed-on: https://gerrit.onap.org/r/72580
+Project: appc/deployment
+Branch: refs/heads/casablanca
