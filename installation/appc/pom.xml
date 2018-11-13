@@ -157,6 +157,7 @@ limitations under the License.
 									<directory>../src/main/properties</directory>
 									<includes>
 										<include>*.properties</include>
+										<include>*.csv</include>
 									</includes>
 									<filtering>false</filtering>
 								</resource>
@@ -359,7 +360,7 @@ limitations under the License.
 												<include>*.dump</include>
 												<include>*.sh</include>
 												<include>*.cfg</include>
-												<include>*.xml</include>		
+												<include>*.xml</include>
 											</includes>
 											<filtering>false</filtering>
 										</resource>
@@ -402,6 +403,7 @@ limitations under the License.
 											<directory>../src/main/properties</directory>
 											<includes>
 												<include>*.properties</include>
+												<include>*.csv</include>
 											</includes>
 											<filtering>false</filtering>
 										</resource>
