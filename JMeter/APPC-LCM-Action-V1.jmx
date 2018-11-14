@@ -151,7 +151,7 @@ StringBuilder timestamp = new StringBuilder();
             &quot;action&quot;: &quot;Restart&quot;,&#xd;
             &quot;action-identifiers&quot;: {&#xd;
                 &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
-                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+                &quot;vserver-id&quot;: &quot;${vm_id}&quot;&#xd;
             },&#xd;
             &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/799ea611-bb36-4e49-b043-964f20c442d5\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
         }&#xd;
@@ -479,7 +479,7 @@ if(jsonMessage != &quot;WAITING&quot;){
             &quot;action&quot;: &quot;Restart&quot;,&#xd;
             &quot;action-identifiers&quot;: {&#xd;
                 &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
-                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+                &quot;vserver-id&quot;: &quot;${vm_id}&quot;&#xd;
             },&#xd;
             &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/799ea611-bb36-4e49-b043-964f20c442d5\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
         }&#xd;
@@ -853,7 +853,7 @@ if(jsonMessage != &quot;WAITING&quot;){
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
           <stringProp name="delimiter">,</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="filename">/home/ubuntu/appc-lcm-test-Stability-Test-VM2.csv</stringProp>
+          <stringProp name="filename">appc-lcm-test-Stability-Test-VM2.csv</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">true</boolProp>
@@ -943,7 +943,7 @@ StringBuilder timestamp = new StringBuilder();
             &quot;action&quot;: &quot;Stop&quot;,&#xd;
             &quot;action-identifiers&quot;: {&#xd;
                 &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
-                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+                &quot;vserver-id&quot;: &quot;${vm_id}&quot;&#xd;
             },&#xd;
             &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/c0d9b8c7-9534-4a22-b464-d6aa2c930847\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
         }&#xd;
@@ -1246,7 +1246,7 @@ StringBuilder timestamp = new StringBuilder();
             &quot;action&quot;: &quot;Start&quot;,&#xd;
             &quot;action-identifiers&quot;: {&#xd;
                 &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
-                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+                &quot;vserver-id&quot;: &quot;${vm_id}&quot;&#xd;
             },&#xd;
             &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/c0d9b8c7-9534-4a22-b464-d6aa2c930847\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
         }&#xd;
@@ -1574,7 +1574,7 @@ if(jsonMessage != &quot;WAITING&quot;){
             &quot;action&quot;: &quot;Stop&quot;,&#xd;
             &quot;action-identifiers&quot;: {&#xd;
                 &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
-                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+                &quot;vserver-id&quot;: &quot;${vm_id}&quot;&#xd;
             },&#xd;
             &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/c0d9b8c7-9534-4a22-b464-d6aa2c930847\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
         }&#xd;
@@ -1987,7 +1987,7 @@ if(jsonMessage != &quot;WAITING&quot;){
             &quot;action&quot;: &quot;Start&quot;,&#xd;
             &quot;action-identifiers&quot;: {&#xd;
                 &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
-                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+                &quot;vserver-id&quot;: &quot;${vm_id}&quot;&#xd;
             },&#xd;
             &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/c0d9b8c7-9534-4a22-b464-d6aa2c930847\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
         }&#xd;
@@ -2361,7 +2361,7 @@ if(jsonMessage != &quot;WAITING&quot;){
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
           <stringProp name="delimiter">,</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="filename">/home/ubuntu/appc-lcm-test-Stability-Test-VM3.csv</stringProp>
+          <stringProp name="filename">appc-lcm-test-Stability-Test-VM3.csv</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">true</boolProp>
@@ -2451,7 +2451,7 @@ StringBuilder timestamp = new StringBuilder();
             &quot;action&quot;: &quot;Rebuild&quot;,&#xd;
             &quot;action-identifiers&quot;: {&#xd;
                 &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
-                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+                &quot;vserver-id&quot;: &quot;${vm_id}&quot;&#xd;
             },&#xd;
             &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/3b3d77e0-a79d-4c10-bfac-1b3914af1a14\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
         }&#xd;
@@ -2779,7 +2779,7 @@ if(jsonMessage != &quot;WAITING&quot;){
             &quot;action&quot;: &quot;Rebuild&quot;,&#xd;
             &quot;action-identifiers&quot;: {&#xd;
                 &quot;vnf-id&quot;: &quot;${vnf_id}&quot;,&#xd;
-                &quot;vserver-id&quot;: &quot;${vm-id}&quot;&#xd;
+                &quot;vserver-id&quot;: &quot;${vm_id}&quot;&#xd;
             },&#xd;
             &quot;payload&quot;: &quot;{\&quot;vm-id\&quot;:\&quot;http://10.12.25.2:8774/v2.1/cf142fb96ce24770946c0f7117c0aeb3/servers/3b3d77e0-a79d-4c10-bfac-1b3914af1a14\&quot;, \&quot;identity-url\&quot;: \&quot;http://10.12.25.2:5000/v2.0\&quot;,\&quot;skip-hypervisor-check\&quot;:\&quot;true\&quot;}&quot;&#xd;
         }&#xd;
