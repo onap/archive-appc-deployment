@@ -69,7 +69,6 @@ APPC_FEATURES_1=" \
  onap-appc-license-manager"
  
  APPC_FEATURES_2=" \
- onap-appc-provider \
  onap-appc-dg-util \
  onap-appc-dg-shared \
  onap-appc-sdc-listener \
@@ -160,7 +159,7 @@ done
 
   echo "Installing dispatcher features"
   start=$(date +%s)
-  ${ODL_HOME}/bin/client "feature:install -r onap-appc-request-handler onap-appc-command-executor onap-appc-lifecycle-management onap-appc-workflow-management lock-manager"
+  ${ODL_HOME}/bin/client "feature:install -r onap-appc-request-handler onap-appc-command-executor onap-appc-lifecycle-management onap-appc-workflow-management lock-manager onap-appc-provider"
   end=$(date +%s)
   echo "Install of dispatcher features took $(expr $end - $start) seconds"
   sleep 7s
