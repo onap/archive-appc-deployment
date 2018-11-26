@@ -30,9 +30,10 @@ make up these functions. Therefore, this allows the cloud to be
 abstracted from Virtual Functions in order to enable repeatable actions,
 as well as enabling automation and a dynamic configuration approach.
 
-ONAP APPC is delivered with **4 Docker Containers**, which are deployed
-using Docker Images already containing the APPC Framework Suite. NOTE:
-All three containers are hosted on Ubuntu 14.04 LTS OS.
+ONAP APPC is delivered either as as a Kubernetes based Cloud Native
+deployment or as an OpenStack deployment with **4 Docker Containers**,
+which are deployed using Docker Images already containing the APPC
+Framework Suite. NOTE: Containers are hosted on Ubuntu 16.04 LTS OS.
 
 Deployment Mode for APPC
 ========================
