@@ -54,7 +54,7 @@ limitations under the License.
         <snapshotRepository>
             <id>ecomp-snapshots</id>
             <name>openecomp-repository-snapshots</name>
-            <url>${openecomp.nexus.snapshot-url}</url>
+            <url>http://localhost:8081/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 

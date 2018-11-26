@@ -40,26 +40,6 @@ services:
         max-size: "30m"
         max-file: "5"
 
-  ansible:
-    image: onap/ccsdk-ansible-server-image:latest
-    depends_on :
-      - db
-    container_name: ccsdk_ansible_container
-    entrypoint: ["/opt/onap/ccsdk/startAnsibleServer.sh"]
-    ports:
-      - "8000"
-    links:
-      - db:dbhost
-      - db:sdnctldb01
-      - db:sdnctldb02
-    environment:
-      - MYSQL_ROOT_PASSWORD=openECOMP1.0
-    logging:
-      driver:   "json-file"
-      options:
-        max-size: "30m"
-        max-file: "5"
-
 
 # Tweaking SDNC_CONFIG_DIR temporarily from ../sdnc/.. to ../appc/.. since it may be needed in this script
 #    to map to SDN-C AAI Service Bundle's AAI Activator class inside the gerrit sdnc/adaptors repo, so that
@@ -68,7 +48,6 @@ services:
     image: "onap/appc-image:latest"
     depends_on :
       - db
-      - ansible
     container_name: appc_controller_container
     entrypoint: ["/opt/onap/appc/bin/startODL.sh"]
     ports:
@@ -80,38 +59,11 @@ services:
       - db:dbhost
       - db:sdnctldb01
       - db:sdnctldb02
-      - ansible:ansiblehost
     environment:
       - MYSQL_ROOT_PASSWORD=openECOMP1.0
       - SDNC_CONFIG_DIR=/opt/onap/appc/data/properties
       - APPC_CONFIG_DIR=/opt/onap/appc/data/properties
       - DMAAP_TOPIC_ENV=SUCCESS
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "30m"
-        max-file: "5"
-
-
-  dgbuilder:
-    image: "onap/ccsdk-dgbuilder-image:latest"
-    depends_on:
-      - db
-    container_name: ccsdk_dgbuilder_container
-    entrypoint:
-       - "/bin/bash"
-       - "-c"
-       - "cd /opt/onap/ccsdk/dgbuilder/ && ./start.sh sdnc1.0 && wait"
-    ports:
-      - "3000:3100"
-    links:
-      - db:dbhost
-      - db:sdnctldb01
-      - db:sdnctldb02
-      - appc:sdnhost
-    environment:
-      - MYSQL_ROOT_PASSWORD=openECOMP1.0
-      - SDNC_CONFIG_DIR=/opt/onap/ccsdk/data/properties
     logging:
       driver: "json-file"
       options:
@@ -137,4 +89,5 @@ services:
       options:
         max-size: "30m"
         max-file: "5"
+
 
