@@ -40,7 +40,7 @@ limitations under the License.
 
 	<properties>
 		<image.name>onap/appc-image</image.name>
-		<appc.release.version>1.4.3</appc.release.version>
+		<appc.release.version>1.4.4</appc.release.version>
 		<appc.snapshot.version>1.4.4-SNAPSHOT</appc.snapshot.version>
                 <!--This version will be over-ridden by jenkins 
                     injecting the version.properties variable file during docker build-->
