@@ -1,7 +1,7 @@
 # ============LICENSE_START==========================================
 # ONAP : APPC
 # ===================================================================
-# Copyright (C) 2017-2018 AT&T Intellectual Property. All rights reserved.
+# Copyright (C) 2017-2019 AT&T Intellectual Property. All rights reserved.
 # ===================================================================
 #
 # Unless otherwise specified, all software contained herein is licensed
@@ -30,16 +30,18 @@ ENV APPC_CONFIG_DIR /opt/onap/appc/data/properties
 # Copy the opt folder to the container's /opt folder
 COPY opt /opt
 
-# We are keeping the feature installers in their
-# own folders in the docker staging repository.
-# The number of feature directories is defined in
-# the installZips.sh file.
-COPY featureDir1 /opt/onap/appc/features
-COPY featureDir2 /opt/onap/appc/features
-COPY featureDir3 /opt/onap/appc/features
-COPY featureDir4 /opt/onap/appc/features
+#Copy the directory containing each features' install script
+COPY featureDir /opt/onap/appc/features
+
+#Copy the directory containing a system folder and an etc folder in order
+#  to merge both of these with the opendaylight folders of the same names.
+COPY repoDir /opt/opendaylight
+
 
 RUN ln -s /opt/onap/appc /opt/appc
+
+#Start opendaylight and pre-install the appc features
+RUN opt/onap/appc/bin/dockerInstall.sh
 
 # Expose port 8181 for ODL REST calls
 EXPOSE 8181
