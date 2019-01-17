@@ -4,7 +4,7 @@
 # ============LICENSE_START=======================================================
 # APPC
 # ================================================================================
-# Copyright (C) 2017 AT&T Intellectual Property. All rights reserved.
+# Copyright (C) 2017-2019 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,16 +33,13 @@ SDNC_HOME=${SDNC_HOME:-/opt/onap/sdnc}
 targetDir=${1:-${APPC_HOME}}
 sdnc_targetDir=${1:-${SDNC_HOME}}
 
-#We are going to use a series of directories in the docker-stage folder to extract features to.
-#By extracting features into more than one directory, we can copy them into the docker image in
-#different parts, creating more even layer sizes in the docker image.
+#The featureDir holds the install-feature shell scripts for each feature
 featureDir=$2/featureDir
 
-#This value determine how many feature directories we want. The featutures will be evenly split
-#into the number of directories specified. Any remainder will be put into the last directory.
-#IF THE FEATURES_DIRECTORY_COUNT IS CHANGED, THE DOCKERFILE MUST ALSO BE UPDATED SINCE IT CONTAINS
-#A COPY COMMAND FOR EACH FEATURE DIRECTORY!! See the Dockerfile for more information.
-FEATURE_DIRECTORY_COUNT=4
+#The repoDir is where the classes are extracted to. This will be merged with the opendaylight
+#  system directory.
+repoDir=$2/repoDir
+
 
 APPC_FEATURES=" \
  appc-core \
@@ -100,25 +97,13 @@ mavenOpts="-s ${SETTINGS_FILE} -gs ${GLOBAL_SETTINGS_FILE}"
 cd ${tmpDir}
 
 echo "Installing APP-C version ${APPC_VERSION}"
-
-#The math for splitting up the features into folders
-featureNumber=1
-featureDirNumber=1
 for feature in ${APPC_FEATURES}
 do
-if (( $featureDirNumber < $FEATURE_DIRECTORY_COUNT ))
-then
-  if (( $featureNumber > $FEATURES_PER_DIRECTORY ))
-  then
-    featureDirNumber=$(($featureDirNumber+1))
-    featureNumber=1
-  fi
-fi
-
- rm -f ${tmpDir}/${feature}-installer*.zip
- mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc:${feature}-installer:${APPC_VERSION}:zip -DoutputDirectory=${tmpDir} -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.ssl.insecure=true
- unzip -d ${featureDir}$featureDirNumber ${tmpDir}/${feature}-installer*zip
-featureNumber=$(($featureNumber+1))
+  rm -f ${tmpDir}/${feature}-installer*.zip
+  mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc:${feature}-installer:${APPC_VERSION}:zip -DoutputDirectory=${tmpDir} -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.ssl.insecure=true
+  unzip -d ${featureDir} ${tmpDir}/${feature}-installer*zip
+  unzip -n -d ${repoDir} ${featureDir}/${feature}/${feature}*zip
+  rm -f ${featureDir}/${feature}/${feature}*zip
 done
 
 echo "Installing platform-logic for APP-C"
