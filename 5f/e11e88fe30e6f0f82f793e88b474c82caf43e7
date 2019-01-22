@@ -1,0 +1,8 @@
+Code-Review+2: Patrick Brady <patrick.brady@att.com>
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: J Armstrong <joss.armstrong@ericsson.com>
+Submitted-by: Patrick Brady <patrick.brady@att.com>
+Submitted-at: Tue, 22 Jan 2019 23:54:56 +0000
+Reviewed-on: https://gerrit.onap.org/r/76096
+Project: appc/deployment
+Branch: refs/heads/master
