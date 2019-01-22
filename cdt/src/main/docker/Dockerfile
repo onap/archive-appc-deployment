@@ -19,10 +19,12 @@
 #
 # ============LICENSE_END============================================
 
-# Base ubuntu with added packages needed for ONAP
-FROM httpd
+# Base Alpine with added packages needed for ONAP
+FROM httpd:2.4-alpine
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
 COPY config-design-tool /usr/local/apache2/htdocs/
+
+RUN mkdir /opt
 
 COPY startCdt.sh /opt
