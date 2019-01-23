@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Jessica Wagantall <jwagantall@linuxfoundation.org>
+Code-Review+2: J Armstrong <joss.armstrong@ericsson.com>
+Submitted-by: J Armstrong <joss.armstrong@ericsson.com>
+Submitted-at: Wed, 23 Jan 2019 09:42:00 +0000
+Reviewed-on: https://gerrit.onap.org/r/76160
+Project: appc/deployment
+Branch: refs/heads/master
