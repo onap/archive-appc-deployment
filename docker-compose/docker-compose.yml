@@ -44,7 +44,7 @@ services:
     image: onap/ccsdk-ansible-server-image:latest
     depends_on :
       - db
-    container_name: ccsdk_ansible_container
+    container_name: appc_ansible_container
     entrypoint: ["/opt/onap/ccsdk/startAnsibleServer.sh"]
     ports:
       - "8000"
