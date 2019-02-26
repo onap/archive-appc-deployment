@@ -28,16 +28,16 @@ MAINTAINER APP-C Team (appc@lists.openecomp.org)
 ENV APPC_CONFIG_DIR /opt/onap/appc/data/properties
 
 # Copy the opt folder to the container's /opt folder
-COPY opt /opt
+COPY --chown=odl:odl opt /opt
 
 #Copy the directory containing each features' install script
-COPY featureDir /opt/onap/appc/features
+COPY --chown=odl:odl featureDir /opt/onap/appc/features
 
 #Copy the directory containing a system folder and an etc folder in order
 #  to merge both of these with the opendaylight folders of the same names.
-COPY repoDir /opt/opendaylight
-
-
+COPY --chown=odl:odl repoDir /opt/opendaylight
+RUN chown -R odl:odl /opt
+USER odl
 RUN ln -s /opt/onap/appc /opt/appc
 
 #Start opendaylight and pre-install the appc features
