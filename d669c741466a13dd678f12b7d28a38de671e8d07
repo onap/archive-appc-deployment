@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c563751e_42e99f03",
+        "filename": "installation/appc/src/main/resources/sdnctl.dump",
+        "patchSetId": 5
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 49
+      },
+      "writtenOn": "2019-03-04T23:06:51Z",
+      "side": 1,
+      "message": "Do we need to set foreign key checks to 1 here?",
+      "revId": "d669c741466a13dd678f12b7d28a38de671e8d07",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
