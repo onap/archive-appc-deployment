@@ -487,6 +487,25 @@ CREATE TABLE `NODE_TYPES` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `OPS_AIC_REGIONS`
+--
+
+DROP TABLE IF EXISTS `OPS_AIC_REGIONS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OPS_AIC_REGIONS` (
+  `REGION_ID` varchar(16) NOT NULL,
+  `IDENTITY_URL` varchar(256) NOT NULL,
+  `HOST_DISCOVERY` varchar(3) NOT NULL DEFAULT 'NO',
+  `ADMIN_TENANT_ID` varchar(64) DEFAULT NULL,
+  `ADMIN_TENANT_NAME` varchar(64) DEFAULT 'admin',
+  `CREATED` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`REGION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `OPS_AIC_HOSTS`
 --
 
@@ -505,25 +524,6 @@ CREATE TABLE `OPS_AIC_HOSTS` (
   `UPDATED` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`REGION_ID`,`HOST`),
   CONSTRAINT `fk_aic_hosts` FOREIGN KEY (`REGION_ID`) REFERENCES `OPS_AIC_REGIONS` (`REGION_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `OPS_AIC_REGIONS`
---
-
-DROP TABLE IF EXISTS `OPS_AIC_REGIONS`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `OPS_AIC_REGIONS` (
-  `REGION_ID` varchar(16) NOT NULL,
-  `IDENTITY_URL` varchar(256) NOT NULL,
-  `HOST_DISCOVERY` varchar(3) NOT NULL DEFAULT 'NO',
-  `ADMIN_TENANT_ID` varchar(64) DEFAULT NULL,
-  `ADMIN_TENANT_NAME` varchar(64) DEFAULT 'admin',
-  `CREATED` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `UPDATED` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`REGION_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1420,14 +1420,5 @@ USE `sdnctl`;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 

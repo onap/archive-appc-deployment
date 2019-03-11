@@ -27,7 +27,7 @@ networks:
 
 services:
   db:
-    image: mariadb:10.1.11
+    image: mariadb:10.4.3
     container_name: sdnc_db_container
     ports:
       - "3306"
