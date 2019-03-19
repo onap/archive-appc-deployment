@@ -40,6 +40,15 @@ ${ODL_HOME}/bin/start
 echo "Waiting ${SLEEP_TIME} seconds for OpenDaylight to initialize"
 sleep ${SLEEP_TIME}
 
+echo "Checking that Karaf can be accessed"
+clientOutput=$(${ODL_HOME}/bin/client shell:echo KarafLoginCheckIsWorking)
+if echo "$clientOutput" | grep -q "KarafLoginCheckIsWorking"; then
+echo "Karaf login succeeded"
+else
+echo "Error during Karaf login"
+exit 1
+fi
+
 echo "Copying a working version of the logging configuration into the opendaylight etc folder"
 cp ${APPC_HOME}/data/org.ops4j.pax.logging.cfg ${ODL_HOME}/etc/org.ops4j.pax.logging.cfg
 echo "Copying a new version of aaf cadi shiro into the opendaylight deploy folder"
