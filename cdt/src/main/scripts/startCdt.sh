@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ###
 # ============LICENSE_START=======================================================
@@ -22,6 +22,6 @@
 
 CDT_PORT=${CDT_PORT:-30232}
 echo "Setting CDT port to $CDT_PORT"
-sed -i -e "s/30290/$CDT_PORT/" /usr/local/apache2/htdocs/main.bundle.js
+sed -i -e "s/30290/$CDT_PORT/" /opt/cdt/main.bundle.js
 
-exec /usr/local/bin/httpd-foreground
+exec /usr/sbin/nginx -g 'daemon off;'

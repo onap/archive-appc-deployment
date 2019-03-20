@@ -20,17 +20,10 @@
 # ============LICENSE_END============================================
 
 # Base Alpine with added packages needed for ONAP
-FROM httpd:2.4-alpine
+FROM nginx:1.15.9-alpine
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
-RUN sed -i -e "s/80/18080/" /usr/local/apache2/conf/httpd.conf; \
-addgroup -S cdt && adduser -S cdt -G cdt
-
-COPY --chown=cdt:cdt config-design-tool /usr/local/apache2/htdocs/
-
-COPY --chown=cdt:cdt startCdt.sh /opt/startCdt.sh
-
-RUN chown -R cdt:cdt /opt; \
-chown -R cdt:cdt /usr/local/apache2
-
-USER cdt:cdt
+COPY config-design-tool /opt/cdt
+COPY startCdt.sh /opt/startCdt.sh
+COPY cert /opt/cert
+COPY nginx.conf /etc/nginx/nginx.conf
