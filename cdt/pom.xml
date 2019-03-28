@@ -210,7 +210,7 @@ limitations under the License.
                     <plugin>
                         <groupId>io.fabric8</groupId>
                         <artifactId>docker-maven-plugin</artifactId>
-                        <version>0.16.5</version>
+                        <version>0.28.0</version>
                         <inherited>false</inherited>
                         <configuration>
                             <images>
@@ -219,7 +219,7 @@ limitations under the License.
                                     <build>
                                         <cleanup>try</cleanup>
                                         <dockerFileDir>${basedir}/target/docker-stage</dockerFileDir>
-                                        <dockerFile>${basedir}/target/docker-stage/Dockerfile</dockerFile>
+                                        <dockerFile>Dockerfile</dockerFile>
                                         <tags>
                                             <tag>${dockertag1}</tag>
                                             <tag>${dockertag2}</tag>

@@ -48,6 +48,7 @@ limitations under the License.
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss'Z'</maven.build.timestamp.format>
 		<!--Determines the version of the cdt-proxy-service to download and install-->
 		<appc.cdt.version>1.5.0-SNAPSHOT</appc.cdt.version>
+		<docker.plugin.version>0.28.0</docker.plugin.version>
 	</properties>
 
 
@@ -261,7 +262,7 @@ limitations under the License.
 					<plugin>
 						<groupId>io.fabric8</groupId>
 						<artifactId>docker-maven-plugin</artifactId>
-						<version>0.16.5</version>
+						<version>${docker.plugin.version}</version>
 						<inherited>false</inherited>
 						<configuration>
 							<images>
@@ -270,7 +271,7 @@ limitations under the License.
 									<build>
 										<cleanup>try</cleanup>
 										<dockerFileDir>${basedir}/target/docker-stage</dockerFileDir>
-										<dockerFile>${basedir}/target/docker-stage/Dockerfile</dockerFile>
+										<dockerFile>Dockerfile</dockerFile>
 										<tags>
 											<tag>${dockertag1}</tag>
 											<tag>${dockertag2}</tag>
