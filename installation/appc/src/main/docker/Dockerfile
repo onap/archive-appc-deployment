@@ -21,7 +21,7 @@
 # ============LICENSE_END============================================
 
 # Base ubuntu with added packages needed for ONAP
-FROM onap/ccsdk-odlsli-alpine-image:0.4.1
+FROM onap/ccsdk-odlsli-alpine-image:0.4.2-STAGING-latest
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
 # Set the Env. Variable in the container to add the APPC CONFIG DIR (the SDNC_CONFIG_DIR is inherited from SDNC Image)
@@ -41,7 +41,7 @@ USER odl
 RUN ln -s /opt/onap/appc /opt/appc
 
 #Start opendaylight and pre-install the appc features
-RUN opt/onap/appc/bin/dockerInstall.sh
+#RUN opt/onap/appc/bin/dockerInstall.sh
 
 # Expose port 8181 for ODL REST calls
 EXPOSE 8181

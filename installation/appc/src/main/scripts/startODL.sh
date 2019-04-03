@@ -24,6 +24,9 @@
 # This script takes care of installing the SDNC & APPC platform components 
 #  if not already installed, and starts the APPC Docker Container
 #
+echo "one"
+exec /opt/onap/appc/bin/dockerInstall.sh
+echo "two"
 
 ODL_HOME=${ODL_HOME:-/opt/opendaylight/current}
 ODL_ADMIN_PASSWORD=${ODL_ADMIN_PASSWORD:-Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U}

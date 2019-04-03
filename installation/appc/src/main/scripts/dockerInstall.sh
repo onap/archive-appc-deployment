@@ -32,14 +32,13 @@ SLEEP_TIME=${SLEEP_TIME:-120}
 MYSQL_PASSWD=${MYSQL_PASSWD:-openECOMP1.0}
 
 appcInstallStartTime=$(date +%s)
-
+${APPC_HOME}/bin/installFeatures.sh
 
 
 echo "Starting OpenDaylight"
 ${ODL_HOME}/bin/start
 echo "Waiting ${SLEEP_TIME} seconds for OpenDaylight to initialize"
-sleep ${SLEEP_TIME}
-
+sleep 5000s
 echo "Checking that Karaf can be accessed"
 clientOutput=$(${ODL_HOME}/bin/client shell:echo KarafLoginCheckIsWorking)
 if echo "$clientOutput" | grep -q "KarafLoginCheckIsWorking"; then
@@ -48,14 +47,14 @@ else
 echo "Error during Karaf login"
 exit 1
 fi
+sleep 120s
 
-echo "Copying a working version of the logging configuration into the opendaylight etc folder"
-cp ${APPC_HOME}/data/org.ops4j.pax.logging.cfg ${ODL_HOME}/etc/org.ops4j.pax.logging.cfg
-echo "Copying a new version of aaf cadi shiro into the opendaylight deploy folder"
-cp ${APPC_HOME}/data/aaf-shiro-aafrealm-osgi-bundle.jar ${ODL_HOME}/deploy/aaf-shiro-aafrealm-osgi-bundle.jar
+#echo "Copying a working version of the logging configuration into the opendaylight etc folder"
+#cp ${APPC_HOME}/data/org.ops4j.pax.logging.cfg ${ODL_HOME}/etc/org.ops4j.pax.logging.cfg
+#echo "Copying a new version of aaf cadi shiro into the opendaylight deploy folder"
+#cp ${APPC_HOME}/data/aaf-shiro-aafrealm-osgi-bundle.jar ${ODL_HOME}/deploy/aaf-shiro-aafrealm-osgi-bundle.jar
 
-echo "Installing APPC platform features"
-${APPC_HOME}/bin/installFeatures.sh
+
 
 echo "Adding a property system.properties for AAF cadi.properties location"
 echo "" >> ${ODL_HOME}/etc/system.properties
