@@ -40,6 +40,9 @@ RUN chown -R odl:odl /opt
 USER odl
 RUN ln -s /opt/onap/appc /opt/appc
 
+# cvass dir stores VNF's configure via Audit or Sync LCM
+RUN mkdir /opt/onap/appc/cvaas
+
 #Start opendaylight and pre-install the appc features
 RUN opt/onap/appc/bin/dockerInstall.sh
 
