@@ -72,7 +72,6 @@ APPC_FEATURES=" \
  appc-design-services \
  appc-interfaces-service"
 
-FEATURES_PER_DIRECTORY=$(($(echo $APPC_FEATURES|wc -w)/$FEATURE_DIRECTORY_COUNT))
 
 APPC_VERSION=${APPC_VERSION:-0.0.1}
 APPC_CDT_VERSION=${APPC_CDT_VERSION:-0.0.1}
