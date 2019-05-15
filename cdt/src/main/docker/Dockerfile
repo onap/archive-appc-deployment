@@ -20,10 +20,11 @@
 # ============LICENSE_END============================================
 
 # Base Alpine with added packages needed for ONAP
-FROM nginx:1.15.9-alpine
+FROM node:10.15.3-alpine
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
 COPY config-design-tool /opt/cdt
 COPY startCdt.sh /opt/startCdt.sh
 COPY cert /opt/cert
-COPY nginx.conf /etc/nginx/nginx.conf
+RUN mkdir /opt/cdt/logs
+RUN npm install express --save

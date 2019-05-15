@@ -4,7 +4,7 @@
 # ============LICENSE_START=======================================================
 # APPC
 # ================================================================================
-# Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+# Copyright (C) 2018-2019 AT&T Intellectual Property. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,4 +24,10 @@ CDT_PORT=${CDT_PORT:-30232}
 echo "Setting CDT port to $CDT_PORT"
 sed -i -e "s/30290/$CDT_PORT/" /opt/cdt/main.bundle.js
 
-exec /usr/sbin/nginx -g 'daemon off;'
+CDT_HOME=/opt/cdt; export CDT_HOME
+LOG_DIR=/opt/cdt/logs; export LOG_DIR
+MaxLogSize=3000000; export MaxLogSize
+PORT=18080; export PORT
+HTTPS_KEY_FILE=/opt/cert/cdt-key.pem; export HTTPS_KEY_FILE
+HTTPS_CERT_FILE=/opt/cert/cdt-cert.pem; export HTTPS_CERT_FILE
+node $CDT_HOME/app/ndserver.js 2>&1 >/dev/null
