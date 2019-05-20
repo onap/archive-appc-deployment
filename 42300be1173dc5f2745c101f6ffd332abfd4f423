@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da110566_1d68c3c0",
+        "filename": "installation/src/main/properties/appc.properties",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-05-20T16:10:29Z",
+      "side": 1,
+      "message": "need trailing slash \"/\"",
+      "range": {
+        "startLine": 36,
+        "startChar": 233,
+        "endLine": 36,
+        "endChar": 234
+      },
+      "revId": "42300be1173dc5f2745c101f6ffd332abfd4f423",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
