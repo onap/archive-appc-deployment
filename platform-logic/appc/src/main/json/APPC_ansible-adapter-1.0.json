@@ -1,1 +1,230 @@
-[{"id":"f0f73aea.0b4068","type":"method","name":"ansible-adapter-1.0","xml":"<method rpc='ansible-adapter-1.0' mode='sync'>\n","comments":"","outputs":1,"x":349,"y":82,"z":"e45911a5.e5d878","wires":[["298dab7a.ab5b1c"]]},{"id":"c30bbd5c.e34688","type":"service-logic","name":"APPC 2.0.1","module":"APPC","version":"2.0.1","comments":"","xml":"<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.1'>","outputs":1,"x":140,"y":160,"z":"e45911a5.e5d878","wires":[["f0f73aea.0b4068"]]},{"id":"63470fb9.5e519","type":"returnFailure","name":"return failure","xml":"<return status='failure'>\n<parameter name='output.status.code' value='200' />\n<parameter name='output.status.message' value='`$org.onap.appc.adapter.ansible.message`' />\n<parameter name='output.status.results' value='`$org.onap.appc.adapter.ansible.results`' />\n","comments":"","x":1090,"y":521,"z":"e45911a5.e5d878","wires":[]},{"id":"298dab7a.ab5b1c","type":"execute","name":"execute","xml":"<execute plugin='org.onap.appc.adapter.ansible.AnsibleAdapter' method='reqExec' >\n<parameter name='AgentUrl' value='`$AgentUrl`'/>\n  <parameter name='User' value='`$User`'/>\n                        <parameter name='Password' value='`$Password`'/>\n                        <parameter name='LocalParameters' value='`$LocalParameters`'/>\n                        <parameter name='EnvParameters' value='`$EnvParameters`'/>\n                        <parameter name='NodeList' value='`$NodeList`'/>\n                        <parameter name='Timeout' value='`$Timeout`'/>\n                        <parameter name='Version' value='`$Version`'/>\n                        <parameter name='PlaybookName' value='`$PlaybookName`'/>\n","comments":"","outputs":1,"x":554,"y":80,"z":"e45911a5.e5d878","wires":[["8d3f0d86.ea312","d9d9a519.bc474"]]},{"id":"e1f566b2.bbbd4","type":"switchNode","name":"switch","xml":"<switch test=\"`$org.onap.appc.adapter.ansible.result.code`\">\n","comments":"","outputs":1,"x":344,"y":241,"z":"e45911a5.e5d878","wires":[["f2ebaaf8.f04038","a907d750.8e938","4108a508.70021c"]]},{"id":"f2ebaaf8.f04038","type":"other","name":"outcome","xml":"<outcome value='500'>\n","comments":"","outputs":1,"x":531,"y":241,"z":"e45911a5.e5d878","wires":[["63470fb9.5e519"]]},{"id":"a907d750.8e938","type":"other","name":"outcome","xml":"<outcome value='100'>\n","comments":"","outputs":1,"x":168,"y":329,"z":"e45911a5.e5d878","wires":[["29180f21.b2dc7"]]},{"id":"29180f21.b2dc7","type":"execute","name":"execute","xml":"<execute plugin='org.onap.appc.adapter.ansible.AnsibleAdapter' method='reqExecResult' >\n   <parameter name='message' value='`$org.onap.appc.adapter.ansible.message`'/>\n   <parameter name='code' value='$org.onap.appc.adapter.ansible.result.code`'/>\n   <parameter name='AgentUrl' value='`$AgentUrl`'/>\n   <parameter name='User' value='`$User`'/>\n   <parameter name='Password' value='`$Password`'/>\n   <parameter name='Id' value='`$org.onap.appc.adapter.ansible.Id`'/>\n","comments":"","outputs":1,"x":346,"y":328,"z":"e45911a5.e5d878","wires":[["a89bdc9.01f0fa","bc54198.43b68e8"]]},{"id":"8d3f0d86.ea312","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":808,"y":81,"z":"e45911a5.e5d878","wires":[["63470fb9.5e519"]]},{"id":"d9d9a519.bc474","type":"other","name":"other","xml":"<outcome value='Other'>\n","comments":"","outputs":1,"x":167,"y":242,"z":"e45911a5.e5d878","wires":[["e1f566b2.bbbd4"]]},{"id":"a89bdc9.01f0fa","type":"failure","name":"failure","xml":"<outcome value='failure'>\n","comments":"","outputs":1,"x":536,"y":329,"z":"e45911a5.e5d878","wires":[["63470fb9.5e519"]]},{"id":"4108a508.70021c","type":"other","name":"outcome","xml":"<outcome value='101'>\n","comments":"","outputs":1,"x":155,"y":522,"z":"e45911a5.e5d878","wires":[["63470fb9.5e519"]]},{"id":"bc54198.43b68e8","type":"success","name":"success","xml":"<outcome value='success'>\n","comments":"","outputs":1,"x":534,"y":398,"z":"e45911a5.e5d878","wires":[["8cf61c08.aaf808"]]},{"id":"8cf61c08.aaf808","type":"returnSuccess","name":"return success","xml":"<return status='success'>\n<parameter name='output.status.code' value='`$org.onap.appc.adapter.ansible.result.code`' />\n<parameter name='output.status.message' value='`$org.onap.appc.adapter.ansible.message`'/>\n<parameter name='output.status.results' value = '`$org.onap.appc.adapter.ansible.results`'/>\n","comments":"","x":686,"y":473,"z":"e45911a5.e5d878","wires":[]},{"id":"373696eb.95dce2","type":"dgstart","name":"DGSTART","outputs":1,"x":118,"y":60,"z":"e45911a5.e5d878","wires":[["c30bbd5c.e34688"]]}]
+[
+  {
+    "id": "7bf7da57.3da1c4",
+    "type": "method",
+    "name": "ansible-adapter-1.0",
+    "xml": "<method rpc='ansible-adapter-1.0' mode='sync'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 364,
+    "y": 69,
+    "z": "b542ee98.8e312",
+    "wires": [
+      [
+        "16608a2e.c8019e"
+      ]
+    ]
+  },
+  {
+    "id": "51e78fba.f0a328",
+    "type": "service-logic",
+    "name": "APPC 2.0.1",
+    "module": "APPC",
+    "version": "2.0.1",
+    "comments": "",
+    "xml": "<service-logic xmlns='http://www.onap.org/sdnc/svclogic' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.onap.org/sdnc/svclogic ./svclogic.xsd' module='APPC' version='2.0.1'>",
+    "outputs": 1,
+    "x": 155,
+    "y": 147,
+    "z": "b542ee98.8e312",
+    "wires": [
+      [
+        "7bf7da57.3da1c4"
+      ]
+    ]
+  },
+  {
+    "id": "8d1e806.c53808",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n<parameter name='output.status.code' value='200' />\n<parameter name='output.status.message' value='`$org.onap.appc.adapter.ansible.message`' />",
+    "comments": "",
+    "x": 1122.142822265625,
+    "y": 67.99999237060547,
+    "z": "b542ee98.8e312",
+    "wires": []
+  },
+  {
+    "id": "16608a2e.c8019e",
+    "type": "execute",
+    "name": "execute",
+    "xml": "<execute plugin='org.onap.appc.adapter.ansible.AnsibleAdapter' method='reqExec' >\n<parameter name='AgentUrl' value='`$AgentUrl`'/>\n  <parameter name='User' value='`$User`'/>\n                        <parameter name='Password' value='`$Password`'/>\n                        <parameter name='LocalParameters' value='`$LocalParameters`'/>\n                        <parameter name='EnvParameters' value='`$EnvParameters`'/>\n                        <parameter name='FileParameters' value='`$FileParameters`'/>\n                        <parameter name='NodeList' value='`$NodeList`'/>\n                        <parameter name='Timeout' value='`$Timeout`'/>\n                        <parameter name='Version' value='`$Version`'/>\n                        <parameter name='InventoryNames' value='`$InventoryNames`'/>\n                        <parameter name='PlaybookName' value='`$PlaybookName`'/>\n                        <parameter name='Action' value='`$Action`'/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 569,
+    "y": 67,
+    "z": "b542ee98.8e312",
+    "wires": [
+      [
+        "d9cc3d9f.aac2d8",
+        "14bd2fff.6686e8"
+      ]
+    ]
+  },
+  {
+    "id": "ba12f2b.bdd719",
+    "type": "switchNode",
+    "name": "switch",
+    "xml": "<switch test=\"`$org.onap.appc.adapter.ansible.result.code`\">\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 359,
+    "y": 228,
+    "z": "b542ee98.8e312",
+    "wires": [
+      [
+        "be58dd22.f76ca8",
+        "9a080acd.94f5a8"
+      ]
+    ]
+  },
+  {
+    "id": "be58dd22.f76ca8",
+    "type": "other",
+    "name": "outcome",
+    "xml": "<outcome value='500'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 546,
+    "y": 228,
+    "z": "b542ee98.8e312",
+    "wires": [
+      [
+        "dae941c0.963348"
+      ]
+    ]
+  },
+  {
+    "id": "9a080acd.94f5a8",
+    "type": "other",
+    "name": "outcome",
+    "xml": "<outcome value='100'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 183,
+    "y": 316,
+    "z": "b542ee98.8e312",
+    "wires": [
+      [
+        "9e3bd7b.ca9e528"
+      ]
+    ]
+  },
+  {
+    "id": "9e3bd7b.ca9e528",
+    "type": "execute",
+    "name": "execute",
+    "xml": "<execute plugin='org.onap.appc.adapter.ansible.AnsibleAdapter' method='reqExecResult' >\n   <parameter name='message' value='`$org.onap.appc.adapter.ansible.message`'/>\n   <parameter name='code' value='$org.onap.appc.adapter.ansible.result.code`'/>\n   <parameter name='AgentUrl' value='`$AgentUrl`'/>\n   <parameter name='User' value='`$User`'/>\n   <parameter name='Password' value='`$Password`'/>\n   <parameter name='Id' value='`$org.onap.appc.adapter.ansible.Id`'/>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 361,
+    "y": 315,
+    "z": "b542ee98.8e312",
+    "wires": [
+      [
+        "abbb14c.b93d5e8",
+        "976d4e79.c90208"
+      ]
+    ]
+  },
+  {
+    "id": "d9cc3d9f.aac2d8",
+    "type": "failure",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 823,
+    "y": 68,
+    "z": "b542ee98.8e312",
+    "wires": [
+      [
+        "8d1e806.c53808"
+      ]
+    ]
+  },
+  {
+    "id": "14bd2fff.6686e8",
+    "type": "other",
+    "name": "other",
+    "xml": "<outcome value='Other'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 182,
+    "y": 229,
+    "z": "b542ee98.8e312",
+    "wires": [
+      [
+        "ba12f2b.bdd719"
+      ]
+    ]
+  },
+  {
+    "id": "abbb14c.b93d5e8",
+    "type": "failure",
+    "name": "failure",
+    "xml": "<outcome value='failure'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 551,
+    "y": 316,
+    "z": "b542ee98.8e312",
+    "wires": [
+      [
+        "dae941c0.963348"
+      ]
+    ]
+  },
+  {
+    "id": "976d4e79.c90208",
+    "type": "success",
+    "name": "success",
+    "xml": "<outcome value='success'>\n",
+    "comments": "",
+    "outputs": 1,
+    "x": 549,
+    "y": 385,
+    "z": "b542ee98.8e312",
+    "wires": [
+      [
+        "46cf1c4a.fd5ebc"
+      ]
+    ]
+  },
+  {
+    "id": "fd6d2e88.86c9a",
+    "type": "dgstart",
+    "name": "DGSTART",
+    "outputs": 1,
+    "x": 133,
+    "y": 47,
+    "z": "b542ee98.8e312",
+    "wires": [
+      [
+        "51e78fba.f0a328"
+      ]
+    ]
+  },
+  {
+    "id": "dae941c0.963348",
+    "type": "returnFailure",
+    "name": "return failure",
+    "xml": "<return status='failure'>\n<parameter name='output.status.code' value='200' />\n<parameter name='output.status.message' value='`$org.onap.appc.adapter.ansible.message`' />\n<parameter name='output.status.results' value='`$org.onap.appc.adapter.ansible.results`' />\n",
+    "comments": "",
+    "x": 1126.7855224609375,
+    "y": 328.2143249511719,
+    "z": "b542ee98.8e312",
+    "wires": []
+  },
+  {
+    "id": "46cf1c4a.fd5ebc",
+    "type": "set",
+    "name": "set",
+    "xml": "<set>\n<parameter name='output.status.code' value='`$org.onap.appc.adapter.ansible.result.code`' />\n<parameter name='output.status.message' value='`$org.onap.appc.adapter.ansible.message`'/>\n<parameter name='output.status.results' value = '`$org.onap.appc.adapter.ansible.results`'/>\n",
+    "comments": "",
+    "x": 1106.78564453125,
+    "y": 479.64276123046875,
+    "z": "b542ee98.8e312",
+    "wires": []
+  }
+]
