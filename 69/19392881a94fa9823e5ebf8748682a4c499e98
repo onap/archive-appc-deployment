@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Lukasz Rajewski <lukasz.rajewski@orange.com>
+Code-Review+2: Takamune Cho <takamune.cho@att.com>
+Submitted-by: Takamune Cho <takamune.cho@att.com>
+Submitted-at: Tue, 28 May 2019 14:20:30 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/appc/deployment/+/88663
+Project: appc/deployment
+Branch: refs/heads/master
