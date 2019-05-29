@@ -175,3 +175,8 @@ do
   sleep 7s
   echo "Sleep Finished"
 done
+
+#Copy json template file for use by the generic restart DG aai fix
+mkdir -p /opt/onap/appc/restapi/templates
+cp /opt/onap/appc/data/aai-named-query.json /opt/onap/appc/restapi/templates/aai-named-query.json
+

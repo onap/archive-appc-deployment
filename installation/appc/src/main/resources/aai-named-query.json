@@ -1,0 +1,14 @@
+{ 
+    "query-parameters": { 
+            "named-query": { 
+            "named-query-uuid": ${tmp.named-query-uuid}
+        } 
+    }, 
+    "instance-filters":{ 
+            "instance-filter":[ { 
+            "generic-vnf": { 
+                "vnf-id": ${tmp.named-query-vnf-id} 
+            } 
+        } ] 
+    }
+}

@@ -116,6 +116,7 @@ limitations under the License.
 										<include>*.sh</include>
 										<include>*.cfg</include>
 										<include>*.xml</include>
+										<include>*.json</include>
 									</includes>
 									<filtering>false</filtering>
 								</resource>
@@ -362,6 +363,7 @@ limitations under the License.
 												<include>*.sh</include>
 												<include>*.cfg</include>
 												<include>*.xml</include>
+												<include>*.json</include>
 											</includes>
 											<filtering>false</filtering>
 										</resource>
