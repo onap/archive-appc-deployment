@@ -3,7 +3,7 @@
 ============LICENSE_START==========================================
 ONAP : APPC
 ===================================================================
-Copyright (C) 2017-2018 AT&T Intellectual Property. All rights reserved.
+Copyright (C) 2017-2019 AT&T Intellectual Property. All rights reserved.
 ===================================================================
 
 Unless otherwise specified, all software contained herein is licensed
@@ -116,6 +116,7 @@ limitations under the License.
 										<include>*.sh</include>
 										<include>*.cfg</include>
 										<include>*.xml</include>
+										<include>*.json</include>
 									</includes>
 									<filtering>false</filtering>
 								</resource>
@@ -362,6 +363,7 @@ limitations under the License.
 												<include>*.sh</include>
 												<include>*.cfg</include>
 												<include>*.xml</include>
+												<include>*.json</include>
 											</includes>
 											<filtering>false</filtering>
 										</resource>
