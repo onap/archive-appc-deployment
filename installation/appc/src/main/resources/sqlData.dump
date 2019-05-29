@@ -53,3 +53,11 @@ UNLOCK TABLES;
 LOCK TABLES `DEVICE_AUTHENTICATION` WRITE;
 INSERT INTO DEVICE_AUTHENTICATION  (PROTOCOL, VNF_TYPE, ACTION, USER_NAME, PASSWORD, URL) VALUES ('ANSIBLE', '', '', 'admin','admin', 'http://appc-ansible-server:8000/Dispatch');
 UNLOCK TABLES;
+
+LOCK TABLES `ASDC_ARTIFACTS` WRITE;
+INSERT INTO ASDC_ARTIFACTS (SERVICE_UUID, DISTRIBUTION_ID, SERVICE_NAME, SERVICE_DESCRIPTION, RESOURCE_UUID, RESOURCE_INSTANCE_NAME, RESOURCE_NAME, RESOURCE_VERSION, RESOURCE_TYPE, ARTIFACT_UUID, ARTIFACT_TYPE, ARTIFACT_VERSION, ARTIFACT_DESCRIPTION, INTERNAL_VERSION, CREATION_DATE, ARTIFACT_NAME, ARTIFACT_CONTENT)
+VALUES (null, null, null, null, null, null, null, null, null, null, null, null, null, 0, '2017-11-11 08:46:19', 'request_validation_policy','{"request-validation-policies":[{"name" : "ActionInProgress","rules":[{"action-received": "Audit","validation-rule": "Reject","in-progress-action-exclusion-list": ["HealthCheck","Test","CheckLock"]},{"action-received": "Sync","validation-rule": "Reject","in-progress-action-exclusion-list": ["HealthCheck","Test","CheckLock"]},{"action-received": "Test","validation-rule": "Reject","in-progress-action-exclusion-list": ["HealthCheck","CheckLock"]},{"action-received": "HealthCheck","validation-rule": "Accept","in-progress-action-inclusion-list": ["Audit","Sync","CheckLock"]},{"action-received": "Default","validation-rule": "Reject","in-progress-action-exclusion-list": ["CheckLock"]}]}]}');
+UNLOCK TABLES;
+
+
+
