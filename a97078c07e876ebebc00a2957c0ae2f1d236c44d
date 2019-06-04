@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88a2d2fb_1a485b96",
+        "filename": "installation/src/main/properties/cadi.properties",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-04T19:43:03Z",
+      "side": 1,
+      "message": "space needs to be removed",
+      "range": {
+        "startLine": 32,
+        "startChar": 27,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "a97078c07e876ebebc00a2957c0ae2f1d236c44d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
