@@ -72,6 +72,7 @@ services:
     container_name: appc_controller_container
     entrypoint: ["/opt/onap/appc/bin/startODL.sh"]
     ports:
+      - "8443:8443"
       - "8282:8181"
       - "1830:1830"
       - "9090:9191"

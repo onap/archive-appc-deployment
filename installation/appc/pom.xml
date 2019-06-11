@@ -112,11 +112,13 @@ limitations under the License.
 								<resource>
 									<directory>src/main/resources</directory>
 									<includes>
+										<include>keystore</include>
 										<include>*.dump</include>
 										<include>*.sh</include>
 										<include>*.cfg</include>
 										<include>*.xml</include>
 										<include>*.json</include>
+										<include>*.properties</include>
 									</includes>
 									<filtering>false</filtering>
 								</resource>
@@ -359,11 +361,13 @@ limitations under the License.
 										<resource>
 											<directory>src/main/resources</directory>
 											<includes>
+												<include>keystore</include>
 												<include>*.dump</include>
 												<include>*.sh</include>
 												<include>*.cfg</include>
 												<include>*.xml</include>
 												<include>*.json</include>
+												<include>*.properties</include>
 											</includes>
 											<filtering>false</filtering>
 										</resource>
