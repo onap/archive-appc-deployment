@@ -24,6 +24,10 @@
 FROM onap/ccsdk-odlsli-alpine-image:0.4.1
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
+# run as root to install ps to comply with karaf scripts
+USER root
+RUN apk add --no-cache procps
+
 # Set the Env. Variable in the container to add the APPC CONFIG DIR (the SDNC_CONFIG_DIR is inherited from SDNC Image)
 ENV APPC_CONFIG_DIR /opt/onap/appc/data/properties
 
@@ -37,6 +41,7 @@ COPY --chown=odl:odl featureDir /opt/onap/appc/features
 #  to merge both of these with the opendaylight folders of the same names.
 COPY --chown=odl:odl repoDir /opt/opendaylight
 RUN chown -R odl:odl /opt
+
 USER odl
 RUN ln -s /opt/onap/appc /opt/appc
 
