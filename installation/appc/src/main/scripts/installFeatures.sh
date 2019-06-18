@@ -126,10 +126,10 @@ APPC_FEATURES_1=" \
 
 
 echo "Enabling core APP-C features"
-featureInstall odl-netconf-connector-all
+featureInstall odl-netconf-connector
 featureInstall odl-restconf-noauth
-featureInstall odl-netconf-topology
-
+featureInstall odl-netconf-clustered-topology
+featureInstall odl-mdsal-clustering
 sleep 7s
 echo "Installing APP-C Features"
 echo ""
