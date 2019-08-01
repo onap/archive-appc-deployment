@@ -55,10 +55,5 @@ committers:
       id: 'rx196w'
       company: 'ATT'
       timezone: 'America/New_York'
-    - name: 'Joss Armstrong'
-      email: 'joss.armstrong@ericsson.com'
-      id: 'jarmstrong001'
-      company: 'Ericsson'
-      timezone: 'Europe/Dublin'
 tsc:
     approval: 'https://lists.onap.org/pipermail/onap-tsc'
