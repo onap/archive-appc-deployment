@@ -21,7 +21,7 @@
 # ============LICENSE_END============================================
 
 # Base ubuntu with added packages needed for ONAP
-FROM onap/ccsdk-odlsli-alpine-image:0.4.1
+FROM onap/ccsdk-odlsli-alpine-image:0.5.1
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
 # run as root to install ps to comply with karaf scripts
