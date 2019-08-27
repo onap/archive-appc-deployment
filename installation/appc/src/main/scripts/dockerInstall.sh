@@ -24,7 +24,7 @@
 # This script runs during docker image build.
 # It starts opendaylight, installs the appc features, then shuts down opendaylight.
 #
-ODL_HOME=${ODL_HOME:-/opt/opendaylight/current}
+ODL_HOME=${ODL_HOME:-/opt/opendaylight}
 ODL_ADMIN_PASSWORD=${ODL_ADMIN_PASSWORD:-Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U}
 SDNC_HOME=${SDNC_HOME:-/opt/onap/ccsdk}
 APPC_HOME=${APPC_HOME:-/opt/onap/appc}
@@ -33,7 +33,8 @@ MYSQL_PASSWD=${MYSQL_PASSWD:-openECOMP1.0}
 
 appcInstallStartTime=$(date +%s)
 
-
+ODL_BOOT_FEATURES_EXTRA="odl-netconf-connector,odl-restconf-noauth,odl-netconf-clustered-topology,odl-mdsal-clustering"
+sed -i -e "\|featuresBoot[^a-zA-Z]|s|$|,${ODL_BOOT_FEATURES_EXTRA}|"  $ODL_HOME/etc/org.apache.karaf.features.cfg
 
 echo "Starting OpenDaylight"
 ${ODL_HOME}/bin/start
@@ -51,8 +52,8 @@ fi
 
 echo "Copying a working version of the logging configuration into the opendaylight etc folder"
 cp ${APPC_HOME}/data/org.ops4j.pax.logging.cfg ${ODL_HOME}/etc/org.ops4j.pax.logging.cfg
-echo "Copying a new version of aaf cadi shiro into the opendaylight deploy folder"
-cp ${APPC_HOME}/data/aaf-shiro-aafrealm-osgi-bundle.jar ${ODL_HOME}/deploy/aaf-shiro-aafrealm-osgi-bundle.jar
+#echo "Copying a new version of aaf cadi shiro into the opendaylight deploy folder"
+#cp ${APPC_HOME}/data/aaf-shiro-aafrealm-osgi-bundle.jar ${ODL_HOME}/deploy/aaf-shiro-aafrealm-osgi-bundle.jar
 
 echo "Installing APPC platform features"
 ${APPC_HOME}/bin/installFeatures.sh
@@ -79,7 +80,7 @@ echo "Stopping OpenDaylight and waiting for it to stop"
 ${ODL_HOME}/bin/stop
 #The karaf command will exit when odl shuts down. This is the most reliable way to wait for opendaylight to stop
 #before exiting the docker container.
-${ODL_HOME}/bin/karaf
+${ODL_HOME}/bin/client
 echo "Karaf process has stopped"
 sleep 10s
 

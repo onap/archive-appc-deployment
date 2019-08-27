@@ -38,25 +38,19 @@ while [ $COUNT -lt 10 ]; do
   let COUNT=COUNT+1
 done
 }
-
- APPC_FEATURES=" \
- appc-metric \
- appc-dmaap-adapter \
- appc-chef-adapter \
- appc-netconf-adapter \
- appc-rest-adapter \
- appc-lifecycle-management \
- appc-dispatcher \
- appc-provider \
- appc-dg-util \
- appc-dg-shared \
- appc-sdc-listener \
- appc-oam \
- appc-iaas-adapter \
- appc-ansible-adapter \
- appc-sequence-generator \
- appc-artifact-handler \
- appc-aai-client"
+function waitForKaraf {
+COUNT=0
+while [ $COUNT -lt 20 ]; do
+  ${ODL_HOME}/bin/client feature:list $1 2> /tmp/installErr
+  cat /tmp/installErr
+  if grep -q 'Failed to get the session' /tmp/installErr; then
+    sleep 10
+  else
+    let COUNT=20
+  fi
+  let COUNT=COUNT+1
+done
+}
 
 APPC_FEATURES_1=" \
  onap-appc-core \
@@ -82,7 +76,9 @@ APPC_FEATURES_1=" \
  onap-appc-config-audit \
  onap-appc-config-encryption-tool \
  onap-appc-config-flow-controller \
- onap-appc-config-params \
+ onap-appc-config-params"
+ 
+ APPC_FEATURES_3=" \
  onap-appc-artifact-handler \
  onap-appc-aai-client \
  onap-appc-event-listener \
@@ -125,12 +121,9 @@ APPC_FEATURES_1=" \
  
 
 
-echo "Enabling core APP-C features"
-featureInstall odl-netconf-connector
-featureInstall odl-restconf-noauth
-featureInstall odl-netconf-clustered-topology
-featureInstall odl-mdsal-clustering
-sleep 7s
+#echo "Enabling core APP-C features"
+#featureInstall odl-netconf-connector odl-restconf-noauth odl-netconf-clustered-topology odl-mdsal-clustering
+#waitForKaraf
 echo "Installing APP-C Features"
 echo ""
 
@@ -144,18 +137,18 @@ do
   fi
 done
 
-#${ODL_HOME}/bin/client feature:install appc-metric appc-dmaap-adapter appc-event-listener appc-chef-adapter appc-netconf-adapter appc-rest-adapter appc-lifecycle-management appc-dispatcher appc-provider appc-dg-util appc-dg-shared appc-sdc-listener appc-oam appc-iaas-adapter appc-ansible-adapter appc-sequence-generator appc-config-generator appc-config-data-services appc-config-adaptor appc-config-audit appc-config-encryption-tool appc-config-flow-controller appc-config-params appc-artifact-handler appc-aai-client
-
 for feature in ${APPC_FEATURES_1}
 do
-  echo "Installing ${feature}"
+  group1Features="${group1Features} ${feature}"
+done
+
+  echo "Installing features: ${group1Features}"
   start=$(date +%s)
-  ${ODL_HOME}/bin/client "feature:install -r ${feature}"
+  ${ODL_HOME}/bin/client "feature:install -r ${group1Features}"
   end=$(date +%s)
-  echo "Install of ${feature} took $(expr $end - $start) seconds"
+  echo "Install of features took $(expr $end - $start) seconds"
   sleep 7s
   echo "Sleep Finished"
-done
 
   echo "Installing dispatcher features"
   start=$(date +%s)
@@ -167,14 +160,29 @@ done
 
 for feature in ${APPC_FEATURES_2}
 do
-  echo "Installing ${feature}"
+  group2Features="${group2Features} ${feature}"
+done
+
+  echo "Installing features: ${group2Features}"
   start=$(date +%s)
-  ${ODL_HOME}/bin/client "feature:install -r ${feature}"
+  ${ODL_HOME}/bin/client "feature:install -r ${group2Features}"
   end=$(date +%s)
-  echo "Install of ${feature} took $(expr $end - $start) seconds"
+  echo "Install of features took $(expr $end - $start) seconds"
   sleep 7s
   echo "Sleep Finished"
+  
+for feature in ${APPC_FEATURES_3}
+do
+  group3Features="${group3Features} ${feature}"
 done
+
+  echo "Installing features: ${group3Features}"
+  start=$(date +%s)
+  ${ODL_HOME}/bin/client "feature:install -r ${group3Features}"
+  end=$(date +%s)
+  echo "Install of features took $(expr $end - $start) seconds"
+  sleep 7s
+  echo "Sleep Finished"
 
 #Copy json template file for use by the generic restart DG aai fix
 mkdir -p /opt/onap/appc/restapi/templates
