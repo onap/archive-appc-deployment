@@ -87,4 +87,9 @@ echo "Starting cdt-proxy-service jar, logging to ${APPC_HOME}/cdt-proxy-service/
 java -jar ${APPC_HOME}/cdt-proxy-service/cdt-proxy-service.jar > ${APPC_HOME}/cdt-proxy-service/jar.log &
 
 echo "Starting ODL/APPC"
+ODL_BOOT_FEATURES_EXTRA="odl-netconf-connector,odl-restconf-noauth,odl-netconf-clustered-topology,odl-mdsal-clustering"
+sed -i -e "\|featuresBoot[^a-zA-Z]|s|$|,${ODL_BOOT_FEATURES_EXTRA}|"  $ODL_HOME/etc/org.apache.karaf.features.cfg
+
+exec ${APPC_HOME}/bin/dockerInstall.sh &
+echo "Starting OpenDaylight"
 exec ${ODL_HOME}/bin/karaf server
