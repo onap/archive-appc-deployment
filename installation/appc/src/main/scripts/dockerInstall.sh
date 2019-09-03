@@ -76,13 +76,15 @@ cp ${APPC_HOME}/data/jetty.xml ${ODL_HOME}/etc/jetty.xml
 cp ${APPC_HOME}/data/keystore ${ODL_HOME}/etc/keystore
 cp ${APPC_HOME}/data/custom.properties ${ODL_HOME}/etc/custom.properties
 
-echo "Stopping OpenDaylight and waiting for it to stop"
-${ODL_HOME}/bin/stop
+#echo "Stopping OpenDaylight and waiting for it to stop"
+#${ODL_HOME}/bin/stop
 #The karaf command will exit when odl shuts down. This is the most reliable way to wait for opendaylight to stop
 #before exiting the docker container.
-${ODL_HOME}/bin/client
-echo "Karaf process has stopped"
-sleep 10s
+#${ODL_HOME}/bin/client
+#echo "Karaf process has stopped"
+#sleep 10s
 
 appcInstallEndTime=$(date +%s)
 echo "Total Appc install took $(expr $appcInstallEndTime - $appcInstallStartTime) seconds"
+#Hold the docker container open on karaf
+exec /opt/opendaylight/bin/client

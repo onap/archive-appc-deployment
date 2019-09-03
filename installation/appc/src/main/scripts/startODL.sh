@@ -87,4 +87,4 @@ echo "Starting cdt-proxy-service jar, logging to ${APPC_HOME}/cdt-proxy-service/
 java -jar ${APPC_HOME}/cdt-proxy-service/cdt-proxy-service.jar > ${APPC_HOME}/cdt-proxy-service/jar.log &
 
 echo "Starting ODL/APPC"
-exec ${ODL_HOME}/bin/karaf server
+exec ${APPC_HOME}/bin/dockerInstall.sh

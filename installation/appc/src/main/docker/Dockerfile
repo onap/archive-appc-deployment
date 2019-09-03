@@ -49,7 +49,7 @@ RUN ln -s /opt/onap/appc /opt/appc
 RUN mkdir /opt/onap/appc/cvaas
 
 #Start opendaylight and pre-install the appc features
-RUN opt/onap/appc/bin/dockerInstall.sh
+#RUN opt/onap/appc/bin/dockerInstall.sh
 
 # Expose port 8181 for ODL REST calls
 EXPOSE 8181
