@@ -87,6 +87,15 @@ echo "Starting cdt-proxy-service jar, logging to ${APPC_HOME}/cdt-proxy-service/
 java -jar ${APPC_HOME}/cdt-proxy-service/cdt-proxy-service.jar > ${APPC_HOME}/cdt-proxy-service/jar.log &
 
 echo "Starting ODL/APPC"
+
+echo "Copying the aaa shiro configuration into opendaylight"
+cp ${APPC_HOME}/data/aaa-app-config.xml ${ODL_HOME}/etc/opendaylight/datastore/initial/config/aaa-app-config.xml
+
+echo "Copying jetty, keystore for https into opendalight"
+cp ${APPC_HOME}/data/jetty.xml ${ODL_HOME}/etc/jetty.xml
+cp ${APPC_HOME}/data/keystore ${ODL_HOME}/etc/keystore
+cp ${APPC_HOME}/data/custom.properties ${ODL_HOME}/etc/custom.properties
+
 ODL_BOOT_FEATURES_EXTRA="odl-netconf-connector,odl-restconf-noauth,odl-netconf-clustered-topology,odl-mdsal-clustering"
 sed -i -e "\|featuresBoot[^a-zA-Z]|s|$|,${ODL_BOOT_FEATURES_EXTRA}|"  $ODL_HOME/etc/org.apache.karaf.features.cfg
 
