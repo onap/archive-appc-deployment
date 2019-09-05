@@ -64,14 +64,6 @@ echo "" >> $APPC_HOME/data/properties/appc.properties
 echo "appc.asdc.env=$DMAAP_TOPIC_ENV" >> $APPC_HOME/data/properties/appc.properties
 echo "" >> $APPC_HOME/data/properties/appc.properties
 
-echo "Copying the aaa shiro configuration into opendaylight"
-cp ${APPC_HOME}/data/aaa-app-config.xml ${ODL_HOME}/etc/opendaylight/datastore/initial/config/aaa-app-config.xml
-
-echo "Copying jetty, keystore for https into opendalight"
-cp ${APPC_HOME}/data/jetty.xml ${ODL_HOME}/etc/jetty.xml
-cp ${APPC_HOME}/data/keystore ${ODL_HOME}/etc/keystore
-cp ${APPC_HOME}/data/custom.properties ${ODL_HOME}/etc/custom.properties
-
 #echo "Stopping OpenDaylight and waiting for it to stop"
 #${ODL_HOME}/bin/stop
 #The karaf command will exit when odl shuts down. This is the most reliable way to wait for opendaylight to stop
