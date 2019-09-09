@@ -91,10 +91,23 @@ echo "Starting ODL/APPC"
 echo "Copying the aaa shiro configuration into opendaylight"
 cp ${APPC_HOME}/data/aaa-app-config.xml ${ODL_HOME}/etc/opendaylight/datastore/initial/config/aaa-app-config.xml
 
+echo "Adding a property system.properties for AAF cadi.properties location"
+echo "" >> ${ODL_HOME}/etc/system.properties
+echo "cadi_prop_files=${APPC_HOME}/data/properties/cadi.properties" >> ${ODL_HOME}/etc/system.properties
+echo "" >> ${ODL_HOME}/etc/system.properties
+
+echo "Adding a value to property appc.asdc.env in appc.properties for appc-asdc-listener feature"
+echo "" >> $APPC_HOME/data/properties/appc.properties
+echo "appc.asdc.env=$DMAAP_TOPIC_ENV" >> $APPC_HOME/data/properties/appc.properties
+echo "" >> $APPC_HOME/data/properties/appc.properties
+
 echo "Copying jetty, keystore for https into opendalight"
 cp ${APPC_HOME}/data/jetty.xml ${ODL_HOME}/etc/jetty.xml
 cp ${APPC_HOME}/data/keystore ${ODL_HOME}/etc/keystore
 cp ${APPC_HOME}/data/custom.properties ${ODL_HOME}/etc/custom.properties
+
+echo "Copying a working version of the logging configuration into the opendaylight etc folder"
+cp ${APPC_HOME}/data/org.ops4j.pax.logging.cfg ${ODL_HOME}/etc/org.ops4j.pax.logging.cfg
 
 ODL_BOOT_FEATURES_EXTRA="odl-netconf-connector,odl-restconf-noauth,odl-netconf-clustered-topology,odl-mdsal-clustering"
 sed -i -e "\|featuresBoot[^a-zA-Z]|s|$|,${ODL_BOOT_FEATURES_EXTRA}|"  $ODL_HOME/etc/org.apache.karaf.features.cfg
