@@ -46,31 +46,8 @@ echo "Error during Karaf login"
 exit 1
 fi
 
-echo "Copying a working version of the logging configuration into the opendaylight etc folder"
-cp ${APPC_HOME}/data/org.ops4j.pax.logging.cfg ${ODL_HOME}/etc/org.ops4j.pax.logging.cfg
-#echo "Copying a new version of aaf cadi shiro into the opendaylight deploy folder"
-#cp ${APPC_HOME}/data/aaf-shiro-aafrealm-osgi-bundle.jar ${ODL_HOME}/deploy/aaf-shiro-aafrealm-osgi-bundle.jar
-
 echo "Installing APPC platform features"
 ${APPC_HOME}/bin/installFeatures.sh
-
-echo "Adding a property system.properties for AAF cadi.properties location"
-echo "" >> ${ODL_HOME}/etc/system.properties
-echo "cadi_prop_files=${APPC_HOME}/data/properties/cadi.properties" >> ${ODL_HOME}/etc/system.properties
-echo "" >> ${ODL_HOME}/etc/system.properties
-
-echo "Adding a value to property appc.asdc.env in appc.properties for appc-asdc-listener feature"
-echo "" >> $APPC_HOME/data/properties/appc.properties
-echo "appc.asdc.env=$DMAAP_TOPIC_ENV" >> $APPC_HOME/data/properties/appc.properties
-echo "" >> $APPC_HOME/data/properties/appc.properties
-
-#echo "Stopping OpenDaylight and waiting for it to stop"
-#${ODL_HOME}/bin/stop
-#The karaf command will exit when odl shuts down. This is the most reliable way to wait for opendaylight to stop
-#before exiting the docker container.
-#${ODL_HOME}/bin/client
-#echo "Karaf process has stopped"
-#sleep 10s
 
 appcInstallEndTime=$(date +%s)
 echo "Total Appc install took $(expr $appcInstallEndTime - $appcInstallStartTime) seconds"
