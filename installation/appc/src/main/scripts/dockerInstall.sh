@@ -38,7 +38,8 @@ echo "Waiting ${SLEEP_TIME} seconds for OpenDaylight to initialize"
 sleep ${SLEEP_TIME}
 
 echo "Checking that Karaf can be accessed"
-clientOutput=$(${ODL_HOME}/bin/client shell:echo KarafLoginCheckIsWorking)
+##clientOutput=$(${ODL_HOME}/bin/client shell:echo KarafLoginCheckIsWorking)
+clientOutput=$(sshpass -pkaraf ssh -o StrictHostKeyChecking=no karaf@localhost -p 8101 "shell:echo KarafLoginCheckIsWorking")
 if echo "$clientOutput" | grep -q "KarafLoginCheckIsWorking"; then
 echo "Karaf login succeeded"
 else
