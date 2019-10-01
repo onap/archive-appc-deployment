@@ -88,8 +88,8 @@ java -jar ${APPC_HOME}/cdt-proxy-service/cdt-proxy-service.jar > ${APPC_HOME}/cd
 
 echo "Starting ODL/APPC"
 
-echo "Copying the aaa shiro configuration into opendaylight"
-cp ${APPC_HOME}/data/aaa-app-config.xml ${ODL_HOME}/etc/opendaylight/datastore/initial/config/aaa-app-config.xml
+#echo "Copying the aaa shiro configuration into opendaylight"
+#cp ${APPC_HOME}/data/aaa-app-config.xml ${ODL_HOME}/etc/opendaylight/datastore/initial/config/aaa-app-config.xml
 
 echo "Adding a property system.properties for AAF cadi.properties location"
 echo "" >> ${ODL_HOME}/etc/system.properties
