@@ -21,12 +21,14 @@
 # ============LICENSE_END============================================
 
 # Base ubuntu with added packages needed for ONAP
-FROM onap/ccsdk-odlsli-alpine-image:0.5.4
+FROM onap/ccsdk-odlsli-alpine-image:0.6.3
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
 # run as root to install ps to comply with karaf scripts
 USER root
 RUN apk add --no-cache procps
+RUN apk add --no-cache openssh
+RUN apk add --no-cache sshpass
 
 # Set the Env. Variable in the container to add the APPC CONFIG DIR (the SDNC_CONFIG_DIR is inherited from SDNC Image)
 ENV APPC_CONFIG_DIR /opt/onap/appc/data/properties

@@ -76,7 +76,7 @@ APPC_FEATURES=" \
 APPC_VERSION=${APPC_VERSION:-0.0.1}
 APPC_CDT_VERSION=${APPC_CDT_VERSION:-0.0.1}
 APPC_OAM_VERSION=${APPC_OAM_VERSION:-0.1.1}
-AAF_SHIRO_VERSION=${AAF_SHIRO_VERSION:-2.1.7-SNAPSHOT}
+#AAF_SHIRO_VERSION=${AAF_SHIRO_VERSION:-2.1.7-SNAPSHOT}
 
 tmpDir=/tmp/appc-${APPC_VERSION}
 
@@ -119,9 +119,10 @@ echo "Downloading dg-loader-provider jar from nexus"
 mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.plugins:dg-loader-provider:${APPC_VERSION}:jar:jar-with-dependencies -DoutputDirectory=${targetDir}/data
 mv ${targetDir}/data/dg-loader-provider-*-jar-with-dependencies.jar ${targetDir}/data/dg-loader-provider-jar-with-dependencies.jar
 
-echo "Downloading aaf-cadi-shiro from nexus"
-mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.aaf.cadi:aaf-shiro-aafrealm-osgi-bundle:${AAF_SHIRO_VERSION} -DoutputDirectory=${targetDir}/data
-mv ${targetDir}/data/aaf-shiro-aafrealm-osgi-bundle-*.jar ${targetDir}/data/aaf-shiro-aafrealm-osgi-bundle.jar
+# installed from CCSDK in El Alto release
+#echo "Downloading aaf-cadi-shiro from nexus"
+#mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.aaf.cadi:aaf-shiro-aafrealm-osgi-bundle:${AAF_SHIRO_VERSION} -DoutputDirectory=${targetDir}/data
+#mv ${targetDir}/data/aaf-shiro-aafrealm-osgi-bundle-*.jar ${targetDir}/data/aaf-shiro-aafrealm-osgi-bundle.jar
 
 echo "Setting keyfile to readonly"
 chmod 400 ${targetDir}/data/stores/org.onap.appc.keyfile

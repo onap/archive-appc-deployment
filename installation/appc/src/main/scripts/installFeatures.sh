@@ -28,7 +28,8 @@ APPC_FEATURE_DIR=${APPC_FEATURE_DIR:-${APPC_HOME}/features}
 function featureInstall {
 COUNT=0
 while [ $COUNT -lt 10 ]; do
-  ${ODL_HOME}/bin/client feature:install $1 2> /tmp/installErr
+sshpass -pkaraf ssh -o StrictHostKeyChecking=no karaf@localhost -p 8101 "feature:install $1" 2> /tmp/installErr
+#  ${ODL_HOME}/bin/client feature:install $1 2> /tmp/installErr
   cat /tmp/installErr
   if grep -q 'Failed to get the session' /tmp/installErr; then
     sleep 10
@@ -41,7 +42,8 @@ done
 function waitForKaraf {
 COUNT=0
 while [ $COUNT -lt 20 ]; do
-  ${ODL_HOME}/bin/client feature:list $1 2> /tmp/installErr
+sshpass -pkaraf ssh -o StrictHostKeyChecking=no karaf@localhost -p 8101 "feature:list $1" 2> /tmp/installErr
+#  ${ODL_HOME}/bin/client feature:list $1 2> /tmp/installErr
   cat /tmp/installErr
   if grep -q 'Failed to get the session' /tmp/installErr; then
     sleep 10
@@ -144,7 +146,8 @@ done
 
   echo "Installing features: ${group1Features}"
   start=$(date +%s)
-  ${ODL_HOME}/bin/client "feature:install -r ${group1Features}"
+sshpass -pkaraf ssh -o StrictHostKeyChecking=no karaf@localhost -p 8101 "feature:install -r ${group1Features}"
+#  ${ODL_HOME}/bin/client "feature:install -r ${group1Features}"
   end=$(date +%s)
   echo "Install of features took $(expr $end - $start) seconds"
   sleep 7s
@@ -152,7 +155,8 @@ done
 
   echo "Installing dispatcher features"
   start=$(date +%s)
-  ${ODL_HOME}/bin/client "feature:install -r onap-appc-request-handler onap-appc-command-executor onap-appc-lifecycle-management onap-appc-workflow-management lock-manager onap-appc-provider"
+sshpass -pkaraf ssh -o StrictHostKeyChecking=no karaf@localhost -p 8101 "feature:install -r onap-appc-request-handler onap-appc-command-executor onap-appc-lifecycle-management onap-appc-workflow-management lock-manager onap-appc-provider"
+#  ${ODL_HOME}/bin/client "feature:install -r onap-appc-request-handler onap-appc-command-executor onap-appc-lifecycle-management onap-appc-workflow-management lock-manager onap-appc-provider"
   end=$(date +%s)
   echo "Install of dispatcher features took $(expr $end - $start) seconds"
   sleep 7s
@@ -165,7 +169,8 @@ done
 
   echo "Installing features: ${group2Features}"
   start=$(date +%s)
-  ${ODL_HOME}/bin/client "feature:install -r ${group2Features}"
+sshpass -pkaraf ssh -o StrictHostKeyChecking=no karaf@localhost -p 8101 "feature:install -r ${group2Features}"
+#  ${ODL_HOME}/bin/client "feature:install -r ${group2Features}"
   end=$(date +%s)
   echo "Install of features took $(expr $end - $start) seconds"
   sleep 7s
@@ -178,7 +183,8 @@ done
 
   echo "Installing features: ${group3Features}"
   start=$(date +%s)
-  ${ODL_HOME}/bin/client "feature:install -r ${group3Features}"
+sshpass -pkaraf ssh -o StrictHostKeyChecking=no karaf@localhost -p 8101 "feature:install -r ${group3Features}"
+#  ${ODL_HOME}/bin/client "feature:install -r ${group3Features}"
   end=$(date +%s)
   echo "Install of features took $(expr $end - $start) seconds"
   sleep 7s
