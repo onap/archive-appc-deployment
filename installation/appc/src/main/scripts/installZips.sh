@@ -46,12 +46,10 @@ APPC_FEATURES=" \
  appc-sdc-listener \
  appc-lifecycle-management \
  appc-provider \
- appc-event-listener \
  appc-dispatcher \
  appc-chef-adapter \
  appc-netconf-adapter \
  appc-rest-adapter \
- appc-dmaap-adapter \
  appc-dg-util \
  appc-metric \
  appc-dg-shared \
@@ -70,7 +68,8 @@ APPC_FEATURES=" \
  appc-aai-client \
  appc-network-inventory-client \
  appc-design-services \
- appc-interfaces-service"
+ appc-interfaces-service \
+ appc-service-communicator"
 
 
 APPC_VERSION=${APPC_VERSION:-0.0.1}
@@ -130,6 +129,10 @@ chmod 400 ${targetDir}/data/stores/org.onap.appc.keyfile
 echo "Downloading CDT Proxy Jar from nexus"
 mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.cdt:cdt-proxy-service:${APPC_CDT_VERSION} -DoutputDirectory=${targetDir}/cdt-proxy-service
 mv ${targetDir}/cdt-proxy-service/cdt-proxy-service-*.jar ${targetDir}/cdt-proxy-service/cdt-proxy-service.jar
+
+echo "Downloading Dmaap Service Jar from nexus"
+mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.services.dmaap:dmaap-event-service:1.7.0-SNAPSHOT -DoutputDirectory=${targetDir}/dmaap-event-service
+mv ${targetDir}/dmaap-event-service/dmaap-event-service-*.jar ${targetDir}/dmaap-event-service/dmaap-event-service.jar
 
 find ${targetDir} -name '*.sh' -exec chmod +x '{}' \;
 
