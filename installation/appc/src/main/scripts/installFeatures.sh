@@ -55,9 +55,9 @@ done
 APPC_FEATURES_1=" \
  onap-appc-core \
  onap-appc-metric \
- onap-appc-dmaap-adapter \
  onap-appc-chef-adapter \
  onap-appc-netconf-adapter \
+ onap-appc-service-communicator \
  onap-appc-rest-adapter \
  onap-appc-lifecycle-management \
  onap-appc-license-manager"
@@ -81,7 +81,6 @@ APPC_FEATURES_1=" \
  APPC_FEATURES_3=" \
  onap-appc-artifact-handler \
  onap-appc-aai-client \
- onap-appc-event-listener \
  onap-appc-network-inventory-client \
  onap-appc-design-services \
  onap-appc-interfaces-service"
@@ -89,8 +88,6 @@ APPC_FEATURES_1=" \
  APPC_FEATURES_UNZIP=" \
  appc-core \
  appc-metric \
- appc-dmaap-adapter \
- appc-event-listener \
  appc-chef-adapter \
  appc-netconf-adapter \
  appc-rest-adapter \
@@ -115,7 +112,8 @@ APPC_FEATURES_1=" \
  appc-aai-client \
  appc-network-inventory-client \
  appc-design-services \
- appc-interfaces-service"
+ appc-interfaces-service \
+ appc-service-communicator"
  
 
  
