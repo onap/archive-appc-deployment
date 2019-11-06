@@ -86,6 +86,9 @@ fi
 echo "Starting cdt-proxy-service jar, logging to ${APPC_HOME}/cdt-proxy-service/jar.log"
 java -jar ${APPC_HOME}/cdt-proxy-service/cdt-proxy-service.jar > ${APPC_HOME}/cdt-proxy-service/jar.log &
 
+echo "Starting dmaap-event-service jar, logging to ${APPC_HOME}/dmaap-event-service/jar.log"
+java -jar -Dorg_onap_appc_bootstrap_path=/opt/onap/appc/data/properties -Dorg_onap_appc_bootstrap_file=appc.properties ${APPC_HOME}/dmaap-event-service/dmaap-event-service.jar > ${APPC_HOME}/dmaap-event-service/jar.log &
+
 echo "Starting ODL/APPC"
 
 echo "Copying the aaa shiro configuration into opendaylight"
