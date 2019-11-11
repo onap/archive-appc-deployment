@@ -40,11 +40,6 @@ repositories:
     - 'appc-parent'
 committers:
     - <<: *onap_releng_ptl
-    - name: 'Marcus Williams'
-      email: 'marcus.williams@intel.com'
-      company: 'Intel'
-      id: 'mgkwill'
-      timezone: 'America/Los_Angeles'
     - name: 'Patrick Brady'
       email: 'pb071s@att.com'
       company: 'ATT'
@@ -67,3 +62,6 @@ tsc:
         - type: 'Removal'
           name: 'Joss Armstrong'
           link: 'https://lists.onap.org/g/onap-tsc/message/5370'
+        - type: 'Removal'
+          name: 'Marcus Williams'
+          link: 'https://lists.onap.org/g/onap-tsc/message/5472'
