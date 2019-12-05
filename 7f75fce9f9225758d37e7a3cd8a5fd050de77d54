@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "998bf714_84a8b1dc",
+        "filename": "platform-logic/appc/src/main/xml/APPC_method_ansible_adapter_1.0_2.0.1.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 2477
+      },
+      "writtenOn": "2019-12-05T01:48:09Z",
+      "side": 1,
+      "message": "Is this changed required?",
+      "range": {
+        "startLine": 62,
+        "startChar": 57,
+        "endLine": 62,
+        "endChar": 58
+      },
+      "revId": "7f75fce9f9225758d37e7a3cd8a5fd050de77d54",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
