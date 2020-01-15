@@ -131,7 +131,7 @@ mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -D
 mv ${targetDir}/cdt-proxy-service/cdt-proxy-service-*.jar ${targetDir}/cdt-proxy-service/cdt-proxy-service.jar
 
 echo "Downloading Dmaap Service Jar from nexus"
-mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.services.dmaap:dmaap-event-service:1.7.0-SNAPSHOT -DoutputDirectory=${targetDir}/dmaap-event-service
+mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.services.dmaap:dmaap-event-service:${APPC_VERSION} -DoutputDirectory=${targetDir}/dmaap-event-service
 mv ${targetDir}/dmaap-event-service/dmaap-event-service-*.jar ${targetDir}/dmaap-event-service/dmaap-event-service.jar
 
 find ${targetDir} -name '*.sh' -exec chmod +x '{}' \;
