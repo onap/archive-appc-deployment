@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Patrick Brady <patrick.brady@att.com>
+Code-Review+2: Takamune Cho <takamune.cho@att.com>
+Submitted-by: Takamune Cho <takamune.cho@att.com>
+Submitted-at: Thu, 16 Jan 2020 12:59:17 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/appc/deployment/+/100346
+Project: appc/deployment
+Branch: refs/heads/master
