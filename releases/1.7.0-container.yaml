@@ -1,0 +1,10 @@
+distribution_type: 'container'
+container_release_tag: '1.7.0'
+project: 'appc-deployment'
+log_dir: 'appc-deployment-maven-docker-stage-master/2/'
+ref: 8c46a7fb13b52f1b0d2fe0cc27787a5df209e285
+containers:
+    - name: 'appc-image'
+      version: '1.7.0-STAGING-20200122T224043Z'
+    - name: 'appc-cdt-image'
+      version: '1.7.0-STAGING-20200122T224043Z'
