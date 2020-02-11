@@ -431,6 +431,28 @@ CREATE TABLE `DT_STATUS_RELATIONSHIP` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `DT_USER_PERMISSIONS`
+--
+
+DROP TABLE IF EXISTS `DT_USER_PERMISSIONS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE sdnctl.`DT_USER_PERMISSIONS` (
+   `DT_USER_PERMISSION_ID` int(11) NOT NULL AUTO_INCREMENT,
+   `VNF_TYPE` varchar(255) NOT NULL,
+   `USER_ID` varchar(255) DEFAULT NULL,
+   `PERMISSION` varchar(255) DEFAULT NULL,
+   `DATE_MODIFIED` datetime(3) DEFAULT NULL,
+   `MODIFIER` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`DT_USER_PERMISSION_ID`),
+    UNIQUE KEY `VNF_USER_UNIQ` (`VNF_TYPE`,`USER_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `GET_CONFIG_TEMPLATE`
 --
 
