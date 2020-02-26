@@ -23,8 +23,12 @@
 FROM node:10.15.3-alpine
 MAINTAINER APP-C Team (appc@lists.openecomp.org)
 
-COPY config-design-tool /opt/cdt
-COPY startCdt.sh /opt/startCdt.sh
-COPY cert /opt/cert
-RUN mkdir /opt/cdt/logs
+USER root
+RUN addgroup -S nodejs && adduser -S nodejs -G nodejs
+COPY --chown=nodejs:nodejs config-design-tool /opt/cdt
+COPY --chown=nodejs:nodejs startCdt.sh /opt/startCdt.sh
+COPY --chown=nodejs:nodejs cert /opt/cert
 RUN npm install express --save
+USER nodejs
+RUN mkdir /opt/cdt/logs
+
