@@ -106,7 +106,7 @@ done
 
 echo "Installing platform-logic for APP-C"
 rm -f ${tmpDir}/platform-logic-installer*.zip
-mvn -U ${mavenOpts} org.apache.maven.plugins:maven-dependency-plugin:2.9:copy -Dartifact=org.onap.appc.deployment:platform-logic-installer:1.7.1-SNAPSHOT:zip -DoutputDirectory=${tmpDir} -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.ssl.insecure=true
+cp ${cwd}/../../platform-logic/installer/target/platform-logic-installer-${APPC_OAM_VERSION}.zip ${tmpDir}
 unzip -d ${targetDir} ${tmpDir}/platform-logic-installer*.zip
 
 echo "Downloading dg-loader DGs from nexus"
