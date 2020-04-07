@@ -15,6 +15,7 @@
 .. limitations under the License.
 .. ============LICENSE_END============================================
 .. ECOMP is a trademark and service mark of AT&T Intellectual Property.
+.. _master_index:
 
 APPC Deployment Documentation
 -----------------------------
