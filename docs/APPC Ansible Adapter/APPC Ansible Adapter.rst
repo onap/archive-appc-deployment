@@ -27,7 +27,7 @@ tools in a structured form. It is agentless in that the target VNF need
 not have any additional software other than:
 
 a) SSH server
-b) Python >= 2.7 
+b) Python >= 2.7 (Note: Since Python 2 support ends in 2020, ansible docker build in ONAP Frankfurt release has been upgraded to Python 3. Python 3 is highly recommendation version.)
 c) Any necessary software that is specific to the VNF to run its functions. 
 
 Any action (e.g configure, restart, health check etc) can be
@@ -65,7 +65,7 @@ A ladder diagram of the work flow is pasted below :
 
 Details of each of these three (DG, Adapter and Ansible Server) are listed below :
 
-1.  **Ansible Directed Graph (DG):** The Ansible Directed graph is the most common way an App-C developer is expected to leverage Ansible functionality. The Ansible DG is a general purpose graph that can be used to invoke and retrieve results from any playbook on an ONAP-compliant Ansible Server. The Ansible Graph,when called, expects a certain set of inputs to be provided as input and when upon completion provides results from the execution of the Ansible playbook. The Ansible
+1.  **Ansible Directed Graph (DG):** The Ansible Directed graph is the most common way an App-C developer is expected to leverage Ansible functionality, which is invoked by RPC: Generic_AnsibleDG, Version: 4.0.0. The Ansible DG is a general purpose graph that can be used to invoke and retrieve results from any playbook on an ONAP-compliant Ansible Server. The Ansible Graph,when called, expects a certain set of inputs to be provided as input and when upon completion provides results from the execution of the Ansible playbook. The Ansible
 DG can be invoked using the following (current) naming:
 
 +------------+----------------------+
@@ -168,9 +168,9 @@ Table 2: Output Variables set by Ansible DG Variable
 
     b. Inventory file
 
-      The Prototype Ansible Server requires that all credentials and IP Addresses for the VNF being tested either already be present in the Server’s Database or be loaded before any playbooks are invoked. Supported credentials are user-name/password and public-key authentication. 
+      The Ansible Server requires that all credentials and IP Addresses for the VNF being tested either already be present in the Server’s Database or be loaded before any playbooks are invoked. Supported credentials are user-name/password and public-key authentication. 
 
-      All VNF credentials stored in a unique file (or in a SQL database depending on the ansible server runtime configuration):
+      All VNF credentials stored in a unique file:
 
       .. code:: bash
 
@@ -189,7 +189,7 @@ Table 2: Output Variables set by Ansible DG Variable
 
     c. Playbooks
 
-      Playbooks can either be provided as stand alone text files or gzipped tar file (playbooks with roles sub-directories) either stored in a local file or in an SQL database.
+      Playbooks can either be provided as stand alone text files or gzipped tar file (playbooks with roles sub-directories) either stored in a local file.
 
       Naming convention: anything\_LCM@M.mn.{yml,tar.gz} where version number M is a digit and mn are subversion number digits.
 
@@ -203,100 +203,16 @@ Table 2: Output Variables set by Ansible DG Variable
 
         |image4|
 
-    d. Installation
-
-      a. Python
-
-        sudo apt-get install python2.7
-        sudo apt-get install python-pip
-        pip install PyMySQL
-        pip install requests
-
-      b. Ansible
-
-        sudo apt-get install software-properties-common
-        sudo apt-add-repository ppa:ansible/ansible
-        sudo apt-get update 
-        sudo apt-get install ansible 
-
-      c. SQL database
-
-        a. Installing MySQL
-
-          sudo apt-get install mysql-server
-
-          Set root passwd during installation (i.e. password\_4\_mysql\_user\_id)
-
-          sudo service mysql restart
-
-        b. Setting up mysql
-
-          mysql -u [username]-p
-
-          mysql -uroot -p
-
-          Create user (i.e. id=mysql\_user\_id psswd=password\_4\_mysql\_user\_id)
-
-          CREATE USER 'appc'@'%' IDENTIFIED BY 'password\_4\_mysql\_user\_id';
-
-          GRANT ALL PRIVILEGES ON *.* TO 'mysql\_user\_id'@'%';
-
-          SET PASSWORD FOR 'mysql\_user\_id'@'%'=PASSWORD('password\_4\_mysql\_user\_id');
-
-        c. Creating schema
-
-          CREATE SCHEMA ansible;
-
-          SHOW DATABASES;
-
-          USE ansible;
-
-          CREATE TABLE playbook (name VARCHAR(45) NOT NULL, value BLOB, type VARCHAR(60), version VARCHAR(60), PRIMARY KEY (name));
-
-          SHOW TABLES;
-
-          CREATE TABLE inventory (hostname VARCHAR(45) NOT NULL, hostgroup VARCHAR(45), credentials VARCHAR(500), PRIMARY KEY (hostname));
-
-          SHOW COLUMNS FROM playbook;
-
-          SHOW COLUMNS FROM inventory;
-
-          GRANT ALL PRIVILEGES ON *.* TO 'mysql\_user\_id'@'%' IDENTIFIED BY 'password\_4\_mysql\_user\_id' WITH GRANT OPTION;
-
-          GRANT ALL PRIVILEGES ON *.* TO 'ansible'@'%' IDENTIFIED BY 'ansible\_agent' WITH GRANT OPTION;
-
-          FLUSH PRIVILEGES;
+    d. Execution
 
 
+      Ansible docker image can be downloaded from like Nexus3_.  search the keyword: "ccsdk-ansible-server-image".
 
-        d. Loading playbooks and inventory data in SQL database
+.. _Nexus3: https://nexus3.onap.org/ 
 
-          Place inventory file and playbooks to be loaded in one directory, set LoadAnsibleMySql variables:
+      Also the dockerfile for ansible docker build is located at Dockerfile_.
 
-          SQL credentials:
-
-          host="localhost" # your host, usually localhost
-          user="mysql\_user\_id" # your username
-          passwd="password\_4\_mysql\_user\_id" # your password
-          db="ansible" # name of the database
-
-
-          Path of playbook location:
-
-          playbook\_path = "something/something/"
-
-
-          Full name of inventory file:
-
-          inventory = "something/something/Ansible\_inventory"
-
-          These variables are located right after main:
-
-          |image5|
-
-          Run loader: python LoadAnsibleMySql.py
-
-    e. Execution
+.. _Dockerfile: https://gerrit.onap.org/r/gitweb?p=ccsdk/distribution.git;a=blob;f=ansible-server/src/main/Dockerfile;h=2751a48213e628f10631e251ed11e45c04f8466f;hb=HEAD
 
       Ansible server is executed through RestServer.py. Its configuration file consists of the following:
 
