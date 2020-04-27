@@ -39,7 +39,7 @@ versions, which start with a "1".
    appc-parent-maven-stage-master/>`_. You can monitor the staging build job from here.
 4. Once the Jenkins build job is finished, note the number of that build job.
 5. Open your local copy of the appc/parent repository. Go to the "releases" directory.
-6. Copy one of the existing release files in that directory. Rename the file with the version number that you are
+6. Copy one of the existing release files in that directory. Rename the new file with the version number that you are
    releasing.
 7. Open the new file. Update the "version:" with the version number that you are releasing. Update the "log_dir:" with
    the Jenkins job number from step 4.
@@ -51,18 +51,18 @@ Releasing the Main APPC Project
 ===============================
 
 1. First, references to the appc parent files need to be set to match the version of the parent files that you just
-   released. You can search for the text "org.onap.appc.parent" in all of the pom.xml files in the appc repository.
-   Perform a find/replace on entire version tag "<version>...</version>" for the parent file in order to update the
-   APPC parent version.
+   released, rather than a snapshot version. You can search for the text "org.onap.appc.parent" in all of the pom.xml
+   files in the appc repository. Perform a find/replace on entire version tag "<version>...</version>" for the parent
+   file in order to update the APPC parent version.
 2. Commit and push this change to Gerrit. Merge the change.
 3. Once the merge is complete, leave a comment on the review with the text "stage-maven-release". (This is assuming that
-   your parent change was the lastest change merged, if it was not, leave the "stage-maven-release" on whichever review
-   was most recently merged).
+   your parent change was the lastest change merged, if it was not, leave the "stage-maven-release" comment on
+   whichever review was most recently merged).
 4. Check the Jenkins job `appc-maven-stage-master <https://jenkins.onap.org/view/appc/job/appc-maven-stage-master/>`_.
    You can monitor the staging build job from here.
 5. Once the Jenkins build job is finished, note the number of that build job.
 6. Open your local copy of the appc repository. Go to the "releases" directory.
-7. Copy one of the existing release files in that directory. Rename the file with the version number that you are
+7. Copy one of the existing release files in that directory. Rename the new file with the version number that you are
    releasing.
 8. Open the new file. Update the "version:" with the version number that you are releasing. Update the "log_dir:" with
    the Jenkins job number from step 4.
@@ -80,7 +80,7 @@ Releasing the APPC CDT Project
    appc-cdt-maven-stage-master/>`_. You can monitor the staging build job from here.
 4. Once the Jenkins build job is finished, note the number of that build job.
 5. Open your local copy of the appc/cdt repository. Go to the "releases" directory.
-6. Copy one of the existing release files in that directory. Rename the file with the version number that you are
+6. Copy one of the existing release files in that directory. Rename the new file with the version number that you are
    releasing.
 7. Open the new file. Update the "version:" with the version number that you are releasing. Update the "log_dir:" with
    the Jenkins job number from step 4.
@@ -94,22 +94,22 @@ Releasing the APPC Docker Images
 Update the APPC Artifact Download Versions
 ------------------------------------------
 
-These changes should be performed in your local copy of the appc/deployment repository.
+The following operations should be performed in your local copy of the appc/deployment repository.
 
 1. Open the "installation/appc/pom.xml" file.
 
    a. Set the "<appc.release.version>" property to the version of APPC that you just released.
    b. Set the "<appc.cdt.version>" property to the version of APPC CDT that you just released.
-   
+
 2. Open the "cdt/pom.xml" file.
 
    a. Set the "<appc.release.version>" to the version of APPC CDT that you just released.
-   
+
 3. Open the "installation/appc/src/main/docker/Dockerfile" file.
 
    a. Make sure that the ccsdk image version listed on the "FROM" line is set to the released (non snapshot) version of
-      ccsdk that you want to use.
-      
+      ccsdk that you want to use to build APPC on.
+
 4. Commit and push these changes to Gerrit. Merge the change, once the verify job completes.
 
 Prepare to Release the Docker Images
@@ -129,31 +129,33 @@ Check the Docker Images Before Release
 
 Optionally, you can download the staged Docker images, and make sure everything is correct, before releasing them.
 
-You can use the Docker tag you copied from Jenkins and download this Docker image:
+You can use the Docker tag you copied from Jenkins (from step 6 of the "Prepare to Release the Docker Images" section)
+and download this Docker image:
 
 .. code:: bash
 
   docker pull nexus3.onap.org:10001/onap/appc-image:<image tag from Jenkins>
   docker pull nexus3.onap.org:10001/onap/appc-cdt-image:<image tag from Jenkins>
-  
+
 Release the Docker Images
 -------------------------
 
 1. Open your local copy of the appc/deployment repository. Go to the "releases" directory.
-2. Copy one of the existing release files in that directory. Rename the file with the version number that you are
+2. Copy one of the existing release files in that directory. Rename the new file with the version number that you are
    releasing, followed by the text "-container".
-3. Open the new file. Update the "container_release_tag:" with the version number that you are releasing.
+3. Open the new file.
 
-   a. Update the "log_dir:" with the Jenkins appc-deployment-maven-docker-stage-master job number that built the staging
+   a. Update the "container_release_tag:" with the version number that you are releasing.
+   b. Update the "log_dir:" with the Jenkins appc-deployment-maven-docker-stage-master job number that built the staging
       images (from step 4 of the "Prepare to Release the Docker Images" section).
-   b. Update the "ref:" with the git commit id of the Gerrit review where you made the "stage-docker-release" comment.
+   c. Update the "ref:" with the git commit id of the Gerrit review where you made the "stage-docker-release" comment.
       (from step 2 of the "Prepare to Release the Docker Images" section).
-   c. Under the "containers:" section, update both "version:" with the image tag from Jenkins (from step 6 of the 
+   d. Under the "containers:" section, update both "version:" with the image tag from Jenkins (from step 6 of the
       "Prepare to Release the Docker Images" section).
-      
+
 4. Commit and push this new file to Gerrit. You can use a commit title like "Add 1.7.1 container release file" or
    something similar.
-5. Once this change is merged in Gerrit, the appc-image and appc-cdt-image Docker images will be released in Nexus 3 
+5. Once this change is merged in Gerrit, the appc-image and appc-cdt-image Docker images will be released in Nexus 3
 
 
 
