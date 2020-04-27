@@ -15,9 +15,11 @@
 .. limitations under the License.
 .. ============LICENSE_END============================================
 
-========================================
-Incrementing APPC Versions After Release
-========================================
+==========================
+Incrementing APPC Versions
+==========================
+
+After a release is performed on any of the APPC repositories, the version numbers need to be incremented. 
 
 Version Numbers
 ===============
