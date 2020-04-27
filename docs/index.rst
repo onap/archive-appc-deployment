@@ -23,6 +23,9 @@ APPC Deployment Documentation
    :maxdepth: 2
 
    APPC Deployment Guidelines/APPC Deployment Guidelines
+   APPC Deployment Guidelines/APPC Building Guidelines
+   APPC Deployment Guidelines/APPC Release Guidelines
+   APPC Deployment Guidelines/Incrementing APPC Versions
    APPC Testing of a Local ONAP Component/APPC Testing of a Local ONAP Component
    APPC Chef Adapter/APPC Chef Adapter
    APPC Ansible Adapter/APPC Ansible Adapter
