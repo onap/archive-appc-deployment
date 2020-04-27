@@ -100,16 +100,16 @@ These changes should be performed in your local copy of the appc/deployment repo
 
    a. Set the "<appc.release.version>" property to the version of APPC that you just released.
    b. Set the "<appc.cdt.version>" property to the version of APPC CDT that you just released.
-   
+
 2. Open the "cdt/pom.xml" file.
 
    a. Set the "<appc.release.version>" to the version of APPC CDT that you just released.
-   
+
 3. Open the "installation/appc/src/main/docker/Dockerfile" file.
 
    a. Make sure that the ccsdk image version listed on the "FROM" line is set to the released (non snapshot) version of
       ccsdk that you want to use.
-      
+
 4. Commit and push these changes to Gerrit. Merge the change, once the verify job completes.
 
 Prepare to Release the Docker Images
@@ -135,7 +135,7 @@ You can use the Docker tag you copied from Jenkins and download this Docker imag
 
   docker pull nexus3.onap.org:10001/onap/appc-image:<image tag from Jenkins>
   docker pull nexus3.onap.org:10001/onap/appc-cdt-image:<image tag from Jenkins>
-  
+
 Release the Docker Images
 -------------------------
 
@@ -150,10 +150,10 @@ Release the Docker Images
       (from step 2 of the "Prepare to Release the Docker Images" section).
    c. Under the "containers:" section, update both "version:" with the image tag from Jenkins (from step 6 of the 
       "Prepare to Release the Docker Images" section).
-      
+
 4. Commit and push this new file to Gerrit. You can use a commit title like "Add 1.7.1 container release file" or
    something similar.
-5. Once this change is merged in Gerrit, the appc-image and appc-cdt-image Docker images will be released in Nexus 3 
+5. Once this change is merged in Gerrit, the appc-image and appc-cdt-image Docker images will be released in Nexus 3
 
 
 
