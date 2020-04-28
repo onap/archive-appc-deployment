@@ -324,8 +324,6 @@ Additional Notes
 -  For more information on a current list of available properties for
    APPC Features, please go to README.md located in the installation
    directory path of the APPC Deployment Code.
--  More documentation can be found on the ONAP Wiki's `APPC
-   Documentation Page <https://wiki.onap.org/display/DW/Controllers>`__
-   and in ONAP's `Read the
+-  More documentation can be found in ONAP's `Read the
    docs <http://onap.readthedocs.io/en/latest/release/index.html#projects>`__
    documentation site.
