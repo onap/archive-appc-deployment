@@ -15,9 +15,9 @@
 .. limitations under the License.
 .. ============LICENSE_END============================================
 
-=============
-Building APPC
-=============
+==============
+Releasing APPC
+==============
 
 Introduction
 ============
