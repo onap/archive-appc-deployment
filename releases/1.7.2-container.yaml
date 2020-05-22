@@ -1,0 +1,10 @@
+distribution_type: 'container'
+container_release_tag: '1.7.2'
+project: 'appc-deployment'
+log_dir: 'appc-deployment-maven-docker-stage-frankfurt/16/'
+ref: ffd050c65335e3a9bddc61614c8dee93aec34d2e
+containers:
+    - name: 'appc-image'
+      version: '1.7.2-STAGING-20200522T202413Z'
+    - name: 'appc-cdt-image'
+      version: '1.7.2-STAGING-20200522T202413Z'
