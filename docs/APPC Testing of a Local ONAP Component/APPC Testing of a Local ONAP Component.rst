@@ -104,8 +104,8 @@ Setting up Git
 
    .. code:: bash
 
-       git clone http://<LF_USER_ID>@gerrit.onap.org/r/a/appc
-       git clone http://<LF_USER_ID>@gerrit.onap.org/r/a/appc/deployment
+       git clone --depth 1 http://<LF_USER_ID>@gerrit.onap.org/r/a/appc
+       git clone --depth 1 http://<LF_USER_ID>@gerrit.onap.org/r/a/appc/deployment
 
 Docker Engine Installation
 --------------------------
