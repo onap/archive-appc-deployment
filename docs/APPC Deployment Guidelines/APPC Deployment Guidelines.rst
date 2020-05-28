@@ -117,7 +117,7 @@ You can clone this repository to your docker host:
 
 .. code:: bash
 
-    git clone "https://gerrit.onap.org/r/appc/deployment"
+    git clone --depth 1 "https://gerrit.onap.org/r/appc/deployment"
 
 Downloading the APPC Docker Images
 ----------------------------------
