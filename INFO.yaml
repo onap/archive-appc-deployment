@@ -1,5 +1,5 @@
 ---
-project: 'appc'
+project: 'appc/deployment'
 project_creation_date: '2017-02-10'
 lifecycle_state: 'Incubation'
 project_category: ''
@@ -41,11 +41,11 @@ committers:
       company: 'ATT'
       id: 'pb071'
       timezone: 'America/Los_Angeles'
-    - name: 'Randa Maher'
-      email: 'rx196w@att.com'
-      id: 'rx196w'
-      company: 'ATT'
-      timezone: 'America/New_York'
+    - name: 'Rupinderjeet Signh'
+      email: 'rupinsi@in.ibm.com'
+      id: 'rupinder-tech'
+      company: 'IBM'
+      timezone: 'India/Bangalore'
 tsc:
     approval: 'https://lists.onap.org/pipermail/onap-tsc'
     changes:
@@ -61,3 +61,9 @@ tsc:
         - type: 'Removal'
           name: 'Marcus Williams'
           link: 'https://lists.onap.org/g/onap-tsc/message/5472'
+        - type: 'Addition'
+          name: 'Rupinderjeet Signh'
+          link: 'https://lists.onap.org/g/onap-tsc/message/6402'
+        - type: 'Removal'
+          name: 'Randa Maher'
+          link: 'https://lists.onap.org/g/onap-tsc/message/6814'
