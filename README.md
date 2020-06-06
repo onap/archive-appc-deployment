@@ -100,7 +100,7 @@ Ther following steps are needed to deploy and start ONAP APPC:
 ```bash
 # Install Docker-Compose
 apt-get install python-pip
-pip install docker-compose
+pip install --no-cache-dir docker-compose
 
 # Login to Nexus Repo to pull Docker Images (this assumes that Nexus Certificate is already imported in the Host VM on /usr/local/share/ca-certificates/ path):
 docker login <DOCKER_REGISTRY_REPO> # prompts for user credentials as a way to authenticate
