@@ -2,4 +2,3 @@
 #
 7510eb86f5921b72f7d4983345c36480f5b6bd15                                        	saml/onap-gerrit-appc-deployment-committers
 daebbf523be390041a1a9c0e340a6d833aae5043                                        	GitHub Replication
-ldap:cn=onap-gerrit-appc-deployment-committers,ou=Groups,dc=freestandards,dc=org	ldap/onap-gerrit-appc-deployment-committers
